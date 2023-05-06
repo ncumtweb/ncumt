@@ -14,37 +14,48 @@
             <div class="swiper sliderFeaturedPosts">
               <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-1.jpg');">
-                    <div class="img-bg-inner">
-                      <h2>The Best Homemade Masks for Face (keep the Pimples Away)</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/mouse.jpg');">
+                    <div class="img-bg-inner"> 
+                      <h2>2023.02.26-28 鍛鍊海鼠</h2>
+                      <p>
+                        踏上過往太魯閣族、日本人以及榮民曾經生活過的土地，沿路都能看到他們過往生活的痕
+                        跡，百年來不同族群來來去去，看著遺留下來的歷史建築、文物，不禁感慨萬千。太魯閣
+                        險峻壯闊的山勢如同帶刺的玫瑰，美麗動人卻危險，一不小心失足就會跌入萬丈深淵，期
+                        待下次能再來拜訪太魯閣的山，續寫下一段山中的故事。
+                      </p>
                     </div>
                   </a>
                 </div>
 
                 <div class="swiper-slide">
-                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-2.jpg');">
+                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/river.jpg');">
                     <div class="img-bg-inner">
-                      <h2>17 Pictures of Medium Length Hair in Layers That Will Inspire Your New Haircut</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                      <h2>2023.03.05 梅花溪</h2>
+                      <p>溯溪讚</p>
                     </div>
                   </a>
                 </div>
 
                 <div class="swiper-slide">
-                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-3.jpg');">
+                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/cat.jpg');">
                     <div class="img-bg-inner">
-                      <h2>13 Amazing Poems from Shel Silverstein with Valuable Life Lessons</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                      <h2>2023.04.08-09 龍貓公車</h2>
+                      <p>龍貓公車讚</p>
                     </div>
                   </a>
                 </div>
 
                 <div class="swiper-slide">
-                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/post-slide-4.jpg');">
+                  <a href="single-post.html" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/eight.jpg');">
                     <div class="img-bg-inner">
-                      <h2>9 Half-up/half-down Hairstyles for Long and Medium Hair</h2>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem neque est mollitia! Beatae minima assumenda repellat harum vero, officiis ipsam magnam obcaecati cumque maxime inventore repudiandae quidem necessitatibus rem atque.</p>
+                      <h2>2023.02.04-06 清水台黎明神社</h2>
+                      <p>
+                        何其幸運，能夠一瞥這些歷史洗刷後的滄海桑田，
+                        我們只不過是偶然拜訪旁觀者，嘗試推敲想像伏地索道上一批一批木材從眼前運送、
+                        木馬道上火車隆隆聲、神社參拜者的莊嚴肅穆、黎明遺址宿泊所旅客的熙來攘往、
+                        埋頭苦幹以石英砂岩砌出平整駁坎牆面的工人們、索道頭無止運轉的纜繩、
+                        各式酒瓶散落前的觥籌交錯…
+                      </p>
                     </div>
                   </a>
                 </div>
