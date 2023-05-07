@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-    <html lang="en">
+    
 
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>NCUMT</title>
+    <title> 中央大學登山社 - @yield('title') </title>
     <meta content="" name="description">
-    <meta content="" name="keywords">
+    <meta content=" 中央大學登山社 " name="keywords">
 
     <!-- Favicons -->
     <link href="assets/img/fav.png" rel="icon">
+    <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
     
 
     <!-- Google Fonts -->
