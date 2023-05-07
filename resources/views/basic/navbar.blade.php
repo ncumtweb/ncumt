@@ -2,7 +2,7 @@
  <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="#" class="logo d-flex align-items-center">
+      <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>中央大學登山社</h1>
@@ -10,9 +10,10 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="#">Blog</a></li>
-          <li><a href="single-post.html">Single Post</a></li>
-          <li class="dropdown"><a href="category.html"><span>Categories</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li><a href="#">行程記錄</a></li>
+          <li><a href="single-post.html">社課影片</a></li>
+          <li><a href="judgement">評分系統</a></li>
+          <li class="dropdown"><a href="category.html"><span>歷年隊伍</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="search-result.html">Search Result</a></li>
               <li><a href="#">Drop Down 1</a></li>
@@ -31,8 +32,9 @@
             </ul>
           </li>
 
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html">關於我們</a></li>
+          <li><a href="contact.html">聯絡我們</a></li>
+          <li><a href="/faq">FAQ</a></li>
         </ul>
       </nav><!-- .navbar -->
 
