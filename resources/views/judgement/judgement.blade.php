@@ -17,7 +17,8 @@
         <div class="row justify-content-center">
           <div class = "col-md-8 mb-5">
             <div class="form mt-5">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <form action="{{ route('judgement.store') }}" method="POST" class="php-email-form">
+                @csrf
                 <div class="form-group">
                   <label for="name" class="form-label">路線名稱</label>  
                   <input type="text" name="name" class="form-control" id="name" placeholder="請輸入路線名稱" required>
@@ -50,7 +51,7 @@
                     <select id="road" name="road" class="form-select" required>
                       <option selected disabled value="">請選擇路跡級別</option>
                       @for($i = 0; $i < 10; $i++) 
-                        <option value = $i> {{ $i+ 1 }}</option>
+                        <option value = {{ $i + 1 }}> {{ $i + 1 }}</option>
                       @endfor
                     </select>
                   </div>
@@ -59,7 +60,7 @@
                     <select id="terrain" name="terrain" class="form-select" required>
                       <option selected disabled value="">請選擇地形級別</option>
                       @for($i = 0; $i < 10; $i++) 
-                        <option value = $i> {{ $i+ 1 }}</option>
+                        <option value = {{ $i + 1 }}> {{ $i + 1 }}</option>
                       @endfor
                     </select>
                   </div>
@@ -68,7 +69,7 @@
                     <select id="plant" name="plant" class="form-select" required>
                       <option selected disabled value="">請選擇植被級別</option>
                       @for($i = 0; $i < 10; $i++) 
-                        <option value = $i> {{ $i+ 1 }}</option>
+                        <option value = {{ $i + 1 }}> {{ $i + 1 }}</option>
                       @endfor
                     </select>
                   </div>
@@ -79,7 +80,7 @@
                     <select id="energy" name="energy" class="form-select" required>
                       <option selected disabled value="">請選擇體力級別</option>
                       @for($i = 0; $i < 4; $i++) 
-                        <option value = $i> {{ $i+ 1 }}</option>
+                        <option value = {{ $i + 1 }}> {{ $i + 1 }}</option>
                       @endfor
                     </select>
                   </div>
@@ -88,12 +89,13 @@
                     <input type="number" name="water" class="form-control" id="water" min="0" placeholder="請輸入多背水天數" required>
                   </div>
                 </div>
-                <div class="my-3">
+                <!-- <div class="my-3">
                   <div class="loading">Loading</div>
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div>
+                </div> -->
                 <div class="text-center"><button type="submit">開始評分</button></div>
+                
               </form>
             </div><!-- End Contact Form -->
           </div>
@@ -252,13 +254,10 @@
                     <td>單日步程11hr以上或爬升1200m</td>
                     
                 </tr>
-              </tbody>
-
-              <tfoot>
-                  <tr>
+                <tr>
                       <td colspan="3">評斷標準為一半以上天數達到上述條件，多背非行動水大於六小時算多背水日。</td>
-                  </tr>
-              </tfoot>
+                </tr>
+              </tbody>
             </table>
           </div>
         </div><!-- 難度分級表 End  -->

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\JudgementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +24,5 @@ Route::get('/home', function () {
 Route::get('/judgement', function () {
     return view('judgement.judgement');
 });
+
+Route::resource('judgement', JudgementController::class);
