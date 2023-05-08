@@ -51,10 +51,9 @@ class JudgementController extends Controller
         $judgement->water = $request->input('water');
         $judgement->save();
 
-        $id = $judgement->id;
+        //$id = $judgement->id;
         
-        return redirect()->route('judgement.index',compact($id));
-
+        return redirect()->route('judgement.index');
     }
 
     /**

@@ -89,12 +89,13 @@
                     <input type="number" name="water" class="form-control" id="water" min="0" placeholder="請輸入多背水天數" required>
                   </div>
                 </div>
-                <!-- <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                </div> -->
+                <div class="my-3">
+                  <div class="result-message"></div>
+                </div>
+              
                 <div class="text-center"><button type="submit">開始評分</button></div>
+
+                
                 
               </form>
             </div><!-- End Contact Form -->

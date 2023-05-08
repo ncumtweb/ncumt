@@ -1120,6 +1120,15 @@ section {
   font-weight: 600;
 }
 
+.contact .php-email-form .result-message {
+
+  color: #f55b6a;
+  text-align: center;
+  font-size: 30px;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
 .contact .php-email-form .error-message br+br {
   margin-top: 25px;
 }

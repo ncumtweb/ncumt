@@ -3,83 +3,102 @@
 * URL: https://bootstrapmade.com/php-email-form/
 * Author: BootstrapMade.com
 */
-// (function () {
+(function(){
 //   "use strict";
+    
+    let forms = document.querySelectorAll('.php-email-form');
+    forms.forEach( function(e) {
+        e.addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        let thisForm = this;
+        var normal_day = document.getElementById("normal_day").value;
+        var abnormal_day = document.getElementById("abnormal_day").value;
+        var level = document.getElementById("level").value;
+        var road = document.getElementById("road").value;
+        var terrain = document.getElementById("terrain").value;
+        var plant = document.getElementById("plant").value;
+        var energy = document.getElementById("energy").value;
+        var water = document.getElementById("water").value;
+        
+        if(checkDay(normal_day, abnormal_day, water)) {
+            var levelScore = Number(caculateLevel(level, road, terrain, plant));
+            var dayScore = Number(calculateDay(normal_day, abnormal_day));
+            var energyScore = Number(calculateEnergy(energy, water));
+            var score = levelScore + dayScore + energyScore;
+            var rank = calcuateRank(score);
+            // var msg =
+            // "<h4>路況：<span>" + levelScore + "</span> 天數：<span>" + dayScore + "</span>" + " 體力：<span>" + energyScore + " </span>" 
+            // + "分數為：<span>" + score + "</span>難度等級：" + rank + "</span></h3>";
+            var msg =
+            "路況分數：" + levelScore + "<br>天數分數：" + dayScore + "<br>體力分數：" + energyScore + "<br>總分：" + score + "<br>難度等級：" + rank ;
+            thisForm.querySelector('.result-message').innerHTML = msg;
+        }    
+        });
+    });
 
-//   let forms = document.querySelectorAll('.php-email-form');
+    function checkDay(normal_day, abnormal_day, water){
 
-//   forms.forEach( function(e) {
-//     e.addEventListener('submit', function(event) {
-//       event.preventDefault();
+        var sum = Number(normal_day) + Number(abnormal_day);
+        if(Number(normal_day) == 0 && Number(abnormal_day) == 0){
+            alert("天數不得為0，請修改一下:)");
+            return false;
+        }
+        if(Number(water) > sum){
+            alert("背水天數不可能大於總天數喔，請你修改一下:)");
+            return false;
+        }
+        return true;
+        
+    }
 
-//       let thisForm = this;
+    function calculateDay(normal_day, abnormal_day){
+        var score = 0;
+        var maxAbnormalIndex = 9;
+        var abnormalScore = [0, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 
-//       let action = thisForm.getAttribute('action');
-//       let recaptcha = thisForm.getAttribute('data-recaptcha-site-key');
-      
-//       if( ! action ) {
-//         displayError(thisForm, 'The form action property is not set!');
-//         return;
-//       }
-//       thisForm.querySelector('.loading').classList.add('d-block');
-//       thisForm.querySelector('.error-message').classList.remove('d-block');
-//       thisForm.querySelector('.sent-message').classList.remove('d-block');
+        if(normal_day == 1)
+            score = 5;
+        else if(normal_day >= 2 && normal_day <= 3)
+            score = 10;
+        else if(normal_day >= 4 && normal_day <= 5)
+            score = 15;
+        else if(normal_day >= 6 && normal_day <= 8)
+            score = 20;
+        else if(normal_day >= 9)
+            score = 25;
+        if(Number(abnormal_day) <= 9)    
+            score += abnormalScore[Number(abnormal_day)];
+        else
+            score += abnormalScore[maxAbnormalIndex];
+        return score;
+    }
 
-//       let formData = new FormData( thisForm );
+    function caculateLevel(level, road, terrain, plant){
+        var score = 0;
+        let level_score_array = [1, 11, 21, 26, 31, 36];
+        score = (level_score_array[(Number(level))] + (Number(road) * 0.3 + Number(terrain) * 0.4 + Number(plant) * 0.3) * 2 ) * 1.5;
+        return score.toFixed(0);
+    }
 
-//       if ( recaptcha ) {
-//         if(typeof grecaptcha !== "undefined" ) {
-//           grecaptcha.ready(function() {
-//             try {
-//               grecaptcha.execute(recaptcha, {action: 'php_email_form_submit'})
-//               .then(token => {
-//                 formData.set('recaptcha-response', token);
-//                 php_email_form_submit(thisForm, action, formData);
-//               })
-//             } catch(error) {
-//               displayError(thisForm, error);
-//             }
-//           });
-//         } else {
-//           displayError(thisForm, 'The reCaptcha javascript API url is not loaded!')
-//         }
-//       } else {
-//         php_email_form_submit(thisForm, action, formData);
-//       }
-//     });
-//   });
-
-//   function php_email_form_submit(thisForm, action, formData) {
-//     fetch(action, {
-//       method: 'POST',
-//       body: formData,
-//       headers: {'X-Requested-With': 'XMLHttpRequest'}
-//     })
-//     .then(response => {
-//       if( response.ok ) {
-//         return response.text();
-//       } else {
-//         throw new Error(`${response.status} ${response.statusText} ${response.url}`); 
-//       }
-//     })
-//     .then(data => {
-//       thisForm.querySelector('.loading').classList.remove('d-block');
-//       if (data.trim() == 'OK') {
-//         thisForm.querySelector('.sent-message').classList.add('d-block');
-//         thisForm.reset(); 
-//       } else {
-//         throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action); 
-//       }
-//     })
-//     .catch((error) => {
-//       displayError(thisForm, error);
-//     });
-//   }
-
-//   function displayError(thisForm, error) {
-//     thisForm.querySelector('.loading').classList.remove('d-block');
-//     thisForm.querySelector('.error-message').innerHTML = error;
-//     thisForm.querySelector('.error-message').classList.add('d-block');
-//   }
-
-// })();
+    function calculateEnergy(energy,water){
+        var score = energy * 7 + water * 2;
+        return score;
+    }
+    function calcuateRank(score){
+        var rank = "";
+        if(score < 40)
+            rank = "D";
+        else if(score >= 40 && score < 60)
+            rank = "C";
+        else if(score >= 60 && score < 80)
+            rank = "B";
+        else if(score >= 80 && score < 100)
+            rank = "A";
+        else if(score >= 100 && score < 120)
+            rank = "S";
+        else if(score >= 120)
+            rank = "S+";
+        return rank;
+    }
+})();
