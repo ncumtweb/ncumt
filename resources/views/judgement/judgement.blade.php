@@ -92,15 +92,65 @@
                 <div class="my-3">
                   <div class="result-message"></div>
                 </div>
-              
-                <div class="text-center"><button type="submit">開始評分</button></div>
 
+                <div class="row">
+                  <div class="text-center">
+                    <button type="button" onclick = "caculate()" value="store" name="submit_button">開始評分</button>
+                    <button type="submit" value="store" name="store_result">儲存評分結果</button>
+                  </div>
+                </div>
                 
                 
               </form>
             </div><!-- End Contact Form -->
           </div>
         </div>
+
+        <!-- 評分紀錄表 -->
+        <div class="row gy-4 justify-content-center text-center">
+            <h1>評分紀錄表</h1>
+            <a>過去隊伍難度的評分紀錄。</a>
+
+          <div class="col-md-10 text-center mb-5">
+            <table class="table table-light table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">路線名稱</th>
+                  <th scope="col">總天數</th>  
+                  <th scope="col">傳統路天數</th>
+                  <th scope="col">非傳統路天數</th>
+                  <th scope="col">路線級別</th>
+                  <th scope="col">路跡/指標級別</th>
+                  <th scope="col">地形級別</th>
+                  <th scope="col">植被級別</th>
+                  <th scope="col">體力級別</th>
+                  <th scope="col">多背水天數</th>
+                  <th scope="col">隊伍難度</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach($judgements as $judgement)
+                  <tr>
+                      <td>{{ $loop->index + 1 }}</td>
+                      <td>{{ $judgement->name }}</td>
+                      <td>{{ $judgement->normal_day + $judgement->abnormal_day}}</td>
+                      <td>{{ $judgement->normal_day }} 天</td>
+                      <td>{{ $judgement->abnormal_day }} 天</td>
+                      <td>{{ $level_array[$judgement->level] }}</td>
+                      <td>{{ $judgement->road }} 分</td>
+                      <td>{{ $judgement->terrain }} 分</td>
+                      <td>{{ $judgement->plant }} 分</td>
+                      <td>{{ $judgement->energy }}</td>
+                      <td>{{ $judgement->water }} 天</td>
+                      <td>{{ $judgement->result_level }}</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+
+          </div>
+        </div><!-- 難度分級表 End  -->
 
         <!-- 難度分級表 -->
         <div class="row gy-4 justify-content-center text-center">
