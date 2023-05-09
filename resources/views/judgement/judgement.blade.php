@@ -111,7 +111,7 @@
             <h1>評分紀錄表</h1>
             <a>過去隊伍難度的評分紀錄。</a>
 
-          <div class="col-md-12 text-center mb-5">
+          <div class="col-md-10 text-center mb-5 table-responsive">
             <table class="table table-light table-bordered table-striped">
               <thead>
                 <tr>
@@ -120,12 +120,12 @@
                   <th scope="col">總天數</th>  
                   <th scope="col">傳統路</th>
                   <th scope="col">非傳統路</th>
-                  <th scope="col">路線級別</th>
-                  <th scope="col">路跡/指標級別</th>
-                  <th scope="col">地形級別</th>
-                  <th scope="col">植被級別</th>
-                  <th scope="col">體力級別</th>
-                  <th scope="col">多背水天數</th>
+                  <th scope="col">路線</th>
+                  <th scope="col">路標</th>
+                  <th scope="col">地形</th>
+                  <th scope="col">植被</th>
+                  <th scope="col">體力</th>
+                  <th scope="col">背水天數</th>
                   <th scope="col">難度總分</th>
                   <th scope="col">隊伍難度</th>
                 </tr>

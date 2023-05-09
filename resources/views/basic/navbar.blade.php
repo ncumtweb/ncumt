@@ -10,38 +10,27 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="#">行程記錄</a></li>
-          <li><a href="single-post.html">社課影片</a></li>
+          <li><a href="/commingsoon">社課影片</a></li>
           <li><a href="judgement">評分系統</a></li>
-          <li class="dropdown"><a href="category.html"><span>歷年隊伍</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="/commingsoon"><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="search-result.html">Search Result</a></li>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              <li><a href="/commingsoon">中級山</a></li>
+              <li><a href="/commingsoon">高山</a></li>
+              <li><a href="/commingsoon">溯溪</a></li>
             </ul>
           </li>
 
-          <li><a href="about.html">關於我們</a></li>
-          <li><a href="contact.html">聯絡我們</a></li>
-          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/commingsoon">關於我們</a></li>
+          <li><a href="/commingsoon">聯絡我們</a></li>
+          <li><a href="/commingsoon">FAQ</a></li>
         </ul>
       </nav><!-- .navbar -->
 
       <div class="position-relative">
         <a href="https://www.facebook.com/ncumountaineeringclub" target = "_blank" class="mx-2"><span class="bi-facebook"></span></a>
         <a href="https://www.instagram.com/ncumountaineeringclub/" target = "_blank" class="mx-2"><span class="bi-instagram"></span></a>
-
+        <a href="https://linktr.ee/ncumt" target = "_blank" class="mx-2"><span class="bi bi-tree"></span></a>
+        <a href="https://github.com/Ben901227/ncumt" target = "_blank" class="mx-2"><span class="bi bi-github"></span></a>
         <a href="#" class="mx-2 js-search-open"><span class="bi-search"></span></a>
         <i class="bi bi-list mobile-nav-toggle"></i>
 

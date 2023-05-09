@@ -10,7 +10,7 @@
     <meta content=" 中央大學登山社 " name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/fav.png" rel="icon">
+    <link href="assets/img/ncumt.png" rel="icon">
     <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
     
 

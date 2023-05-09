@@ -9,24 +9,23 @@
         <h3 class="footer-heading">中央大學登山社</h3>
         <p>
             中大登山社於民國 64 年創立，
-            今年共21位幹部，社員人數眾多，從平易近人的高山百岳和歷史古道、專精的技能訓練與實作到深度探勘原始山林皆有涉略，
+            幹部、社員人數眾多，從平易近人的高山百岳和歷史古道、專精的技能訓練與實作到深度探勘原始山林皆有涉略，
             亦有從事攀岩、溯溪、單車等活動。 在山社裡將可以交到一群能患難與共、一同歡笑、一同去挑戰自我的朋友，因愛山而相遇、
             因愛山而成為了幹部，希望能夠把山的美好傳承下去。歡迎各位加入我們的登山行列，漫遊台灣山林，與我們在山林中飽覽大自然令人驚嘆的美、
             體驗冒險帶來的樂趣、挑戰從未探索的新事物。若想瞭解更多歡迎關注我們的FB粉絲團及Instagram！
         </p>
-        <p><a href="/about" class="footer-link-more">關於我們</a></p>
+        <p><a href="/commingsoon" class="footer-link-more">關於我們</a></p>
         </div>
         <div class="col-6 col-lg-2">
         <h3 class="footer-heading">其他連結</h3>
         <ul class="footer-links list-unstyled">
-            <li><a href="/"><i class="bi bi-chevron-right"></i> 首頁 </a></li>
-            <li><a href="/"><i class="bi bi-chevron-right"></i> 行程記錄 </a></li>
-            <li><a href="/"><i class="bi bi-chevron-right"></i> 社課影片 </a></li>
+            <li><a href="/"><i class="bi bi-chevron-right"></i> 首頁 </a></li>            
+            <li><a href="/commingsoon"><i class="bi bi-chevron-right"></i> 社課影片 </a></li>
             <li><a href="judgement"><i class="bi bi-chevron-right"></i> 評分系統 </a></li>
-            <li><a href="/"><i class="bi bi-chevron-right"></i> 歷年隊伍 </a></li>
-            <li><a href="/about"><i class="bi bi-chevron-right"></i> 關於我們 </a></li>
-            <li><a href="/"><i class="bi bi-chevron-right"></i> 聯絡我們 </a></li>
-            <li><a href="/faq"><i class="bi bi-chevron-right"></i> FAQ </a></li>
+            <li><a href="/commingsoon"><i class="bi bi-chevron-right"></i> 行程記錄 </a></li>
+            <li><a href="/commingsoon"><i class="bi bi-chevron-right"></i> 關於我們 </a></li>
+            <li><a href="/commingsoon"><i class="bi bi-chevron-right"></i> 聯絡我們 </a></li>
+            <li><a href="/commingsoon"><i class="bi bi-chevron-right"></i> FAQ </a></li>
         </ul>
         </div>
         <!-- <div class="col-6 col-lg-2">
