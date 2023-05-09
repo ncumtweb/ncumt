@@ -5,6 +5,7 @@
 */
 
 function caculate() {
+    
     var name = document.getElementById("name").value;
     var normal_day = document.getElementById("normal_day").value;
     var abnormal_day = document.getElementById("abnormal_day").value;
@@ -16,6 +17,7 @@ function caculate() {
     var water = document.getElementById("water").value;
     
     if(check(name, normal_day, abnormal_day, level, road, terrain, plant, energy, water)) {
+        document.getElementById("store_result").disabled = false;
         var levelScore = Number(caculateLevel(level, road, terrain, plant));
         var dayScore = Number(calculateDay(normal_day, abnormal_day));
         var energyScore = Number(calculateEnergy(energy, water));
@@ -24,6 +26,7 @@ function caculate() {
         var msg =
         "路況分數：" + levelScore + "<br>天數分數：" + dayScore + "<br>體力分數：" + energyScore + "<br>總分：" + score + "<br>難度等級：" + rank ;
         document.querySelector('.result-message').innerHTML = msg;
+        
     }     
     
 }

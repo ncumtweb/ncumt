@@ -96,7 +96,7 @@
                 <div class="row">
                   <div class="text-center">
                     <button type="button" onclick = "caculate()" value="store" name="submit_button">開始評分</button>
-                    <button type="submit" value="store" name="store_result">儲存評分結果</button>
+                    <button type="submit" disabled value="store" id = "store_result" name="store_result">儲存評分結果</button>
                   </div>
                 </div>
                 
