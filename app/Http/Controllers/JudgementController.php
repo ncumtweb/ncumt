@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Judgement;
-
+use Illuminate\Support\Facades\Schema;
 class JudgementController extends Controller
 {
     /**
@@ -15,8 +15,10 @@ class JudgementController extends Controller
     public function index()
     {
         $judgements = Judgement::orderBy('id','desc')->get();
+        $judgements_column_name = Schema::getColumnListing('judgements');
+        $judgements_column_number = count($judgements_column_name);
         $level_array = ["一", "二", "三a", "三b", "四a", "四b"];
-        return view('judgement.judgement')->with(compact('judgements','level_array'));
+        return view('judgement.judgement')->with(compact('judgements', 'level_array', 'judgements_column_number'));
     }
 
     /**
@@ -63,6 +65,7 @@ class JudgementController extends Controller
         $judgement->plant = $plant;
         $judgement->energy = $energy;
         $judgement->water = $water;
+        $judgement->score = $total_score;
         $judgement->result_level = $result_level;
         $judgement->save();
         return redirect()->route('judgement.index');
