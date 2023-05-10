@@ -68,7 +68,7 @@ class JudgementController extends Controller
         $judgement->score = $total_score;
         $judgement->result_level = $result_level;
         $judgement->save();
-        return redirect()->route('judgement.index');
+        return redirect()->route('judgement.index')->with('status','評分紀錄儲存成功');
 
     }
 
@@ -141,7 +141,8 @@ class JudgementController extends Controller
      */
     public function edit($id)
     {
-        //
+        $judgement = Judgement::find($id);
+        return view('judgement.edit', compact('judgement'));
     }
 
     /**
@@ -153,7 +154,38 @@ class JudgementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        
+        $normal_day = $request->input('normal_day');
+        $abnormal_day = $request->input('abnormal_day');
+        $level = $request->input('level');
+        $road = $request->input('road');
+        $terrain = $request->input('terrain');
+        $plant = $request->input('plant');
+        $energy = $request->input('energy');
+        $water = $request->input('water');
+
+        $day_score = self::caculateDay($normal_day, $abnormal_day);
+        $level_score = self::caculateLevel($level, $road, $terrain, $plant);
+        $energy_score = self::caculateEnergy($energy, $water);
+        $total_score = $day_score + $level_score + $energy_score;
+        $result_level = self::caculateRank($total_score);
+
+        $judgement = Judgement::find($id);
+        $judgement->name = $request->input('name');
+        $judgement->normal_day = $normal_day;
+        $judgement->abnormal_day = $abnormal_day;
+        $judgement->level = $level;
+        $judgement->road = $road;
+        $judgement->terrain = $terrain;
+        $judgement->plant = $plant;
+        $judgement->energy = $energy;
+        $judgement->water = $water;
+        $judgement->score = $total_score;
+        $judgement->result_level = $result_level;
+        $judgement->update();
+
+        return redirect()->route('judgement.index')->with('status','評分紀錄更新成功');
     }
 
     /**
@@ -164,6 +196,8 @@ class JudgementController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $judgement = Judgement::findOrFail($id);
+        $judgement->delete();
+        return redirect()->route('judgement.index')->with('status','評分紀錄刪除成功');
     }
 }

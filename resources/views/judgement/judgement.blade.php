@@ -13,7 +13,11 @@
             <a> 此評分系統根據路況、天數及所需體力來量化，並依據分數高低來訂定隊伍難度等級。</a>
           </div>
         </div>
-
+        @if (session('status'))
+          <div class="col-lg-12 text-center mb-5">
+            <h6 class="alert alert-success">{{ session('status') }}</h6>
+          </div>
+        @endif
         <div class="row justify-content-center">
           <div class = "col-md-8 mb-5">
             <div class="form mt-5">
@@ -128,6 +132,7 @@
                   <th scope="col">背水天數</th>
                   <th scope="col">難度總分</th>
                   <th scope="col">隊伍難度</th>
+                  <th scope="col">編輯/刪除</th>
                 </tr>
               </thead>
               <tbody>
@@ -151,6 +156,14 @@
                         <td>{{ $judgement->water }} 天</td>
                         <td>{{ $judgement->score }} 分</td>
                         <td>{{ $judgement->result_level }}</td>
+                        <td>
+                          <form action="{{ route('judgement.destroy', $judgement->id) }}" method="POST">
+                            <button type = "button" class="bi bi-pencil-square" onclick="window.location='{{ route('judgement.edit', $judgement->id) }}'"></button>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="bi bi-trash"></button>
+                          </form>
+                        </td>
                     </tr>
                   @endforeach
                 @endif
