@@ -1,6 +1,6 @@
 @extends('basic.main')
 
-@section('title',  'Comming Soon')
+@section('title',  '創建紀錄')
 
 @section('content')
 <main id="main">
@@ -9,15 +9,11 @@
 
         <div class="row">
           <div class="col-lg-12 text-center mb-5">
-            <h1 class="page-title">Comming Soon</h1>
-            <a> 努力製作中，先放隻狗狗在這邊等。</a>
+            <h1 class="page-title">創建紀錄</h1>
           </div>
         </div>
 
         <div class="row">
-          <div class="col-lg-12 text-center mb-5">
-            <img src="assets/img/post-landscape-1.jpg" alt="" class="img-fluid">
-          </div>
         </div>
       </div>
     </section>

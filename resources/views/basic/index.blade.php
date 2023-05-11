@@ -143,4 +143,4 @@
     </div> <!-- End .row -->
   </div>
 </section> <!-- End Post Grid Section -->
-
+@endsection

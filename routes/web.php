@@ -24,8 +24,8 @@ Route::get('/', function () {
     return view('basic.index');
 });
 
-Route::get('/home', function () {
-    return view('basic.index');
+Route::get('/create', function () {
+    return view('record.create');
 });
 
 Route::get('/judgement', function () {
