@@ -14,8 +14,11 @@
         </div>
 
         <div class="row">
+            <div id="editor"></div>
         </div>
       </div>
     </section>
 </main><!-- End #main -->
+
+<!-- <script src="{{ asset('js/app.js') }}"></script> -->
 @endsection

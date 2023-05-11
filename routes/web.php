@@ -20,11 +20,11 @@ Route::get('/welcome', function () {
 Route::get('/commingsoon', function () {
     return view('commingsoon');
 });
-Route::get('/', function () {
-    return view('basic.index');
-});
+// Route::get('/', function () {
+//     return view('basic.index');
+// });
 
-Route::get('/create', function () {
+Route::get('/', function () {
     return view('record.create');
 });
 
