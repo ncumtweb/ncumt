@@ -10,8 +10,7 @@ const editor = new Editor({
   initialEditType: 'markdown',
   previewStyle: 'tab',
   theme: 'dark',
-  language: 'zh-TW',
-  initialValue: '請告訴我們你的精采故事吧!'
+  language: 'zh-TW'
 });
 
 document.querySelector('#createRecordForm').addEventListener('submit', e => {

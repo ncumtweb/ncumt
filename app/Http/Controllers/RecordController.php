@@ -38,6 +38,9 @@ class RecordController extends Controller
     {
         $record = New Record();
         $record->name = $request->input('name');
+        $record->category = $request->input('category');
+        $record->start_date = $request->input('start_date');
+        $record->end_date = $request->input('end_date');
         $record->image = $request->input('image');
         $record->content = $request->input('content');
         $record->save();

@@ -1,6 +1,6 @@
 @extends('basic.main')
 
-@section('title',  '創建紀錄')
+@section('title',  '行程紀錄')
 
 @section('content')
 <main id="main">
