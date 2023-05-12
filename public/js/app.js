@@ -27973,6 +27973,18 @@ var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__["default"]((_Edit
   height: '500px',
   initialEditType: 'markdown'
 }, _defineProperty(_Editor, "previewStyle", 'tab'), _defineProperty(_Editor, "theme", 'dark'), _defineProperty(_Editor, "language", 'zh-TW'), _defineProperty(_Editor, "initialValue", '請告訴我們你的精采故事吧!'), _Editor));
+document.querySelector('#createRecordForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  document.querySelector('#content').value = editor.getMarkdown();
+  e.target.submit();
+});
+
+// editor.eventManager.removeEventHandler('addImageBlobHook');
+// editor.eventManager.listen('addImageBlobHook', (blob, callback) =>{
+//   var uploadedImageURL = that.imageUpload(blob);
+//   callback(uploadedImageURL, 'alt text');
+//   return false;
+// });
 
 /***/ }),
 

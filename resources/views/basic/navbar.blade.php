@@ -12,7 +12,7 @@
         <ul>
           <li><a href="{{ url('/commingsoon') }}">社課影片</a></li>
           <li><a href="{{ url('/judgement') }}">評分系統</a></li>
-          <li class="dropdown"><a href="/commingsoon"><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          <li class="dropdown"><a href="/record"><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="{{ url('/commingsoon') }}">中級山</a></li>
               <li><a href="{{ url('/commingsoon') }}">高山</a></li>

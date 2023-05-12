@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JudgementController;
+use App\Http\Controllers\RecordController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,16 +22,9 @@ Route::get('/welcome', function () {
 Route::get('/commingsoon', function () {
     return view('commingsoon');
 });
-// Route::get('/', function () {
-//     return view('basic.index');
-// });
-
 Route::get('/', function () {
-    return view('record.create');
-});
-
-Route::get('/judgement', function () {
-    return view('judgement.judgement');
+    return view('basic.index');
 });
 
 Route::resource('judgement', JudgementController::class);
+Route::resource('record', RecordController::class);
