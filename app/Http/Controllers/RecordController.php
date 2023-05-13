@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Record;
+use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
@@ -14,8 +15,9 @@ class RecordController extends Controller
      */
     public function index()
     {
-        // $record = Record::orderBy('id','desc')->get();
-        return view('record.create');
+        $records = Record::orderBy('start_date','desc')->get();
+        $category_array = ["中級山", "高山", "溯溪"];
+        return view('record.record', compact('records', 'category_array'));
     }
 
     /**
@@ -25,7 +27,7 @@ class RecordController extends Controller
      */
     public function create()
     {
-        //
+        return view('record.create');
     }
 
     /**
@@ -36,17 +38,26 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
+
+        $file = $request->image;
+        $folder_name = "uploads/images/";
+        $upload_path = public_path() . '/' . $folder_name;
+        $extension  =  $file->extension();
+        $filename = $request->input('name') . '.' . $extension;
+        $file->move($upload_path, $filename);
+
         $record = New Record();
         $record->name = $request->input('name');
+        $record->description = $request->input('description');
         $record->category = $request->input('category');
         $record->start_date = $request->input('start_date');
         $record->end_date = $request->input('end_date');
-        $record->image = $request->input('image');
+        $record->image = $folder_name . '/' . $filename;
         $record->content = $request->input('content');
         $record->save();
 
-        //return redirect()->route('record.index');
-        return view('record.record', compact('record'));
+        return redirect()->route('record.index');
+        
     }
 
     /**
@@ -57,7 +68,9 @@ class RecordController extends Controller
      */
     public function show($id)
     {
-        //
+        $record = Record::find($id);
+        $category_array = ["中級山", "高山", "溯溪"];
+        return view('record.show', compact('record', 'category_array'));
     }
 
     /**
