@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    <url>
+        <loc>http://ncumt.student.ncu.edu.tw/</loc>
+        <lastmod>2023-05-13T21:41:59+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>http://ncumt.student.ncu.edu.tw/commingsoon</loc>
+        <lastmod>2023-05-13T21:41:59+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>http://ncumt.student.ncu.edu.tw/record</loc>
+        <lastmod>2023-05-13T21:41:59+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>http://ncumt.student.ncu.edu.tw/record/create</loc>
+        <lastmod>2023-05-13T21:41:59+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>http://ncumt.student.ncu.edu.tw/judgement</loc>
+        <lastmod>2023-05-13T21:41:59+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>http://ncumt.student.ncu.edu.tw/record/10</loc>
+        <lastmod>2023-05-13T21:41:59+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+    <url>
+        <loc>http://ncumt.student.ncu.edu.tw/record/9</loc>
+        <lastmod>2023-05-13T21:41:59+00:00</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+            </url>
+</urlset>

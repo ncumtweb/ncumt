@@ -3,6 +3,7 @@
     <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="google-site-verification" content="7ocfxPW4vR32yq9Wp3IXciw8NEsIF4kfFp4zd2CgfZk" />
 
     <title> 中央大學登山社 - @yield('title') </title>
     <meta content="" name="description">
