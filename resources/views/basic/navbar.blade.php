@@ -4,7 +4,7 @@
 
       <a href="/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <img src="assets/img/ncumt.png" alt="">
+        <img src="{{ asset('assets/img/ncumt.png') }}" alt="">
         <h1>NCUMT</h1>
       </a>
 
