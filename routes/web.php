@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JudgementController;
 use App\Http\Controllers\RecordController;
+use App\Http\Controllers\BasicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,9 +23,7 @@ Route::get('/welcome', function () {
 Route::get('/commingsoon', function () {
     return view('commingsoon');
 });
-Route::get('/', function () {
-    return view('basic.index');
-});
+Route::get('/', [BasicController::class, 'index']);
 
 Route::resource('judgement', JudgementController::class);
 Route::resource('record', RecordController::class);

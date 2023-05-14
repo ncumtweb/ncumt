@@ -10,61 +10,16 @@
       <div class="col-12">
         <div class="swiper sliderFeaturedPosts">
           <div class="swiper-wrapper">
+          @foreach($records as $record)
             <div class="swiper-slide">
-              <a href="/" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/mouse.jpg');">
-                <div class="img-bg-inner"> 
-                  <h2>2023.02.26-28 鍛鍊海鼠</h2>
-                  <!-- <p>
-                    踏上過往太魯閣族、日本人以及榮民曾經生活過的土地，沿路都能看到他們過往生活的痕
-                    跡，百年來不同族群來來去去，看著遺留下來的歷史建築、文物，不禁感慨萬千。太魯閣
-                    險峻壯闊的山勢如同帶刺的玫瑰，美麗動人卻危險，一不小心失足就會跌入萬丈深淵，期
-                    待下次能再來拜訪太魯閣的山，續寫下一段山中的故事。
-                  </p> -->
-                </div>
-              </a>
+                <a href="{{ route('record.show', $record->id )}}" class="img-bg d-flex align-items-end" style="background-image: url({{ asset($record->image) }});">
+                  <div class="img-bg-inner"> 
+                    <h2>{{ $record->start_date . "-" . $record->end_date . " " . $record->name }}</h2>
+                    <p>{{ $record->description }}</p> 
+                  </div>
+                </a>              
             </div>
-
-            <div class="swiper-slide">
-              <a href="/" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/boliku.jpg');">
-                <div class="img-bg-inner">
-                  <h2>2023.01.29-31 寶里苦溪溯登李棟山</h2>
-                  <!-- <p>
-                    喜歡一路上的瀑布深潭，還有原始溪谷的樣貌，很漂亮，也給人一種平靜的感覺，
-                    從瀑布深潭走到涓涓細流，從有水走到沒水，在溪谷裡慢慢溯源是特別不一樣的感受，                        
-                    數不清的地形和高繞，還好有大家一起找路架繩過地形，團隊合作的過程中學習到很多，是最寶貴的經驗，
-                    最後終於終於切到稜線上，大家都很累但也很感動。
-                  </p> -->
-                </div>
-              </a>
-            </div>
-
-            <div class="swiper-slide">
-              <a href="/" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/cat.jpg');">
-                <div class="img-bg-inner">
-                  <h2>2023.04.08-09 龍貓公車</h2>
-                  <!-- <p>
-                    踏上八通關古道西段，探訪過去乘載無數人登玉山的龍貓公車，大家坐上車，模仿著司機與乘客，玩的很開心，
-                    回程路上飄起陣陣薄霧，加上陽光灑落在樹林上，頗有魔幻森林的感覺，是中級山才能看見的美景，
-                    整體行程不長路況也很好，是條蠻入門的中級山路線。
-                  </p> -->
-                </div>
-              </a>
-            </div>
-
-            <div class="swiper-slide">
-              <a href="/" class="img-bg d-flex align-items-end" style="background-image: url('assets/img/eight.jpg');">
-                <div class="img-bg-inner">
-                  <h2>2023.02.04-06 清水台黎明神社</h2>
-                  <!-- <p>
-                    何其幸運，能夠一瞥這些歷史洗刷後的滄海桑田，
-                    我們只不過是偶然拜訪旁觀者，嘗試推敲想像伏地索道上一批一批木材從眼前運送、
-                    木馬道上火車隆隆聲、神社參拜者的莊嚴肅穆、黎明遺址宿泊所旅客的熙來攘往、
-                    埋頭苦幹以石英砂岩砌出平整駁坎牆面的工人們、索道頭無止運轉的纜繩、
-                    各式酒瓶散落前的觥籌交錯…
-                  </p> -->
-                </div>
-              </a>
-            </div>
+          @endforeach
           </div>
           <div class="custom-swiper-button-next">
             <span class="bi-chevron-right"></span>

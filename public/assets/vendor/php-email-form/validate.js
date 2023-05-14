@@ -24,7 +24,7 @@ function caculate() {
         var score = levelScore + dayScore + energyScore;
         var rank = calcuateRank(score);
         var msg =
-        "路況分數：" + levelScore + "<br>天數分數：" + dayScore + "<br>體力分數：" + energyScore + "<br>總分：" + score + "<br>難度等級：" + rank ;
+        "路線名稱：" + name + "<br>路況分數：" + levelScore + "<br>天數分數：" + dayScore + "<br>體力分數：" + energyScore + "<br>總分：" + score + "<br>難度等級：" + rank ;
         document.querySelector('.result-message').innerHTML = msg;
         
     }     
