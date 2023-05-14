@@ -6,7 +6,7 @@ import '@toast-ui/editor/dist/i18n/zh-tw';
 const editor = new Editor({
   el: document.querySelector('#editor'),
   previewStyle: 'vertical',
-  height: '500px',
+  height: '1000px',
   initialEditType: 'markdown',
   previewStyle: 'tab',
   theme: 'dark',

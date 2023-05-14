@@ -84,7 +84,7 @@ return [
     | considered valid. This security feature keeps tokens short-lived so
     | they have less time to be guessed. You may change this as needed.
     |
-    */
+    
 
     'passwords' => [
         'users' => [
@@ -95,7 +95,7 @@ return [
         ],
     ],
 
-    /*
+    
     |--------------------------------------------------------------------------
     | Password Confirmation Timeout
     |--------------------------------------------------------------------------
@@ -104,8 +104,9 @@ return [
     | times out and the user is prompted to re-enter their password via the
     | confirmation screen. By default, the timeout lasts for three hours.
     |
-    */
+    
 
     'password_timeout' => 10800,
-
+    */
+    'remember' => true,
 ];

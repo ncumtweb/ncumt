@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JudgementController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\BasicController;
+use App\Http\Controllers\PortalLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,18 @@ Route::get('/welcome', function () {
 Route::get('/commingsoon', function () {
     return view('commingsoon');
 });
-Route::get('/', [BasicController::class, 'index']);
+Route::get('/', [BasicController::class, 'index'])->name('index');
 
 Route::resource('judgement', JudgementController::class);
 Route::resource('record', RecordController::class);
+
+Route::prefix('portal')->name('portal.')->group(function () {
+    Route::get('/', function () {
+        return view('basic.portal');
+    })->name('index');
+
+    
+    Route::get('/callback', [PortalLoginController::class, 'handleProviderCallback']);
+    Route::get('/login', [PortalLoginController::class, 'redirectToProvider'])->name('login');
+    Route::get('/logout', [PortalLoginController::class, 'logout'])->name('logout');
+});

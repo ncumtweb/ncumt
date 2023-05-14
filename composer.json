@@ -11,7 +11,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
+        "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.5",
+        "ncucc/portal-oauth2-provider": "dev-master",
         "spatie/laravel-sitemap": "^6.3"
     },
     "require-dev": {
@@ -59,6 +61,12 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "repositories": [
+        {
+           "type": "path",
+           "url": "./repositories/laravel-socialite-portal-provider"
+        }
+    ],
     "minimum-stability": "dev",
     "prefer-stable": true
 }

@@ -27970,7 +27970,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__["default"]((_Editor = {
   el: document.querySelector('#editor'),
   previewStyle: 'vertical',
-  height: '500px',
+  height: '1000px',
   initialEditType: 'markdown'
 }, _defineProperty(_Editor, "previewStyle", 'tab'), _defineProperty(_Editor, "theme", 'dark'), _defineProperty(_Editor, "language", 'zh-TW'), _Editor));
 document.querySelector('#createRecordForm').addEventListener('submit', function (e) {

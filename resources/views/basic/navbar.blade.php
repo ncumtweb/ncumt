@@ -15,13 +15,26 @@
           <li class="dropdown"><a><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="{{ url('/record') }}">所有紀錄</a></li>
-              <li><a href="{{ url('/record/create') }}">新增紀錄</a></li>
+              @auth 
+                <li><a href="{{ url('/record/create') }}">新增紀錄</a></li>
+              @endauth
             </ul>
           </li>
 
           <li><a href="{{ url('/commingsoon') }}">關於我們</a></li>
           <li><a href="{{ url('/commingsoon') }}">聯絡我們</a></li>
           <li><a href="{{ url('/commingsoon') }}">FAQ</a></li>
+          @guest
+            <li><a href="/portal">{{ __('登入') }}</a></li>
+          @endguest
+
+          @if(Auth::check())
+            <li class="dropdown"><a><span>{{Auth::user()->name_zh . ' 您好'}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+              <ul>
+                <li><a href="{{ url('/user/'.Auth::user()->id) }}">{{ __('個人資料') }}</a></i>
+                <li><a href="/portal/logout">{{ __('登出') }}</a></li>
+              </ul>
+          @endif
         </ul>
       </nav><!-- .navbar -->
 

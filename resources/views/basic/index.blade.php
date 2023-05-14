@@ -14,7 +14,8 @@
             <div class="swiper-slide">
                 <a href="{{ route('record.show', $record->id )}}" class="img-bg d-flex align-items-end" style="background-image: url({{ asset($record->image) }});">
                   <div class="img-bg-inner"> 
-                    <h2>{{ $record->start_date . "-" . $record->end_date . " " . $record->name }}</h2>
+                    <h2>{{ $record->start_date . "-" . $record->end_date }}</h2>
+                    <h2>{{ $record->name }}</h2>
                     <p>{{ $record->description }}</p> 
                   </div>
                 </a>              

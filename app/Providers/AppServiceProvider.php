@@ -24,5 +24,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $this->bootPortalSocialite();
+    }
+
+    private function bootPortalSocialite()
+    {
+        $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
+
+        $socialite->extend(
+            'portal',
+            function ($app) use ($socialite) {
+                $config = $app['config']['ncu.portal'];
+                return $socialite->buildProvider(\Ncucc\Portal\PortalBaseProvider::class, $config);
+            }
+        );
     }
 }
