@@ -36,67 +36,108 @@
   </div>
 </section><!-- End Hero Slider Section -->
 
-<!-- ======= Post Grid Section ======= -->
-<section id="posts" class="posts">
-  <div class="container" data-aos="fade-up">
-    <div class="row g-5 justify-content-center">
-      <div class="col-lg-10">
-        <div class="post-entry-1 lg">
-          <a href="/"><img src="assets/img/mouse.jpg" alt="" class="img-fluid"></a>
-          <div class="post-meta"><span class="date">中級山</span> <span class="mx-1">&bullet;</span> <span>2023.02.26-28</span></div>
-          <h2><a href="/">鍛鍊海鼠潛水行</a></h2>
-          <p class="mb-4 d-block">
-            踏上過往太魯閣族、日本人以及榮民曾經生活過的土地，沿路都能看到他們過往生活的痕
-            跡，百年來不同族群來來去去，看著遺留下來的歷史建築、文物，不禁感慨萬千。太魯閣
-            險峻壯闊的山勢如同帶刺的玫瑰，美麗動人卻危險，一不小心失足就會跌入萬丈深淵，期
-            待下次能再來拜訪太魯閣的山，續寫下一段山中的故事。
-          </p>
-        </div>
-      </div>
-    </div> <!-- End .row -->
+@if (session('status'))
+  <div class="col-lg-12 text-center mb-5">
+    <h6 class="alert alert-success">{{ session('status') }}</h6>
   </div>
-</section> <!-- End Post Grid Section -->
+@endif
 
-<!-- ======= Post Grid Section ======= -->
-<section id="posts" class="posts">
-  <div class="container" data-aos="fade-up">
-    <div class="row g-5 justify-content-center">
-      <div class="col-lg-10">
-        <div class="post-entry-1 lg">
-          <a href="/"><img src="assets/img/eight.jpg" alt="" class="img-fluid"></a>
-          <div class="post-meta"><span class="date">中級山</span> <span class="mx-1">&bullet;</span> <span>2023.02.04-06</span></div>
-          <h2><a href="/">清水台黎明神社</a></h2>
-          <p class="mb-4 d-block">
-            何其幸運，能夠一瞥這些歷史洗刷後的滄海桑田，
-            我們只不過是偶然拜訪旁觀者，嘗試推敲想像伏地索道上一批一批木材從眼前運送、
-            木馬道上火車隆隆聲、神社參拜者的莊嚴肅穆、黎明遺址宿泊所旅客的熙來攘往、
-            埋頭苦幹以石英砂岩砌出平整駁坎牆面的工人們、索道頭無止運轉的纜繩、
-            各式酒瓶散落前的觥籌交錯…
-          </p>
-        </div>
+<!-- start post -->
+<section class="signa-table-section clearfix">
+      <div class="container">
+         <div class="row">
+            <div class="col-lg">
+              <table id="post-table" class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">公告類別</th>
+                    <th scope="col">公告</th>
+                    <th scope="col">發布時間</th>
+                    <th scope="col">發布者</th>
+                    <!-- 幹部才能編輯 -->
+                    @auth
+                      @if(Auth::user()->role > 0)  
+                        <th scope="col">編輯/刪除</th>
+                      @endif
+                    @endauth
+                  </tr>
+                </thead>
+                <tbody>
+                    @if($posts->count() > 0)
+                      @foreach($posts as $post)
+                        <!-- 置頂 -->
+                        @if($post->pin == 1)  
+                          <tr data-bs-toggle="modal" data-bs-target="#x{{ $post->id }}">  
+                            <td class="postshow" data-toggle="modal" data-target="#Modal"><i class="bi bi-pin-angle-fill"></i> {{ $loop->index + 1 }} </td>
+                            <td> <span class="{{ $tag_array[$post->type] }}">{{ $type_array[$post->type] }}</span></td>
+                            <td> {{ $post->title }}</td>
+                            <td> {{ $post->created_at->locale('zh-TW')->isoFormat('LLLL') }}</td>
+                            <td> {{ $post->user->name_zh }}</td>
+                            @auth
+                              @if(Auth::user()->role > 0) 
+                                <td>
+                                  <form action="{{ route('post.destroy', $post->id) }}" method="POST">
+                                    <button type = "button" class="bi bi-pencil-square" onclick="window.location='{{ route('post.edit', $post->id) }}'"></button>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bi bi-trash"></button>
+                                  </form>
+                                </td>
+                              @endif
+                            @endauth
+                          </tr>
+                        <!-- 非置頂 -->
+                        @else
+                          <tr data-bs-toggle="modal" data-bs-target="#x{{ $post->id }}">  
+                            <td class="postshow" data-toggle="modal" data-target="#Modal"><i class="bi bi-card-text"></i> {{ $loop->index + 1 }} </td>
+                            <td> <span class="{{ $tag_array[$post->type] }}">{{ $type_array[$post->type] }}</span></td>
+                            <td> {{ $post->title }}</td>
+                            <td> {{ $post->created_at->locale('zh-TW')->isoFormat('LLLL') }}</td>
+                            <td> {{ $post->user->name_zh }}</td>
+                            @auth
+                              @if(Auth::user()->role > 0) 
+                                <td>
+                                  <form action="{{ route('post.destroy', $post->id) }}" method="POST">
+                                    <button type = "button" class="bi bi-pencil-square" onclick="window.location='{{ route('post.edit', $post->id) }}'"></button>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="bi bi-trash"></button>
+                                  </form>
+                                </td>
+                              @endif
+                            @endauth
+                          </tr>
+                        @endif
+                          <!-- Modal -->
+                          <div class="modal fade" id="x{{ $post->id }}" tabindex="-1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">{{ $post->title }}</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  {!!  $post->content !!}
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      @endforeach
+                    @else
+                      <tr>
+                        <td colspan = '4'>目前暫無公告</td>
+                      </tr>
+                    @endif
+                </tbody>
+              </table>
+            </div>
+         </div>
       </div>
-    </div> <!-- End .row -->
-  </div>
-</section> <!-- End Post Grid Section -->
+    </section>
+<!-- end post -->
 
-<!-- ======= Post Grid Section ======= -->
-<section id="posts" class="posts">
-  <div class="container" data-aos="fade-up">
-    <div class="row g-5 justify-content-center">
-      <div class="col-lg-10">
-        <div class="post-entry-1 lg">
-          <a href="/"><img src="assets/img/boliku.jpg" alt="" class="img-fluid"></a>
-          <div class="post-meta"><span class="date">溯溪</span> <span class="mx-1">&bullet;</span> <span>2023.01.29-31</span></div>
-          <h2><a href="/">寶里苦溪溯登李棟山</a></h2>
-          <p class="mb-4 d-block">
-            喜歡一路上的瀑布深潭，還有原始溪谷的樣貌，很漂亮，也給人一種平靜的感覺，
-            從瀑布深潭走到涓涓細流，從有水走到沒水，在溪谷裡慢慢溯源是特別不一樣的感受，                        
-            數不清的地形和高繞，還好有大家一起找路架繩過地形，團隊合作的過程中學習到很多，是最寶貴的經驗，
-            最後終於終於切到稜線上，大家都很累但也很感動。
-          </p>
-        </div>
-      </div>
-    </div> <!-- End .row -->
-  </div>
-</section> <!-- End Post Grid Section -->
 @endsection

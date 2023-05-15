@@ -5,6 +5,8 @@ use App\Http\Controllers\JudgementController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\BasicController;
 use App\Http\Controllers\PortalLoginController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +30,9 @@ Route::get('/', [BasicController::class, 'index'])->name('index');
 
 Route::resource('judgement', JudgementController::class);
 Route::resource('record', RecordController::class);
+Route::resource('user', UserController::class);
+Route::resource('post', PostController::class);
+
 
 Route::prefix('portal')->name('portal.')->group(function () {
     Route::get('/', function () {
@@ -39,3 +44,5 @@ Route::prefix('portal')->name('portal.')->group(function () {
     Route::get('/login', [PortalLoginController::class, 'redirectToProvider'])->name('login');
     Route::get('/logout', [PortalLoginController::class, 'logout'])->name('logout');
 });
+
+

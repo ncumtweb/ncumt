@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Models\Record;
-use App\Models\User;
 
-class BasicController extends Controller
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Post;
+
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +15,12 @@ class BasicController extends Controller
      */
     public function index()
     {
-        $posts = (new PostController)->index();
-        $type_array = ["隊伍相關", "社課相關", "其他"];
-        $tag_array = ["badge bg-success", "badge bg-info text-dark", "badge bg-warning text-dark"];
-        
-        $records = Record::orderBy('start_date','desc')->get();
-        $category_array = ["中級山", "高山", "溯溪"];
-        
-        
-        return view('basic.index', compact('records', 'category_array', 'posts', 'type_array', 'tag_array'));
+        $posts = Post::where('expired_at', '>', now()) 
+        ->orderBy('pin', 'DESC')
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
+        return $posts;
     }
 
     /**
@@ -33,7 +30,7 @@ class BasicController extends Controller
      */
     public function create()
     {
-        //
+        return view('post.create');
     }
 
     /**
@@ -44,7 +41,16 @@ class BasicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+        $post->user_id = Auth::user()->id;
+        $post->type = $request->input('type');
+        $post->pin = $request->input('pin');
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->expired_at = $request->input('expired_at');
+        $post->save();
+
+        return redirect()->route('index');
     }
 
     /**
@@ -55,7 +61,7 @@ class BasicController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::where('id', id)->first();
     }
 
     /**
@@ -66,7 +72,8 @@ class BasicController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::Find($id);
+        return view('post.edit', compact('post'));
     }
 
     /**
@@ -78,7 +85,16 @@ class BasicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post->user_id = Auth::user()->id;
+        $post->type = $request->input('type');
+        $post->pin = $request->input('pin');
+        $post->title = $request->input('title');
+        $post->content = $request->input('content');
+        $post->expired_at = $request->input('expired_at');
+        $post->update();
+
+        return redirect()->route('index');
     }
 
     /**
@@ -89,6 +105,8 @@ class BasicController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('index')->with('status','公告刪除成功');
     }
 }

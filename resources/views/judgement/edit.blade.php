@@ -35,36 +35,36 @@
                             <div class="row"> 
                                 <div class="form-group col-md-3">
                                     <label for="level" class="form-label">路況分級</label>
-                                    <select id="level" name="level" class="form-select" value = "{{ $judgement->level }}" required>
-                                    <option value="0">一</option>
-                                    <option value="1">二</option>
-                                    <option value="2">三a</option>
-                                    <option value="3">三b</option>
-                                    <option value="4">四a</option>
-                                    <option value="5">四b</option>
+                                    <select id="level" name="level" class="form-select" required>
+                                        <option value="0" {{ $judgement->level == 0 ? 'selected' : ''}}>一</option>
+                                        <option value="1" {{ $judgement->level == 1 ? 'selected' : ''}}>二</option>
+                                        <option value="2" {{ $judgement->level == 2 ? 'selected' : ''}}>三a</option>
+                                        <option value="3" {{ $judgement->level == 3 ? 'selected' : ''}}>三b</option>
+                                        <option value="4" {{ $judgement->level == 4 ? 'selected' : ''}}>四a</option>
+                                        <option value="5" {{ $judgement->level == 5 ? 'selected' : ''}}>四b</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="road" class="form-label">路跡/指標級別</label>
-                                    <select id="road" name="road" class="form-select" value = "{{ $judgement->road }}" required>
+                                    <select id="road" name="road" class="form-select" required>
                                     @for($i = 0; $i < 10; $i++) 
-                                        <option value = {{ $i + 1 }}> {{ $i + 1 }}</option>
+                                        <option value = {{ $i + 1 }} {{ $judgement->road == $i + 1 ? 'selected' : ''}}> {{ $i + 1 }}</option>
                                     @endfor
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="terrain" class="form-label">地形級別</label>
-                                    <select id="terrain" name="terrain" class="form-select" value = "{{ $judgement->terrain }}" required>
+                                    <select id="terrain" name="terrain" class="form-select" required>
                                     @for($i = 0; $i < 10; $i++) 
-                                        <option value = {{ $i + 1 }}> {{ $i + 1 }}</option>
+                                        <option value = {{ $i + 1 }} {{ $judgement->terrain == $i + 1 ? 'selected' : ''}}> {{ $i + 1 }}</option>
                                     @endfor
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="plant" class="form-label">植被級別</label>
-                                    <select id="plant" name="plant" class="form-select" value = "{{ $judgement->plant }}" required>
+                                    <select id="plant" name="plant" class="form-select" required>
                                     @for($i = 0; $i < 10; $i++) 
-                                        <option value = {{ $i + 1 }}> {{ $i + 1 }}</option>
+                                        <option value = {{ $i + 1 }} {{ $judgement->plant == $i + 1 ? 'selected' : ''}}> {{ $i + 1 }}</option>
                                     @endfor
                                     </select>
                                 </div>
@@ -72,9 +72,9 @@
                             <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="energy" class="form-label">體力級別</label>
-                                <select id="energy" name="energy" class="form-select" value = "{{ $judgement->energy }}" required>
+                                <select id="energy" name="energy" class="form-select" required>
                                 @for($i = 0; $i < 4; $i++) 
-                                    <option value = {{ $i + 1 }}> {{ $i + 1 }}</option>
+                                    <option value = {{ $i + 1 }} {{ $judgement->energy == $i + 1 ? 'selected' : ''}}> {{ $i + 1 }}</option>
                                 @endfor
                                 </select>
                             </div>

@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
-use App\Models\Record;
 use App\Models\User;
 
-class BasicController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +14,7 @@ class BasicController extends Controller
      */
     public function index()
     {
-        $posts = (new PostController)->index();
-        $type_array = ["隊伍相關", "社課相關", "其他"];
-        $tag_array = ["badge bg-success", "badge bg-info text-dark", "badge bg-warning text-dark"];
-        
-        $records = Record::orderBy('start_date','desc')->get();
-        $category_array = ["中級山", "高山", "溯溪"];
-        
-        
-        return view('basic.index', compact('records', 'category_array', 'posts', 'type_array', 'tag_array'));
+        //
     }
 
     /**
@@ -55,7 +46,12 @@ class BasicController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        $position = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
+        '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
+        '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
+        '財務長', '山防組組長' ];
+        return view('user.information', compact('user', 'position'));
     }
 
     /**
@@ -78,7 +74,16 @@ class BasicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $user = User::find($id);
+        $user->name_zh = $request->input('name_zh');
+        $user->name_en = $request->input('name_en');
+        $user->nickname = $request->input('nickname');
+        $user->identifier = $request->input('studentID');
+        $user->phone = $request->input('phone');
+        $user->email = $request->input('email');
+        $user->update();
+
+        return redirect()->back()->with('status','個人資料更新成功');
     }
 
     /**

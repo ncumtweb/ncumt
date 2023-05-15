@@ -15,8 +15,11 @@
           <li class="dropdown"><a><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
               <li><a href="{{ url('/record') }}">所有紀錄</a></li>
+              <!-- 幹部才能新增紀錄 -->
               @auth 
-                <li><a href="{{ url('/record/create') }}">新增紀錄</a></li>
+                @if(Auth::user()->role > 0) 
+                  <li><a href="{{ url('/record/create') }}">新增紀錄</a></li>
+                @endif
               @endauth
             </ul>
           </li>
@@ -31,7 +34,12 @@
           @if(Auth::check())
             <li class="dropdown"><a><span>{{Auth::user()->name_zh . ' 您好'}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
-                <li><a href="{{ url('/user/'.Auth::user()->id) }}">{{ __('個人資料') }}</a></i>
+                <li><a href="{{ route('user.show', Auth::user()->id )}}">{{ __('個人資料') }}</a></i>
+                @auth 
+                  @if(Auth::user()->role > 0) 
+                    <li><a href="{{ route('post.create') }}">新增公告</a></i>
+                    @endif
+                @endauth
                 <li><a href="/portal/logout">{{ __('登出') }}</a></li>
               </ul>
           @endif

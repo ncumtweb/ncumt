@@ -132,7 +132,12 @@
                   <th scope="col">背水天數</th>
                   <th scope="col">難度總分</th>
                   <th scope="col">隊伍難度</th>
-                  <th scope="col">編輯/刪除</th>
+                  <!-- 幹部才能編輯 -->
+                  @auth
+                    @if(Auth::user()->role > 0)  
+                      <th scope="col">編輯/刪除</th>
+                    @endif
+                  @endauth
                 </tr>
               </thead>
               <tbody>
@@ -156,14 +161,19 @@
                         <td>{{ $judgement->water }} 天</td>
                         <td>{{ $judgement->score }} 分</td>
                         <td>{{ $judgement->result_level }}</td>
-                        <td>
-                          <form action="{{ route('judgement.destroy', $judgement->id) }}" method="POST">
-                            <button type = "button" class="bi bi-pencil-square" onclick="window.location='{{ route('judgement.edit', $judgement->id) }}'"></button>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="bi bi-trash"></button>
-                          </form>
-                        </td>
+                        <!-- 幹部才能編輯 -->
+                        @auth
+                          @if(Auth::user()->role > 0) 
+                            <td>
+                              <form action="{{ route('judgement.destroy', $judgement->id) }}" method="POST">
+                                <button type = "button" class="bi bi-pencil-square" onclick="window.location='{{ route('judgement.edit', $judgement->id) }}'"></button>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bi bi-trash"></button>
+                              </form>
+                            </td>
+                          @endif
+                        @endauth
                     </tr>
                   @endforeach
                 @endif
