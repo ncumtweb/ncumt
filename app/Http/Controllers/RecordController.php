@@ -70,7 +70,7 @@ class RecordController extends Controller
     {
         $record = Record::find($id);
         $category_array = ["中級山", "高山", "溯溪"];
-        return view('record.show', compact('record', 'category_array'));
+        return view('record.show', ['record' => Record::findOrFail($id), 'category_array' => $category_array]);
     }
 
     /**

@@ -53,7 +53,6 @@
                     <th scope="col">#</th>
                     <th scope="col">公告類別</th>
                     <th scope="col">公告</th>
-                    <th scope="col">發布時間</th>
                     <th scope="col">發布者</th>
                     <!-- 幹部才能編輯 -->
                     @auth
@@ -72,7 +71,7 @@
                             <td class="postshow" data-toggle="modal" data-target="#Modal"><i class="bi bi-pin-angle-fill"></i> {{ $loop->index + 1 }} </td>
                             <td> <span class="{{ $tag_array[$post->type] }}">{{ $type_array[$post->type] }}</span></td>
                             <td> {{ $post->title }}</td>
-                            <td> {{ $post->created_at->locale('zh-TW')->isoFormat('LLLL') }}</td>
+                            
                             <td> {{ $post->user->name_zh }}</td>
                             @auth
                               @if(Auth::user()->role > 0) 
@@ -93,7 +92,6 @@
                             <td class="postshow" data-toggle="modal" data-target="#Modal"><i class="bi bi-card-text"></i> {{ $loop->index + 1 }} </td>
                             <td> <span class="{{ $tag_array[$post->type] }}">{{ $type_array[$post->type] }}</span></td>
                             <td> {{ $post->title }}</td>
-                            <td> {{ $post->created_at->locale('zh-TW')->isoFormat('LLLL') }}</td>
                             <td> {{ $post->user->name_zh }}</td>
                             @auth
                               @if(Auth::user()->role > 0) 
