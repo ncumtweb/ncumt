@@ -52,7 +52,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">公告類別</th>
-                    <th scope="col">公告</th>
+                    <th scope="col">公告標題</th>
                     <th scope="col">發布者</th>
                     <!-- 幹部才能編輯 -->
                     @auth

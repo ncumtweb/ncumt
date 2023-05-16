@@ -14,7 +14,8 @@
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.5",
         "ncucc/portal-oauth2-provider": "dev-master",
-        "spatie/laravel-sitemap": "^6.3"
+        "spatie/laravel-sitemap": "^6.3",
+        "timetree/timetree-sdk-php": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
