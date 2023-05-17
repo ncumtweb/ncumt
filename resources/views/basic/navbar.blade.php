@@ -18,7 +18,7 @@
               <!-- 幹部才能新增紀錄 -->
               @auth 
                 @if(Auth::user()->role > 0) 
-                  <li><a href="{{ url('/record/create') }}">新增紀錄</a></li>
+                  <li><a href="{{ route('record.create') }}">新增紀錄</a></li>
                 @endif
               @endauth
             </ul>

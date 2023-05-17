@@ -18,10 +18,3 @@ document.querySelector('#createRecordForm').addEventListener('submit', e => {
   document.querySelector('#content').value = editor.getMarkdown();
   e.target.submit();
 });
-
-// editor.eventManager.removeEventHandler('addImageBlobHook');
-// editor.eventManager.listen('addImageBlobHook', (blob, callback) =>{
-//   var uploadedImageURL = that.imageUpload(blob);
-//   callback(uploadedImageURL, 'alt text');
-//   return false;
-// });

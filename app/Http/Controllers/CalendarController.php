@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Models\Record;
-use App\Models\User;
 
-class BasicController extends Controller
+use Illuminate\Http\Request;
+use App\Models\Event;
+use Carbon\Carbon;
+
+class CalendarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,19 +15,22 @@ class BasicController extends Controller
      */
     public function index()
     {
-        $posts = (new PostController)->index();
-        $calendar_events = (new CalendarController)->index();
+        $calendar_events = array();
+        $events = Event::all();
+        $category_array =['#BAE3A4', '#7CC3F3','#D6D583', '#CA81F1']; // 0 => 爬山(綠色), 1 => 溯溪(藍色), 2 => 社課(黃色), 3 => 開會(紫色)
 
-        $type_array = ["隊伍相關", "社課相關", "其他"];
-        $tag_array = ["badge bg-success", "badge bg-info text-dark", "badge bg-warning text-dark"];
+        foreach ($events as $event) {
+            $calendar_events[] = [
+                'id' => $event->id,
+                'title' => $event->title,
+                'start' => $event->start,
+                'end' => $event->end,
+                'color' => $category_array[$event->category],
+            ];
+        }
         
-        $records = Record::orderBy('start_date','desc')->get();
-        $category_array = ["中級山", "高山", "溯溪"];
-        
-        
-        return view('basic.index', compact('records', 'category_array', 'posts', 'type_array', 'tag_array','calendar_events'));
+        return $calendar_events;
     }
-
     /**
      * Show the form for creating a new resource.
      *

@@ -16,6 +16,11 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
-        "@toast-ui/editor": "^3.2.2"
+        "@fullcalendar/core": "^6.1.7",
+        "@fullcalendar/daygrid": "^6.1.7",
+        "@fullcalendar/list": "^6.1.7",
+        "@fullcalendar/timegrid": "^6.1.7",
+        "@toast-ui/editor": "^3.2.2",
+        "fullcalendar": "^6.1.7"
     }
 }

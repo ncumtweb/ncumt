@@ -27979,13 +27979,6 @@ document.querySelector('#createRecordForm').addEventListener('submit', function 
   e.target.submit();
 });
 
-// editor.eventManager.removeEventHandler('addImageBlobHook');
-// editor.eventManager.listen('addImageBlobHook', (blob, callback) =>{
-//   var uploadedImageURL = that.imageUpload(blob);
-//   callback(uploadedImageURL, 'alt text');
-//   return false;
-// });
-
 /***/ }),
 
 /***/ "./resources/js/bootstrap.js":
