@@ -38,7 +38,7 @@ class CalendarController extends Controller
      */
     public function create()
     {
-        //
+        return view('calendar.create');
     }
 
     /**
@@ -49,7 +49,13 @@ class CalendarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $event = new Event();
+        $event->title = $request->input('title');
+        $event->category = $request->input('category');
+        $event->start = $request->input('start');
+        $event->end = $request->input('end');
+        $event->save();
+        return redirect()->route('index');
     }
 
     /**
@@ -71,7 +77,8 @@ class CalendarController extends Controller
      */
     public function edit($id)
     {
-        //
+        $event = Event::find($id);
+        return view('calendar.edit', compact('event'));
     }
 
     /**
@@ -83,7 +90,13 @@ class CalendarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $event = Event::findorFail($id);
+        $event->title = $request->input('title');
+        $event->category = $request->input('category');
+        $event->start = $request->input('start');
+        $event->end = $request->input('end');
+        $event->update();
+        return redirect()->route('index');
     }
 
     /**
@@ -94,6 +107,8 @@ class CalendarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $event = Event::findorFail($id);
+        $event->delete();
+        return redirect()->route('index');
     }
 }

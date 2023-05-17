@@ -140,7 +140,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title" id="calendarEventTitle">123</h3>
+        <h3 class="modal-title" id="calendarEventTitle"></h3>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -148,7 +148,13 @@
         <h5>結束時間：<span id="calendarEventEnd"></span></h5>
       </div>  
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">關閉</button>
+        @auth
+          @if(auth::user()->role > 0)
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="editEvent">編輯</button>
+            
+          @endif
+        @endauth
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="deleteEvent">關閉</button>
       </div>
     </div>
   </div>
@@ -173,7 +179,6 @@
 <script>
   $(document).ready(function () {
     var events = @json($calendar_events);
-    console.log(events);
     $('#calendar').fullCalendar({
         header: {
           left: 'today, prev, next',
@@ -185,12 +190,17 @@
         selectHelper: true,
         displayEventTime: false,
         eventClick: function(event) {
-          console.log(event.end);
+          
           $('#calendarEventTitle').html(event.title);
           $('#calendarEventStart').html(moment(event.start).locale('zh-Tw').format('LLLL'));
           $('#calendarEventEnd').html(moment(event.end).locale('zh-Tw').format('LLLL'));
           $('#calendarEvent').modal('toggle');
-         
+          document.getElementById("editEvent").addEventListener("click", function(){
+            console.log(event.id);
+            var url = '{{ route("calendar.edit", ":id") }}';
+            url = url.replace(':id', event.id);
+            location.href = url;
+          });
         },
     })
   });
@@ -199,7 +209,7 @@
   moment.locale('zh-Tw', {
       months: '一月_二月_三月_四月_五月_六月_七月_八月_九月_十月_十一月_十二月'.split('_'),
       monthsShort: '1月_2月_3月_4月_5月_6月_7月_8月_9月_10月_11月_12月'.split('_'),
-      weekdays: '星期日_星期一_星期二_星期三_星期四_星期五_星期六'.split('_'),
+      weekdays: '(日)_(一)_(二)_(三)_(四)_(五)_(六)'.split('_'),
       weekdaysShort: '周日_周一_周二_周三_周四_周五_周六'.split('_'),
       weekdaysMin: '日_一_二_三_四_五_六'.split('_'),
       longDateFormat: {
@@ -208,7 +218,7 @@
         L: 'YYYY-MM-DD',
         LL: 'YYYY年MMMD日',
         LLL: 'YYYY年MMMD日Ah點mm分',
-        LLLL: 'YYYY年MMMD日ddddAh點mm分',
+        LLLL: 'YYYY.MM.D ddddAh點mm分',
         l: 'YYYY-MM-DD',
         ll: 'YYYY年MMMD日',
         lll: 'YYYY年MMMD日Ah點mm分',

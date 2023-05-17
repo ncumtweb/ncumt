@@ -7,6 +7,7 @@ use App\Http\Controllers\BasicController;
 use App\Http\Controllers\PortalLoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,7 @@ Route::get('/welcome', function () {
 Route::get('/commingsoon', function () {
     return view('commingsoon');
 });
-Route::get('/calendar', function () {
-    return view('calendar');
-});
+
 Route::get('/', [BasicController::class, 'index'])->name('index');
 
 Route::resource('judgement', JudgementController::class);
@@ -50,6 +49,6 @@ Route::prefix('portal')->name('portal.')->group(function () {
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::resource('post', PostController::class);
-    
+    Route::resource('calendar', CalendarController::class);
 
 });

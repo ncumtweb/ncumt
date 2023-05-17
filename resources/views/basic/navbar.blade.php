@@ -24,8 +24,18 @@
             </ul>
           </li>
 
+          @auth 
+            @if(Auth::user()->role > 0) 
+              <li class="dropdown"><a><span>幹部專區</span><i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul>  
+                  <li><a href="{{ route('record.create') }}">新增紀錄</a></li>
+                  <li><a href="{{ route('post.create') }}">新增公告</a></i>
+                  <li><a href="{{ route('calendar.create') }}">新增活動</a></i>
+                </ul>  
+              </li>
+            @endif
+          @endauth
           <li><a href="{{ url('/commingsoon') }}">關於我們</a></li>
-          <li><a href="{{ url('/commingsoon') }}">聯絡我們</a></li>
           <li><a href="{{ url('/commingsoon') }}">FAQ</a></li>
           @guest
             <li><a href="/portal">{{ __('登入') }}</a></li>
@@ -35,11 +45,6 @@
             <li class="dropdown"><a><span>{{Auth::user()->name_zh . ' 您好'}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="{{ route('user.show', Auth::user()->id )}}">{{ __('個人資料') }}</a></i>
-                @auth 
-                  @if(Auth::user()->role > 0) 
-                    <li><a href="{{ route('post.create') }}">新增公告</a></i>
-                    @endif
-                @endauth
                 <li><a href="/portal/logout">{{ __('登出') }}</a></li>
               </ul>
           @endif
