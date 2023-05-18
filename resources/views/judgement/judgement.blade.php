@@ -9,7 +9,7 @@
 
         <div class="row">
           <div class="col-lg-12 text-center">
-            <h1 class="page-title"><font face = "微軟正黑體" size = "10px" >隊伍難度評分系統</font></h1>
+            <h1 class="page-title">隊伍難度評分系統</h1>
             <a> 此評分系統根據路況、天數及所需體力來量化，並依據分數高低來訂定隊伍難度等級。</a>
           </div>
         </div>

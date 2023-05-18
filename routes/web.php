@@ -28,6 +28,10 @@ Route::get('/commingsoon', function () {
     return view('commingsoon');
 });
 
+Route::get('/course', function () {
+    return view('course.course');
+});
+
 Route::get('/', [BasicController::class, 'index'])->name('index');
 
 Route::resource('judgement', JudgementController::class);
