@@ -36,11 +36,11 @@
               </div>
               <div class="form-group ">
                 <label for="start">開始時間</label>
-                <input type="datetime-local" class="form-control" id="start" name="start">
+                <input type="datetime-local" class="form-control" id="start" name="start" required>
               </div>
               <div class="form-group ">
                 <label for="end">結束時間</label>
-                <input type="datetime-local" class="form-control" id="end" name="end">
+                <input type="datetime-local" class="form-control" id="end" name="end" required>
               </div>
               <div class="row">
                 <div class="text-center">

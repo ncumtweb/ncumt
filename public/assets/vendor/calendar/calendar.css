@@ -526,8 +526,8 @@ temporary rendered events).
 .fc-event {
 	position: relative; /* for resize handle and other inner positioning */
 	display: block; /* make the <a> tag block */
-	font-size: 15px;
-	line-height: 1.3;
+	font-size: 20px;
+	line-height: 1;
 	border-radius: 3px;
 	border: 1px solid #3a87ad; /* default BORDER color */
 	font-weight: bold; /* undo jqui's ui-widget-header bold */
@@ -1239,7 +1239,7 @@ be a descendant of the grid when it is being dragged.
 	height: 8px;
 	overflow: hidden;
 	line-height: 8px;
-	font-size: 11px;
+	font-size: 20px;
 	font-family: monospace;
 	text-align: center;
 	cursor: s-resize;

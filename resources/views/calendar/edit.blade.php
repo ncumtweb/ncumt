@@ -46,6 +46,11 @@
               <div class="row">
                 <div class="text-center">
                   <button type="submit">更新活動</button>
+                  <form action="{{ route('calendar.destroy', $event->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" style="background:#AB3B3A">刪除活動</button>
+                  </form>
                 </div>
               </div>
             </form>

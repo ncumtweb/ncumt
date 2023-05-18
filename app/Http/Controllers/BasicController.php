@@ -18,8 +18,8 @@ class BasicController extends Controller
         $posts = (new PostController)->index();
         $calendar_events = (new CalendarController)->index();
 
-        $type_array = ["隊伍相關", "社課相關", "其他"];
-        $tag_array = ["badge bg-success", "badge bg-info text-dark", "badge bg-warning text-dark"];
+        $type_array = ["隊伍", "社課", "其他"];
+        $tag_array = ["#A8D8B9", "#E6E5A3", "#9B90C2"];
         
         $records = Record::orderBy('start_date','desc')->get();
         $category_array = ["中級山", "高山", "溯溪"];
