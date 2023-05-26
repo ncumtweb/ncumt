@@ -31,6 +31,7 @@
                   <li><a href="{{ route('record.create') }}">新增紀錄</a></li>
                   <li><a href="{{ route('post.create') }}">新增公告</a></i>
                   <li><a href="{{ route('calendar.create') }}">新增活動</a></i>
+                  <li><a href="{{ route('course.create') }}">新增社課</a></i>
                 </ul>  
               </li>
             @endif

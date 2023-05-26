@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Record;
+use App\Models\Course;
 
-class RecordController extends Controller
+class CourseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $records = Record::orderBy('start_date','desc')->get();
-        $category_array = ["中級山", "高山", "溯溪"];
-        return view('record.record', compact('records', 'category_array'));
+        $courses = Course::orderBy('date','desc')->get();
+        return view('course.course', ['courses' => $courses]);
     }
 
     /**
@@ -26,7 +25,7 @@ class RecordController extends Controller
      */
     public function create()
     {
-        return view('record.create');
+        return view('course.create');
     }
 
     /**
@@ -37,25 +36,29 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
-
         $file = $request->image;
-        $folder_name = "uploads/images/records";
+        $folder_name = "uploads/images/courses";
         $upload_path = public_path() . '/' . $folder_name;
         $extension  =  $file->extension();
-        $filename = $request->input('name') . '.' . $extension;
+        $filename = $request->input('title') . '.' . $extension;
         $file->move($upload_path, $filename);
+        
+        
+        $course = new Course();
 
-        $record = New Record();
-        $record->name = $request->input('name');
-        $record->description = $request->input('description');
-        $record->category = $request->input('category');
-        $record->start_date = $request->input('start_date');
-        $record->end_date = $request->input('end_date');
-        $record->image = $folder_name . '/' . $filename;
-        $record->content = $request->input('content');
-        $record->save();
+        $course->title = $request->input('title');
+        $course->date = $request->input('date');
+        $course->image = $folder_name . '/' . $filename;
+        if($request->input('videoURL')) {
+            $course->videoURL = $request->input('videoURL');
+        }
+        if($request->input('pptURL')) {
+            $course->pptURL = $request->input('pptURL');
+        }
 
-        return redirect()->route('record.index');
+        $course->save();
+
+        return redirect()->route('course.index');
         
     }
 
@@ -67,9 +70,7 @@ class RecordController extends Controller
      */
     public function show($id)
     {
-        $record = Record::findOrFail($id);
-        $category_array = ["中級山", "高山", "溯溪"];
-        return view('record.show', ['record' => $record, 'category_array' => $category_array]);
+        //
     }
 
     /**

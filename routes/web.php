@@ -8,6 +8,7 @@ use App\Http\Controllers\PortalLoginController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\CourseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,15 +29,13 @@ Route::get('/commingsoon', function () {
     return view('commingsoon');
 });
 
-Route::get('/course', function () {
-    return view('course.course');
-});
 
 Route::get('/', [BasicController::class, 'index'])->name('index');
 
+Route::resource('course', CourseController::class);
+
 Route::resource('judgement', JudgementController::class);
 Route::resource('record', RecordController::class);
-
 Route::resource('user', UserController::class);
 
 

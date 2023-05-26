@@ -1,4 +1,4 @@
-@\@extends('basic.main')
+@extends('basic.main')
 
 @section('title',  '登入選項')
 
