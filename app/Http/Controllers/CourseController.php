@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File; 
 class CourseController extends Controller
 {
@@ -99,7 +98,6 @@ class CourseController extends Controller
         $course = Course::find($id);
 
         if($request->image) {
-            //dd(public_path($course->image));
             File::delete(public_path($course->image));
             $file = $request->image;
             $folder_name = "uploads/images/courses";
@@ -132,6 +130,9 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $course = Course::findOrFail($id);
+        File::delete(public_path($course->image));
+        $course->delete();
+        return redirect()->route('course.index')->with('status','社課刪除成功');
     }
 }

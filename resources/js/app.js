@@ -13,8 +13,21 @@ const editor = new Editor({
   language: 'zh-TW'
 });
 
-document.querySelector('#createRecordForm').addEventListener('submit', e => {
-  e.preventDefault();
-  document.querySelector('#content').value = editor.getMarkdown();
-  e.target.submit();
-});
+if (document.querySelector('#createRecordForm')) {
+  document.querySelector('#createRecordForm').addEventListener('submit', e => {
+      e.preventDefault();
+      document.querySelector('#content').value = editor.getMarkdown();
+      e.target.submit();
+  });
+}
+
+if (document.querySelector('#editRecordForm')) {
+  editor.setMarkdown(document.querySelector('#oldContent').value);
+  
+
+  document.querySelector('#editRecordForm').addEventListener('submit', e => {
+      e.preventDefault();
+      document.querySelector('#content').value = editor.getMarkdown();
+      e.target.submit();
+  });
+}

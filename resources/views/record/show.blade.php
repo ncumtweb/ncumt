@@ -8,7 +8,15 @@
       <div class="container">
         <div class="row mb-2">
           <div class="col-lg-12 text-center">
-          <h1 class="page-title">{{ $record->name }}</h1>
+          <h1 class="page-title">
+            {{ $record->name }}
+            @auth
+                @if(Auth::user()->role > 0)
+                    <a class="bi bi-pencil-square" href="{{ route('record.edit', $record->id) }}"></a>
+                    <a class="bi bi-trash" href="{{ route('record.delete', $record->id) }}"></a>
+                @endif
+            @endauth
+          </h1>
             <div class="post-meta">
               <span class="date">{{ $category_array[$record->category] }}</span> 
               <span class="mx-1">&bullet;</span> 

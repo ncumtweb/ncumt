@@ -27,6 +27,7 @@
                             @auth
                                 @if(Auth::user()->role > 0)
                                     <a class="bi bi-pencil-square" href="{{ route('course.edit', $course->id) }}"></a>
+                                    <a class="bi bi-trash" href="{{ route('course.destroy', $course->id) }}"></a>
                                 @endif
                             @endauth
                         </h1>

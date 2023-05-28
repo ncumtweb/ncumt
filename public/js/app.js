@@ -27973,11 +27973,21 @@ var editor = new _toast_ui_editor__WEBPACK_IMPORTED_MODULE_0__["default"]((_Edit
   height: '1000px',
   initialEditType: 'markdown'
 }, _defineProperty(_Editor, "previewStyle", 'tab'), _defineProperty(_Editor, "theme", 'dark'), _defineProperty(_Editor, "language", 'zh-TW'), _Editor));
-document.querySelector('#createRecordForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  document.querySelector('#content').value = editor.getMarkdown();
-  e.target.submit();
-});
+if (document.querySelector('#createRecordForm')) {
+  document.querySelector('#createRecordForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.querySelector('#content').value = editor.getMarkdown();
+    e.target.submit();
+  });
+}
+if (document.querySelector('#editRecordForm')) {
+  editor.setMarkdown(document.querySelector('#oldContent').value);
+  document.querySelector('#editRecordForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.querySelector('#content').value = editor.getMarkdown();
+    e.target.submit();
+  });
+}
 
 /***/ }),
 

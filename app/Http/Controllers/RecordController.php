@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Record;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File; 
 
 class RecordController extends Controller
 {
@@ -85,7 +86,13 @@ class RecordController extends Controller
      */
     public function edit($id)
     {
-        //
+        $record = Record::findOrFail($id);
+
+        if(Auth::check() && Auth::user()->role > 0){
+            return view('record.edit', compact('record'));
+        }
+
+        return redirect()->route('portal.index')->with('status','您並無權限進行此操作，請先登入。');
     }
 
     /**
@@ -97,7 +104,28 @@ class RecordController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $record = Record::findOrFail($id);
+
+        if($request->image) {
+            File::delete(public_path($record->image));
+            $file = $request->image;
+            $folder_name = "uploads/images/records";
+            $upload_path = public_path() . '/' . $folder_name;
+            $extension  =  $file->extension();
+            $filename = $request->input('name')  . time() . '.' . $extension;
+            $file->move($upload_path, $filename);
+            $record->image = $folder_name . '/' . $filename;
+        }
+
+        $record->name = $request->input('name');
+        $record->description = $request->input('description');
+        $record->category = $request->input('category');
+        $record->start_date = $request->input('start_date');
+        $record->end_date = $request->input('end_date');
+        $record->content = $request->input('content');
+        $record->update();
+
+        return redirect()->route('record.show', $record->id);
     }
 
     /**
@@ -106,8 +134,16 @@ class RecordController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete($id)
     {
-        //
+        $record = Record::findOrFail($id);
+
+        if(Auth::check() && Auth::user()->role > 0){
+            File::delete(public_path($record->image));
+            $record->delete();
+            return redirect()->route('record.index')->with('status','紀錄刪除成功');
+        }
+
+        return redirect()->route('portal.index')->with('status','您並無權限進行此操作，請先登入。');
     }
 }

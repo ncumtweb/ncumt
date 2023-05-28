@@ -77,6 +77,9 @@ Route::middleware(['checkRole'])->group(function () {
     Route::post('/course/create', [CourseController::class, 'store'])->name('course.store');
     Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
     Route::put('/course/edit/{id}', [CourseController::class, 'update'])->name('course.update');
+    Route::get('/course/delete/{id}', [CourseController::class, 'destroy'])->name('course.destroy');
 
+
+    Route::get('/record/delete/{id}', [RecordController::class, 'delete'])->name('record.delete');
     
 });
