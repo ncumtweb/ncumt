@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File; 
 class CourseController extends Controller
 {
     /**
@@ -40,7 +41,7 @@ class CourseController extends Controller
         $folder_name = "uploads/images/courses";
         $upload_path = public_path() . '/' . $folder_name;
         $extension  =  $file->extension();
-        $filename = $request->input('title') . '.' . $extension;
+        $filename = $request->input('title') . time() . '.' . $extension;
         $file->move($upload_path, $filename);
         
         
@@ -48,7 +49,7 @@ class CourseController extends Controller
 
         $course->title = $request->input('title');
         $course->date = $request->input('date');
-        $course->image = $folder_name . '/' . $filename;
+        $course->image = $folder_name  . '/' . $filename;
         if($request->input('videoURL')) {
             $course->videoURL = $request->input('videoURL');
         }
@@ -81,7 +82,9 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-        //
+        $course = Course::find($id);
+
+        return view('course.edit', compact('course'));
     }
 
     /**
@@ -93,7 +96,32 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $course = Course::find($id);
+
+        if($request->image) {
+            //dd(public_path($course->image));
+            File::delete(public_path($course->image));
+            $file = $request->image;
+            $folder_name = "uploads/images/courses";
+            $upload_path = public_path() . '/' . $folder_name;
+            $extension  =  $file->extension();
+            $filename = $request->input('title') . time() . '.' . $extension;
+            $file->move($upload_path, $filename);
+            $course->image = $folder_name . '/' . $filename;
+        }
+
+        $course->title = $request->input('title');
+        $course->date = $request->input('date');
+        
+        if($request->input('videoURL')) {
+            $course->videoURL = $request->input('videoURL');
+        }
+        if($request->input('pptURL')) {
+            $course->pptURL = $request->input('pptURL');
+        }
+        $course->update();
+
+        return redirect()->route('course.index');
     }
 
     /**

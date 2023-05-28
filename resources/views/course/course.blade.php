@@ -23,6 +23,12 @@
                                 &nbsp;
                                 <a class="bi bi-filetype-ppt" href="{{ asset($course->pptURL) }}" target="_blank"></a>
                             @endif
+
+                            @auth
+                                @if(Auth::user()->role > 0)
+                                    <a class="bi bi-pencil-square" href="{{ route('course.edit', $course->id) }}"></a>
+                                @endif
+                            @endauth
                         </h1>
                         <a href="{{ asset($course->videoURL) }}" class="glightbox link-video">
                             <span class="bi-play-fill"></span>

@@ -32,11 +32,12 @@ Route::get('/commingsoon', function () {
 
 Route::get('/', [BasicController::class, 'index'])->name('index');
 
-Route::resource('course', CourseController::class);
+Route::get('/course', [CourseController::class, 'index'])->name('course.index');
+Route::get('/judgement', [JudgementController::class, 'index'])->name('judgement.index');
 
-Route::resource('judgement', JudgementController::class);
 Route::resource('record', RecordController::class);
-Route::resource('user', UserController::class);
+
+
 
 
 Route::prefix('portal')->name('portal.')->group(function () {
@@ -51,7 +52,31 @@ Route::prefix('portal')->name('portal.')->group(function () {
 });
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
+    Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+
+});
+
+//management control
+Route::middleware(['checkRole'])->group(function () {
+
+    //post
     Route::resource('post', PostController::class);
+
+    //calendar
     Route::resource('calendar', CalendarController::class);
 
+    // judgement 
+    Route::post('/judgement', [JudgementController::class, 'store'])->name('judgement.store');
+    Route::get('/judgement/{id}', [JudgementController::class, 'edit'])->name('judgement.edit');
+    Route::put('/judgement/{id}', [JudgementController::class, 'update'])->name('judgement.update');
+    Route::delete('/judgement/delete/{id}', [JudgementController::class, 'destroy'])->name('judgement.destroy');
+
+    //course
+    Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');
+    Route::post('/course/create', [CourseController::class, 'store'])->name('course.store');
+    Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
+    Route::put('/course/edit/{id}', [CourseController::class, 'update'])->name('course.update');
+
+    
 });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -51,6 +52,11 @@ class UserController extends Controller
         '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
         '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
         '財務長', '山防組組長' ];
+
+        //avoid url attack
+        if(!$this->checkUser($id)) {
+            return redirect()->route('index');
+        }
         return view('user.information', compact('user', 'position'));
     }
 
@@ -95,5 +101,14 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function checkUser($id) {
+        if ($id != Auth::user()->id) {
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 }

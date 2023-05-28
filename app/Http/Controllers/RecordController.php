@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Record;
+use Illuminate\Support\Facades\Auth;
 
 class RecordController extends Controller
 {
@@ -26,7 +27,11 @@ class RecordController extends Controller
      */
     public function create()
     {
-        return view('record.create');
+        if(Auth::check() && Auth::user()->role > 0){
+            return view('record.create');
+        }
+    
+        return redirect()->route('portal.index')->with('status','您並無權限進行此操作，請先登入。');
     }
 
     /**
@@ -42,7 +47,7 @@ class RecordController extends Controller
         $folder_name = "uploads/images/records";
         $upload_path = public_path() . '/' . $folder_name;
         $extension  =  $file->extension();
-        $filename = $request->input('name') . '.' . $extension;
+        $filename = $request->input('name')  . time() . '.' . $extension;
         $file->move($upload_path, $filename);
 
         $record = New Record();

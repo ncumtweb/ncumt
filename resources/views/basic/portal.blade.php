@@ -6,11 +6,18 @@
 
 <!-- ======= Services Section ======= -->
 <section id="contact" class="contact mb-2">
-  <div class="container data-aos="fade-up">
+  <div class="container" data-aos="fade-up">
     <div class="row">
       <div class="col-lg-12 text-center mb-5">
         <h1 class="page-title">登入選項</h1>
-        <a>本系統僅以 Portal 作為登入的系統</a>
+        @if (session('status'))
+          <div class="col-lg-12 text-center">
+            <h6 class="alert alert-danger">{{ session('status') }}</h6>
+          </div>
+        @else
+          <a>本系統僅以 Portal 作為登入的系統</a>
+        @endif
+        
       </div>
     </div>
 

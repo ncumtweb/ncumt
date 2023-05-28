@@ -141,6 +141,8 @@ class JudgementController extends Controller
      */
     public function edit($id)
     {
+
+        
         $judgement = Judgement::find($id);
         return view('judgement.edit', compact('judgement'));
     }
