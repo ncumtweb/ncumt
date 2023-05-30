@@ -25,8 +25,8 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/commingsoon', function () {
-    return view('commingsoon');
+Route::get('/comingsoon', function () {
+    return view('comingsoon');
 });
 
 Route::get('/', [BasicController::class, 'index'])->name('index');

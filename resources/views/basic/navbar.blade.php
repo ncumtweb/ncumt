@@ -36,8 +36,8 @@
               </li>
             @endif
           @endauth
-          <li><a href="{{ url('/commingsoon') }}">關於我們</a></li>
-          <li><a href="{{ url('/commingsoon') }}">FAQ</a></li>
+          <li><a href="{{ url('/comingsoon') }}">關於我們</a></li>
+          <li><a href="{{ url('/comingsoon') }}">FAQ</a></li>
           @guest
             <li><a href="/portal">{{ __('登入') }}</a></li>
           @endguest

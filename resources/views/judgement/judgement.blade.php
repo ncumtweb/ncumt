@@ -8,18 +8,18 @@
       <div class="container" data-aos="fade-up">
 
         <div class="row">
-          <div class="col-lg-12 text-center">
+          <div class="col-lg-12 text-center mb-2">
             <h1 class="page-title">隊伍難度評分系統</h1>
             <a> 此評分系統根據路況、天數及所需體力來量化，並依據分數高低來訂定隊伍難度等級。</a>
           </div>
         </div>
         @if (session('status'))
-          <div class="col-lg-12 text-center mb-5">
+          <div class="col-lg-12 text-center mb-2">
             <h6 class="alert alert-success">{{ session('status') }}</h6>
           </div>
         @endif
         <div class="row justify-content-center">
-          <div class = "col-md-8 mb-5">
+          <div class = "col-md-8">
             <div class="form mt-5">
               <form action="{{ route('judgement.store') }}" method="POST" class="php-email-form">
                 @csrf

@@ -4,16 +4,16 @@
 
 @section('content')
 <main id="main">
-    <section id="contact" class="contact mb-5">
+    <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
             <div class="row">
-                <div class="col-lg-12 text-center mb-5">
-                    <h1 class="page-title"><font face = "微軟正黑體" size = "10px" >編輯評分紀錄</font></h1>
+                <div class="col-lg-12 text-center">
+                    <h1 class="page-title">編輯評分紀錄</h1>
                 </div>
             </div>
 
             <div class="row justify-content-center">
-                <div class = "col-md-8 mb-5">
+                <div class = "col-md-8">
                     <div class="form mt-5">
                         <form action="{{ route('judgement.update', $judgement->id) }}" method="POST" class="php-email-form">
                             @csrf

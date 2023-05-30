@@ -25,12 +25,12 @@
                     <h3 class="footer-heading">其他連結</h3>
                     <ul class="footer-links list-unstyled">
                         <li><a href="/"><i class="bi bi-chevron-right"></i> 首頁 </a></li>            
-                        <li><a href="{{ url('/commingsoon') }}"><i class="bi bi-chevron-right"></i> 社課影片 </a></li>
+                        <li><a href="{{ route('course.index') }}"><i class="bi bi-chevron-right"></i> 社課影片 </a></li>
                         <li><a href="{{ url('/judgement') }}"><i class="bi bi-chevron-right"></i> 評分系統 </a></li>
-                        <li><a href="{{ url('/commingsoon') }}"><i class="bi bi-chevron-right"></i> 行程記錄 </a></li>
-                        <li><a href="{{ url('/commingsoon') }}"><i class="bi bi-chevron-right"></i> 關於我們 </a></li>
-                        <li><a href="{{ url('/commingsoon') }}"><i class="bi bi-chevron-right"></i> 聯絡我們 </a></li>
-                        <li><a href="{{ url('/commingsoon') }}"><i class="bi bi-chevron-right"></i> FAQ </a></li>
+                        <li><a href="{{ url('/comingsoon') }}"><i class="bi bi-chevron-right"></i> 行程記錄 </a></li>
+                        <li><a href="{{ url('/comingsoon') }}"><i class="bi bi-chevron-right"></i> 關於我們 </a></li>
+                        <li><a href="{{ url('/comingsoon') }}"><i class="bi bi-chevron-right"></i> 聯絡我們 </a></li>
+                        <li><a href="{{ url('/comingsoon') }}"><i class="bi bi-chevron-right"></i> FAQ </a></li>
                     </ul>
                 </div>
                 <!-- <div class="col-6 col-lg-2">
