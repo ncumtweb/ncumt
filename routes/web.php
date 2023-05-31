@@ -35,7 +35,7 @@ Route::get('/course', [CourseController::class, 'index'])->name('course.index');
 Route::get('/judgement', [JudgementController::class, 'index'])->name('judgement.index');
 
 Route::resource('record', RecordController::class);
-
+Route::post('/record/upload', [RecordController::class, 'uploadImage'])->name('record.uploadImage');
 
 
 

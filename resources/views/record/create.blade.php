@@ -52,9 +52,8 @@
                     <img class="img-fluid" id="preview_image" src="#" alt="預覽封面"/>
                 </div>
                 <div class="form-group">  
-                    <label for="editor" class="form-label">內容</label>
-                    <div id="editor"></div>
-                    <input type="hidden" name="content" class="form-control" id="content" required>
+                    <label for="CKeditor" class="form-label">內容</label>
+                    <textarea class="form-control" id="CKeditor" name="CKeditor"></textarea>  
                 </div>
                 <div class="row">
                   <div class="text-center">
@@ -72,4 +71,20 @@
 </main><!-- End #main -->
 
 <script src="{{ asset('assets/vendor/create-record-form/createRecordForm.js') }}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor.create(document.querySelector("#CKeditor"), {
+      ckfinder: {
+         uploadUrl: "{{ route('record.uploadImage', ['_token' => csrf_token()]) }}",
+      },
+    }).catch((error) => {
+       console.error(error);
+    });
+
+</script>
+<style>
+.ck-editor__editable {
+  min-height: 800px;
+}
+</style>
 @endsection

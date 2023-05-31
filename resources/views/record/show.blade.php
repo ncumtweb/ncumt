@@ -31,11 +31,23 @@
             <div class="single-post">
               <p>{{ $record->description }}</p>
               <img src="{{ asset($record->image) }}" alt="" class="img-fluid">
-              <p>{!! \Illuminate\Support\Str::markdown($record->content) !!}</p>
+              <div class="content">
+                <p>{!! $record->content !!}</p>
+              </div>
             </div><!-- End Single Post Content -->
           </div>
         </div>
       </div>
     </section>
   </main><!-- End #main -->
+  <!-- <style>
+  figure {
+    max-width: 100%;
+  }
+
+  img {
+    max-width: 100%;
+    
+  }
+  </style> -->
 @endsection

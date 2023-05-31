@@ -34,7 +34,6 @@ class RecordController extends Controller
     
         return redirect()->route('portal.index')->with('status','您並無權限進行此操作，請先登入。');
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -58,7 +57,7 @@ class RecordController extends Controller
         $record->start_date = $request->input('start_date');
         $record->end_date = $request->input('end_date');
         $record->image = $folder_name . '/' . $filename;
-        $record->content = $request->input('content');
+        $record->content = $request->input('CKeditor');
         $record->save();
 
         return redirect()->route('record.index');
@@ -122,7 +121,7 @@ class RecordController extends Controller
         $record->category = $request->input('category');
         $record->start_date = $request->input('start_date');
         $record->end_date = $request->input('end_date');
-        $record->content = $request->input('content');
+        $record->content = $request->input('CKeditor');
         $record->update();
 
         return redirect()->route('record.show', $record->id);
@@ -145,5 +144,24 @@ class RecordController extends Controller
         }
 
         return redirect()->route('portal.index')->with('status','您並無權限進行此操作，請先登入。');
+    }
+
+    public function uploadImage(Request $request) {
+
+        if ($request->hasFile('upload')) {
+            $folder_name = "uploads/images/records";
+            $upload_path = public_path() . '/' . $folder_name;
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName . '_' . time() . '.' . $extension;
+      
+            $request->file('upload')->move($upload_path, $fileName);
+      
+            $url = asset($folder_name . '/' . $fileName);
+  
+            return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
+        }
+
     }
 }

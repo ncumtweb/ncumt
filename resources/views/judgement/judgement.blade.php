@@ -18,7 +18,7 @@
             <h6 class="alert alert-success">{{ session('status') }}</h6>
           </div>
         @endif
-        <div class="row justify-content-center">
+        <div class="row mb-5 justify-content-center">
           <div class = "col-md-8">
             <div class="form mt-5">
               <form action="{{ route('judgement.store') }}" method="POST" class="php-email-form">

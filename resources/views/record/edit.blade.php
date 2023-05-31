@@ -1,6 +1,6 @@
 @extends('basic.main')
 
-@section('title',  '創建紀錄')
+@section('title',  '編輯紀錄')
 
 @section('content')
 <main id="main">
@@ -52,12 +52,8 @@
                     <img class="img-fluid" id="preview_image" src="{{ asset($record->image) }}" alt="預覽封面"/>
                 </div>
                 <div class="form-group">  
-                    <label for="editor" class="form-label">內容</label>
-                    
-                    <div>
-                      <div id="editor"></div>
-                    </div>
-                    <input type="hidden" id="oldContent" value="{{ $record->content }}">
+                    <label for="CKeditor" class="form-label">內容</label>
+                    <textarea class="form-control" id="CKeditor" name="CKeditor">{{ $record->content }}</textarea>  
                 </div>
                 <div class="row">
                   <div class="text-center">
@@ -76,4 +72,17 @@
 </main><!-- End #main -->
 
 <script src="{{ asset('assets/vendor/create-record-form/createRecordForm.js') }}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/ckeditor5-build-classic-with-image-resize@12.4.0/build/ckeditor.min.js"></script> -->
+
+<script>
+    ClassicEditor.create(document.querySelector("#CKeditor"), {
+      ckfinder: {
+         uploadUrl: "{{ route('record.uploadImage', ['_token' => csrf_token()]) }}",
+      },
+    }).catch((error) => {
+       console.error(error);
+    });
+</script>
 @endsection

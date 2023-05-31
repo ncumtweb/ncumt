@@ -766,7 +766,11 @@ section {
   padding-right: 8px;
   padding-left: 3px;
 }
-
+.post-content .content img{
+  max-width: 80%;
+  left: auto !important;
+  height: auto;
+}
 .post-content figure {
   position: relative;
   left: 52%;
@@ -1357,4 +1361,8 @@ section {
 
 .footer .credits a {
   color: var(--color-white);
+}
+
+.ck-editor__editable {
+  min-height: 800px;
 }

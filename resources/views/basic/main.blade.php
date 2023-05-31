@@ -8,7 +8,9 @@
     <title> 中央大學登山社 - @yield('title') </title>
     <meta content="" name="description">
     <meta content=" 中央大學登山社 " name="keywords">
-
+    
+    
+    
     <!-- Favicons -->
     <link href="{{ asset('assets/img/ncumt.png') }}" rel="icon">
     <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->

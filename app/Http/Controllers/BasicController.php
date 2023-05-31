@@ -46,7 +46,7 @@ class BasicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
@@ -93,4 +93,6 @@ class BasicController extends Controller
     {
         //
     }
+
+
 }
