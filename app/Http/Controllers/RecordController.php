@@ -110,6 +110,14 @@ class RecordController extends Controller
     public function update(Request $request, $id)
     {
         $record = Record::findOrFail($id);
+        
+        $validator = Validator::make($request->all(), [
+            'end_date' => 'after:start_date',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->with('status','結束日期需在開始日期之後，請再次確認。');
+        }
 
         if($request->image) {
             File::delete(public_path($record->image));

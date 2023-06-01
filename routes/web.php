@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::get('/', [BasicController::class, 'index'])->name('index');
 
 Route::get('/course', [CourseController::class, 'index'])->name('course.index');
 Route::get('/judgement', [JudgementController::class, 'index'])->name('judgement.index');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
 Route::resource('record', RecordController::class);
 Route::post('/record/upload', [RecordController::class, 'uploadImage'])->name('record.uploadImage');
@@ -64,6 +66,7 @@ Route::middleware(['checkRole'])->group(function () {
 
     //calendar
     Route::resource('calendar', CalendarController::class);
+    Route::get('calendar/delete/{id}', [CalendarController::class, 'destroy'])->name('calendar.delete');
 
     // judgement 
     Route::post('/judgement', [JudgementController::class, 'store'])->name('judgement.store');
@@ -78,7 +81,14 @@ Route::middleware(['checkRole'])->group(function () {
     Route::put('/course/edit/{id}', [CourseController::class, 'update'])->name('course.update');
     Route::get('/course/delete/{id}', [CourseController::class, 'destroy'])->name('course.destroy');
 
-
+    //record
     Route::get('/record/delete/{id}', [RecordController::class, 'delete'])->name('record.delete');
+    
+    //faq
+    Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create');
+    Route::post('/faq/create', [FaqController::class, 'store'])->name('faq.store');
+    Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('faq.edit');
+    Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
+    Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
     
 });

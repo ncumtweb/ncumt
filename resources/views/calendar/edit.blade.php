@@ -32,6 +32,7 @@
                     <option value="1" {{ $event->category == 1 ? 'selected' : ''}}>溯溪</option>
                     <option value="2" {{ $event->category == 2 ? 'selected' : ''}}>社課</option>
                     <option value="3" {{ $event->category == 3 ? 'selected' : ''}}>開會</option>
+                    <option value="4" {{ $event->category == 4 ? 'selected' : ''}}>山防</option>
                   </select>
                 </div>
               </div>
@@ -46,11 +47,7 @@
               <div class="row">
                 <div class="text-center">
                   <button type="submit">更新活動</button>
-                  <form action="{{ route('calendar.destroy', $event->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" style="background:#AB3B3A">刪除活動</button>
-                  </form>
+                  <button type="button" onclick="window.location='{{ route('calendar.delete', $event->id) }}'">刪除活動</button>
                 </div>
               </div>
             </form>

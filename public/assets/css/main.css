@@ -1117,6 +1117,10 @@ section {
   font-size: 15px;
 }
 
+.contact .createRecordForm #answer {
+  height:200px;
+}
+
 .contact .createRecordForm {
   box-shadow: 0 0 30px rgba(var(--color-black-rgb), 0.1);
   padding: 30px;
@@ -1132,6 +1136,19 @@ section {
 .contact .createRecordForm input::focus,
 .contact .createRecordForm textarea::focus {
   background-color: var(--color-primary);
+}
+
+.contact .createRecordForm .row button[type=button] {
+  background: #AB3B3A;
+  border: 1;
+  padding: 10px 20px;
+  color: #fff;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.contact .createRecordForm button[type=button]:hover {
+  background: rgba(var(--color-primary-rgb), 0.8);
 }
 
 .contact .createRecordForm button[type=submit] {
@@ -1347,6 +1364,21 @@ section {
   color: var(--color-white);
   line-height: 40px;
 }
+
+/* FAQ */
+.accordion-button {
+  font-size: 30px;
+}
+
+.accordion-body strong {
+  font-size: 20px;
+}
+
+.accordion-body form {
+  display: flex;
+  justify-content: flex-end;
+}
+/* End FAQ */
 
 .footer .footer-legal .social-links a:hover {
   background-color: rgba(var(--color-white-rgb), 0.2);

@@ -14,9 +14,17 @@
           </div>
         </div>
 
+        @if (session('status'))
         <div class="row justify-content-center">
-          <div class = "col-md-8 mb-5">
-            <div class="form mt-5">
+            <div class="col-lg-8 text-center">
+                <h6 class="alert alert-danger">結束日期需在開始日期之後，請再次確認。</h6>
+            </div>
+        </div>
+        @endif
+
+        <div class="row justify-content-center">
+          <div class = "col-md-8">
+            <div class="form">
               <form action="{{ route('record.update', $record->id) }}" method="POST" id="editRecordForm" class="createRecordForm" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')

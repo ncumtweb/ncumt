@@ -17,7 +17,7 @@
         @if (session('status'))
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h6 class="alert alert-danger">結束日期需在開始日期之後，請再次確認。</h6>
+                <h6 class="alert alert-danger">{{ session('status') }}</h6>
             </div>
         </div>
         @endif

@@ -211,7 +211,7 @@
         L: 'YYYY-MM-DD',
         LL: 'YYYY年MMMD日',
         LLL: 'YYYY年MMMD日Ah點mm分',
-        LLLL: 'YYYY.MM.D ddddAh點mm分',
+        LLLL: 'YYYY.MM.DD ddddAhh點mm分',
         l: 'YYYY-MM-DD',
         ll: 'YYYY年MMMD日',
         lll: 'YYYY年MMMD日Ah點mm分',
