@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Record;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\Validator;
 
 class RecordController extends Controller
 {
@@ -43,12 +44,17 @@ class RecordController extends Controller
     public function store(Request $request)
     {
 
+        $validator = Validator::make($request->all(), [
+            'end_date' => 'after:start_date',
+        ]);
+        
+        if ($validator->fails()) {
+            return redirect()->back()->with('status','結束日期需在開始日期之後，請再次確認。')->withInput($request->all());
+        }
+
         $file = $request->image;
         $folder_name = "uploads/images/records";
-        $upload_path = public_path() . '/' . $folder_name;
-        $extension  =  $file->extension();
-        $filename = $request->input('name')  . time() . '.' . $extension;
-        $file->move($upload_path, $filename);
+        $name = $request->input('name');
 
         $record = New Record();
         $record->name = $request->input('name');
@@ -56,7 +62,7 @@ class RecordController extends Controller
         $record->category = $request->input('category');
         $record->start_date = $request->input('start_date');
         $record->end_date = $request->input('end_date');
-        $record->image = $folder_name . '/' . $filename;
+        $record->image = $this->storeImage($file, $folder_name, $name);
         $record->content = $request->input('CKeditor');
         $record->save();
 
@@ -109,11 +115,8 @@ class RecordController extends Controller
             File::delete(public_path($record->image));
             $file = $request->image;
             $folder_name = "uploads/images/records";
-            $upload_path = public_path() . '/' . $folder_name;
-            $extension  =  $file->extension();
-            $filename = $request->input('name')  . time() . '.' . $extension;
-            $file->move($upload_path, $filename);
-            $record->image = $folder_name . '/' . $filename;
+            $name = $request->input('name');
+            $record->image = $this->storeImage($file, $folder_name, $name);
         }
 
         $record->name = $request->input('name');
@@ -144,6 +147,16 @@ class RecordController extends Controller
         }
 
         return redirect()->route('portal.index')->with('status','您並無權限進行此操作，請先登入。');
+    }
+
+    public function storeImage($file, $folder_name, $name) {
+        
+        $upload_path = public_path() . '/' . $folder_name;
+        $extension  =  $file->extension();
+        $filename = $name  . time() . '.' . $extension;
+        $file->move($upload_path, $filename);
+
+        return $folder_name . '/' . $filename;
     }
 
     public function uploadImage(Request $request) {

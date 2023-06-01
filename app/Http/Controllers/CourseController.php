@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Course;
+use Illuminate\Http\Request;
+use App\Http\Controllers\RecordController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File; 
 class CourseController extends Controller
 {
@@ -38,17 +40,15 @@ class CourseController extends Controller
     {
         $file = $request->image;
         $folder_name = "uploads/images/courses";
-        $upload_path = public_path() . '/' . $folder_name;
-        $extension  =  $file->extension();
-        $filename = $request->input('title') . time() . '.' . $extension;
-        $file->move($upload_path, $filename);
+        $name = $request->input('title');
+
         
         
         $course = new Course();
 
         $course->title = $request->input('title');
         $course->date = $request->input('date');
-        $course->image = $folder_name  . '/' . $filename;
+        $course->image = App::make(RecordController::class)->storeImage($file, $folder_name, $name);
         if($request->input('videoURL')) {
             $course->videoURL = $request->input('videoURL');
         }
@@ -101,11 +101,8 @@ class CourseController extends Controller
             File::delete(public_path($course->image));
             $file = $request->image;
             $folder_name = "uploads/images/courses";
-            $upload_path = public_path() . '/' . $folder_name;
-            $extension  =  $file->extension();
-            $filename = $request->input('title') . time() . '.' . $extension;
-            $file->move($upload_path, $filename);
-            $course->image = $folder_name . '/' . $filename;
+            $name = $request->input('title');
+            $course->image = App::make(RecordController::class)->storeImage($file, $folder_name, $name);
         }
 
         $course->title = $request->input('title');
