@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
 use Spatie\Sitemap\SitemapGenerator;
+
 use App\Models\Record;
 
 class GenerateSitemap extends Command
@@ -50,8 +51,9 @@ class GenerateSitemap extends Command
         //     );
         // });
         // $postsitmap->writeToFile(public_path('sitemap.xml'));
-
-        SitemapGenerator::create(config('app.url'))->writeToFile(public_path('sitemap.xml'));
+        
+        // SitemapGenerator::create(URL::to('/').'/')->writeToFile(public_path('sitemap.xml'));
+        SitemapGenerator::create(config('app.url'))->setConcurrency(1)->writeToFile(public_path('sitemap.xml'));
     
     }
 }

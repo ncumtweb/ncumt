@@ -11,6 +11,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="{{ url('/course') }}">社課影片</a></li>
+          <li><a href="{{ url('/map') }}">山社地圖</a></li>
           <li><a href="{{ url('/judgement') }}">評分系統</a></li>
           <li class="dropdown"><a><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>

@@ -22,12 +22,20 @@ use App\Http\Controllers\FaqController;
 |
 */
 
+Route::fallback(function () {
+    return redirect()->route('index');
+});
+
 Route::get('/welcome', function () {
     return view('welcome');
 });
 
 Route::get('/comingsoon', function () {
     return view('comingsoon');
+});
+
+Route::get('/map', function () {
+    return view('map');
 });
 
 Route::get('/', [BasicController::class, 'index'])->name('index');
