@@ -766,13 +766,15 @@ section {
   padding-right: 8px;
   padding-left: 3px;
 }
-.post-content .content img{
+
+.post-content .content img {
   max-width: 80%;
   max-height: 600px;
   left: auto !important;
   height: auto;
 
 }
+
 .post-content figure {
   /* position: relative; */
   left: 52%;
@@ -1118,7 +1120,7 @@ section {
 }
 
 .contact .createRecordForm #answer {
-  height:200px;
+  height: 200px;
 }
 
 .contact .createRecordForm {
@@ -1231,9 +1233,9 @@ section {
 }
 
 .contact .php-email-form input,
-.contact .php-email-form textarea {
+.contact .php-email-form textarea,
+.contact .php-email-form select {
   padding: 10px 14px;
-  border-radius: 0;
   box-shadow: none;
   font-size: 15px;
 }
@@ -1378,6 +1380,7 @@ section {
   display: flex;
   justify-content: flex-end;
 }
+
 /* End FAQ */
 
 .footer .footer-legal .social-links a:hover {

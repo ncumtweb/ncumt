@@ -5,7 +5,6 @@
 @section('content')
 
 <div class="container" data-aos="fade-up">
-
     <div class="row">
         <div class="col-lg-12 text-center mb-2">
             <h1 class="page-title">山社地圖</h1>

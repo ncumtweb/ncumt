@@ -19,7 +19,7 @@
           </div>
         @endif
         <div class="row mb-5 justify-content-center">
-          <div class = "col-md-8">
+          <div class = "col-md-12">
             <div class="form mt-5">
               <form action="{{ route('judgement.store') }}" method="POST" class="php-email-form">
                 @csrf
@@ -51,7 +51,7 @@
                     </select>
                   </div>
                   <div class="form-group col-md-3">
-                    <label for="road" class="form-label">路跡/指標級別</label>
+                    <label for="road" class="form-label">路跡級別</label>
                     <select id="road" name="road" class="form-select" required>
                       <option selected disabled value="">請選擇路跡級別</option>
                       @for($i = 0; $i < 10; $i++) 
@@ -115,7 +115,7 @@
             <h1>評分紀錄表</h1>
             <a>過去隊伍難度的評分紀錄。</a>
 
-          <div class="col-md-10 text-center mb-5 table-responsive">
+          <div class="col-md-12 text-center mb-5 table-responsive">
             <table class="table table-light table-bordered table-striped">
               <thead>
                 <tr>
@@ -188,7 +188,7 @@
             <h1>難度分級表</h1>
             <a>根據量化的分數高低訂定隊伍難度，難度由高至低分成S+到D。</a>
 
-          <div class="col-md-6 text-center mb-5">
+          <div class="col-md-12 text-center mb-5">
             <table class="table table-light table-bordered table-striped">
               <thead>
                 <tr>
@@ -232,7 +232,7 @@
           <h1>路況分級表</h1>
           <a>路況分級如下表，再根據下表的級別，並參照該路線的路跡/指標、地形、植被，量化成分數。</a>
           
-          <div class="col-md-6 text-center mb-5">
+          <div class="col-md-12 text-center mb-5">
               <table class="table table-light table-bordered table-striped">
                 <thead>
                   <tr>
@@ -303,7 +303,7 @@
           <h1>體力分級表</h1>
           <a>體力參照標準如下表，再根據下表的級別，量化成分數。</a>
 
-          <div class="col-md-6 text-center mb-5">
+          <div class="col-md-12 text-center mb-5">
             <table class="table table-light table-bordered table-striped">
               <thead>
                 <tr>

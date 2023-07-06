@@ -25,14 +25,18 @@
             </ul>
           </li>          
           <li><a href="{{ url('/comingsoon') }}">關於我們</a></li>
+          
+          @guest
+            <li><a href="{{ route('faq.index') }}">FAQ</a></li>
+          @endguest
+
           @auth 
             @if(Auth::user()->role > 0)
-              <li class="dropdown"><a href="{{ route('faq.index') }}"><span>FAQ</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a> 
+              <li class="dropdown"><a><span>FAQ</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a> 
                 <ul>
+                  <li><a href="{{ route('faq.index') }}">FAQ</a></li>
                   <li><a href="{{ route('faq.create') }}">新增FAQ</a></i>
                 </ul>
-            @else
-              <li><a href="{{ route('faq.index') }}">FAQ</a></li>
             @endif
           @endauth
           
