@@ -75,7 +75,8 @@
         <div class="container">
             <div class="row justify-content-between">
                     <div class="copyright">
-                        © Copyright <strong><span>ZenBlog</span></strong>. All Rights Reserved
+                        © Copyright <strong><span>ZenBlog</span></strong>. All Rights Reserved <br>
+                        © Copyright <strong><span>Ben</span></strong>. All Rights Reserved
                     </div>
 
                     <div class="credits">

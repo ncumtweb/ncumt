@@ -44,7 +44,9 @@ class PortalLoginController extends Controller
             $user->name_zh = $user_portal->user['chineseName'];
             $user->name_en = $user_portal->user['englishName'];
             $user->email = $user_portal->user['email'];
-            $user->phone = $user_portal->user['mobilePhone'];
+            if(!is_null($user->phone)){
+                $user->phone = $user_portal->user['mobilePhone'];
+            }                
             $user->role = $role;
             $user->save();
 

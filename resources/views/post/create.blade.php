@@ -46,11 +46,10 @@
                   <label for="expired_at">過期時間</label>
                   <input type="datetime-local" class="form-control" id="expired_at" name="expired_at">
                 </div>
-              <div class="form-group">
-                <label for="content" class="form-label">公告內容 </label>                    
-                <textarea name="content" class="form-control" id="content" placeholder="請輸入公告內容" required></textarea>
-              </div>
-              
+              <div class="form-group">  
+                    <label for="CKeditor" class="form-label">內容</label>
+                    <textarea rows="10" style="height:100%" class="form-control" id="CKeditor" name="content"></textarea>  
+                </div>
              
               <div class="row">
                 <div class="text-center">
@@ -65,4 +64,18 @@
     </div>
   </section>
 </main><!-- End #main -->
+
+<script src="{{ asset('assets/vendor/create-record-form/createRecordForm.js') }}"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/35.4.0/classic/ckeditor.js"></script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/ckeditor5-build-classic-with-image-resize@12.4.0/build/ckeditor.min.js"></script> -->
+
+<script>
+    ClassicEditor.create(document.querySelector("#CKeditor"), {
+      toolbar: [ 'undo', 'redo', '|', 'Heading', 
+        '|', 'bold', 'italic', 'link', 'numberedList', 'bulletedList' ],
+    }).catch((error) => {
+       console.error(error);
+    });
+</script>
 @endsection
