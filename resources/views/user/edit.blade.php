@@ -47,7 +47,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="position" class="form-label">職位</label>                    
-                    <input type="text" name="position" class="form-control" id="position" value="{{ $position[$user->role] }}" disabled>
+                    <input type="text" name="position" class="form-control" id="position" value="{{ $position[$user->role] }}">
                   </div>
                 </div>
 

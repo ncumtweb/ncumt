@@ -15,7 +15,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $position = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
+        '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
+        '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
+        '財務長', '山防組組長', '山防組組員'];
+
+        $users = User::orderBy('created_at','desc')->get();
+        return view('user.user', compact('users', 'position'));
     }
 
     /**
@@ -51,7 +57,7 @@ class UserController extends Controller
         $position = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
         '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
         '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
-        '財務長', '山防組組長' ];
+        '財務長', '山防組組長', '山防組組員'];
 
         //avoid url attack
         if(!$this->checkUser($id)) {
@@ -68,7 +74,13 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $position = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
+        '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
+        '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
+        '財務長', '山防組組長', '山防組組員'];
+
+        return(view('user.edit', compact('user', 'position')));
     }
 
     /**
@@ -84,6 +96,7 @@ class UserController extends Controller
         $user->name_zh = $request->input('name_zh');
         $user->name_en = $request->input('name_en');
         $user->nickname = $request->input('nickname');
+        $user->role = $request->input('position');
         $user->identifier = $request->input('studentID');
         $user->phone = $request->input('phone');
         $user->email = $request->input('email');

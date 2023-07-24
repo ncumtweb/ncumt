@@ -61,6 +61,8 @@ Route::prefix('portal')->name('portal.')->group(function () {
 });
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
     Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
