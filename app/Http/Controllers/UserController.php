@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    const POSITION = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
+    '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
+    '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
+    '財務長', '山防組組長', '山防組組員'];
     /**
      * Display a listing of the resource.
      *
@@ -15,12 +19,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $position = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
-        '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
-        '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
-        '財務長', '山防組組長', '山防組組員'];
+        $position = self::POSITION;
 
-        $users = User::orderBy('created_at','desc')->get();
+        $users = User::orderBy('created_at','asc')->get();
         return view('user.user', compact('users', 'position'));
     }
 
@@ -54,10 +55,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $position = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
-        '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
-        '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
-        '財務長', '山防組組長', '山防組組員'];
+        $position = self::POSITION;
 
         //avoid url attack
         if(!$this->checkUser($id)) {
@@ -75,10 +73,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
-        $position = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
-        '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
-        '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
-        '財務長', '山防組組長', '山防組組員'];
+        $position = self::POSITION;
 
         return(view('user.edit', compact('user', 'position')));
     }

@@ -25,8 +25,8 @@
                                 <th scope="col">角色</th>
                                 <!-- 幹部才能編輯 -->
                                 @auth
-                                    @if(Auth::user()->role > 0)  
-                                    <th scope="col">編輯/刪除</th>
+                                    @if(Auth::user()->role == 16)  
+                                    <th scope="col">編輯</th>
                                     @endif
                                 @endauth
                             </tr>
@@ -34,7 +34,7 @@
                         <tbody>
                             @if (!$users->count())
                             <tr>
-                                <td colspan= {{ $judgements_column_number }}>目前使用者</td>
+                                <td colspan= {{ $users->count() }}>目前尚無使用者</td>
                             </tr>
                             @else
                                 @foreach($users as $user)
@@ -47,7 +47,7 @@
                                         <td>{{ $position[$user->role] }}</td>
                                         <!-- 幹部才能編輯 -->
                                         @auth
-                                        @if(Auth::user()->role > 0) 
+                                        @if(Auth::user()->role == 16) 
                                             <td>
                                                 <button type = "button" class="bi bi-pencil-square" onclick="window.location='{{ route('user.edit', $user->id) }}'"></button>
                                             </td>
