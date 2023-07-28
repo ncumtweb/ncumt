@@ -14,7 +14,7 @@ class EquipmentController extends Controller
      */
     public function index()
     {
-        $bags = Equipment::orderBy('created_at','desc')->where('name', '大背包')->where('status', 0)->get();
+        $bags = Equipment::orderBy('created_at','desc')->where('name', '大背包')->where('status', 0)->get();        
         return view('equipment.equipment',compact('bags'));
     }
 

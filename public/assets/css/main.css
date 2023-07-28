@@ -42,6 +42,24 @@ h6 {
 #main {
   margin-top: 90px;
 }
+/* equipment system */
+.nav-pills .nav-link{
+  --bs-nav-pills-link-active-bg: var(--color-black);
+  color: var(--color-black);
+}
+
+.equipment button[type=button] {
+  background: var(--color-primary);
+  border: 1;
+  padding: 5px 10px;
+  color: #fff;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.equipment button[type=submit]:hover {
+  background: rgba(var(--color-primary-rgb), 0.8);
+}
 
 /*--------------------------------------------------------------
 # Sections & Section Header
