@@ -12,8 +12,21 @@
         <ul>
           <li><a href="{{ url('/course') }}">社課影片</a></li>
           <li><a href="{{ url('/map') }}">山社地圖</a></li>
-          <li><a href="{{ url('/judgement') }}">評分系統</a></li>
+          @guest
+            <li><a href="{{ url('/judgement') }}">評分系統</a></li>              
+          @endguest
+
+          @auth
+          <li class="dropdown"><a><span>系統</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="{{ url('/judgement') }}">評分系統</a></li>              
+                @if(Auth::user()->role > 0)
+                  <li><a href="{{ url('/equipment') }}">裝備租借系統</a></li>
+                @endif
+            </ul>
           <li class="dropdown"><a><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+          @endauth
+
             <ul>
               <li><a href="{{ url('/record') }}">所有紀錄</a></li>
               <!-- 幹部才能新增紀錄 -->

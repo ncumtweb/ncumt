@@ -10,6 +10,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\RentalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,4 +103,10 @@ Route::middleware(['checkRole'])->group(function () {
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
     
+
+    //equipment
+    Route::resource('equipment', EquipmentController::class);
+    
+    //rental
+    Route::get('/equipment/addEquipment/{equipment_id}', [RentalController::class, 'addEquipment'])->name('rental.addEquipment');
 });

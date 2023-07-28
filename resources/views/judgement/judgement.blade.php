@@ -181,7 +181,7 @@
             </table>
 
           </div>
-        </div><!-- 難度分級表 End  -->
+        </div><!-- 評分紀錄表 End  -->
 
         <!-- 難度分級表 -->
         <div class="row gy-4 justify-content-center text-center">
