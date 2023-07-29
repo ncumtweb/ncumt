@@ -17,7 +17,6 @@
         @else
           <a>本系統僅以 Portal 作為登入的系統</a>
         @endif
-        
       </div>
     </div>
 

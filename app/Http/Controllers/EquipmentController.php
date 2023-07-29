@@ -7,15 +7,20 @@ use App\Models\Equipment;
 
 class EquipmentController extends Controller
 {
+    public function select() 
+    {
+        return view('equipment.chose');
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($name)
     {
-        $bags = Equipment::orderBy('created_at','desc')->where('name', '大背包')->where('status', 0)->get();        
-        return view('equipment.equipment',compact('bags'));
+        $equipments = Equipment::orderBy('created_at','desc')->where('name', $name)->where('status', 0)->get();        
+        return view('equipment.equipment',compact('equipments', 'name'));
     }
 
     /**

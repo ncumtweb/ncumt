@@ -91,7 +91,9 @@ class UserController extends Controller
         $user->name_zh = $request->input('name_zh');
         $user->name_en = $request->input('name_en');
         $user->nickname = $request->input('nickname');
-        $user->role = $request->input('position');
+        // if ($user->role) {
+        //     $user->role = $request->input('position');
+        // }
         $user->identifier = $request->input('studentID');
         $user->phone = $request->input('phone');
         $user->email = $request->input('email');

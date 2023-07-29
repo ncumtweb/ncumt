@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Rental;
 use App\Models\RentalEquipment;
 use App\Models\Equipment;
+use Carbon\Carbon;
 
 class RentalController extends Controller
 {
@@ -18,25 +19,29 @@ class RentalController extends Controller
 
     public function index()
     {
-        $rentals = Rental::orderby('created_at', 'desc');
+        $rentals = Rental::where('user_id', Auth::user()->id)->where('rental_amount', '>', 0)->orderby('created_at', 'desc')->get();
 
         return view('equipment.rentalList', compact('rentals'));
     }
+    
     public function showRental($rental_id)
     {        
         $rental = Rental::findOrFail($rental_id);
-        $rentalEquipments = RentalEquipment::where('rental_id', '=' , $rental_id)->get();    
+        $rentalEquipments = RentalEquipment::where('rental_id', '=' , $rental_id)->orderby('equipment_id', 'asc')->get();    
 
         return view('equipment.rental', compact('rental', 'rentalEquipments'));
        
     }
+
     public function addEquipment($equipment_id) 
     {
         $equipment = Equipment::findOrFail($equipment_id);
         $equipment->status = 1;
         $equipment->update();
 
+        $name = $equipment->name;
         $rental = Rental::where('user_id', Auth::user()->id)->where('rental_date', null)->first();
+
         if(!$rental) {
             $rental = new Rental();
             $rental->user_id = Auth::user()->id;
@@ -55,8 +60,11 @@ class RentalController extends Controller
 
         session()->put('rental_id', $rental->id);
         // ->with('rental_id', $rental->id)
-        return redirect()->route('equipment.index');
+
+        return redirect()->route('equipment.index', $name)->with('status','裝備已新增至租借清單，請點擊下方按鈕查看');
     }
+
+    //check the price is member or normal
     public function getPrice($member_price, $normal_price) {
         $amount = 0;
         if(Auth::user()->role >= 0) {
@@ -84,9 +92,21 @@ class RentalController extends Controller
         
         if($rental->rental_amount == 0) {
             session()->forget('rental_id');
-            return redirect()->route('equipment.index')->with('status','裝備移除成功，目前尚無租借，將您導回裝備租借頁面');
+            return redirect()->route('equipment.select')->with('status','裝備取消租借成功，目前尚無租借，將您導回裝備租借頁面');
         }
-        return redirect()->back()->with('status','裝備移除成功');
+        return redirect()->back()->with('status','裝備取消租借成功');
+    }
+
+    public function returnRental($rental_id) {
+        $rental = Rental::findOrFail($rental_id);
+        $rental->actual_return_date = Carbon::now()->toDateString();
+        $rental->update();
+        foreach($rental->rentalEquipment as $rentalEquipment) {
+            $rentalEquipment->equipment->status = 0;
+            $rentalEquipment->equipment->update();
+        }
+
+        return redirect()->back()->with('status','裝備歸還成功');
     }
     /**
      * Show the form for creating a new resource.
@@ -140,7 +160,13 @@ class RentalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $rental = Rental::findOrFail($id);
+        $rental->rental_date = $request->input('rental_date');
+        $rental->return_date = $request->input('return_date');
+        $rental->update();
+        session()->forget('rental_id');
+        
+        return view('equipment.chose');
     }
 
     /**

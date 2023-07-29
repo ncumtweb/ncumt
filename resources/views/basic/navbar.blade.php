@@ -21,7 +21,7 @@
             <ul>
               <li><a href="{{ url('/judgement') }}">評分系統</a></li>              
                 @if(Auth::user()->role > 0)
-                  <li><a href="{{ url('/equipment') }}">裝備租借系統</a></li>
+                  <li><a href="{{ route('equipment.select') }}">個人裝備租借系統</a></li>
                 @endif
             </ul>
           <li class="dropdown"><a><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -76,6 +76,7 @@
             <li class="dropdown"><a><span>{{Auth::user()->name_zh . ' 您好'}}</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
               <ul>
                 <li><a href="{{ route('user.show', Auth::user()->id )}}">{{ __('個人資料') }}</a></i>
+                <li><a href="{{ route('rental.index') }}">{{ __('已租借清單') }}</a></i>
                 <li><a href="/portal/logout">{{ __('登出') }}</a></li>
               </ul>
           @endif

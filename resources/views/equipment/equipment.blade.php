@@ -23,28 +23,26 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-header mb-5">
-                    <!-- <h2>大背包</h2>                     -->
                     <nav class="nav nav-pills flex-column flex-sm-row">
-                        <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">大背包</a>
-                        <a class="flex-sm-fill text-sm-center nav-link" href="#">睡袋</a>
-                        <a class="flex-sm-fill text-sm-center nav-link" href="#">睡墊</a>
-                        <!-- <a class="flex-sm-fill text-sm-center nav-link" href="#">確認租借</a> -->
+                        <a class="flex-sm-fill text-sm-center nav-link {{ $name == '大背包' ? 'active' : ''}}" aria-current="page" href="{{ route('equipment.index', '大背包') }}">大背包</a>
+                        <a class="flex-sm-fill text-sm-center nav-link {{ $name == '睡袋' ? 'active' : ''}}" href="{{ route('equipment.index', '睡袋') }}">睡袋</a>
+                        <a class="flex-sm-fill text-sm-center nav-link {{ $name == '睡墊' ? 'active' : ''}}" href="{{ route('equipment.index', '睡墊') }}">睡墊</a>
                     </nav>
                 </div>
                
                 <div class="equipment row g-5">
                     <div class="col-md-12">
                         <div class="row g-5 mb-5">
-                            @foreach($bags as $bag)
+                            @foreach($equipments as $equipment)
                                 <div class="col-md-3 border-start custom-border">
                                     <div class="post-entry-1">
-                                        <a href="single-post.html"><img src="assets/img/bag25.jpg" alt="" class="img-fluid"></a>
+                                        <a href="single-post.html"><img src="{{ asset($equipment->image) }}" alt="" class="img-fluid"></a>
                                         <div class="post-meta">
-                                            <span class="date">社員價格：{{ $bag->member_price }}</span><br>
-                                            <span>非社員價格：{{ $bag->normal_price }}</span>
+                                            <span class="date">社員價格：{{ $equipment->member_price }}</span><br>
+                                            <span>非社員價格：{{ $equipment->normal_price }}</span>
                                         </div>
-                                        <h3><a>{{ $bag->description }}</a></h3>
-                                        <button type="button" onclick = "window.location='{{ route('rental.addEquipment', $bag->id) }}'">租借</button>
+                                        <h3><a>{{ $equipment->description }}</a></h3>
+                                        <button type="button" onclick = "window.location='{{ route('rental.addEquipment', $equipment->id) }}'">租借</button>
                                         
                                     </div>
                                 </div>
