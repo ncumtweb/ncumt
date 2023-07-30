@@ -41,7 +41,7 @@
         <a href="{{ route('equipment.index', '睡墊') }}">
           <div class="info-item info-item-borders">
             <i class="bi bi-person-x-fill"></i>
-            <h3>睡袋</h3>
+            <h3>睡墊</h3>
           </div>
         </a>
       </div><!-- End Info Item -->
