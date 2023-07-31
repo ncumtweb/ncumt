@@ -68,6 +68,18 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
     Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
+    //equipment
+    Route::get('/equipment/{name}', [EquipmentController::class, 'index'])->name('equipment.index');
+    Route::get("/selectEquipment", [EquipmentController::class, 'select'])->name('equipment.select');
+    
+    //rental
+    Route::get('/rentalList', [RentalController::class, 'index'])->name('rental.index');
+    Route::get('/rentalList/returnRental/{rental_id}', [RentalController::class, 'returnRental'])->name('rental.return');
+    Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
+    Route::get('/equipment/addEquipment/{equipment_id}', [RentalController::class, 'addEquipment'])->name('rental.addEquipment');
+    Route::get('/equipment/showRental/{rental_id}', [RentalController::class, 'showRental'])->name('rental.showRental');
+    Route::get('/equipment/removeRentalEquipment/{rentalEquipment_id}', [RentalController::class, 'removeEquipment'])->name('rentalEquipment.remove');
+    Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
 });
 
 //management control
@@ -103,18 +115,5 @@ Route::middleware(['checkRole'])->group(function () {
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
     
-
-    //equipment
-    Route::get('/equipment/{name}', [EquipmentController::class, 'index'])->name('equipment.index');
-    Route::get("/selectEquipment", [EquipmentController::class, 'select'])->name('equipment.select');
-
-    //rental
-    Route::get('/rentalList', [RentalController::class, 'index'])->name('rental.index');
-    Route::get('/rentalList/returnRental/{rental_id}', [RentalController::class, 'returnRental'])->name('rental.return');
-    Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
-    Route::get('/equipment/addEquipment/{equipment_id}', [RentalController::class, 'addEquipment'])->name('rental.addEquipment');
-    Route::get('/equipment/showRental/{rental_id}', [RentalController::class, 'showRental'])->name('rental.showRental');
-    Route::get('/equipment/removeRentalEquipment/{rentalEquipment_id}', [RentalController::class, 'removeEquipment'])->name('rentalEquipment.remove');
-    Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
     
 });

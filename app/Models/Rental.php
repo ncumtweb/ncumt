@@ -12,7 +12,7 @@ class Rental extends Model
     use HasFactory;
 
     public function rentalEquipment() {
-        return $this->hasmany(RentalEquipment::class);
+        return $this->hasmany(RentalEquipment::class)->orderBy('equipment_id', 'asc');
     }
 
     public function user() {

@@ -26,7 +26,7 @@
           <div class="info-item info-item-borders">
             <i class="bi bi-person-check-fill"></i>
             <h3>Portal 帳號登入</h3>
-            <p>若為中大師生/已有註冊過Portal帳號，請由此登入</p>
+            <p>若為中大師生或是已有註冊過 Portal 帳號，請由此登入</p>
           </div>
         </a>
       </div><!-- End Info Item -->
@@ -36,7 +36,7 @@
           <div class="info-item info-item-borders">
             <i class="bi bi-person-x-fill"></i>
             <h3>訪客登入（無 Portal 帳號）</h3>
-            <p>若沒有Portal帳號，請由此註冊帳號</p>
+            <p>若沒有 Portal 帳號，請由此註冊帳號</p>
           </div>
         </a>
       </div><!-- End Info Item -->

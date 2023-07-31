@@ -19,9 +19,12 @@ class RentalController extends Controller
 
     public function index()
     {
-        $rentals = Rental::where('user_id', Auth::user()->id)->where('rental_amount', '>', 0)->orderby('created_at', 'desc')->get();
-
-        return view('equipment.rentalList', compact('rentals'));
+        $rentals = Rental::where('user_id', Auth::user()->id)->whereNotNull('rental_date')->orderby('created_at', 'desc')->get();
+        //$rentalEquipments = RentalEquipment::where('rental_id', '=' , $rental->id)->orderby('equipment_id', 'asc')->get();  
+        $rentalEquipments = [];
+        foreach($rentals as $rental)
+            $rentalEquipments = $rental->rentalEquipment;  
+        return view('equipment.rentalList', compact('rentals', 'rentalEquipments'));
     }
     
     public function showRental($rental_id)

@@ -22,7 +22,7 @@
       <div class="col-md-4">
         <a href="{{ route('equipment.index', '大背包') }}">
           <div class="info-item info-item-borders">
-            <i class="bi bi-bag-dash"></i>
+            <img src = "{{ asset('assets/img/bag.png') }}" alt="sleep_bag">
             <h3>大背包</h3>            
           </div>
         </a>
@@ -31,7 +31,7 @@
       <div class="col-md-4">
         <a href="{{ route('equipment.index', '睡袋') }}">
           <div class="info-item info-item-borders">
-            <i class="bi bi-person-x-fill"></i>
+            <img src = "{{ asset('assets/img/sleep_bag.png') }}" alt="sleep_bag">
             <h3>睡袋</h3>
           </div>
         </a>
@@ -40,7 +40,8 @@
       <div class="col-md-4">
         <a href="{{ route('equipment.index', '睡墊') }}">
           <div class="info-item info-item-borders">
-            <i class="bi bi-person-x-fill"></i>
+            <!-- <i class="bi bi-person-x-fill"></i> -->
+            <img src = "{{ asset('assets/img/sleep_panel.png') }}" alt="sleep_bag">
             <h3>睡墊</h3>
           </div>
         </a>
