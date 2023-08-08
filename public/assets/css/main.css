@@ -118,9 +118,17 @@ section {
 /*--------------------------------------------------------------
 # Page title
 --------------------------------------------------------------*/
+
+
 .page-title {
   font-size: 70px;
   color: var(--color-black);
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 40px !important;
+  }
 }
 
 /* Form Input Fieldds */

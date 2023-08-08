@@ -24,24 +24,27 @@
                   <li><a href="{{ route('equipment.select') }}">個人裝備租借系統</a></li>
                 @endif
             </ul>
-          <li class="dropdown"><a><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-          @endauth
-
+          </li>
+          
+          <li class="dropdown"><a><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>        
             <ul>
               <li><a href="{{ url('/record') }}">所有紀錄</a></li>
               <!-- 幹部才能新增紀錄 -->
-              @auth 
                 @if(Auth::user()->role > 0) 
                   <li><a href="{{ route('record.create') }}">新增紀錄</a></li>
                 @endif
-              @endauth
             </ul>
           </li>          
-          <li><a href="{{ url('/comingsoon') }}">關於我們</a></li>
+          @endauth
+
+          
           
           @guest
             <li><a href="{{ route('faq.index') }}">FAQ</a></li>
+            <li><a href="{{ route('record.index') }}">所有紀錄</a></li>
           @endguest
+
+          <li><a href="{{ url('/comingsoon') }}">關於我們</a></li>
 
           @auth 
             @if(Auth::user()->role > 0)
