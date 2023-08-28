@@ -27,10 +27,10 @@
                         <li><a href="/"><i class="bi bi-chevron-right"></i> 首頁 </a></li>            
                         <li><a href="{{ route('course.index') }}"><i class="bi bi-chevron-right"></i> 社課影片 </a></li>
                         <li><a href="{{ url('/judgement') }}"><i class="bi bi-chevron-right"></i> 評分系統 </a></li>
-                        <li><a href="{{ url('/comingsoon') }}"><i class="bi bi-chevron-right"></i> 行程記錄 </a></li>
+                        <li><a href="{{ route('record.index') }}"><i class="bi bi-chevron-right"></i> 行程記錄 </a></li>
                         <li><a href="{{ url('/comingsoon') }}"><i class="bi bi-chevron-right"></i> 關於我們 </a></li>
-                        <li><a href="{{ url('/comingsoon') }}"><i class="bi bi-chevron-right"></i> 聯絡我們 </a></li>
-                        <li><a href="{{ url('/comingsoon') }}"><i class="bi bi-chevron-right"></i> FAQ </a></li>
+                        <li><a href="https://www.facebook.com/ncumountaineeringclub" target="_blank"><i class="bi bi-chevron-right"></i> 聯絡我們 </a></li>
+                        <li><a href="{{ route('faq.index') }}"><i class="bi bi-chevron-right"></i> FAQ </a></li>
                     </ul>
                 </div>
                 <!-- <div class="col-6 col-lg-2">

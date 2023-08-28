@@ -517,6 +517,11 @@ section {
   margin-bottom: 10px;
 }
 
+/* 圖片下方小標置中 */
+.post-meta.mt-2 {
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .custom-border {
     border: none !important;

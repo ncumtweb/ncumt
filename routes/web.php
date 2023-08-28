@@ -36,9 +36,13 @@ Route::get('/comingsoon', function () {
     return view('comingsoon');
 });
 
-Route::get('/map', function () {
-    return view('map');
+Route::get('/aboutus', function () {
+    return view('information.aboutus');
 });
+
+// Route::get('/map', function () {
+//     return view('map');
+// });
 
 Route::get('/', [BasicController::class, 'index'])->name('index');
 

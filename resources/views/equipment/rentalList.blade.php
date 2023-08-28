@@ -59,18 +59,18 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <table class="table table-light table-bordered table-striped">
+                        <table class="table table-light table-bordered table-striped" style="table-layout: fixed;">
                             <tbody>
                                 <tr>
-                                    <th colspan = 3 >租借資訊</th>
+                                    <th colspan = 4 >租借資訊</th>
                                 </tr>
                                 <tr>
                                     <td colspan = 2>租借日期</td>
-                                    <td >{{ $rental->rental_date }}</td>
+                                    <td colspan = 2>{{ $rental->rental_date }}</td>
                                 </tr>                                    
                                 <tr>
                                     <td colspan = 2>預計歸還日期</td>
-                                    <td >{{ $rental->return_date }}</td> 
+                                    <td colspan = 2>{{ $rental->return_date }}</td> 
                                 </tr>                         
                                 <tr>
                                     <td >總金額</td>

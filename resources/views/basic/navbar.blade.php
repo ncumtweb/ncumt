@@ -11,7 +11,7 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="{{ url('/course') }}">社課影片</a></li>
-          <li><a href="{{ url('/map') }}">山社地圖</a></li>
+          <!-- <li><a href="{{ url('/map') }}">山社地圖</a></li> -->
           @guest
             <li><a href="{{ url('/judgement') }}">評分系統</a></li>              
           @endguest
@@ -44,7 +44,7 @@
             <li><a href="{{ route('record.index') }}">所有紀錄</a></li>
           @endguest
 
-          <li><a href="{{ url('/comingsoon') }}">關於我們</a></li>
+          <!-- <li><a href="{{ url('/aboutus') }}">關於我們</a></li> -->
 
           @auth 
             @if(Auth::user()->role > 0)
