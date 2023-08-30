@@ -13,7 +13,7 @@
             </div>
 
             <div class="row justify-content-center">
-                <div class = "col-md-8">
+                <div class = "col-md-12">
                     <div class="form mt-5">
                         <form action="{{ route('judgement.update', $judgement->id) }}" method="POST" class="php-email-form">
                             @csrf
@@ -23,13 +23,21 @@
                                 <input type="text" name="name" class="form-control" id="name" value = "{{ $judgement->name }}" required>
                             </div>
                             <div class="row">  
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="normal_day" class="form-label">傳統路天數</label>
                                     <input type="number" name="normal_day" class="form-control" id="normal_day" min="0" value = "{{ $judgement->normal_day }}" required>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <label for="abnormal_day" class="form-label">非傳統路天數</label>
                                     <input type="number" name="abnormal_day" class="form-control" id="abnormal_day" min="0" value = "{{ $judgement->abnormal_day }}" required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="trip_tag" class="form-label">行程</label>
+                                    <select id="trip_tag" name="trip_tag" class="form-select" required>
+                                        <option value="0" {{ $judgement->trip_tag == 0 ? 'selected' : ''}}>一般行程</option>
+                                        <option value="1" {{ $judgement->trip_tag == 1 ? 'selected' : ''}}>壓縮行程</option>
+                                        <option value="2" {{ $judgement->trip_tag == 2 ? 'selected' : ''}}>寬鬆行程</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="row"> 

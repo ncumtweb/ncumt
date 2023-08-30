@@ -42,6 +42,7 @@ class JudgementController extends Controller
 
         $normal_day = $request->input('normal_day');
         $abnormal_day = $request->input('abnormal_day');
+        $trip_tag = $request->input('trip_tag');
         $level = $request->input('level');
         $road = $request->input('road');
         $terrain = $request->input('terrain');
@@ -53,12 +54,14 @@ class JudgementController extends Controller
         $level_score = self::caculateLevel($level, $road, $terrain, $plant);
         $energy_score = self::caculateEnergy($energy, $water);
         $total_score = $day_score + $level_score + $energy_score;
+        $total_score = self::caculateTripTag($total_score, $trip_tag);
         $result_level = self::caculateRank($total_score);
     
         $judgement = new Judgement();
         $judgement->name = $request->input('name');
         $judgement->normal_day = $normal_day;
         $judgement->abnormal_day = $abnormal_day;
+        $judgement->trip_tag = $trip_tag;
         $judgement->level = $level;
         $judgement->road = $road;
         $judgement->terrain = $terrain;
@@ -101,12 +104,12 @@ class JudgementController extends Controller
         return $score;
     }
 
-    public function caculateEnergy($energy, $water){
+    public function caculateEnergy($energy, $water) {
         $score = $energy * 7 + $water * 2;
         return $score;
     }
 
-    public function caculateRank($score){
+    public function caculateRank($score) {
         $rank = "";
         if($score < 40)
             $rank = "D";
@@ -121,6 +124,17 @@ class JudgementController extends Controller
         else if($score >= 120)
             $rank = "S+";
         return $rank;
+    }
+
+    public function caculateTripTag($score, $trip_tag) {
+        if($trip_tag == 1) {
+            $score = $score * 1.1;
+        }
+        else if($trip_tag == 2) {
+            $score = $score * 0.9;
+        }
+
+        return $score;
     }
     /**
      * Display the specified resource.
@@ -160,6 +174,7 @@ class JudgementController extends Controller
         
         $normal_day = $request->input('normal_day');
         $abnormal_day = $request->input('abnormal_day');
+        $trip_tag = $request->input('trip_tag');
         $level = $request->input('level');
         $road = $request->input('road');
         $terrain = $request->input('terrain');
@@ -171,12 +186,14 @@ class JudgementController extends Controller
         $level_score = self::caculateLevel($level, $road, $terrain, $plant);
         $energy_score = self::caculateEnergy($energy, $water);
         $total_score = $day_score + $level_score + $energy_score;
+        $total_score = self::caculateTripTag($total_score, $trip_tag);
         $result_level = self::caculateRank($total_score);
 
         $judgement = Judgement::find($id);
         $judgement->name = $request->input('name');
         $judgement->normal_day = $normal_day;
         $judgement->abnormal_day = $abnormal_day;
+        $judgement->trip_tag = $trip_tag;
         $judgement->level = $level;
         $judgement->road = $road;
         $judgement->terrain = $terrain;

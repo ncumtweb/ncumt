@@ -68,8 +68,8 @@
               </div>
               <div class="row">
                 <div class="text-center">
-                  <button type="button" onclick ="window.location='{{ route('equipment.index', '大背包', session('rental_id') ) }}'" style="background: var(--color-green);">繼續租借</button>                    
-                  <button type="submit">確認租借</button>
+                  <button type="button" onclick ="window.location='{{ route('equipment.index', '大背包', session('rental_id') ) }}'" style="background: #393939;">繼續租借</button>                    
+                  <button type="submit" style="background: #A6B18F;">確認租借</button>
                 </div>
               </div>
             </form>

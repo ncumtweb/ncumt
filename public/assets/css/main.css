@@ -629,6 +629,11 @@ section {
   flex: 0 0 65%;
 }
 
+.thumbnail img.img-fluid {
+  border: 2px solid;
+  border-radius: 10%;
+}
+
 @media (max-width: 960px) {
   .post-entry-2 .thumbnail {
     flex: 0 0 100%;
@@ -1306,7 +1311,7 @@ section {
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #4585e6;
+  background: #A6B18F;
   border: 1;
   padding: 10px 20px;
   color: #fff;
