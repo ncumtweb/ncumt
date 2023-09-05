@@ -10,6 +10,7 @@
 
       <nav id="navbar" class="navbar">
         <ul>
+        <li><a href="{{ url('/aboutus') }}">關於我們</a></li>
           <li><a href="{{ url('/course') }}">社課影片</a></li>
           <!-- <li><a href="{{ url('/map') }}">山社地圖</a></li> -->
           @guest
@@ -28,7 +29,7 @@
           
           <li class="dropdown"><a><span>行程記錄</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>        
             <ul>
-              <li><a href="{{ url('/record') }}">所有紀錄</a></li>
+              <li><a href="{{ route('record.index') }}">所有紀錄</a></li>
               <!-- 幹部才能新增紀錄 -->
                 @if(Auth::user()->role > 0) 
                   <li><a href="{{ route('record.create') }}">新增紀錄</a></li>

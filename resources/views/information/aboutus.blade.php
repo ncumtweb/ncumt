@@ -4,42 +4,95 @@
 
 @section('content')
 
-<!-- introduction !-->
+
 <section>
     <div class="container" data-aos="fade-up">
         <div class="row">
             <div class="col-lg-12 text-center mb-5">
-            <h1 class="page-title">關於我們</h1>
+                <h1 class="page-title">關於我們</h1>
             </div>
         </div>
 
-        <div class="row mb-5">
-
+        <div class="row">
+            <!-- introduction !-->
             <div class="d-md-flex post-entry-2 half">
                 <a class="me-4 thumbnail">
-                    <img src="assets/img/about.jpeg" alt="" class="img-fluid">
+                    <img src="assets/img/aboutus.jpg" alt="" class="img-fluid">
                     <div class="post-meta mt-2">
-                        2022.12.10-11 
+                        2023.05.21 
                         <span class="mx-1">&bullet;</span> 
-                        白雪村初嚮營
+                        李棟山四路會師
                     </div>
                 </a>
                 <div class="ps-md-5 mt-4 mt-md-0">
                     <div class="post-meta mt-4">About us</div>
-                    <h2 class="mb-4 display-4">中央大學登山社</h2>
+                    <h2 class="mb-4 display-4">中大登山社</h2>
 
-                    <p>中央大學登山社 中大登山社於民國 64 年創立， 幹部、社員人數眾多，從平易近人的高山百岳和歷史古道、專精的技能訓練與實作到深度探勘原始山林皆有涉略， 亦有從事攀岩、溯溪、單車等活動。</p>
-                    <p>在山社裡將可以交到一群能患難與共、一同歡笑、一同去挑戰自我的朋友，因愛山而相遇、 因愛山而成為了幹部，希望能夠把山的美好傳承下去。歡迎各位加入我們的登山行列，漫遊台灣山林，
-                        我們在山林中飽覽大自然令人驚嘆的美，體驗冒險帶來的樂趣、挑戰從未探索的新事物。若想瞭解更多歡迎關注我們的FB粉絲團及 Instagram！</p>
+                    <p>中大登山社於民國 64 年創立，當年第一次活動隊登上李棟山,之後李棟山便成為登山社社山。
+                        我們的幹部和社員人數眾多，從平易近人的高山百岳和歷史古道，專精的技能訓練與實作到深度探勘原始山林皆有涉略，
+                        亦有從事攀岩、溯溪、單車等活動，歡迎各位加入我們的登山行列，漫遊台灣山林，我們在山林中飽覽大自然令人驚嘆的美，
+                        體驗冒險帶來的樂趣、挑戰從未探索的新事物。若想瞭解更多歡迎關注我們的FB粉絲團及 Instagram！
+                    </p>
                 </div>
             </div>
-
+            <!-- End introduction !-->
+            
+            <!-- location !-->
+            <div class="d-md-flex post-entry-2 half mt-5">
+                <a class="me-4 thumbnail order-2">
+                    <img src="assets/img/map.png" alt="" class="img-fluid">
+                </a>
+                <div class="pe-md-5 mt-4 mt-md-0">
+                    <div class="post-meta mt-4">Location</div>
+                    <h2 class="mb-4 display-4">社窩</h2>
+                    <p>山社的社窩位在據德樓的 B1，進去下樓梯遇到的第一間就是了！不論是要租借裝備、上社課、出隊集合都會到社窩去，有空也可以來走走看看喔～</p>
+                    <p>社窩就像是我們的第二個家，承載了每個中央山社人滿滿的回憶。</p>
+                    <p><a href="https://goo.gl/maps/nvGsBbsf29DT5HxX6" target= "_blank" class="more">Google Map 位置連結</a></p>
+                </div>
+            </div>
+            <!-- End location !-->
         </div>
     </div>
 </section>
-<!-- End introduction !-->
 
-<section>
+<!-- activity -->
+<section class="mb-5 bg-light py-5">
+    <div class="container" data-aos="fade-up">
+        <div class="row justify-content-between align-items-lg-center">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <div class="post-meta mt-4">Activity</div>
+                <h2 class="display-4 mb-4">山社出隊</h2>
+                <p>社上主要出隊有三種路線：高山、中級山、溯溪。</p>
+                <ol>
+                    <li>高山：行走在三千公尺上的山稜線上，能夠欣賞群山繚繞的美景。</li>
+                    <li>中級山：行走在一千到三千公尺的山中，多半走在森林中，能夠欣賞蓊鬱森林的美景。</li>
+                    <li>溯溪：沿著溪谷溯行，能夠看到各種不同的溪谷風景，如：瀑布、深潭等等。</li>
+                </ol>
+                <p><a href="{{ route('record.index') }}" class="more">看看我們的紀錄吧</a></p>
+            </div>
+            <div class="col-lg-8">
+                <div class="row thumbnail">
+                    <div class="col-4">
+                        <img src="assets/img/high.jpg" alt="" class="img-fluid">
+                        <div class="post-meta mt-2">高山路線</div>
+                    </div>
+                    <div class="col-4 mt-4">
+                        <img src="assets/img/middle.jpeg" alt="" class="img-fluid">
+                        <div class="post-meta mt-2">中級山路線</div>
+                    </div>
+                    <div class="col-4 mt-4">
+                        <img src="assets/img/river.jpg" alt="" class="img-fluid mt-4 ">
+                        <div class="post-meta mt-2">溯溪路線</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End activity -->
+
+<!-- 幹部介紹 -->
+<!-- <section>
     <div class="container" data-aos="fade-up">
         <div class="row">
             <div class="col-12 text-center mb-5">
@@ -77,6 +130,6 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 
 @endsection

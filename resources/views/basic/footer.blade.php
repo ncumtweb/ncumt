@@ -1,6 +1,6 @@
 @php
     use App\Models\Record;
-    $records = Record::orderBy('start_date','desc')->get();
+    $records = Record::orderBy('start_date','desc')->take(5)->get();
     $category_array = ["中級山", "高山", "溯溪"];
 @endphp
 
