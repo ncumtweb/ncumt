@@ -26,7 +26,9 @@
                         <span>{{ $record->start_date }}-{{ $record->end_date }}</span>
                       </div>
                       <a href="{{ route('record.show', $record->id) }}" ><img src="{{ asset($record->image) }}" alt="" class="img-fluid"></a>
-                      <p class="d-block">{{ $record->description }}<a href="{{ route('record.show', $record->id )}}">... Read more</a></p>
+                      <p>{{ $record->description }}</p>
+                       <button type = "button" class="btn btn-outline-primary btn-sm" onclick="location.href='{{ route('record.show', $record->id )}}'">Read More</button>
+                      <!-- <p class="d-block">{{ $record->description }}<a href="{{ route('record.show', $record->id )}}"> Read more</a></p> -->
                     </div>
                   </div>
                 </div> <!-- End .row -->

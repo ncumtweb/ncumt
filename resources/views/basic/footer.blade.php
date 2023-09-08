@@ -19,7 +19,7 @@
                         因愛山而成為了幹部，希望能夠把山的美好傳承下去。歡迎各位加入我們的登山行列，漫遊台灣山林，與我們在山林中飽覽大自然令人驚嘆的美、
                         體驗冒險帶來的樂趣、挑戰從未探索的新事物。若想瞭解更多歡迎關注我們的FB粉絲團及Instagram！
                     </p>
-                    <p><a href="{{ url('/commingsoon') }}" class="footer-link-more">關於我們</a></p>
+                    <p><a href="{{ url('/aboutus') }}" class="footer-link-more">關於我們</a></p>
                 </div>
                 <div class="col-6 col-lg-2">
                     <h3 class="footer-heading">其他連結</h3>
@@ -28,7 +28,7 @@
                         <li><a href="{{ route('course.index') }}"><i class="bi bi-chevron-right"></i> 社課影片 </a></li>
                         <li><a href="{{ url('/judgement') }}"><i class="bi bi-chevron-right"></i> 評分系統 </a></li>
                         <li><a href="{{ route('record.index') }}"><i class="bi bi-chevron-right"></i> 行程記錄 </a></li>
-                        <li><a href="{{ url('/comingsoon') }}"><i class="bi bi-chevron-right"></i> 關於我們 </a></li>
+                        <li><a href="{{ url('/aboutus') }}"><i class="bi bi-chevron-right"></i> 關於我們 </a></li>
                         <li><a href="https://www.facebook.com/ncumountaineeringclub" target="_blank"><i class="bi bi-chevron-right"></i> 聯絡我們 </a></li>
                         <li><a href="{{ route('faq.index') }}"><i class="bi bi-chevron-right"></i> FAQ </a></li>
                     </ul>
@@ -76,7 +76,6 @@
             <div class="row justify-content-between">
                     <div class="copyright">
                         © Copyright <strong><span>ZenBlog</span></strong>. All Rights Reserved <br>
-                        © Copyright <strong><span>Ben</span></strong>. All Rights Reserved
                     </div>
 
                     <div class="credits">
@@ -92,7 +91,7 @@
                     <div class="social-links mb-3 mb-lg-0 text-center text-md-end">
                         <a href="https://www.facebook.com/ncumountaineeringclub" target = "_blank" class="facebook"><i class="bi bi-facebook"></i></a>
                         <a href="https://www.instagram.com/ncumountaineeringclub/" target = "_blank" class="instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="https://github.com/Ben901227/ncumt" target = "_blank" class="github"><i class="bi bi-github"></i></a>
+                        <a href="https://github.com/ncumtweb/ncumt" target = "_blank" class="github"><i class="bi bi-github"></i></a>
                     </div>
                 </div>
             </div>
