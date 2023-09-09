@@ -12,6 +12,8 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\MailController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,7 @@ use App\Http\Controllers\RentalController;
 Route::fallback(function () {
     return redirect()->route('index');
 });
+
 
 Route::get('/welcome', function () {
     return view('welcome');
