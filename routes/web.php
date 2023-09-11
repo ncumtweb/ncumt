@@ -72,7 +72,8 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
     //course
-    Route::get('/course/register/{id}', [CourseController::class, 'show'])->name('course.show');
+    Route::get('/course/register', [CourseController::class, 'showRegister'])->name('course.show');
+    Route::post('/course/register/{id}', [CourseController::class, 'register'])->name('course.register');
 
     //equipment
     Route::get('/equipment/{name}', [EquipmentController::class, 'index'])->name('equipment.index');

@@ -24,8 +24,22 @@
                   <input type="text" name="title" class="form-control" id="title" value="{{ $course->title }}" required>
                 </div>
                 <div class="form-group">
-                  <label for="date">社課日期</label>
-                  <input type="date" class="form-control" id="date" name="date" value="{{ $course->date }}" required>
+                  <label for="description" class="form-label">社課簡介 </label>                    
+                  <textarea name="description" class="form-control" id="description">{{ $course->description }}</textarea>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="date" class="form-label">社課日期</label>
+                    <input type="date" class="form-control" id="date" name="date" value="{{ $course->date }}" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="speaker" class="form-label">社課講師</label>
+                    <input type="text" name="speaker" class="form-control" id="speaker" value="{{ $course->speaker }}" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="location" class="form-label">社課地點</label>
+                    <input type="text" class="form-control" id="location" name="location" value="{{ $course->location }}" required>
+                  </div>
                 </div>
                 <div class="form-group">
                     <label for="image">社課照片</label>
@@ -35,7 +49,7 @@
                 </div>
                 <div class="form-group">
                   <label for="videoURL" class="form-label">社課影片連結</label>                    
-                  <input type="url" name="videoURL" class="form-control" id="videoURL" value="{{ $course->videoURL }}" required>
+                  <input type="url" name="videoURL" class="form-control" id="videoURL" value="{{ $course->videoURL }}" >
                 </div>
                 <div class="form-group">
                   <label for="pptURL" class="form-label">社課簡報連結</label>                    

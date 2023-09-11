@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\CourseRecord;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RecordController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\Mail;
+
 class CourseController extends Controller
 {
     /**
@@ -16,7 +19,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::orderBy('date','desc')->get();
+        $courses = Course::whereNotNull('videoURL')->orderBy('date','desc')->get();
         return view('course.course', ['courses' => $courses]);
     }
 
@@ -45,9 +48,11 @@ class CourseController extends Controller
         
         
         $course = new Course();
-
         $course->title = $request->input('title');
+        $course->description = $request->input('description');
         $course->date = $request->input('date');
+        $course->speaker = $request->input('speaker');
+        $course->location = $request->input('location');
         $course->image = App::make(RecordController::class)->storeImage($file, $folder_name, $name);
         if($request->input('videoURL')) {
             $course->videoURL = $request->input('videoURL');
@@ -68,12 +73,34 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function showRegister()
     {
-        $course = Course::find($id);
 
-        return view('course.register', compact('course'));
+        $courses = Course::where('videoURL', null)
+            ->where('date', '>' , now()->toDateString())
+            ->orderBy('date','asc')
+            ->get();
+        
+            
+        return view('course.register', compact('courses'));
     }
+
+    public function register($id) {
+
+        $courseRecord = new CourseRecord();
+
+        $courseRecord->course_id = $id; 
+        $courseRecord->user_id = auth()->user()->id;
+        $courseRecord->save();
+
+        $msg = auth()->user()->name . '「' . $courseRecord->course->title. '」' . '社課報名完成';
+
+        Mail::to($courseRecord->user->email)
+            ->later(now()->addSeconds(5), new \App\Mail\Course($courseRecord));
+    
+        return redirect()->back()->with('status', $msg);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -108,8 +135,11 @@ class CourseController extends Controller
         }
 
         $course->title = $request->input('title');
+        $course->description = $request->input('description');
         $course->date = $request->input('date');
-        
+        $course->speaker = $request->input('speaker');
+        $course->location = $request->input('location');
+
         if($request->input('videoURL')) {
             $course->videoURL = $request->input('videoURL');
         }

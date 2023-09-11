@@ -23,8 +23,22 @@
                   <input type="text" name="title" class="form-control" id="title" placeholder="請輸入社課名稱" required>
                 </div>
                 <div class="form-group">
-                  <label for="date">社課日期</label>
-                  <input type="date" class="form-control" id="date" name="date" required>
+                  <label for="description" class="form-label">社課簡介 </label>                    
+                  <textarea name="description" class="form-control" id="description" placeholder="請輸入社課簡介" ></textarea>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-4">
+                    <label for="date" class="form-label">社課日期</label>
+                    <input type="date" class="form-control" id="date" name="date" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="speaker" class="form-label">社課講師</label>
+                    <input type="text" name="speaker" class="form-control" id="speaker" placeholder="請輸入社課講師" required>
+                  </div>
+                  <div class="form-group col-md-4">
+                    <label for="location" class="form-label">社課地點</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="請輸入社課地點" required>
+                  </div>
                 </div>
                 <div class="form-group">
                     <label for="image">社課照片</label>

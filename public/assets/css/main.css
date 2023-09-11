@@ -1167,7 +1167,7 @@ section {
   margin-bottom: 20px;
 }
 
-.contact .createRecordForml input,
+.contact .createRecordForm input,
 .contact .createRecordForm textarea {
   padding: 10px 14px;
   border-radius: 0;
@@ -1443,7 +1443,7 @@ section {
 # button
 --------------------------------------------------------------*/
 
-button.black[type=button] {
+button.black[type=submit] {
   background: var(--color-primary);
   border: 1;
   padding: 10px 30px;

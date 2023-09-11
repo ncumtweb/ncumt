@@ -20,6 +20,7 @@
           @auth
           <li class="dropdown"><a><span>系統</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
+              <!-- <li><a href="{{ route('course.show') }}">社課報名系統</a></li>  -->
               <li><a href="{{ url('/judgement') }}">評分系統</a></li>              
                 @if(Auth::user()->role >= 0)
                   <li><a href="{{ route('equipment.select') }}">個人裝備租借系統</a></li>
