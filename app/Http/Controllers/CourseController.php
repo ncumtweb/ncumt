@@ -70,7 +70,9 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::find($id);
+
+        return view('course.register', compact('course'));
     }
 
     /**

@@ -1439,6 +1439,19 @@ section {
 
 /* End FAQ */
 
+/*--------------------------------------------------------------
+# button
+--------------------------------------------------------------*/
+
+button.black[type=button] {
+  background: var(--color-primary);
+  border: 1;
+  padding: 10px 30px;
+  color: #fff;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
 .footer .footer-legal .social-links a:hover {
   background-color: rgba(var(--color-white-rgb), 0.2);
 }

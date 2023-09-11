@@ -35,10 +35,6 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/comingsoon', function () {
-    return view('comingsoon');
-});
-
 Route::get('/aboutus', function () {
     return view('information.aboutus');
 });
@@ -74,6 +70,9 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
     Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+
+    //course
+    Route::get('/course/register/{id}', [CourseController::class, 'show'])->name('course.show');
 
     //equipment
     Route::get('/equipment/{name}', [EquipmentController::class, 'index'])->name('equipment.index');
