@@ -74,6 +74,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     //course
     Route::get('/course/register', [CourseController::class, 'showRegister'])->name('course.show');
     Route::post('/course/register/{id}', [CourseController::class, 'register'])->name('course.register');
+    Route::get('/course/showRecord/', [CourseController::class, 'showRecord'])->name('course.showRecord');
 
     //equipment
     Route::get('/equipment/{name}', [EquipmentController::class, 'index'])->name('equipment.index');

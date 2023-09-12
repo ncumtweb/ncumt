@@ -101,6 +101,10 @@ class CourseController extends Controller
         return redirect()->back()->with('status', $msg);
     }
 
+    public function showRecord() {
+        $courseRecords = CourseRecord::where('user_id', auth()->user()->id)->get();
+        return view('course.record', compact('courseRecords'));
+    }
 
     /**
      * Show the form for editing the specified resource.
