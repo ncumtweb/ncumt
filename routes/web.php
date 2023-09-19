@@ -46,13 +46,13 @@ Route::get('/aboutus', function () {
 Route::get('/', [BasicController::class, 'index'])->name('index');
 
 Route::get('/course', [CourseController::class, 'index'])->name('course.index');
+Route::get('/course/register', [CourseController::class, 'showRegister'])->name('course.show');
+
 Route::get('/judgement', [JudgementController::class, 'index'])->name('judgement.index');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 
 Route::resource('record', RecordController::class);
 Route::post('/record/upload', [RecordController::class, 'uploadImage'])->name('record.uploadImage');
-
-
 
 Route::prefix('portal')->name('portal.')->group(function () {
     Route::get('/', function () {
@@ -72,8 +72,6 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 
     //course
-    Route::get('/course/register', [CourseController::class, 'showRegister'])->name('course.show');
-    Route::post('/course/register/{id}', [CourseController::class, 'register'])->name('course.register');
     Route::get('/course/showRecord/', [CourseController::class, 'showRecord'])->name('course.showRecord');
 
     //equipment
@@ -88,6 +86,10 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/equipment/showRental/{rental_id}', [RentalController::class, 'showRental'])->name('rental.showRental');
     Route::get('/equipment/removeRentalEquipment/{rentalEquipment_id}', [RentalController::class, 'removeEquipment'])->name('rentalEquipment.remove');
     Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
+});
+
+Route::middleware(['courseLogin'])->group(function () {
+    Route::post('/course/register/{id}', [CourseController::class, 'register'])->name('course.register');
 });
 
 //management control
@@ -112,7 +114,9 @@ Route::middleware(['checkRole'])->group(function () {
     Route::get('/course/edit/{id}', [CourseController::class, 'edit'])->name('course.edit');
     Route::put('/course/edit/{id}', [CourseController::class, 'update'])->name('course.update');
     Route::get('/course/delete/{id}', [CourseController::class, 'destroy'])->name('course.destroy');
-
+    Route::get('/course/record/{id}', [CourseController::class, 'showAllRecords'])->name('course.showAllRecords');
+    
+    
     //record
     Route::get('/record/delete/{id}', [RecordController::class, 'delete'])->name('record.delete');
     

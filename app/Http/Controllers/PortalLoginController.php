@@ -58,7 +58,15 @@ class PortalLoginController extends Controller
             $checkExist = User::where('id', $user_portal->user['id'])->first(); // 指向不成功，所以再查一次
         }
         Auth::login($checkExist);
+        
+        if (session()->has('previous_page')) {
+            $url = session('previous_page');
+            session()->forget('previous_page');
+            return redirect()->intended($url);
+        }
+
         return redirect()->route('index');
+        
     }
 
     public function logout()

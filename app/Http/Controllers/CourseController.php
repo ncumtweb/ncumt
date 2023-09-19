@@ -106,6 +106,11 @@ class CourseController extends Controller
         return view('course.record', compact('courseRecords'));
     }
 
+    public function showAllRecords($id) {
+        $course = Course::findOrFail($id);
+        $courseRecords = CourseRecord::where('course_id', $id)->orderBy('created_at', 'asc')->get();
+        return view('course.allRecords', compact('course', 'courseRecords'));
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -164,6 +169,7 @@ class CourseController extends Controller
     public function destroy($id)
     {
         $course = Course::findOrFail($id);
+
         File::delete(public_path($course->image));
         $course->delete();
         return redirect()->route('course.index')->with('status','社課刪除成功');

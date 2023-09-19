@@ -19,7 +19,6 @@ class UserMiddleware
         if (Auth::check() && Auth::user()->role > 0) {
             return $next($request);
         }
-
         else{
             return redirect()->route('portal.index')->with('status','您並無權限進行此操作，請先登入。');
         }

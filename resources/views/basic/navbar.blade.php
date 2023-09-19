@@ -10,19 +10,23 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-        <li><a href="{{ url('/aboutus') }}">關於我們</a></li>
-          <li><a href="{{ url('/course') }}">社課影片</a></li>
+          <li><a href="{{ url('/aboutus') }}">關於我們</a></li>
+          <li class="dropdown"><a><span>社課資訊</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="{{ route('course.show') }}">社課報名</a></li> 
+              <li><a href="{{ url('/course') }}">社課影片</a></li>
+            </ul>
           <!-- <li><a href="{{ url('/map') }}">山社地圖</a></li> -->
           @guest
+            <li><a href="{{ route('record.index') }}">所有紀錄</a></li>
             <li><a href="{{ url('/judgement') }}">評分系統</a></li>              
           @endguest
 
           @auth
           <li class="dropdown"><a><span>系統</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <!-- <li><a href="{{ route('course.show') }}">社課報名系統</a></li>  -->
               <li><a href="{{ url('/judgement') }}">評分系統</a></li>              
-                @if(Auth::user()->role >= 0)
+                @if(Auth::user()->role > 0)
                   <li><a href="{{ route('equipment.select') }}">個人裝備租借系統</a></li>
                 @endif
             </ul>
@@ -38,15 +42,10 @@
             </ul>
           </li>          
           @endauth
-
-          
           
           @guest
             <li><a href="{{ route('faq.index') }}">FAQ</a></li>
-            <li><a href="{{ route('record.index') }}">所有紀錄</a></li>
           @endguest
-
-          <!-- <li><a href="{{ url('/aboutus') }}">關於我們</a></li> -->
 
           @auth 
             @if(Auth::user()->role > 0)
