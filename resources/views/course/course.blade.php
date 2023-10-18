@@ -27,7 +27,7 @@
                             @auth
                                 @if(Auth::user()->role > 0)
                                     <a class="bi bi-pencil-square" href="{{ route('course.edit', $course->id) }}"></a>
-                                    <a class="bi bi-trash" href="{{ route('course.destroy', $course->id) }}"></a>
+                                    <a class="bi bi-trash" onclick="return confirmDelete();" href="{{ route('course.destroy', $course->id) }}"></a>
                                 @endif
                             @endauth
                         </h1>
@@ -45,3 +45,9 @@
     </div>
 </div>
 @endsection
+
+<script>
+function confirmDelete() {
+    return confirm('確定要刪除這堂社課嗎？');
+}
+</script>

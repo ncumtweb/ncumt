@@ -32,7 +32,7 @@
             @else
                 <div class="row justify-content-center">
                     <!-- Table -->
-                    @foreach($courseRecords as $courseRecord)
+
                         <div class="col-md-10 text-center mb-5">                    
                             <table class="table table-light table-bordered table-striped">
                                 <thead>
@@ -44,16 +44,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($courseRecords as $courseRecord)
                                     <tr>
                                         <td>{{ $courseRecord->course->date }}</td>
                                         <td>{{ $courseRecord->course->title }}</td>  
                                         <td>{{ $courseRecord->course->speaker }}</td>
                                         <td>{{ $courseRecord->course->location }}</td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>    
-                    @endforeach
+                    
                     <!-- End Table -->
                 </div>
             @endif

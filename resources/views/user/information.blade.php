@@ -22,7 +22,7 @@
         <div class="row justify-content-center">
           <div class = "col-md-8 ">
             <div class="form ">
-              <form action="{{ route('user.update', $user->id) }}" method="POST" id="createRecordForm" class="createRecordForm" enctype="multipart/form-data">
+              <form action="{{ route('user.update', $user->id) }}" method="POST" id="createRecordForm" class="php-email-form" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -54,7 +54,7 @@
                 <div class="row">
                   <div class="form-group col-md-4">
                     <label for="studentID" class="form-label">學號</label>                    
-                    <input type="text" name="studentID" class="form-control" id="studentID" value="{{ $user->identifier }}" required>
+                    <input type="text" name="studentID" class="form-control" id="studentID" value="{{ $user->identifier }}" disabled>
                   </div>
                   <div class="form-group col-md-4">
                     <label for="phone" class="form-label">手機號碼</label>                    

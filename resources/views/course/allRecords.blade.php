@@ -37,12 +37,13 @@
                             <table class="table table-light table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th colspan = 3>已報名列表</th>
+                                        <th colspan = 4>已報名列表</th>
                                     </tr>
                                     <tr>
                                         <th scope="col">學號</th>
                                         <th scope="col">姓名</th>
                                         <th scope="col">E-mail</th>
+                                        <th scope="col">報名時間</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,7 +51,8 @@
                                     <tr>
                                         <td>{{ $courseRecord->user->identifier }}</td>
                                         <td>{{ $courseRecord->user->name_zh }}</td>
-                                        <td>{{ $courseRecord->user->email }}</td>                  
+                                        <td>{{ $courseRecord->user->email }}</td> 
+                                        <td>{{ $courseRecord->created_at }}</td>                  
                                     </tr>
                                     @endforeach
                                 </tbody>

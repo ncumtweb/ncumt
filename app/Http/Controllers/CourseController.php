@@ -77,7 +77,7 @@ class CourseController extends Controller
     {
 
         $courses = Course::where('videoURL', null)
-            ->where('date', '>' , now()->toDateString())
+            ->whereDate('date', '>=' , now()->toDateString())
             ->orderBy('date','asc')
             ->get();
         

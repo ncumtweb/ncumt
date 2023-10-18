@@ -70,20 +70,16 @@
                             @else
                                 <div class="row justify-content-center py-4">
                                     <div class="col-lg-4">                                
-                                        <form action="{{ route('course.register', $course->id) }}" method="POST">
-                                            @csrf                            
-                                            <button class="black" disabled type="submit">已報名完成</button>
-                                        </form>
+                                        <button class="black" type="submit">已報名完成</button>    
                                     </div>
                                 </div>         
-                            @endif
+                            @endif                            
                         </div>
                     </div>
                 </div>
             </section>
         @endforeach
     @endif
-
 @endsection
 
 <script>
