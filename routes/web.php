@@ -30,11 +30,6 @@ Route::fallback(function () {
     return redirect()->route('index');
 });
 
-
-Route::get('/welcome', function () {
-    return view('welcome');
-});
-
 Route::get('/aboutus', function () {
     return view('information.aboutus');
 });
@@ -46,7 +41,7 @@ Route::get('/aboutus', function () {
 Route::get('/', [BasicController::class, 'index'])->name('index');
 
 Route::get('/course', [CourseController::class, 'index'])->name('course.index');
-Route::get('/course/register', [CourseController::class, 'showRegister'])->name('course.show');
+Route::get('/course/register', [CourseController::class, 'showRegister'])->name('course.showRegister');
 
 Route::get('/judgement', [JudgementController::class, 'index'])->name('judgement.index');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');

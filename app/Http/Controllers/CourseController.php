@@ -63,7 +63,7 @@ class CourseController extends Controller
 
         $course->save();
 
-        return redirect()->route('course.index');
+        return redirect()->route('course.showRegister')->with('status','社課新增成功');
         
     }
 
@@ -157,7 +157,7 @@ class CourseController extends Controller
         }
         $course->update();
 
-        return redirect()->route('course.index');
+        return redirect()->route('course.showRegister')->with('status','社課更新成功');
     }
 
     /**

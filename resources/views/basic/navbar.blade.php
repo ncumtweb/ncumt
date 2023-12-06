@@ -13,7 +13,7 @@
           <li><a href="{{ url('/aboutus') }}">關於我們</a></li>
           <li class="dropdown"><a><span>社課資訊</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
             <ul>
-              <li><a href="{{ route('course.show') }}">社課報名</a></li> 
+              <li><a href="{{ route('course.showRegister') }}">社課報名</a></li> 
               <li><a href="{{ url('/course') }}">社課影片</a></li>
             </ul>
           <!-- <li><a href="{{ url('/map') }}">山社地圖</a></li> -->

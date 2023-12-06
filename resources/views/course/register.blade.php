@@ -53,7 +53,7 @@
                                 @endauth
                             </h2>
                             <h3>講者： {{ $course->speaker }}</h3>
-                            <h3>時間： {{ $course->date }} 晚上七點</h3>
+                            <h3>日期： {{ $course->date }}</h3>
                             <h3>地點： {{ $course->location }}</h3>
                             @if( $course->description )
                                 <h3>簡介：{{ $course->description }}</h3>

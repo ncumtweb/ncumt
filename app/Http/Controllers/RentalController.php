@@ -20,7 +20,6 @@ class RentalController extends Controller
     public function index()
     {
         $rentals = Rental::where('user_id', Auth::user()->id)->whereNotNull('rental_date')->orderby('created_at', 'desc')->get();
-        //$rentalEquipments = RentalEquipment::where('rental_id', '=' , $rental->id)->orderby('equipment_id', 'asc')->get();  
         $rentalEquipments = [];
         foreach($rentals as $rental)
             $rentalEquipments = $rental->rentalEquipment;  
@@ -32,7 +31,7 @@ class RentalController extends Controller
         $rental = Rental::findOrFail($rental_id);
         $rentalEquipments = RentalEquipment::where('rental_id', '=' , $rental_id)->orderby('equipment_id', 'asc')->get();    
 
-        return view('equipment.rental', compact('rental', 'rentalEquipments'));
+        return view('equipment.personalRental', compact('rental', 'rentalEquipments'));
        
     }
 
@@ -169,7 +168,7 @@ class RentalController extends Controller
         $rental->update();
         session()->forget('rental_id');
         
-        return view('equipment.chose');
+        return redirect()->route('rental.index')->with('status','租借成功，請確認租借資訊');
     }
 
     /**

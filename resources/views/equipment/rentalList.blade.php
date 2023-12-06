@@ -79,7 +79,7 @@
                                             <td>實際歸還日期</td>
                                             <td>{{ $rental->actual_return_date }}</td>
                                         @else                        
-                                            <td>
+                                            <td colspan = 2>
                                                 <div class="equipment">
                                                     <button type="button" onclick="window.location='{{ route('rental.return', $rental->id) }}'" style="padding: 1px 50px;">歸還</button>
                                                 </div>                                    
