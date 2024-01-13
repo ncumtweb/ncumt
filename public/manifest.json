@@ -1,14 +1,14 @@
 {
-    "name": "NCUMT",
+    "name": "中央大學登山社",
     "short_name": "NCUMT",
     "start_url": "/index.php",
-    "background_color": "#6777ef",
-    "description": "NCUMT",
+    "background_color": "#f0f1f7",
+    "description": "中央大學登山社網頁",
     "display": "fullscreen",
     "theme_color": "#6777ef",
     "icons": [
         {
-            "src": "ncumt.png",
+            "src": "pwaLogo.png",
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
