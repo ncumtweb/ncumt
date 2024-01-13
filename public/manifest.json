@@ -1,0 +1,17 @@
+{
+    "name": "NCUMT",
+    "short_name": "NCUMT",
+    "start_url": "/index.php",
+    "background_color": "#6777ef",
+    "description": "NCUMT",
+    "display": "fullscreen",
+    "theme_color": "#6777ef",
+    "icons": [
+        {
+            "src": "ncumt.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
