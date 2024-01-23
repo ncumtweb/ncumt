@@ -24,7 +24,7 @@
                 <div class="col-6 col-lg-2">
                     <h3 class="footer-heading">其他連結</h3>
                     <ul class="footer-links list-unstyled">
-                        <li><a href="/"><i class="bi bi-chevron-right"></i> 首頁 </a></li>            
+                        <li><a href="/"><i class="bi bi-chevron-right"></i> 首頁 </a></li>
                         <li><a href="{{ route('course.index') }}"><i class="bi bi-chevron-right"></i> 社課影片 </a></li>
                         <li><a href="{{ url('/judgement') }}"><i class="bi bi-chevron-right"></i> 評分系統 </a></li>
                         <li><a href="{{ route('record.index') }}"><i class="bi bi-chevron-right"></i> 行程記錄 </a></li>
@@ -47,7 +47,7 @@
 
                     </ul>
                 </div> -->
-            
+
                 <div class="col-lg-4">
                     <h3 class="footer-heading">近期紀錄</h3>
                     <ul class="footer-links footer-blog-entry list-unstyled">
@@ -57,7 +57,7 @@
                                 <img src="{{ asset($record->image) }}" alt="" class="img-fluid me-3">
                                 <div>
                                 <div class="post-meta d-block">
-                                    <span class="date">{{ $category_array[$record->category] }}</span> 
+                                    <span class="date">{{ $category_array[$record->category] }}</span>
                                     <span class="mx-1">&bullet;</span>
                                      <span>{{ $record->start_date }}-{{ $record->end_date }}</span></div>
                                 <span>{{ $record->name }}</span>
@@ -114,3 +114,21 @@
 <script src="{{ asset('assets/js/snowstorm.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
 
+<script src="{{ asset('/sw.js') }}"></script>
+
+<script>
+    if ("serviceWorker" in navigator) {
+        // Register a service worker hosted at the root of the
+        // site using the default scope.
+        navigator.serviceWorker.register("/sw.js").then(
+            (registration) => {
+                console.log("Service worker registration succeeded:", registration);
+            },
+            (error) => {
+                console.error(`Service worker registration failed: ${error}`);
+            },
+        );
+    } else {
+        console.error("Service workers are not supported.");
+    }
+</script>
