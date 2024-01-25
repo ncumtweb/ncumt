@@ -9,7 +9,10 @@
     <meta content="" name="description">
     <meta content=" 中央大學登山社 " name="keywords">
 
-
+    <!-- PWA  -->
+    <meta name="theme-color" content="#6777ef"/>
+    <link rel="apple-touch-icon" href="{{ asset('assets/img/ncumt.png') }}">
+    <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- Favicons -->
     <link href="{{ asset('assets/img/ncumt.png') }}" rel="icon">
