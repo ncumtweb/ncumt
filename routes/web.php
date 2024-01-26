@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JudgementController;
 use App\Http\Controllers\RecordController;
@@ -30,6 +31,8 @@ Route::fallback(function () {
     return redirect()->route('index');
 });
 
+Route::get('/table', App\Http\Livewire\JudgementPage::class);
+
 Route::get('/aboutus', function () {
     return view('information.aboutus');
 });
@@ -54,7 +57,7 @@ Route::prefix('portal')->name('portal.')->group(function () {
         return view('basic.portal');
     })->name('index');
 
-    
+
     Route::get('/callback', [PortalLoginController::class, 'handleProviderCallback']);
     Route::get('/login', [PortalLoginController::class, 'redirectToProvider'])->name('login');
     Route::get('/logout', [PortalLoginController::class, 'logout'])->name('logout');
@@ -72,7 +75,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     //equipment
     Route::get('/equipment/{name}', [EquipmentController::class, 'index'])->name('equipment.index');
     Route::get("/selectEquipment", [EquipmentController::class, 'select'])->name('equipment.select');
-    
+
     //rental
     Route::get('/rentalList', [RentalController::class, 'index'])->name('rental.index');
     Route::get('/rentalList/returnRental/{rental_id}', [RentalController::class, 'returnRental'])->name('rental.return');
@@ -97,7 +100,7 @@ Route::middleware(['checkRole'])->group(function () {
     Route::resource('calendar', CalendarController::class);
     Route::get('calendar/delete/{id}', [CalendarController::class, 'destroy'])->name('calendar.delete');
 
-    // judgement 
+    // judgement
     Route::post('/judgement', [JudgementController::class, 'store'])->name('judgement.store');
     Route::get('/judgement/{id}', [JudgementController::class, 'edit'])->name('judgement.edit');
     Route::put('/judgement/{id}', [JudgementController::class, 'update'])->name('judgement.update');
@@ -110,17 +113,17 @@ Route::middleware(['checkRole'])->group(function () {
     Route::put('/course/edit/{id}', [CourseController::class, 'update'])->name('course.update');
     Route::get('/course/delete/{id}', [CourseController::class, 'destroy'])->name('course.destroy');
     Route::get('/course/record/{id}', [CourseController::class, 'showAllRecords'])->name('course.showAllRecords');
-    
-    
+
+
     //record
     Route::get('/record/delete/{id}', [RecordController::class, 'delete'])->name('record.delete');
-    
+
     //faq
     Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create');
     Route::post('/faq/create', [FaqController::class, 'store'])->name('faq.store');
     Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('faq.edit');
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
-    
-    
+
+
 });
