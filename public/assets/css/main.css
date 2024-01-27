@@ -238,7 +238,7 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Desktop Navigation 
+# Desktop Navigation
 --------------------------------------------------------------*/
 @media (min-width: 1280px) {
   .navbar {
@@ -526,7 +526,7 @@ section {
   .custom-border {
     border: none !important;
   }
-  
+
 }
 
 .author .photo {
@@ -849,7 +849,13 @@ section {
 .category-title {
   border-bottom: none;
 }
-
+.pagination {
+    --bs-pagination-active-bg: black;
+    --bs-pagination-active-border-color: black;
+    --bs-pagination-color: black;
+    --bs-pagination-hover-color: black;
+    --bs-pagination-color: black;
+}
 .custom-pagination a {
   display: inline-block;
   width: 40px;
