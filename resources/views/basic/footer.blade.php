@@ -54,7 +54,7 @@
                         @foreach($records as $record)
                             <li>
                             <a href="{{ route('record.show', $record->id )}}" class="d-flex align-items-center">
-                                <img src="{{ asset($record->image) }}" alt="" class="img-fluid me-3">
+                                <img src="{{ asset($record->image) }}" loading="lazy" alt="" class="img-fluid me-3">
                                 <div>
                                 <div class="post-meta d-block">
                                     <span class="date">{{ $category_array[$record->category] }}</span>
@@ -131,4 +131,9 @@
     } else {
         console.error("Service workers are not supported.");
     }
+</script>
+<script>
+    $(document).ready(function(){
+        $('img').lazyload();
+    });
 </script>
