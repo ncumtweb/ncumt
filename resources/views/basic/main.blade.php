@@ -6,8 +6,9 @@
     <meta name="google-site-verification" content="7ocfxPW4vR32yq9Wp3IXciw8NEsIF4kfFp4zd2CgfZk" />
 
     <title> 中央大學登山社 - @yield('title') </title>
-    <meta content="" name="description">
+    <meta name="description" content="國立中央大學登山社官方網站">
     <meta content=" 中央大學登山社 " name="keywords">
+
 
     <!-- PWA  -->
     <meta name="theme-color" content="#6777ef"/>
@@ -15,7 +16,7 @@
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- Favicons -->
-    <link href="{{ asset('assets/img/ncumt.png') }}" rel="icon">
+    <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
     <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
 
     <!-- fullcalendar -->
@@ -25,6 +26,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js"></script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"></script>
 
     <!-- toastr -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet"  />
