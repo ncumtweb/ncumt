@@ -15,15 +15,15 @@ class PortalBaseProvider extends AbstractProvider implements ProviderInterface
     protected $scopeSeparator = ' ';
 
     protected $scopes = [
-        'identifier',
-        'chinese-name', 'english-name',
-        'gender', 'birthday',
-        'personal-id',
-        'student-id',
-        'faculty-records' ,
-        'academy-records',
-        'email',
-        'mobile-phone',
+	    'identifier',
+	    'chinese-name', 'english-name',
+	    'gender', 'birthday',
+	    'personal-id',
+	    'student-id',
+	    'faculty-records' ,
+	    'academy-records',
+	    'email',
+	    'mobile-phone',
     ];
 
     /**
