@@ -29,11 +29,11 @@
                 @csrf
                 @method('PUT')
                 <div class="form-group">
-                  <label for="name" class="form-label">路線名稱</label>                    
+                  <label for="name" class="form-label">路線名稱</label>
                   <input type="text" name="name" class="form-control" id="name" value="{{ $record->name }}" required>
                 </div>
                 <div class="form-group">
-                  <label for="description" class="form-label">路線簡介 </label>                    
+                  <label for="description" class="form-label">路線簡介 </label>
                   <textarea name="description" class="form-control" id="description" required>{{ $record->description }}</textarea>
                 </div>
                 <div class="form-group">
@@ -45,23 +45,34 @@
                   </select>
                 </div>
                 <div class="row">
-                  <div class="form-group col-md-6">
-                    <label for="start_date">出發日期</label>
-                    <input type="date" class="form-control" id="start_date" name="start_date" value="{{ $record->start_date }}" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="end_date">結束日期</label>
-                    <input type="date" class="form-control" id="end_date" name="end_date" value="{{ $record->end_date }}" required>
-                  </div>
+                    <div class="form-group col-md-12">
+                        @error('end_date')
+                            <div class="alert alert-danger" >{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="start_date">出發日期</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date" value="{{ $record->start_date }}" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="end_date">結束日期</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date" value="{{ $record->end_date }}" required>
+                    </div>
                 </div>
                 <div class="form-group col-md-12">
                     <label for="image">封面照</label>
+                    @error('image')
+                        <div class="alert alert-danger" >{{ $message }}</div>
+                    @enderror
                     <input type="file" name="image" class="form-control" id="image" accept="image/gif, image/jpeg, image/png" >
                     <img class="img-fluid" id="preview_image" src="{{ asset($record->image) }}" alt="預覽封面"/>
                 </div>
-                <div class="form-group">  
+                <div class="form-group">
                     <label for="CKeditor" class="form-label">內容</label>
-                    <textarea class="form-control" id="CKeditor" name="CKeditor">{{ $record->content }}</textarea>  
+                    @error('CKeditor')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
+                    <textarea class="form-control" id="CKeditor" name="CKeditor">{{ $record->content }}</textarea>
                 </div>
                 <div class="row">
                   <div class="text-center">
@@ -71,10 +82,10 @@
                 </div>
               </form>
             </div>
-          </div> 
+          </div>
         </div>
 
-        
+
       </div>
     </section>
 </main><!-- End #main -->

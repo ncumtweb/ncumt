@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Record;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
 
 class RecordController extends Controller
 {
@@ -32,24 +34,32 @@ class RecordController extends Controller
         if(Auth::check() && Auth::user()->role > 0){
             return view('record.create');
         }
-    
+
         return redirect()->route('portal.index')->with('status','您並無權限進行此操作，請先登入。');
     }
+
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
+     * @throws ValidationException
      */
     public function store(Request $request)
     {
-
         $validator = Validator::make($request->all(), [
-            'end_date' => 'after:start_date',
+            'end_date' => 'after_or_equal:start_date',
+            'image' => 'required',
+            'CKeditor' => 'required',
+
+        ], [
+            'end_date.after_or_equal' => '結束日期需在開始日期之後。',
+            'image.required' => '請上傳封面照。',
+            'CKeditor.required' => '請填寫紀錄內容。',
         ]);
-        
+
         if ($validator->fails()) {
-            return redirect()->back()->with('status','結束日期需在開始日期之後，請再次確認。')->withInput($request->all());
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
         $file = $request->image;
@@ -67,7 +77,7 @@ class RecordController extends Controller
         $record->save();
 
         return redirect()->route('record.index');
-        
+
     }
 
     /**
@@ -110,11 +120,12 @@ class RecordController extends Controller
     public function update(Request $request, $id)
     {
         $record = Record::findOrFail($id);
-        
+
         $validator = Validator::make($request->all(), [
-            'end_date' => 'after:start_date',
+            'end_date' => 'after_or_equal:start_date',
+            'CKeditor' => 'required',
         ]);
-        
+
         if ($validator->fails()) {
             return redirect()->back()->with('status','結束日期需在開始日期之後，請再次確認。');
         }
@@ -158,11 +169,12 @@ class RecordController extends Controller
     }
 
     public function storeImage($file, $folder_name, $name) {
-        
+
         $upload_path = public_path() . '/' . $folder_name;
         $extension  =  $file->extension();
         $filename = $name  . time() . '.' . $extension;
         $file->move($upload_path, $filename);
+        ImageOptimizer::optimize($folder_name . '/' . $filename);
 
         return $folder_name . '/' . $filename;
     }
@@ -176,11 +188,11 @@ class RecordController extends Controller
             $fileName = pathinfo($originName, PATHINFO_FILENAME);
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $fileName . '_' . time() . '.' . $extension;
-      
+
             $request->file('upload')->move($upload_path, $fileName);
-      
+
             $url = asset($folder_name . '/' . $fileName);
-  
+
             return response()->json(['fileName' => $fileName, 'uploaded'=> 1, 'url' => $url]);
         }
 
