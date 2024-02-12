@@ -33,12 +33,12 @@
                         </h1>
                         <a href="{{ asset($course->videoURL) }}" class="glightbox link-video">
                             <span class="bi-play-fill"></span>
-                            <img src="{{ asset($course->image) }}" alt="" class="img-fluid">
+                            <img src="{{ asset($course->image) }}" loading="lazy" alt="" class="img-fluid">
                         </a>
-   
+
                         </div>
                     </div>
-                </div><!-- End Video -->        
+                </div><!-- End Video -->
                 @endforeach
             </div>
         </section>

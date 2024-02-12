@@ -37,7 +37,8 @@
                         <div class="col-lg-7">
                             <div class="row justify-content-center thumbnail">
                                 <div class="col-9">
-                                    <img src="{{ asset($course->image) }}" alt="" class="img-fluid">                        
+                                    <img src="{{ asset($course->image) }}" loading="lazy" alt="" class="img-fluid">
+
                                 </div>
                             </div>
                         </div>
@@ -60,20 +61,20 @@
                             @endif
                             @if( !$course->users->contains(Auth::user()) )
                                 <div class="row justify-content-center py-4">
-                                    <div class="col-lg-4">                                
+                                    <div class="col-lg-4">
                                         <form action="{{ route('course.register', $course->id) }}" method="POST">
-                                            @csrf                            
+                                            @csrf
                                             <button class="black" type="submit">一鍵報名</button>
                                         </form>
                                     </div>
                                 </div>
                             @else
                                 <div class="row justify-content-center py-4">
-                                    <div class="col-lg-4">                                
-                                        <button class="black" type="submit">已報名完成</button>    
+                                    <div class="col-lg-4">
+                                        <button class="black" type="submit">已報名完成</button>
                                     </div>
-                                </div>         
-                            @endif                            
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
