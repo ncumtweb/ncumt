@@ -13,7 +13,6 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\RentalController;
-use App\Http\Controllers\MailController;
 
 
 /*
@@ -45,12 +44,9 @@ Route::get('/', [BasicController::class, 'index'])->name('index');
 
 Route::get('/course', [CourseController::class, 'index'])->name('course.index');
 Route::get('/course/register', [CourseController::class, 'showRegister'])->name('course.showRegister');
-
 Route::get('/judgement', [JudgementController::class, 'index'])->name('judgement.index');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
-
-Route::resource('record', RecordController::class);
-Route::post('/record/upload', [RecordController::class, 'uploadImage'])->name('record.uploadImage');
+Route::get('/record', [RecordController::class, 'index'])->name('record.index');
 
 Route::prefix('portal')->name('portal.')->group(function () {
     Route::get('/', function () {
@@ -116,7 +112,12 @@ Route::middleware(['checkRole'])->group(function () {
 
 
     //record
+    Route::post('/record/create', [RecordController::class, 'store'])->name('record.store');
+    Route::get('/record/edit/{id}', [RecordController::class, 'edit'])->name('record.edit');
+    Route::put('/record/edit/{id}', [RecordController::class, 'update'])->name('record.update');
+    Route::post('/record/upload', [RecordController::class, 'uploadImage'])->name('record.uploadImage');
     Route::get('/record/delete/{id}', [RecordController::class, 'delete'])->name('record.delete');
+
 
     //faq
     Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create');

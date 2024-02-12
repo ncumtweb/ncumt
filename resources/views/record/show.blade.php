@@ -13,7 +13,6 @@
               @auth
                   @if(Auth::user()->role > 0)
                     <a class="bi bi-pencil-square" href="{{ route('record.edit', $record->id) }}"></a>
-                    <!-- <a class="bi bi-trash" href="{{ route('record.delete', $record->id) }}"></a> -->
                   @endif
               @endauth
             </h1>

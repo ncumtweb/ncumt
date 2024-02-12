@@ -28,11 +28,11 @@
               <form action="{{ route('record.store') }}" method="POST" id="createRecordForm" class="createRecordForm" enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
-                  <label for="name" class="form-label">路線名稱</label>                    
+                  <label for="name" class="form-label">路線名稱</label>
                   <input type="text" name="name" class="form-control" id="name" placeholder="請輸入路線名稱"  value="{{ old('name') }}" required>
                 </div>
                 <div class="form-group">
-                  <label for="description" class="form-label">路線簡介 </label>                    
+                  <label for="description" class="form-label">路線簡介 </label>
                   <textarea name="description" class="form-control" id="description" placeholder="請輸入路線簡介" required>{{ old('description') }}</textarea>
                 </div>
                 <div class="form-group">
@@ -51,6 +51,11 @@
                   </select>
                 </div>
                 <div class="row">
+                    <div class="form-group col-md-12">
+                        @error('end_date')
+                            <div class="alert alert-danger" >{{ $message }}</div>
+                        @enderror
+                    </div>
                   <div class="form-group col-md-6">
                     <label for="start_date">出發日期</label>
                     <input type="date" class="form-control" id="start_date" name="start_date" value="{{ old('start_date') }}" required>
@@ -62,12 +67,22 @@
                 </div>
                 <div class="form-group col-md-12">
                     <label for="image">封面照</label>
-                    <input type="file" name="image" class="form-control" id="image" accept="image/gif, image/jpeg, image/png" required >
+                    <div class="form-group col-md-12">
+                        @error('image')
+                            <div class="alert alert-danger" >{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <input type="file" name="image" class="form-control" id="image" accept="image/gif, image/jpeg, image/png" >
                     <img class="img-fluid" id="preview_image" src="#" alt="預覽封面"/>
                 </div>
-                <div class="form-group">  
+                <div class="form-group">
                     <label for="CKeditor" class="form-label">內容</label>
-                    <textarea class="form-control" id="CKeditor" name="CKeditor">{!! old('CKeditor') !!}</textarea>  
+                    <div class="col-md-12">
+                        @error('CKeditor')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <textarea class="form-control" id="CKeditor" name="CKeditor">{!! old('CKeditor') !!}</textarea>
                 </div>
                 <div class="row">
                   <div class="text-center">
@@ -76,10 +91,10 @@
                 </div>
               </form>
             </div>
-          </div> 
+          </div>
         </div>
 
-        
+
       </div>
     </section>
 </main><!-- End #main -->
