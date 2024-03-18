@@ -129,4 +129,4 @@ Route::middleware(['checkRole'])->group(function () {
     
 });
 
-Route::view('/test', 'test.blade.php');
+Route::view('/test', 'test');
