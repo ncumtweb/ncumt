@@ -26,6 +26,8 @@ use App\Http\Controllers\RentalController;
 |
 */
 
+Route::view('/ttt', 'test');  //http://127.0.0.1/ttt
+
 Route::fallback(function () {
     return redirect()->route('index');
 });
