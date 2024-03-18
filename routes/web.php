@@ -126,5 +126,7 @@ Route::middleware(['checkRole'])->group(function () {
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
-
+    
 });
+
+Route::view('/test', 'test.blade.php');
