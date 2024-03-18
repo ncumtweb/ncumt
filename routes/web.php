@@ -56,6 +56,7 @@ Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::resource('record', RecordController::class);
 Route::post('/record/upload', [RecordController::class, 'uploadImage'])->name('record.uploadImage');
 
+Route::view('/test', 'test');
 
 
 Route::prefix('portal')->name('portal.')->group(function () {
