@@ -49,14 +49,10 @@ Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/record', [RecordController::class, 'index'])->name('record.index');
 Route::get('/record/show/{id}', [RecordController::class, 'show'])->name('record.show');
 
-
-
-
 Route::prefix('portal')->name('portal.')->group(function () {
     Route::get('/', function () {
         return view('basic.portal');
     })->name('index');
-
 
     Route::get('/callback', [PortalLoginController::class, 'handleProviderCallback']);
     Route::get('/login', [PortalLoginController::class, 'redirectToProvider'])->name('login');

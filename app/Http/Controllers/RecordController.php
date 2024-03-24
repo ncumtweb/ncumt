@@ -208,16 +208,16 @@ class RecordController extends Controller
 
         $image = $request->file('upload');
 
-
         $response = Http::withHeaders([
-            'Authorization' => 'Client-ID ' . '4fcd3b4531ce032',
+            'Authorization' => env('IMGUR_CLIENT_ID'),
         ])->attach(
             'image', file_get_contents($image), $image->getClientOriginalName()
         )->post('https://api.imgur.com/3/image');
 
         if ($response->successful()) {
             $responseJson = $response->json();
-            $fileName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);;
+            $fileName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+            Log::info('Imgur DeleteHash: ' . $responseJson['data']['deletehash']);
             return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $responseJson['data']['link']]);
 
         } else {
