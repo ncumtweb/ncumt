@@ -112,7 +112,7 @@
     <script>
         ClassicEditor.create(document.querySelector("#CKeditor"), {
             ckfinder: {
-                uploadUrl: "{{ route('record.uploadImage', ['_token' => csrf_token()]) }}",
+                uploadUrl: "{{ route('record.callImgurApi', ['_token' => csrf_token()]) }}",
             },
             link: {
                 addTargetToExternalLinks: true

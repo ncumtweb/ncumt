@@ -47,12 +47,12 @@ Route::get('/course/register', [CourseController::class, 'showRegister'])->name(
 Route::get('/judgement', [JudgementController::class, 'index'])->name('judgement.index');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/record', [RecordController::class, 'index'])->name('record.index');
+Route::get('/record/show/{id}', [RecordController::class, 'show'])->name('record.show');
 
 Route::prefix('portal')->name('portal.')->group(function () {
     Route::get('/', function () {
         return view('basic.portal');
     })->name('index');
-
 
     Route::get('/callback', [PortalLoginController::class, 'handleProviderCallback']);
     Route::get('/login', [PortalLoginController::class, 'redirectToProvider'])->name('login');
@@ -112,10 +112,12 @@ Route::middleware(['checkRole'])->group(function () {
 
 
     //record
-    Route::post('/record/create', [RecordController::class, 'store'])->name('record.store');
+    Route::get('/record/create', [RecordController::class, 'create'])->name('record.create');
+    Route::post('/record/store', [RecordController::class, 'store'])->name('record.store');
     Route::get('/record/edit/{id}', [RecordController::class, 'edit'])->name('record.edit');
     Route::put('/record/edit/{id}', [RecordController::class, 'update'])->name('record.update');
     Route::post('/record/upload', [RecordController::class, 'uploadImage'])->name('record.uploadImage');
+    Route::post('/record/imgur', [RecordController::class, 'callImgurApi'])->name('record.callImgurApi');
     Route::get('/record/delete/{id}', [RecordController::class, 'delete'])->name('record.delete');
 
 
