@@ -40,6 +40,8 @@ Route::get('/aboutus', function () {
 //     return view('map');
 // });
 
+Route::view('/test', 'test');
+
 Route::get('/', [BasicController::class, 'index'])->name('index');
 
 Route::get('/course', [CourseController::class, 'index'])->name('course.index');
@@ -125,6 +127,5 @@ Route::middleware(['checkRole'])->group(function () {
     Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('faq.edit');
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
-
 
 });
