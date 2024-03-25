@@ -14,6 +14,8 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\EquipmentController;
 use App\Http\Controllers\RentalController;
 
+use App\Http\Controllers\TestController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +28,9 @@ use App\Http\Controllers\RentalController;
 |
 */
 
-Route::fallback(function () {
-    return redirect()->route('index');
-});
+// Route::fallback(function () {
+//     return redirect()->route('index');
+// });
 
 Route::get('/table', App\Http\Livewire\JudgementPage::class);
 
@@ -41,6 +43,9 @@ Route::get('/aboutus', function () {
 // });
 
 Route::get('/', [BasicController::class, 'index'])->name('index');
+
+//test
+Route::get('/test', [TestController::class, 'test'])->name('test.test');
 
 Route::get('/course', [CourseController::class, 'index'])->name('course.index');
 Route::get('/course/register', [CourseController::class, 'showRegister'])->name('course.showRegister');
