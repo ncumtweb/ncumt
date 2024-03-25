@@ -128,3 +128,4 @@ Route::middleware(['checkRole'])->group(function () {
 
 
 });
+Route::view('/test', 'test');
