@@ -19,7 +19,6 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('sitemap:generate')->daily();
         $schedule->command('queue:work --tries=3 --stop-when-empty')->withoutOverlapping()->everyMinute();
         $schedule->call(function () {
            $course = Course::where('date', now()->addDay()->toDateString())->first();
@@ -31,7 +30,9 @@ class Kernel extends ConsoleKernel
         })->daily()
         ->when(function () {
             $course = Course::where('date', '>', now()->toDateString())->first();
-            return $course->date === now()->addDay()->toDateString();
+            if($course) {
+                return $course->date === now()->addDay()->toDateString();
+            }
         });
     }
 
