@@ -17,7 +17,9 @@ class RecordComments extends Component
 
     public function mount($recordId)
     {
-        $this->recordComments = RecordComment::where('record_id', $recordId)->get();
+        $this->recordComments = RecordComment::where('record_id', $recordId)
+            ->orderBy('created_at', 'asc')
+            ->get();
     }
 
     public function postComment()
@@ -41,6 +43,6 @@ class RecordComments extends Component
 
     public function render()
     {
-        return view('livewire.record-comments');
+        return view('livewire/recordComment/record-comments');
     }
 }
