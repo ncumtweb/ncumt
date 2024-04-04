@@ -22,7 +22,12 @@ class RecordComments extends Component
             ->get();
     }
 
-    public function postComment()
+    public function render()
+    {
+        return view('livewire/recordComment/record-comments');
+    }
+
+    public function createComment()
     {
         $this->validate([
             'content' => 'required|max:200',
@@ -46,8 +51,17 @@ class RecordComments extends Component
         $this->successMessage = '成功發送評論！';
     }
 
-    public function render()
+    public function editComment($recordCommentId)
     {
-        return view('livewire/recordComment/record-comments');
+
+    }
+
+    public function deleteComment($recordCommentId)
+    {
+        $comment = RecordComment::findOrFail($recordCommentId);
+        $comment->delete();
+
+        $this->recordComments = $this->recordComments->except($recordCommentId);
+        $this->successMessage = '成功刪除評論！';
     }
 }

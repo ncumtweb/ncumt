@@ -5,7 +5,7 @@
             <h2 class="comment-title py-4">評論（{{ $recordComments->count() }}）</h2>
             <div class="border border-primary rounded p-4 mb-4">
                 @foreach($recordComments as $recordComment)
-                    <div class="comment d-flex mb-4">
+                    <div class="comment d-flex mb-4" wire:key="{{ $recordComment->id }}">
                         <div class="flex-shrink-0">
                             <div class="avatar avatar-sm rounded-circle">
                                 <img class="avatar-img" src={{ asset("assets/img/favicon.png") }} alt=""
@@ -16,17 +16,20 @@
                             <div class="bg-light">
                                 <div class="comment-meta d-flex ">
                                     <h6 class="mb-0 me-2">{{ $recordComment->user->name_zh }}</h6>
-                                    <span class="text-muted">{{ $recordComment->created_at }}</span>
+                                    <span class="text-muted me-2">{{ $recordComment->created_at }}</span>
+                                    <button wire:click="editComment({{ $recordComment->id }})"
+                                            class="bi bi-pencil-square me-1"></button>
+                                    <button onclick="confirmDelete('是否確定要刪除這則評論（回覆也會一起刪除）？')"
+                                            wire:click="deleteComment({{ $recordComment->id }})"
+                                            class="bi bi-trash"></button>
                                 </div>
                                 <div class="comment-body">
                                     {{ $recordComment->content }}
                                 </div>
                             </div>
-                            @if($recordComment->replies->count() > 0)
-                                <livewire:record-comment-replies :recordCommentId="$recordComment->id"
-                                                                 :replyCount="$recordComment->replies->count()"
-                                                                 wire:key="$recordComment->id"/>
-                            @endif
+                            <livewire:record-comment-replies :recordCommentId="$recordComment->id"
+                                                             :replyCount="$recordComment->replies->count()"
+                                                             wire:key="$recordComment->id"/>
                         </div>
                     </div>
                 @endforeach
@@ -57,7 +60,7 @@
                                     </textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button wire:click="postComment" class="comment-button btn btn-primary">
+                                    <button wire:click="createComment" class="comment-button btn btn-primary">
                                         發表評論
                                     </button>
                                 </div>

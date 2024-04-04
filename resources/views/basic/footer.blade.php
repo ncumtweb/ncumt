@@ -107,13 +107,12 @@
 <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
 <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-
+<script src={{ asset("/assets/vendor/validate/confirmDelete.js") }}></script>
 
 <!-- Template Main JS File -->
 <script src="{{ asset('assets/js/main.js') }}"></script>
 <script src="{{ asset('assets/js/snowstorm.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-
 <script src="{{ asset('/sw.js') }}"></script>
 
 <script>

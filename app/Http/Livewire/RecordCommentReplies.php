@@ -55,13 +55,32 @@ class RecordCommentReplies extends Component
             'record_comment_id' => $this->recordCommentId,
             'record_id' => $recordComment->record_id,
         ]);
-
-        $this->recordCommentReplies->prepend($newReply);
-        $this->recordCommentReplies = $this->recordCommentReplies->sortBy('created_at');
-
+        if (!empty($this->recordCommentReplies)) {
+            $this->recordCommentReplies->prepend($newReply);
+            $this->recordCommentReplies = $this->recordCommentReplies->sortBy('created_at');
+        } else {
+            $this->toggleReplies($this->recordCommentId);
+        }
         // Clear input fields
         $this->reset(['content']);
 
+        $this->replyCount = $this->replyCount + 1;
+
         $this->successMessage = '成功發送回覆！';
+    }
+
+    public function editCommentReply($recordCommentReplyId)
+    {
+
+    }
+
+    public function deleteCommentReply($recordCommentReplyId)
+    {
+        $recordCommentReply = RecordCommentReply::findOrFail($recordCommentReplyId);
+        $recordCommentReply->delete();
+
+        $this->recordCommentReplies = $this->recordCommentReplies->except($recordCommentReplyId);
+        $this->replyCount = $this->replyCount - 1;
+        $this->successMessage = '成功刪除回覆！';
     }
 }
