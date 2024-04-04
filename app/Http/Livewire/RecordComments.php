@@ -9,11 +9,16 @@ use Livewire\Component;
 class RecordComments extends Component
 {
     public $content;
+
+    public $editContent;
+
     public $recordId;
 
     public $successMessage;
 
     public $recordComments;
+
+    public $selectedRecordCommentId;
 
     public function mount($recordId)
     {
@@ -27,7 +32,7 @@ class RecordComments extends Component
         return view('livewire/recordComment/record-comments');
     }
 
-    public function createComment()
+    public function createRecordComment()
     {
         $this->validate([
             'content' => 'required|max:200',
@@ -51,12 +56,32 @@ class RecordComments extends Component
         $this->successMessage = '成功發送評論！';
     }
 
-    public function editComment($recordCommentId)
+    public function editRecordComment($recordCommentId)
     {
-
+        $this->selectedRecordCommentId = $recordCommentId;
+        $recordComment = RecordComment::findOrFail($recordCommentId);
+        $this->editContent = $recordComment->content;
     }
 
-    public function deleteComment($recordCommentId)
+    public function saveEditRecordComment($recordCommentId)
+    {
+        $this->validate([
+            'editContent' => 'required|max:200',
+        ], [
+            'editContent.required' => '評論內容不能為空。',
+            'editContent.max' => '評論內容不能超過 200 字。',
+        ]);
+
+        $recordComment = RecordComment::findOrFail($recordCommentId);
+        $recordComment->content = $this->editContent;
+        $recordComment->update();
+        $this->selectedRecordCommentId = null;
+        $this->recordComments = RecordComment::where('record_id', $recordComment->record_id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+    }
+
+    public function deleteRecordComment($recordCommentId)
     {
         $comment = RecordComment::findOrFail($recordCommentId);
         $comment->delete();

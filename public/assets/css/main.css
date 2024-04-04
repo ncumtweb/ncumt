@@ -1106,8 +1106,8 @@ section {
     text-transform: uppercase;
     color: var(--color-black) !important;
     letter-spacing: 0.1rem;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 15px;
+    font-weight: 400;
     margin-bottom: 30px;
 }
 
@@ -1126,12 +1126,30 @@ section {
     font-size: 14px;
 }
 
-.comment-button,
+.comment-button {
+    background: var(--color-primary);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: #fff;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
 .comment .comment-replies-button {
-    letter-spacing: 0.1rem;
-    font-size: 18px;
-    padding: 0.5rem;
-    background-color: #212121;
+    background: var(--color-primary);
+    border: none;
+    border-radius: 5px;
+    padding: 10px 5px;
+    color: #fff;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+
+.comment-button:hover,
+.comment .comment-replies-button:hover {
+    background: rgba(var(--color-primary-rgb), 0.8);
 }
 
 /*--------------------------------------------------------------

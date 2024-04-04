@@ -13,12 +13,15 @@ class RecordCommentReplies extends Component
     public $recordCommentReplies = [];
     public $isToggleReplies = false;
 
-    public $recordId;
-
     public $content;
+
+    public $editContent;
+
     public $successMessage;
 
     public $replyCount;
+
+    public $selectedRecordCommentReplyId;
 
     public function render()
     {
@@ -27,6 +30,7 @@ class RecordCommentReplies extends Component
 
     public function toggleReplies($recordCommentId)
     {
+        $this->successMessage = null;
         $this->isToggleReplies = !$this->isToggleReplies;
         if ($this->isToggleReplies) {
             $this->recordCommentReplies = RecordCommentReply::where('record_comment_id', $recordCommentId)
@@ -37,7 +41,7 @@ class RecordCommentReplies extends Component
         }
     }
 
-    public function postReply()
+    public function createRecordCommentReply()
     {
         $this->validate([
             'content' => 'required|max:200',
@@ -65,16 +69,36 @@ class RecordCommentReplies extends Component
         $this->reset(['content']);
 
         $this->replyCount = $this->replyCount + 1;
-
         $this->successMessage = '成功發送回覆！';
     }
 
-    public function editCommentReply($recordCommentReplyId)
+    public function editRecordCommentReply($recordCommentReplyId)
     {
-
+        $this->selectedRecordCommentReplyId = $recordCommentReplyId;
+        $recordCommentReply = RecordCommentReply::findOrFail($recordCommentReplyId);
+        $this->editContent = $recordCommentReply->content;
     }
 
-    public function deleteCommentReply($recordCommentReplyId)
+    public function saveEditRecordCommentReply($recordCommentReplyId)
+    {
+        $this->validate([
+            'editContent' => 'required|max:200',
+        ], [
+            'editContent.required' => '回覆內容不能為空。',
+            'editContent.max' => '回覆內容不能超過 200 字。',
+        ]);
+
+        $recordCommentReply = RecordCommentReply::findOrFail($recordCommentReplyId);
+        $recordCommentReply->content = $this->editContent;
+        $recordCommentReply->update();
+        $this->selectedRecordCommentReplyId = null;
+        $this->recordCommentReplies = RecordCommentReply::where('record_comment_id',
+            $recordCommentReply->record_comment_id)
+            ->orderBy('created_at', 'asc')
+            ->get();
+    }
+
+    public function deleteRecordCommentReply($recordCommentReplyId)
     {
         $recordCommentReply = RecordCommentReply::findOrFail($recordCommentReplyId);
         $recordCommentReply->delete();

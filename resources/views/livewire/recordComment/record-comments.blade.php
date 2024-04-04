@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-md-12 post-content">
+    <div class="col-lg-12 post-content">
         <!-- ======= Comments ======= -->
         <div class="comments">
             <h2 class="comment-title py-4">評論（{{ $recordComments->count() }}）</h2>
@@ -14,18 +14,33 @@
                         </div>
                         <div class="flex-grow-1 ms-2 ms-sm-3">
                             <div class="bg-light">
-                                <div class="comment-meta d-flex ">
-                                    <h6 class="mb-0 me-2">{{ $recordComment->user->name_zh }}</h6>
-                                    <span class="text-muted me-2">{{ $recordComment->created_at }}</span>
-                                    <button wire:click="editComment({{ $recordComment->id }})"
-                                            class="bi bi-pencil-square me-1"></button>
-                                    <button onclick="confirmDelete('是否確定要刪除這則評論（回覆也會一起刪除）？')"
-                                            wire:click="deleteComment({{ $recordComment->id }})"
-                                            class="bi bi-trash"></button>
+                                <div class="comment-meta d-flex mb-2">
+                                    <h6 class="mb-0 me-2 comment-title">{{ $recordComment->user->name_zh }}</h6>
+                                    <span class="text-muted me-2">{{ $recordComment->created_at->format('Y-m-d H:i') }}</span>
+                                    @if(Auth::id() == $recordComment->user_id)
+                                        <button wire:click="editRecordComment({{ $recordComment->id }})"
+                                                class="bi bi-pencil-square me-1"></button>
+                                        <button onclick="confirmDelete('是否確定要刪除這則評論（回覆也會一起刪除）？')"
+                                                wire:click="deleteRecordComment({{ $recordComment->id }})"
+                                                class="bi bi-trash"></button>
+                                    @endif
                                 </div>
-                                <div class="comment-body">
-                                    {{ $recordComment->content }}
-                                </div>
+                                @if($selectedRecordCommentId == $recordComment->id)
+                                    @if ($errors->has('editContent'))
+                                        <div class="comment-desc alert alert-danger mt-2">
+                                            {{ $errors->first('editContent') }}
+                                        </div>
+                                    @endif
+                                    <textarea wire:model.defer="editContent" class="form-control"
+                                              rows="3"></textarea>
+                                    <button wire:click="saveEditRecordComment({{ $recordComment->id }})"
+                                            class="comment-button mt-2">保存
+                                    </button>
+                                @else
+                                    <div class="comment-body">
+                                        {{ $recordComment->content }}
+                                    </div>
+                                @endif
                             </div>
                             <livewire:record-comment-replies :recordCommentId="$recordComment->id"
                                                              :replyCount="$recordComment->replies->count()"
@@ -60,7 +75,7 @@
                                     </textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button wire:click="createComment" class="comment-button btn btn-primary">
+                                    <button wire:click="createRecordComment" class="comment-button">
                                         發表評論
                                     </button>
                                 </div>
