@@ -67,13 +67,13 @@ class RecordCommentReplies extends Component
         }
         // Clear input fields
         $this->reset(['content']);
-
         $this->replyCount = $this->replyCount + 1;
         $this->successMessage = '成功發送回覆！';
     }
 
     public function editRecordCommentReply($recordCommentReplyId)
     {
+        $this->successMessage = null;
         $this->selectedRecordCommentReplyId = $recordCommentReplyId;
         $recordCommentReply = RecordCommentReply::findOrFail($recordCommentReplyId);
         $this->editContent = $recordCommentReply->content;
@@ -96,6 +96,7 @@ class RecordCommentReplies extends Component
             $recordCommentReply->record_comment_id)
             ->orderBy('created_at', 'asc')
             ->get();
+        $this->replyCount = RecordComment::findOrFail($this->recordCommentId)->replies->count();
     }
 
     public function deleteRecordCommentReply($recordCommentReplyId)
@@ -104,7 +105,7 @@ class RecordCommentReplies extends Component
         $recordCommentReply->delete();
 
         $this->recordCommentReplies = $this->recordCommentReplies->except($recordCommentReplyId);
-        $this->replyCount = $this->replyCount - 1;
+        $this->replyCount = RecordComment::findOrFail($this->recordCommentId)->replies->count();
         $this->successMessage = '成功刪除回覆！';
     }
 }

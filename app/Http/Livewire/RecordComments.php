@@ -22,6 +22,7 @@ class RecordComments extends Component
 
     public function mount($recordId)
     {
+        $this->newRecordCommentId = null;
         $this->recordComments = RecordComment::where('record_id', $recordId)
             ->orderBy('created_at', 'asc')
             ->get();
@@ -42,15 +43,14 @@ class RecordComments extends Component
         ]);
 
         // 新增一筆評論並存入 record_comment
-        $newComment = RecordComment::create([
+        $newRecordComment = RecordComment::create([
             'content' => $this->content,
             'user_id' => Auth::id(),
             'record_id' => $this->recordId,
         ]);
 
-        $this->recordComments->prepend($newComment);
+        $this->recordComments->prepend($newRecordComment);
         $this->recordComments = $this->recordComments->sortBy('created_at');
-
 
         $this->reset(['content']);
         $this->successMessage = '成功發送評論！';
@@ -58,6 +58,7 @@ class RecordComments extends Component
 
     public function editRecordComment($recordCommentId)
     {
+        $this->successMessage = null;
         $this->selectedRecordCommentId = $recordCommentId;
         $recordComment = RecordComment::findOrFail($recordCommentId);
         $this->editContent = $recordComment->content;

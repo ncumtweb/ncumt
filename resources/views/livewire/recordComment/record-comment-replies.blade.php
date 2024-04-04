@@ -25,7 +25,7 @@
                         </textarea>
                         </div>
                         <div class="col-3">
-                            <button wire:click="postReply" class="comment-replies-button btn btn-primary px-1">
+                            <button wire:click="createRecordCommentReply" class="comment-replies-button">
                                 回覆
                             </button>
                         </div>
@@ -40,7 +40,7 @@
         </div>
         <div class="row">
             @foreach($recordCommentReplies as $recordCommentReply)
-                <div class="reply d-flex mb-2 bg-light" wire:key="{{ $recordCommentReply->id }}">
+                <div class="reply d-flex mb-2 bg-light" wire:key="recordCommentReply-{{ $recordCommentReply->id }}">
                     <div class="flex-grow-1 ms-2 ms-sm-3">
                         <div class="reply-meta d-flex align-items-baseline mb-2">
                             <h6 class="mb-0 me-2 comment-replies-title">{{ $recordCommentReply->user->name_zh }}</h6>
@@ -60,7 +60,7 @@
                                 </div>
                             @endif
                             <div class="row">
-                                <div class="col-9 mb-3">
+                                <div class="col-9">
                                     <textarea wire:model.defer="editContent" class="form-control"
                                               rows="1"></textarea>
                                 </div>
@@ -96,7 +96,7 @@
                                     @if($successMessage)
                                         <div class="comment-desc alert alert-success mt-1">{{ $successMessage }}</div>
                                     @endif
-                                    <div class="col-9 mb-3">
+                                    <div class="col-9">
                                         <textarea class="comment-desc form-control" id="content" placeholder="留下你的回覆"
                                                   wire:model.defer="content"
                                                   cols="10" rows="1">

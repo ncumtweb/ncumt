@@ -5,7 +5,7 @@
             <h2 class="comment-title py-4">評論（{{ $recordComments->count() }}）</h2>
             <div class="border border-primary rounded p-4 mb-4">
                 @foreach($recordComments as $recordComment)
-                    <div class="comment d-flex mb-4" wire:key="{{ $recordComment->id }}">
+                    <div class="comment d-flex mb-4" wire:key="recordComment-{{ $recordComment->id }}">
                         <div class="flex-shrink-0">
                             <div class="avatar avatar-sm rounded-circle">
                                 <img class="avatar-img" src={{ asset("assets/img/favicon.png") }} alt=""
@@ -14,9 +14,10 @@
                         </div>
                         <div class="flex-grow-1 ms-2 ms-sm-3">
                             <div class="bg-light">
-                                <div class="comment-meta d-flex mb-2">
+                                <div class="comment-meta d-flex mb-2 align-items-baseline">
                                     <h6 class="mb-0 me-2 comment-title">{{ $recordComment->user->name_zh }}</h6>
-                                    <span class="text-muted me-2">{{ $recordComment->created_at->format('Y-m-d H:i') }}</span>
+                                    <span
+                                        class="text-muted me-2">{{ $recordComment->created_at->format('Y-m-d H:i') }}</span>
                                     @if(Auth::id() == $recordComment->user_id)
                                         <button wire:click="editRecordComment({{ $recordComment->id }})"
                                                 class="bi bi-pencil-square me-1"></button>
@@ -42,9 +43,11 @@
                                     </div>
                                 @endif
                             </div>
-                            <livewire:record-comment-replies :recordCommentId="$recordComment->id"
-                                                             :replyCount="$recordComment->replies->count()"
-                                                             wire:key="$recordComment->id"/>
+                            @if($selectedRecordCommentId == null)
+                                <livewire:record-comment-replies :recordCommentId="$recordComment->id"
+                                                                 :replyCount="$recordComment->replies->count()"
+                                                                 wire:key="{{ now() }}"/>
+                            @endif
                         </div>
                     </div>
                 @endforeach
