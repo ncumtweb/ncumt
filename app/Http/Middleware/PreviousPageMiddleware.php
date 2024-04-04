@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-class CourseMiddleware
+class PreviousPageMiddleware
 {
     /**
      * Handle an incoming request.
@@ -21,10 +21,9 @@ class CourseMiddleware
         }
         else{
             if (!$request->user() && !$request->is('login')) {
-                session(['previous_page' => '/course/register']);
+                session(['previous_page' => url()->previous()]);
             }
-            return redirect()->route('portal.index')->with('status','請先登入，才能報名社課。');
+            return redirect()->route('portal.index')->with('status','請先登入，才能進行此操作。');
         }
-        
     }
 }

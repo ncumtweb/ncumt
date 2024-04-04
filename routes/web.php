@@ -53,9 +53,7 @@ Route::get('/record/show/{id}', [RecordController::class, 'show'])->name('record
 
 
 Route::prefix('portal')->name('portal.')->group(function () {
-    Route::get('/', function () {
-        return view('basic.portal');
-    })->name('index');
+    Route::get('/', [PortalLoginController::class, 'index'])->name('index');
 
 
     Route::get('/callback', [PortalLoginController::class, 'handleProviderCallback']);
@@ -86,7 +84,7 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
 });
 
-Route::middleware(['courseLogin'])->group(function () {
+Route::middleware(['previousPage'])->group(function () {
     Route::post('/course/register/{id}', [CourseController::class, 'register'])->name('course.register');
 });
 
