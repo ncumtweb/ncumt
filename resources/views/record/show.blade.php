@@ -23,18 +23,18 @@
                 </div>
             </div>
             {{--紀錄內容--}}
-{{--            <div class="row justify-content-center">--}}
-{{--                <div class="col-md-12 post-content" data-aos="fade-up">--}}
-{{--                    <!-- ======= Single Post Content ======= -->--}}
-{{--                    <div class="single-post">--}}
-{{--                        <p>{{ $record->description }}</p>--}}
-{{--                        <img src="{{ asset($record->image) }}" loading="lazy" alt="" class="img-fluid">--}}
-{{--                        <div class="content">--}}
-{{--                            <p>{!! $record->content !!}</p>--}}
-{{--                        </div>--}}
-{{--                    </div><!-- End Single Post Content -->--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <div class="row justify-content-center">
+                <div class="col-md-12 post-content" data-aos="fade-up">
+                    <!-- ======= Single Post Content ======= -->
+                    <div class="single-post">
+                        <p>{{ $record->description }}</p>
+                        <img src="{{ asset($record->image) }}" loading="lazy" alt="" class="img-fluid">
+                        <div class="content">
+                            <p>{!! $record->content !!}</p>
+                        </div>
+                    </div><!-- End Single Post Content -->
+                </div>
+            </div>
             <livewire:record-comments :recordId="$record->id" wire:key="record-$record->id"/>
         </div>
     </section>
