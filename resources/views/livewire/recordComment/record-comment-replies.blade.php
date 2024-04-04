@@ -25,6 +25,11 @@
                     </div>
                 @endguest
                 @auth
+                    @if ($errors->has('content'))
+                        <div class="comment-desc alert alert-danger mt-2">
+                            {{ $errors->first('content') }}
+                        </div>
+                    @endif
                     <div class="row justify-content-center mt-2">
                         <div class="col-lg-12">
                             <div class="row">

@@ -12,10 +12,10 @@
                                      class="img-fluid">
                             </div>
                         </div>
-                        <div class="flex-grow-1 ms-2 ms-sm-3 ">
+                        <div class="flex-grow-1 ms-2 ms-sm-3">
                             <div class="bg-light">
-                                <div class="comment-meta d-flex">
-                                    <h6 class="mb-0 me-2 comment-title">{{ $recordComment->user->name_zh }}</h6>
+                                <div class="comment-meta d-flex ">
+                                    <h6 class="mb-0 me-2">{{ $recordComment->user->name_zh }}</h6>
                                     <span class="text-muted">{{ $recordComment->created_at }}</span>
                                 </div>
                                 <div class="comment-body">
@@ -38,6 +38,11 @@
                     </div>
                 @endguest
                 @auth
+                    @if ($errors->has('content'))
+                        <div class="comment-desc alert alert-danger mt-2">
+                            {{ $errors->first('content') }}
+                        </div>
+                    @endif
                     <div class="row justify-content-center mt-2">
                         <div class="col-lg-12">
                             <div class="row">

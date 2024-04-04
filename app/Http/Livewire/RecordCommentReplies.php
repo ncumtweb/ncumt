@@ -40,7 +40,10 @@ class RecordCommentReplies extends Component
     public function postReply()
     {
         $this->validate([
-            'content' => 'required',
+            'content' => 'required|max:200',
+        ], [
+            'content.required' => '回覆內容不能為空。',
+            'content.max' => '回覆內容不能超過 200 字。',
         ]);
 
         $recordComment = RecordComment::findOrFail($this->recordCommentId);

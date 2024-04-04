@@ -25,9 +25,13 @@ class RecordComments extends Component
     public function postComment()
     {
         $this->validate([
-            'content' => 'required',
+            'content' => 'required|max:200',
+        ], [
+            'content.required' => '評論內容不能為空。',
+            'content.max' => '評論內容不能超過 200 字。',
         ]);
-        // Save comment to database
+
+        // 新增一筆評論並存入 record_comment
         $newComment = RecordComment::create([
             'content' => $this->content,
             'user_id' => Auth::id(),
@@ -37,9 +41,8 @@ class RecordComments extends Component
         $this->recordComments->prepend($newComment);
         $this->recordComments = $this->recordComments->sortBy('created_at');
 
-        // Clear input fields
-        $this->reset(['content']);
 
+        $this->reset(['content']);
         $this->successMessage = '成功發送評論！';
     }
 
