@@ -29,7 +29,9 @@ class RecordCommentReplies extends Component
     {
         $this->isToggleReplies = !$this->isToggleReplies;
         if ($this->isToggleReplies) {
-            $this->recordCommentReplies = RecordCommentReply::where('record_comment_id', $recordCommentId)->get();
+            $this->recordCommentReplies = RecordCommentReply::where('record_comment_id', $recordCommentId)
+                ->orderBy('created_at', 'asc')
+                ->get();
         } else {
             $this->recordCommentReplies = [];
         }
@@ -52,6 +54,8 @@ class RecordCommentReplies extends Component
         ]);
 
         $this->recordCommentReplies->prepend($newReply);
+        $this->recordCommentReplies = $this->recordCommentReplies->sortBy('created_at');
+
         // Clear input fields
         $this->reset(['content']);
 

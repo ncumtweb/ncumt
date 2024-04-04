@@ -35,6 +35,8 @@ class RecordComments extends Component
         ]);
 
         $this->recordComments->prepend($newComment);
+        $this->recordComments = $this->recordComments->sortBy('created_at');
+
         // Clear input fields
         $this->reset(['content']);
 
