@@ -38,7 +38,6 @@
                             <div class="row justify-content-center thumbnail">
                                 <div class="col-9">
                                     <img src="{{ asset($course->image) }}" loading="lazy" alt="" class="img-fluid">
-
                                 </div>
                             </div>
                         </div>
@@ -60,7 +59,8 @@
                             <h3>日期： {{ $course->date }}</h3>
                             <h3>地點： {{ $course->location }}</h3>
                             @if( $course->description )
-                                <h3>簡介：{{ $course->description }}</h3>
+                                <h3>簡介：</h3>
+                                <div class="course-desc">{!! $course->description !!}</div>
                             @endif
                             @if( !$course->users->contains(Auth::user()) )
                                 <div class="row justify-content-center py-4">

@@ -1526,3 +1526,10 @@ button.black[type=submit] {
     cursor: pointer;
     color: #007bff; /* 藍色 */
 }
+
+/*course*/
+
+.course-desc p{
+    text-indent: 2em;
+    text-align: justify;
+}
