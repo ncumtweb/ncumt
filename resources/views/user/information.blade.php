@@ -13,13 +13,14 @@
             <h1 class="page-title">個人資料</h1>
           </div>
         </div>
-        @if (session('status'))
-          <div class="col-lg-12 text-center mb-5">
-            <h6 class="alert alert-success">{{ session('status') }}</h6>
-          </div>
-        @endif
+      
         <!-- start form -->
         <div class="row justify-content-center">
+          @if (session('status'))
+            <div class="col-md-8 text-center mb-5">
+              <h6 class="alert alert-success">{{ session('status') }}</h6>
+            </div>
+          @endif
           <div class = "col-md-8 ">
             <div class="form ">
               <form action="{{ route('user.update', $user->id) }}" method="POST" id="createRecordForm" class="php-email-form" enctype="multipart/form-data">
