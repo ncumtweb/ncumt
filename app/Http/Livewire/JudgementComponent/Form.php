@@ -8,8 +8,8 @@ use Livewire\Component;
 class Form extends Component
 {
     const DEFAULT_STRING = '';
-    const DEFAULT_SELECT = 0;
-    const DEFAULT_INTEGER = 1;
+    const DEFAULT_SELECT = '';
+    const DEFAULT_INTEGER = 0;
 
     public $name = self::DEFAULT_STRING;
     public $normal_day = self::DEFAULT_SELECT;
@@ -102,7 +102,7 @@ class Form extends Component
 
     public function render()
     {
-        return view('livewire/judgementComponent/form');
+        return view('livewire/judgementComponent/create');
     }
 
     public function calculate()
