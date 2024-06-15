@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\RecordComment;
 
 use App\Models\RecordComment;
 use App\Models\RecordCommentReply;

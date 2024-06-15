@@ -35,7 +35,7 @@
                     </div><!-- End Single Post Content -->
                 </div>
             </div>
-            <livewire:record-comments :recordId="$record->id" wire:key="record-$record->id"/>
+            <livewire:record-comment.record-comments :recordId="$record->id" wire:key="record-$record->id"/>
         </div>
     </section>
     <!-- <style>

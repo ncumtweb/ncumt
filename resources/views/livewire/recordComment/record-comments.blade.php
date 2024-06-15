@@ -44,7 +44,7 @@
                                 @endif
                             </div>
                             @if($selectedRecordCommentId == null)
-                                <livewire:record-comment-replies :recordCommentId="$recordComment->id"
+                                <livewire:record-comment.record-comment-replies :recordCommentId="$recordComment->id"
                                                                  :replyCount="$recordComment->replies->count()"
                                                                  wire:key="{{ now() }}"/>
                             @endif
