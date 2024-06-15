@@ -44,7 +44,8 @@
                     <div class="flex-grow-1 ms-2 ms-sm-3">
                         <div class="reply-meta d-flex align-items-baseline mb-2">
                             <h6 class="mb-0 me-2 comment-replies-title">{{ $recordCommentReply->user->name_zh }}</h6>
-                            <span class="text-muted me-2">{{ $recordCommentReply->created_at->format('Y-m-d H:i') }}</span>
+                            <span
+                                class="text-muted me-2">{{ $recordCommentReply->created_at->format('Y-m-d H:i') }}</span>
                             @if(Auth::id() == $recordCommentReply->user_id)
                                 <button wire:click="editRecordCommentReply({{ $recordCommentReply->id }})"
                                         class="bi bi-pencil-square me-1"></button>
