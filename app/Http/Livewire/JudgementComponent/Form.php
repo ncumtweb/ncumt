@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\JudgementComponent;
 
 use App\Models\Judgement;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Form extends Component
@@ -78,7 +79,6 @@ class Form extends Component
     public function mount($mode)
     {
         $this->mode = $mode;
-        $judgement = null;
         if ($this->mode == 'edit') {
 
             $judgement = Judgement::findOrFail($this->judgementId);
@@ -115,13 +115,14 @@ class Form extends Component
         $judgement->water = $this->water;
         $judgement->score = $this->totalScore;
         $judgement->result_level = $this->resultLevel;
+        $judgement->modify_user = Auth::id();
         if ($this->mode == 'edit') {
             $judgement->update();
             return redirect()->route('judgement.index')->with('status','評分紀錄更新成功');
         }
-        $this->emitTo('judgement-component.page', 'reloadJudgements');
+        $judgement->create_user = Auth::id();
         $judgement->save();
-
+        $this->emitTo('judgement-component.page', 'reloadJudgements');
         session()->flash('status', '評分結果儲存成功');
         $this->reset();
     }
