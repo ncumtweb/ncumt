@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Judgement;
 
 use App\Models\Judgement;
 use Illuminate\Support\Facades\Schema;

@@ -1,18 +1,18 @@
 <?php
 
-use App\Http\Livewire\Counter;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\JudgementController;
-use App\Http\Controllers\RecordController;
 use App\Http\Controllers\BasicController;
-use App\Http\Controllers\PortalLoginController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CourseController;
-use App\Http\Controllers\FaqController;
 use App\Http\Controllers\EquipmentController;
+use App\Http\Controllers\FaqController;
+use App\Http\Controllers\JudgementController;
+use App\Http\Controllers\PortalLoginController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\UserController;
+use App\Http\Livewire\Counter;
+use Illuminate\Support\Facades\Route;
 
 
 /*
@@ -30,7 +30,7 @@ Route::fallback(function () {
     return redirect()->route('index');
 });
 
-Route::get('/table', App\Http\Livewire\JudgementPage::class);
+Route::get('/table', \App\Http\Livewire\Judgement\JudgementPage::class);
 
 Route::get('/aboutus', function () {
     return view('information.aboutus');
