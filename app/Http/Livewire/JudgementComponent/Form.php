@@ -10,11 +10,13 @@ class Form extends Component
     const DEFAULT_STRING = '';
     const DEFAULT_SELECT = '';
     const DEFAULT_INTEGER = 0;
+    public $judgementId;
+    public $mode; // create or edit
 
     public $name = self::DEFAULT_STRING;
     public $normal_day = self::DEFAULT_SELECT;
     public $abnormal_day = self::DEFAULT_SELECT;
-    public $trip_tag = self::DEFAULT_SELECT;
+    public $trip_tag = self::DEFAULT_INTEGER;
     public $level = self::DEFAULT_SELECT;
     public $road = self::DEFAULT_SELECT;
     public $terrain = self::DEFAULT_SELECT;
@@ -73,6 +75,26 @@ class Form extends Component
         'water.min' => '多背水天數不得小於0',
     ];
 
+    public function mount($mode)
+    {
+        $this->mode = $mode;
+        $judgement = null;
+        if ($this->mode == 'edit') {
+
+            $judgement = Judgement::findOrFail($this->judgementId);
+            $this->name = $judgement->name;
+            $this->normal_day = $judgement->normal_day;
+            $this->abnormal_day = $judgement->abnormal_day;
+            $this->trip_tag = $judgement->trip_tag;
+            $this->level = $judgement->level;
+            $this->road = $judgement->road;
+            $this->terrain = $judgement->terrain;
+            $this->plant = $judgement->plant;
+            $this->energy = $judgement->energy;
+            $this->water = $judgement->water;
+        }
+    }
+
     public function submit()
     {
         $this->validate();
@@ -81,7 +103,7 @@ class Form extends Component
         }
 
         $judgement = new Judgement();
-        $judgement->name  = $this->name;
+        $judgement->name = $this->name;
         $judgement->normal_day = $this->normal_day;
         $judgement->abnormal_day = $this->abnormal_day;
         $judgement->trip_tag = $this->trip_tag;
@@ -93,16 +115,20 @@ class Form extends Component
         $judgement->water = $this->water;
         $judgement->score = $this->totalScore;
         $judgement->result_level = $this->resultLevel;
+        if ($this->mode == 'edit') {
+            $judgement->update();
+            return redirect()->route('judgement.index')->with('status','評分紀錄更新成功');
+        }
+        $this->emitTo('judgement-component.page', 'reloadJudgements');
         $judgement->save();
 
         session()->flash('status', '評分結果儲存成功');
-
         $this->reset();
     }
 
     public function render()
     {
-        return view('livewire/judgementComponent/create');
+        return view('livewire.judgement-component.form');
     }
 
     public function calculate()

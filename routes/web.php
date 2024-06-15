@@ -30,8 +30,6 @@ Route::fallback(function () {
     return redirect()->route('index');
 });
 
-Route::get('/table', \App\Http\Livewire\JudgementComponent\JudgementPage::class);
-
 Route::get('/aboutus', function () {
     return view('information.aboutus');
 });
