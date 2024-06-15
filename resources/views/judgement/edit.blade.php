@@ -11,7 +11,7 @@
                     <h1 class="page-title">編輯評分紀錄</h1>
                 </div>
             </div>
-            <livewire:judgement-component.form :judgementId="$id" :mode="'edit'" wire:key="judgement-$judgement->id"/>
+            <livewire:judgement-component.form :judgementId="$id" :mode="'edit'"/>
         </div>
     </section>
 

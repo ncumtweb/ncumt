@@ -11,7 +11,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
-use App\Http\Livewire\Counter;
 use Illuminate\Support\Facades\Route;
 
 
@@ -43,6 +42,8 @@ Route::get('/', [BasicController::class, 'index'])->name('index');
 Route::get('/course', [CourseController::class, 'index'])->name('course.index');
 Route::get('/course/register', [CourseController::class, 'showRegister'])->name('course.showRegister');
 Route::get('/judgement', [JudgementController::class, 'index'])->name('judgement.index');
+Route::get('/judgement/record', [JudgementController::class, 'record'])->name('judgement.record');
+Route::get('/judgement/rule', [JudgementController::class, 'rule'])->name('judgement.rule');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/record', [RecordController::class, 'index'])->name('record.index');
 Route::get('/record/show/{id}', [RecordController::class, 'show'])->name('record.show');
@@ -97,10 +98,7 @@ Route::middleware(['checkRole'])->group(function () {
     Route::get('calendar/delete/{id}', [CalendarController::class, 'destroy'])->name('calendar.delete');
 
     // judgement
-    Route::post('/judgement', [JudgementController::class, 'store'])->name('judgement.store');
-    Route::get('/judgement/{id}', [JudgementController::class, 'edit'])->name('judgement.edit');
-    Route::put('/judgement/{id}', [JudgementController::class, 'update'])->name('judgement.update');
-    Route::delete('/judgement/delete/{id}', [JudgementController::class, 'destroy'])->name('judgement.destroy');
+    Route::get('/judgement/edit/{id}', [JudgementController::class, 'edit'])->name('judgement.edit');
 
     //course
     Route::get('/course/create', [CourseController::class, 'create'])->name('course.create');

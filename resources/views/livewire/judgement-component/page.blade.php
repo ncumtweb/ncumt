@@ -1,31 +1,33 @@
-<div class="row gy-4 justify-content-center text-center">
-    <h1>評分紀錄表</h1>
-    <a>過去隊伍難度的評分紀錄。</a>
-    <div class="col-md-12 text-center table-responsive">
+<div class="col-md-12 text-center table-responsive">
+    @if($judgements->isEmpty())
+        <div class="col-lg-12 text-center">
+            <h2>目前沒有隊伍難度評分紀錄</h2>
+        </div>
+    @else
         <table class="table table-light table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">路線名稱</th>
-                        <th scope="col">總天數</th>
-                        <th scope="col">傳統路</th>
-                        <th scope="col">非傳統路</th>
-                        <th scope="col">路線</th>
-                        <th scope="col">路標</th>
-                        <th scope="col">地形</th>
-                        <th scope="col">植被</th>
-                        <th scope="col">體力</th>
-                        <th scope="col">背水天數</th>
-                        <th scope="col">難度總分</th>
-                        <th scope="col">隊伍難度</th>
-                        <!-- 幹部才能編輯 -->
-                        @auth
-                            @if(Auth::user()->role > 0)
-                                <th scope="col">編輯/刪除</th>
-                            @endif
-                        @endauth
-                    </tr>
-                </thead>
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">路線名稱</th>
+                <th scope="col">總天數</th>
+                <th scope="col">傳統路</th>
+                <th scope="col">非傳統路</th>
+                <th scope="col">路線</th>
+                <th scope="col">路標</th>
+                <th scope="col">地形</th>
+                <th scope="col">植被</th>
+                <th scope="col">體力</th>
+                <th scope="col">背水天數</th>
+                <th scope="col">難度總分</th>
+                <th scope="col">隊伍難度</th>
+                <!-- 幹部才能編輯 -->
+                @auth
+                    @if(Auth::user()->role > 0)
+                        <th scope="col">編輯/刪除</th>
+                    @endif
+                @endauth
+            </tr>
+            </thead>
             <tbody>
             @foreach($judgements as $judgement)
                 <tr wire:key="judgementPage-{{ $judgement->id }}">
@@ -84,8 +86,8 @@
         <div class="d-flex justify-content-center">
             {{ $judgements->links() }}
         </div>
-    </div>
-</div><!-- 評分紀錄表 End  -->
+    @endif
+</div>
 
 
 
