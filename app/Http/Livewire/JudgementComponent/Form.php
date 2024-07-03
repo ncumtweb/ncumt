@@ -12,6 +12,9 @@ class Form extends Component
     const DEFAULT_SELECT = '';
     const DEFAULT_INTEGER = 0;
     public $judgementId;
+
+    public $judgementUpdated;
+
     public $mode; // create or edit
 
     public $name = self::DEFAULT_STRING;
@@ -81,17 +84,17 @@ class Form extends Component
         $this->mode = $mode;
         if ($this->mode == 'edit') {
 
-            $judgement = Judgement::findOrFail($this->judgementId);
-            $this->name = $judgement->name;
-            $this->normal_day = $judgement->normal_day;
-            $this->abnormal_day = $judgement->abnormal_day;
-            $this->trip_tag = $judgement->trip_tag;
-            $this->level = $judgement->level;
-            $this->road = $judgement->road;
-            $this->terrain = $judgement->terrain;
-            $this->plant = $judgement->plant;
-            $this->energy = $judgement->energy;
-            $this->water = $judgement->water;
+            $this->judgementUpdated = Judgement::findOrFail($this->judgementId);
+            $this->name = $this->judgementUpdated->name;
+            $this->normal_day = $this->judgementUpdated->normal_day;
+            $this->abnormal_day = $this->judgementUpdated->abnormal_day;
+            $this->trip_tag = $this->judgementUpdated->trip_tag;
+            $this->level = $this->judgementUpdated->level;
+            $this->road = $this->judgementUpdated->road;
+            $this->terrain = $this->judgementUpdated->terrain;
+            $this->plant = $this->judgementUpdated->plant;
+            $this->energy = $this->judgementUpdated->energy;
+            $this->water = $this->judgementUpdated->water;
         }
     }
 
@@ -102,7 +105,7 @@ class Form extends Component
             return;
         }
 
-        $judgement = new Judgement();
+        $judgement = $this->mode == 'edit' ? $this->judgementUpdated : new Judgement();
         $judgement->name = $this->name;
         $judgement->normal_day = $this->normal_day;
         $judgement->abnormal_day = $this->abnormal_day;
@@ -215,7 +218,7 @@ class Form extends Component
      * - 120 and above: "SSS"
      * </pre>
      *
-     * @param $score
+     * @param int $score
      * @return string
      */
     private function calculateRank(int $score): string
