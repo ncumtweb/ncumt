@@ -18,7 +18,7 @@ class AddCommentsToEquipmentsTable extends Migration
             $table->unsignedBigInteger('modify_user')->nullable()->comment('更新者 ID');
 
             $table->comment = '裝備資訊表';
-            $table->string('category', 255)->nullable()->comment('裝備種類：大背包、睡袋、睡墊 ...')->change();
+            $table->string('name', 255)->nullable()->comment('裝備種類：大背包、睡袋、睡墊 ...')->change();
             $table->string('description', 255)->comment('裝備簡介')->change();
             $table->string('image', 255)->nullable()->comment('圖片路徑')->change();
             $table->date('bought_date')->nullable()->comment('購買日期')->change();
@@ -40,7 +40,7 @@ class AddCommentsToEquipmentsTable extends Migration
             $table->dropColumn('create_user');
             $table->dropColumn('modify_user');
             $table->comment = null;
-            $table->string('category', 255)->nullable()->comment(null)->change();
+            $table->string('name', 255)->nullable()->comment(null)->change();
             $table->string('description', 255)->comment(null)->change();
             $table->string('image', 255)->nullable()->comment(null)->change();
             $table->date('bought_date')->nullable()->comment(null)->change();
