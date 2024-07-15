@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Event;
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class CalendarController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function index()
     {
         $calendar_events = array();
         $events = Event::all();
         $category_array =['#A8D8B9', '#7DB9DE','#E6E5A3', '#9B90C2', '#E87A90']; // 0 => 爬山(綠色), 1 => 溯溪(藍色), 2 => 社課(黃色), 3 => 開會(紫色), 4' => 山防(紅色)
-        $category = ['0' => "出隊 | ", '1' => "出隊 | ", '2' => "社課 | ", '3' => "討論 | ", '4' => "山防 | "];
+        $category = ['0' => "出隊 | ", '1' => "溯溪 | ", '2' => "社課 | ", '3' => "討論 | ", '4' => "山防 | "];
         foreach ($events as $event) {
             $calendar_events[] = [
                 'id' => $event->id,
@@ -28,7 +27,7 @@ class CalendarController extends Controller
                 'color' => $category_array[$event->category],
             ];
         }
-        
+
         return $calendar_events;
     }
     /**
