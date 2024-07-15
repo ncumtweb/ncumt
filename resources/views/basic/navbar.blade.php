@@ -21,6 +21,7 @@
                         <li><a href="{{ route('judgement.index') }}">評分系統</a></li>
                         <li><a href="{{ route('judgement.record') }}">評分紀錄</a></li>
                         <li><a href="{{ route('judgement.rule') }}">評分規則</a></li>
+                        <li><a href="{{ route('judgement.pointRule') }}">分數計算</a></li>
                     </ul>
                 @guest
                     <li><a href="{{ route('record.index') }}">所有紀錄</a></li>
