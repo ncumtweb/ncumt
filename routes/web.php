@@ -26,6 +26,10 @@ use App\Http\Controllers\RentalController;
 |
 */
 
+Route::get('/trip/list', function () {
+    return view('trip.tripList');
+});
+
 Route::fallback(function () {
     return redirect()->route('index');
 });
