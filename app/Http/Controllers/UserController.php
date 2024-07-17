@@ -94,7 +94,6 @@ class UserController extends Controller
         // if ($user->role) {
         //     $user->role = $request->input('position');
         // }
-        $user->identifier = $request->input('studentID');
         $user->phone = $request->input('phone');
         $user->email = $request->input('email');
         $user->update();

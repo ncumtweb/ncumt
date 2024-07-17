@@ -7,7 +7,7 @@ use App\Models\CourseRecord;
 use Illuminate\Http\Request;
 use App\Http\Controllers\RecordController;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\File; 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
 class CourseController extends Controller
@@ -45,8 +45,8 @@ class CourseController extends Controller
         $folder_name = "uploads/images/courses";
         $name = $request->input('title');
 
-        
-        
+
+
         $course = new Course();
         $course->title = $request->input('title');
         $course->description = $request->input('description');
@@ -64,7 +64,7 @@ class CourseController extends Controller
         $course->save();
 
         return redirect()->route('course.showRegister')->with('status','社課新增成功');
-        
+
     }
 
     /**
@@ -80,8 +80,8 @@ class CourseController extends Controller
             ->whereDate('date', '>=' , now()->toDateString())
             ->orderBy('date','asc')
             ->get();
-        
-            
+
+
         return view('course.register', compact('courses'));
     }
 
@@ -89,7 +89,7 @@ class CourseController extends Controller
 
         $courseRecord = new CourseRecord();
 
-        $courseRecord->course_id = $id; 
+        $courseRecord->course_id = $id;
         $courseRecord->user_id = auth()->user()->id;
         $courseRecord->save();
 
@@ -97,7 +97,7 @@ class CourseController extends Controller
 
         Mail::to($courseRecord->user->email)
             ->later(now()->addSeconds(5), new \App\Mail\Course($courseRecord));
-    
+
         return redirect()->back()->with('status', $msg);
     }
 
@@ -172,6 +172,6 @@ class CourseController extends Controller
 
         File::delete(public_path($course->image));
         $course->delete();
-        return redirect()->route('course.index')->with('status','社課刪除成功');
+        return redirect()->intended(url()->previous())->with('status','社課刪除成功');
     }
 }

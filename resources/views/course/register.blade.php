@@ -13,10 +13,10 @@
             </div>
 
             @if (session('status'))
-            <div class="col-lg-12 text-center">
-                <h6 class="alert alert-success">{{ session('status') }}</h6>
-            </div>
-            @endif
+                <div class="col-lg-12 text-center">
+                    <h6 class="alert alert-success">{{ session('status') }}</h6>
+                </div>
+        @endif
     </section>
 
     @if($courses->count() == 0)
@@ -38,7 +38,6 @@
                             <div class="row justify-content-center thumbnail">
                                 <div class="col-9">
                                     <img src="{{ asset($course->image) }}" loading="lazy" alt="" class="img-fluid">
-
                                 </div>
                             </div>
                         </div>
@@ -47,9 +46,12 @@
                             <h2 class="display-4 mb-4">{{ $course->title }}
                                 @auth
                                     @if(Auth::user()->role > 0)
-                                        <a class="bi bi-pencil-square" href="{{ route('course.edit', $course->id) }}"></a>
-                                        <a class="bi bi-trash" onclick="return confirmDelete();" href="{{ route('course.destroy', $course->id) }}"></a>
-                                        <a class="bi bi-info-circle" href="{{ route('course.showAllRecords', $course->id) }}"></a>
+                                        <a class="bi bi-pencil-square"
+                                           href="{{ route('course.edit', $course->id) }}"></a>
+                                        <a class="bi bi-trash" onclick="return confirmDeleteCourse();"
+                                           href="{{ route('course.destroy', $course->id) }}"></a>
+                                        <a class="bi bi-info-circle"
+                                           href="{{ route('course.showAllRecords', $course->id) }}"></a>
                                     @endif
                                 @endauth
                             </h2>
@@ -57,7 +59,8 @@
                             <h3>日期： {{ $course->date }}</h3>
                             <h3>地點： {{ $course->location }}</h3>
                             @if( $course->description )
-                                <h3>簡介：{{ $course->description }}</h3>
+                                <h3>簡介：</h3>
+                                <div class="course-desc">{!! $course->description !!}</div>
                             @endif
                             @if( !$course->users->contains(Auth::user()) )
                                 <div class="row justify-content-center py-4">
@@ -84,7 +87,7 @@
 @endsection
 
 <script>
-function confirmDelete() {
-    return confirm('確定要刪除這堂社課嗎？');
-}
+    function confirmDeleteCourse() {
+        return confirm('確定要刪除這堂社課嗎？');
+    }
 </script>
