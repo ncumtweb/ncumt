@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::fallback(function () {
-    return redirect()->route('index');
+    return view('404');
 });
 
 Route::get('/aboutus', function () {
@@ -128,3 +128,5 @@ Route::middleware(['checkRole'])->group(function () {
 
 
 });
+
+Route::view('/404', '404');
