@@ -26,7 +26,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::fallback(function () {
-    return view('404');
+    $randomNumber = rand(1, 4) . '';
+    return view('404', ['randomNumber' => $randomNumber]);
 });
 
 Route::get('/aboutus', function () {
@@ -130,4 +131,3 @@ Route::middleware(['checkRole'])->group(function () {
 
 });
 
-Route::view('/404', '404');
