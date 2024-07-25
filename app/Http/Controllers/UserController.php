@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    const POSITION = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
+    const POSITION = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員",
     '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
     '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
     '財務長', '山防組組長', '山防組組員'];
@@ -52,7 +52,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id)f
     {
         $user = User::find($id);
         $position = self::POSITION;

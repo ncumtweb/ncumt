@@ -8,6 +8,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\JudgementController;
 use App\Http\Controllers\PortalLoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TripCreateController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
@@ -127,5 +128,8 @@ Route::middleware(['checkRole'])->group(function () {
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
+    // trip
+    Route::get('/trip/create', [TripCreateController::class, 'create'])->name('trip.create');
+    Route::put('/trip/create', [TripCreateController::class, 'update'])->name('trip.update');
 
 });
