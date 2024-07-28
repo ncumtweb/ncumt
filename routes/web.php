@@ -130,6 +130,12 @@ Route::middleware(['checkRole'])->group(function () {
 
     // trip
     Route::get('/trip/create', [TripCreateController::class, 'create'])->name('trip.create');
-    Route::put('/trip/create', [TripCreateController::class, 'update'])->name('trip.update');
+    Route::get('/trip/edit/{id}', [TripCreateController::class, 'edit'])->name('trip.edit');
+    Route::put('/trip/create', [TripCreateController::class, 'handleRequest1'])->name('trip.handleRequest1');
+    Route::put('/trip/edit/{id}', [TripCreateController::class, 'handleRequest2'])->name('trip.handleRequest2');
+
+    //    Route::put('/trip/create', [TripCreateController::class, 'update'])->name('trip.update');
+    //    Route::put('/trip/create', [TripCreateController::class, 'publish'])->name('trip.publish');
+
 
 });

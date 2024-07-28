@@ -34,12 +34,6 @@
                       <label for="description" class="form-label">隊伍簡介 </label>
                       <textarea name="description" class="form-control" id="description" placeholder="請輸入隊伍簡介" required></textarea>
                   </div>
-                  <!--
-                <div class="form-group">
-                    <label for="trip-schedule" class="form-label">隊伍行程 </label>
-                    <textarea name="trip-schedule" class="form-control" id="trip-schedule" placeholder="請輸入隊伍行程" required></textarea>
-                </div>
-                -->
 
                   <div class="form-group">
                       <label for="category" class="form-label">路線類別</label>
@@ -90,18 +84,14 @@
                           <input type="date" class="form-control" id="quit_date" name="quit_date" required>
                       </div>
                   </div>
-                  <div class="form-group">
-                      <label for="prepare-day" class="form-label">有無預備天</label>
-                      <select id="prepare-day" name="prepare-day" class="form-select" required>
-                          <option selected disabled value="">請選擇有/無</option>
-                          <option value="0">有</option>
-                          <option value="1">無</option>
-                      </select>
+                  <div class="form-group col-md-6">
+                      <label for="prepare_day" class="form-label">預備天天數</label>
+                      <input type="text" name="prepare_day" class="form-control" id="prepare_day" placeholder="請輸入預備天天數" required>
                   </div>
-                  <div class="form-group">
-                      <label for="quit-rule" class="form-label" >鳥隊規定</label>
 
-                      <textarea class="form-control" id="quit-rule" name="quit-rule" placeholder="請輸入鳥隊規定說明"></textarea>
+                  <div class="form-group">
+                      <label for="quit_rule" class="form-label" >鳥隊規定</label>
+                      <textarea class="form-control" id="quit_rule" name="quit_rule" placeholder="請輸入鳥隊規定說明"></textarea>
                       <!-- <input type="hidden" name="content" class="form-control" id="content" required> -->
                   </div>
                   <div class="form-group col-md-12">
@@ -120,12 +110,7 @@
                           <input type="text" name="actual_fee" class="form-control" id="actual_fee" placeholder="請輸入隊費金額" required>
                       </div>
                   </div>
-                  <div class="form-group">
-                      <label for="fee-description" class="form-label">隊費說明</label>
 
-                      <textarea class="form-control" id="fee-description" name="fee-description"></textarea>
-                      <!-- <input type="hidden" name="content" class="form-control" id="content" required> -->
-                  </div>
                   <div class="row">
                       <div class="form-group col-md-6">
                           <label for="expected_cadre_count" class="form-label">預計錄取幹部人數</label>
@@ -136,58 +121,16 @@
                           <input type="text" name="expected_member_count" class="form-control" id="expected_member_count" placeholder="請輸入體能標準" required>
                       </div>
                   </div>
-                  <div class="row">
-                      <div class="form-group col-md-6">
-                          <label for="requirement-man" class="form-label">體能標準(男)</label>
-                          <input type="text" name="requirement-man" class="form-control" id="requirement-man" placeholder="請輸入體能標準" required>
-                      </div>
-                      <div class="form-group col-md-6">
-                          <label for="requirement-woman" class="form-label">體能標準(女)</label>
-                          <input type="text" name="requirement-woman" class="form-control" id="requirement-woman" placeholder="請輸入體能標準" required>
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label for="requirement-description" class="form-label">體訓要求 </label>
-                      <textarea name="requirement-description" class="form-control" id="requirement-description" placeholder="請輸入體訓要求/說明" required></textarea>
-                  </div>
-
-
-
-
-                  <!-- 領隊資訊 -->
-
-                  <div class="row">
-                      <div class="form-group col-md-4">
-                          <label for="leader_name" class="form-label">領隊</label>
-                          <input type="text" name="leader_name" class="form-control" id="leader_name" placeholder="請輸入領隊姓名" required>
-                      </div>
-                      <div class="form-group col-md-4">
-                          <label for="leader_id" class="form-label">領隊學號</label>
-                          <input type="text" name="leader_id" class="form-control" id="leader_id" placeholder="請輸入領隊學號" required>
-                      </div>
-                      <div class="form-group col-md-4">
-                          <label for="leader_phone" class="form-label">領隊電話</label>
-                          <input type="text" name="leader_phone" class="form-control" id="leader_phone" placeholder="請輸入領隊電話號碼" required>
-                      </div>
-                  </div>
 
                   <div class="form-group">
-                      <label for="leader_contact" class="form-label">其他領隊聯絡方式</label>
-                      <input type="text" name="leader_contact" class="form-control" id="leader_contact" placeholder="請輸入領隊的其他聯絡方式，例如：FB:易大佬" required>
+                      <label for="additional_content" class="form-label">其他內容</label>
+                      <textarea class="form-control" id="additional_content" name="additional_content"></textarea>
                   </div>
-                  <div class="form-group">
-
-                      <div class="form-group">
-                          <label for="others" class="form-label">其他內容</label>
-
-                          <textarea class="form-control" id="others" name="others"></textarea>
-
-                      </div>
 
                       <div class="row">
                           <div class="text-center">
-                              <button type="submit">暫存紀錄</button>
-                              <button type="submit">儲存並發布</button>
+                              <button type="submit" name="action" value="update">暫存紀錄</button>
+                              <button type="submit" name="action" value="publish">儲存並發布</button>
                           </div>
                       </div>
                       <!-- 不知道要不要加入過去的相關隊伍紀錄文，就是創建者自己選擇該貼文，資料庫就可以存貼文編號 -->
