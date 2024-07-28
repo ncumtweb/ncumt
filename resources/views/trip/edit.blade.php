@@ -23,7 +23,7 @@
                                     {{ session('status') }}
                                 </div>
                             @endif
-                            <form action="{{ route('trip.handleRequest2', ['id' => $trip->id]) }}" method="POST" id="createRecordForm" class="createRecordForm" enctype="multipart/form-data">
+                            <form action="{{ route('trip.update', ['id' => $trip->id]) }}" method="POST" id="createRecordForm" class="createRecordForm" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">

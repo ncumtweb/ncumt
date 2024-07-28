@@ -45,7 +45,7 @@ class TripCreateController extends Controller
 
     }
 
-    public function handleRequest1(Request $request) {
+    public function store(Request $request) {
 
         $trip = New Trip();
 
@@ -88,7 +88,7 @@ class TripCreateController extends Controller
         }
 
     }
-    public function handleRequest2(Request $request, $id) {
+    public function update(Request $request, $id) {
 
         $trip = Trip::find($id);
         if (!$trip) {
