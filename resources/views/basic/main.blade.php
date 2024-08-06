@@ -46,13 +46,12 @@
     <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
 
-
     <!-- Template Main CSS Files -->
     <link href="{{ asset('assets/css/variables.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
     @livewireStyles
-
+    @stack('styles')
     <!-- =======================================================
     * Template Name: ZenBlog
     * Updated: Mar 10 2023 with Bootstrap v5.2.3

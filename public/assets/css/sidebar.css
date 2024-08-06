@@ -1,70 +1,36 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-}
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #fff;
-}
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-.header h1 {
-    font-size: 36px;
-    color: #333;
-}
-.form-label {
-    font-weight: bold;
-    color: #1c6149;
-}
-.form-control {
-    border: 1px solid #ccc;
-    padding: 10px;
-    width: 100%;
-    box-sizing: border-box;
-}
-.form-group {
-    margin-bottom: 20px;
-}
-.btn {
-    background-color: #1c6149;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-.btn:hover {
-    background-color: #155a3a;
-}
+
+/* 側邊欄設置 */
 #sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 200px;
-    background-color: #f8f9fa;
-    padding-top: 20px;
+    position: fixed; /* 固定在頁面右側 */
+    top: 50%; /* 垂直居中 */
+    right: 0;
+    transform: translateY(-50%); /* 垂直居中調整 */
+    width: 250px; /* 調整寬度 */
+    height: auto; /* 自適應高度 */
+    background-color: #f8f9fa; /* 調整背景顏色 */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 陰影效果 */
+    z-index: 900; /* 確保在主要內容之前 */
 }
+
+/* 側邊欄列表樣式 */
 #sidebar ul {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
+
 #sidebar ul li {
-    margin: 10px 0;
+    border-bottom: 1px solid #ddd; /* 分隔線 */
 }
+
 #sidebar ul li a {
+    display: block;
+    padding: 15px;
     text-decoration: none;
-    color: #333;
+    color: #333; /* 調整文字顏色 */
+    transition: background-color 0.3s ease;
 }
+
 #sidebar ul li a:hover {
-    text-decoration: underline;
-}
-main {
-    margin-left: 220px; /* Sidebar width + some padding */
-    padding: 20px;
+    background-color: #eee; /* 滑鼠懸停時的背景顏色 */
 }
