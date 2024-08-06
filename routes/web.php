@@ -24,6 +24,21 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/basic-information', function () {
+    return view('forms.basic_information');
+})->name('form.basic_information');
+
+Route::get('/eating-habit', function () {
+    return view('forms.eating_habit');
+})->name('form.eating_habit');
+
+Route::get('/emergency-contact', function () {
+    return view('forms.emergency_contact');
+})->name('form.emergency_contact');
+
+Route::get('/mountaineering-deeds', function () {
+    return view('forms.mountaineering_deeds');
+})->name('form.mountaineering_deeds');
 
 Route::fallback(function () {
     return redirect()->route('index');
