@@ -52,7 +52,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)f
+    public function show($id)
     {
         $user = User::find($id);
         $position = self::POSITION;
