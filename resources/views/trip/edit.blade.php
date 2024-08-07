@@ -162,6 +162,7 @@
                                     <img class="img-fluid" id="preview_image" src="#" alt="預覽封面"/>
                                 </div>
 
+
                                 <div class="row">
                                     <div class="form-group col-md-6">
                                         <label for="expected_fee" class="form-label">預期隊費</label>

@@ -9,13 +9,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Carbon\Carbon;
+use App\Traits\ImageTrait;
+use Illuminate\Support\Facades\File;
 
 class TripController extends Controller
 {
+    use ImageTrait;
     public function create() // 會連到 web.php 的 function
     {
         if (Auth::check() && Auth::user()->role > 0) {
-            if (Auth::user()->guard != 0) {
+            if(Auth::user()->guard != 0) {
                 return view('trip.create');
             }
             // 等隊伍畫面完成後，想導回隊伍頁面，加入以下內容
@@ -56,7 +59,6 @@ class TripController extends Controller
             }
         }
         return redirect()->route('portal.index')->with('status', '您並無權限進行此操作，請先登入。');
-
     }
 
     // 創建新隊伍資料
@@ -78,6 +80,10 @@ class TripController extends Controller
             'end_date.after_or_equal' => '結束日期需在開始日期之後。',
             'image.required' => '請上傳封面照。',
         ]);
+        $file = $request->image;
+        $folder_name = "uploads/images/trips";
+        $name = $request->input('name');
+
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all());
@@ -92,7 +98,7 @@ class TripController extends Controller
         $trip->category = $request->input('category');
         $trip->start_date = $request->input('start_date');
         $trip->end_date = $request->input('end_date');
-        $trip->image = $request->file('image');
+        $trip->image = $this->storeImage($file, $folder_name, $name);
         $trip->actual_fee = $request->input('actual_fee');
         $trip->expected_fee = $request->input('expected_fee');
         $trip->registration_open = $request->input('registration_open');
@@ -105,7 +111,7 @@ class TripController extends Controller
         $trip->quit_rule = $request->input('quit_rule');
         $trip->additional_content = $request->input('additional_content');
 
-        $trip->total_day = (strtotime($trip->end_date) - strtotime($trip->start_date) + $trip->prepare_day) / 86400;
+        $trip->total_day = (strtotime($trip->end_date) - strtotime($trip->start_date) ) / 86400 + $trip->prepare_day;
 
         // 檢查按鈕的值
         $action = $request->input('action');
@@ -147,6 +153,14 @@ class TripController extends Controller
                 'image.required' => '請上傳封面照。',
             ]);
 
+            if($request->image) {
+                File::delete(public_path($trip->image));
+                $file = $request->image;
+                $folder_name = "uploads/images/records";
+                $name = $request->input('name');
+                $trip->image = $this->storeImage($file, $folder_name, $name);
+            }
+
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput($request->all());
             }
@@ -159,7 +173,6 @@ class TripController extends Controller
             $trip->category = $request->input('category');
             $trip->start_date = $request->input('start_date');
             $trip->end_date = $request->input('end_date');
-            $trip->image = $request->file('image');
             $trip->actual_fee = $request->input('actual_fee');
             $trip->expected_fee = $request->input('expected_fee');
             $trip->registration_open = $request->input('registration_open');
@@ -171,7 +184,7 @@ class TripController extends Controller
             $trip->quit_date = $request->input('quit_date');
             $trip->quit_rule = $request->input('quit_rule');
             $trip->additional_content = $request->input('additional_content');
-            $trip->total_day = (strtotime($trip->end_date) - strtotime($trip->start_date) + $trip->prepare_day) / 86400;
+            $trip->total_day = (strtotime($trip->end_date) - strtotime($trip->start_date) ) / 86400 + $trip->prepare_day;
 
             // 檢查按鈕的值
             $action = $request->input('action');
