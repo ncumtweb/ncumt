@@ -14,7 +14,7 @@ class AddCreateUserAndModifyUserToJudgementsTable extends Migration
     public function up()
     {
         Schema::table('judgements', function (Blueprint $table) {
-            $table->unsignedBigInteger('create_user')->nullable()->after('created_at'); // 假設 'id' 是表中的第一個欄位
+            $table->unsignedBigInteger('create_user')->nullable()->after('created_at');
             $table->unsignedBigInteger('modify_user')->nullable()->after('create_user');
         });
     }
