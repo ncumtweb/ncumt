@@ -8,6 +8,7 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\JudgementController;
 use App\Http\Controllers\PortalLoginController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TripController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
@@ -48,8 +49,6 @@ Route::get('/judgement/pointRule', [JudgementController::class, 'pointRule'])->n
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/record', [RecordController::class, 'index'])->name('record.index');
 Route::get('/record/show/{id}', [RecordController::class, 'show'])->name('record.show');
-
-
 
 
 Route::prefix('portal')->name('portal.')->group(function () {
@@ -127,5 +126,9 @@ Route::middleware(['checkRole'])->group(function () {
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
-
+    // trip
+    Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
+    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])->name('trip.edit');
+    Route::put('/trip/create', [TripController::class, 'store'])->name('trip.store');
+    Route::put('/trip/edit/{id}', [TripController::class, 'update'])->name('trip.update');
 });
