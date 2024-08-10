@@ -1,17 +1,18 @@
 @extends('basic.main')
 
-@section('title',  '大專登山研討會報名')
+@section('title',  '查詢報名資訊')
 
 @section('content')
-    <section id="contact" class="contact mb-5">
+    <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
             <div class="col-lg-12 text-center">
                 <h1 class="mt-3">113 年度第二十五屆全國大專校院登山運動研討會</h1>
-                <h1 class="page-title">研討會報名表</h1>
+                <h1 class="page-title">查詢報名資訊</h1>
             </div>
-            <div class="row mb-5 justify-content-center">
+            <div class="row justify-content-center">
                 <div class="col-md-10">
-                    <livewire:conference.form :mode="App\Enums\Mode::CREATE"/>
+                    <livewire:conference.search/>
+                    <livewire:conference.form :mode="App\Enums\Mode::EDIT"/>
                 </div>
             </div>
         </div>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Conference;
 
-use App\Enums\Gender;
 use App\Enums\Identity;
+use App\Enums\Mode;
 use App\Models\ConferenceUser;
 use Livewire\Component;
 
@@ -11,11 +11,12 @@ class Form extends Component
 {
 
     public $mode;
+    public $conferenceUser;
 
     public $name;
-    public $isVegetarian;
-    public $gender;
     public $phone;
+    public $gender;
+    public $isVegetarian;
     public $email;
     public $identity;
     public $schoolName;
@@ -41,6 +42,23 @@ class Form extends Component
         'department.required' => '系級為必填',
     ];
 
+    protected $listeners = [
+        'userSelected' => 'handleUserSelected',
+    ];
+
+    public function handleUserSelected($conferenceUserId): void
+    {
+        $this->conferenceUser = ConferenceUser::findOrFail($conferenceUserId);
+        $this->name = $this->conferenceUser->name;
+        $this->phone = $this->conferenceUser->phone;
+        $this->gender = $this->conferenceUser->gender;
+        $this->isVegetarian = $this->conferenceUser->is_vegetarian;
+        $this->email = $this->conferenceUser->email;
+        $this->identity = $this->conferenceUser->identity;
+        $this->schoolName = $this->conferenceUser->school_name;
+        $this->department = $this->conferenceUser->department;
+    }
+
     /**
      * 若身份為學生，則增加校名與系級必填的規則
      *
@@ -58,12 +76,15 @@ class Form extends Component
         }
     }
 
-    public function submit()
+    public function submit(): void
     {
         $this->updateRuleByIdentity($this->identity);
         $this->validate();
+        $existingUser = null;
 
-        $existingUser = ConferenceUser::where('email', $this->email)->first();
+        if (Mode::CREATE == $this->mode) {
+            $existingUser = ConferenceUser::where('email', $this->email)->first();
+        }
 
         if ($existingUser) {
             // 如果 email 已经存在，返回错误消息
@@ -71,7 +92,7 @@ class Form extends Component
             return;
         }
 
-        $conferenceUser = new ConferenceUser();
+        $conferenceUser = Mode::CREATE == $this->mode ? new ConferenceUser() : $this->conferenceUser;
         $conferenceUser->name = $this->name;
         $conferenceUser->is_vegetarian = $this->isVegetarian;
         $conferenceUser->gender = $this->gender;
@@ -80,8 +101,6 @@ class Form extends Component
         $conferenceUser->identity = $this->identity;
         $conferenceUser->school_name = $this->schoolName;
         $conferenceUser->department = $this->department;
-
-        // 保存到数据库
         $conferenceUser->save();
 
         session()->flash('status', '成功提交表單！');

@@ -33,6 +33,14 @@ Route::get('/aboutus', function () {
     return view('information.aboutus');
 });
 
+Route::get('/conference/register', function () {
+    return view('conference.register');
+});
+
+Route::get('/conference/search', function () {
+    return view('conference.searchAndEdit');
+});
+
 // Route::get('/map', function () {
 //     return view('map');
 // });
@@ -48,8 +56,6 @@ Route::get('/judgement/pointRule', [JudgementController::class, 'pointRule'])->n
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/record', [RecordController::class, 'index'])->name('record.index');
 Route::get('/record/show/{id}', [RecordController::class, 'show'])->name('record.show');
-
-
 
 
 Route::prefix('portal')->name('portal.')->group(function () {
@@ -126,6 +132,4 @@ Route::middleware(['checkRole'])->group(function () {
     Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('faq.edit');
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
-
-
 });
