@@ -17,6 +17,7 @@ class Search extends Component
 
     public $messages = [
         'email.required' => 'Email 為必填',
+        'email.email' => 'Email 格式錯誤',
     ];
 
     public function submit(): void
@@ -27,6 +28,7 @@ class Search extends Component
         if (!$this->conferenceUser) {
             // 如果没有找到匹配的记录
             $this->addError('email', '查無此 email 的報名資訊');
+            return;
         }
         session()->flash('status', '查詢成功！');
         $this->emit('userSelected', $this->conferenceUser->id);

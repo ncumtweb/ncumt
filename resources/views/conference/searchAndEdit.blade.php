@@ -12,7 +12,6 @@
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <livewire:conference.search/>
-                    <livewire:conference.form :mode="App\Enums\Mode::EDIT"/>
                 </div>
             </div>
         </div>

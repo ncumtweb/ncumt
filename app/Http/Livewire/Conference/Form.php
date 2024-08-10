@@ -80,16 +80,13 @@ class Form extends Component
     {
         $this->updateRuleByIdentity($this->identity);
         $this->validate();
-        $existingUser = null;
 
-        if (Mode::CREATE == $this->mode) {
+        if (Mode::CREATE == $this->mode || (Mode::EDIT == $this->mode && !$this->isOriginalEmail())) {
             $existingUser = ConferenceUser::where('email', $this->email)->first();
-        }
-
-        if ($existingUser) {
-            // 如果 email 已经存在，返回错误消息
-            $this->addError('email', '此電子郵件已註冊過');
-            return;
+            if ($existingUser) {
+                $this->addError('email', '此電子郵件已註冊過');
+                return;
+            }
         }
 
         $conferenceUser = Mode::CREATE == $this->mode ? new ConferenceUser() : $this->conferenceUser;
@@ -99,17 +96,31 @@ class Form extends Component
         $conferenceUser->phone = $this->phone;
         $conferenceUser->email = $this->email;
         $conferenceUser->identity = $this->identity;
-        $conferenceUser->school_name = $this->schoolName;
-        $conferenceUser->department = $this->department;
+        if (Identity::SOCIAL->value == $this->identity) {
+            $conferenceUser->school_name = null;
+            $conferenceUser->department = null;
+        } else {
+            $conferenceUser->school_name = $this->schoolName;
+            $conferenceUser->department = $this->department;
+        }
         $conferenceUser->save();
 
-        session()->flash('status', '成功提交表單！');
-
-        $this->reset();
+        if (Mode::CREATE == $this->mode) {
+            $successMessage = '成功送出報名資訊！';
+            $this->reset();
+        } else {
+            $successMessage = '成功修改報名資訊！';
+        }
+        session()->flash('status', $successMessage);
     }
 
     public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.conference.form');
+    }
+
+    private function isOriginalEmail():bool
+    {
+        return $this->conferenceUser->email == $this->email;
     }
 }

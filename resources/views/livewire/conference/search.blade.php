@@ -6,8 +6,8 @@
             </div>
         @endif
         <div class="form-group">
-            <label for="email">電子郵件</label>
-            <input type="email" id="email" wire:model="email"
+            <label for="search-email">電子郵件</label>
+            <input type="email" id="search-email" wire:model="email"
                    class="form-control @error('email') is-invalid @enderror"
                    placeholder="請輸入電子郵件">
             @error('email')
@@ -17,6 +17,9 @@
         <div class="col-md-12 d-flex justify-content-center">
             <button type="button" class="btn btn-primary w-25" wire:click="submit">查詢</button>
         </div>
+        @if($conferenceUser)
+            <livewire:conference.form :mode="App\Enums\Mode::EDIT"/>
+        @endif
     </form>
 </div>
 
