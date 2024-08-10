@@ -26,7 +26,6 @@ class Search extends Component
 
         $this->conferenceUser = ConferenceUser::where('email', $this->email)->first();
         if (!$this->conferenceUser) {
-            // 如果没有找到匹配的记录
             $this->addError('email', '查無此 email 的報名資訊');
             return;
         }

@@ -52,7 +52,7 @@
             <!-- 是否吃素 -->
             <div class="col-md-2">
                 <div class="form-group">
-                    <label for="isVegetarian">是否吃素</label>
+                    <label for="isVegetarian">吃素</label>
                     <select id="isVegetarian" wire:model="isVegetarian"
                             class="form-control @error('isVegetarian') is-invalid @enderror">
                         <option value="">請選擇是否吃素</option>
