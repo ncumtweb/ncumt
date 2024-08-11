@@ -14,7 +14,9 @@
                     <ul>
                         <li><a href="{{ url('conference/register') }}">研討會報名表</a></li>
                         <li><a href="{{ url('conference/search') }}">研討會查詢</a></li>
-                        <li><a href="{{ url('conference/result') }}">研討會報名結果</a></li>
+                        @if(Auth::user()->role > App\Enums\Role::MEMBER->value)
+                            <li><a href="{{ url('conference/result') }}">研討會報名結果</a></li>
+                        @endif
                     </ul>
                 <li><a href="{{ url('/aboutus') }}">關於我們</a></li>
                 <li class="dropdown"><a><span>社課資訊</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
@@ -36,7 +38,7 @@
                 @auth
                     <li class="dropdown"><a><span>系統</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            @if(Auth::user()->role > 0)
+                            @if(Auth::user()->role > App\Enums\Role::MEMBER->value)
                                 <li><a href="{{ route('equipment.select') }}">個人裝備租借系統</a></li>
                             @endif
                         </ul>
@@ -46,7 +48,7 @@
                         <ul>
                             <li><a href="{{ route('record.index') }}">所有紀錄</a></li>
                             <!-- 幹部才能新增紀錄 -->
-                            @if(Auth::user()->role > 0)
+                            @if(Auth::user()->role > App\Enums\Role::MEMBER->value)
                                 <li><a href="{{ route('record.create') }}">新增紀錄</a></li>
                             @endif
                         </ul>
@@ -58,7 +60,7 @@
                 @endguest
 
                 @auth
-                    @if(Auth::user()->role > 0)
+                    @if(Auth::user()->role > App\Enums\Role::MEMBER->value)
                         <li class="dropdown"><a><span>FAQ</span> <i
                                     class="bi bi-chevron-down dropdown-indicator"></i></a>
                             <ul>
@@ -70,7 +72,7 @@
 
 
                 @auth
-                    @if(Auth::user()->role > 0)
+                    @if(Auth::user()->role > App\Enums\Role::MEMBER->value)
                         <li class="dropdown"><a><span>幹部專區</span><i
                                     class="bi bi-chevron-down dropdown-indicator"></i></a>
                             <ul>

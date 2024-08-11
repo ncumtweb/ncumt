@@ -41,9 +41,6 @@ Route::get('/conference/search', function () {
     return view('conference.searchAndEdit');
 });
 
-Route::get('/conference/result', function () {
-    return view('conference.result');
-});
 
 // Route::get('/map', function () {
 //     return view('map');
@@ -72,10 +69,9 @@ Route::prefix('portal')->name('portal.')->group(function () {
 });
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
-    Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
-    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user/show/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::put('/user/show/{id}', [UserController::class, 'update'])->name('user.update');
 
     //course
     Route::get('/course/showRecord/', [CourseController::class, 'showRecord'])->name('course.showRecord');
@@ -136,4 +132,12 @@ Route::middleware(['checkRole'])->group(function () {
     Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('faq.edit');
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
+
+    // user
+    Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
+    Route::post('/users/updateRole/{id}', [UserController::class, 'updateRole'])->name('user.updateRole');
+
+    Route::get('/conference/result', function () {
+        return view('conference.result');
+    });
 });
