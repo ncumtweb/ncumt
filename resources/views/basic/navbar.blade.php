@@ -14,9 +14,11 @@
                     <ul>
                         <li><a href="{{ url('conference/register') }}">研討會報名表</a></li>
                         <li><a href="{{ url('conference/search') }}">研討會查詢</a></li>
-                        @if(Auth::user()->role > App\Enums\Role::MEMBER->value)
-                            <li><a href="{{ url('conference/result') }}">研討會報名結果</a></li>
-                        @endif
+                        @auth
+                            @if(Auth::user()->role > App\Enums\Role::MEMBER->value)
+                                <li><a href="{{ url('conference/result') }}">研討會報名結果</a></li>
+                            @endif
+                        @endauth
                     </ul>
                 <li><a href="{{ url('/aboutus') }}">關於我們</a></li>
                 <li class="dropdown"><a><span>社課資訊</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
