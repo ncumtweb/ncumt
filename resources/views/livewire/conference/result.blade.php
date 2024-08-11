@@ -1,3 +1,7 @@
+@php
+    use App\Enums\Gender;
+    use App\Enums\Identity;
+@endphp
 <div class="col-md-10 mt-4 text-center table-responsive">
     <table class="table table-striped table-bordered">
         <thead>
@@ -16,16 +20,15 @@
         @foreach($conferenceUsers as $conferenceUser)
             <tr wire:key="ConferenceUser-{{ $conferenceUser->id }}">
                 <td>{{ $conferenceUser->name }}</td>
-                <td>{{ $conferenceUser->gender == 1 ? '男' : '女' }}</td>
+                <td>{{ Gender::from($conferenceUser->gender)->toChinese() }}</td>
                 <td>{{ $conferenceUser->is_vegetarian ? '是' : '否' }}</td>
                 <td>{{ $conferenceUser->phone }}</td>
                 <td>{{ $conferenceUser->email }}</td>
-                @if(App\Enums\Identity::STUDENT->value == $conferenceUser->identity)
-                    <td>學生</td>
+                <td>{{ Identity::from($conferenceUser->identity)->toChinese() }}</td>
+                @if(Identity::STUDENT->value == $conferenceUser->identity)
                     <td>{{ $conferenceUser->school_name }}</td>
                     <td>{{ $conferenceUser->department }}</td>
                 @else
-                    <td>社會人士</td>
                     <td></td>
                     <td></td>
                 @endif

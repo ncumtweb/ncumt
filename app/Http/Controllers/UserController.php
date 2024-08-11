@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    const POSITION = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
+    const POSITION = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員",
     '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
     '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
     '財務長', '山防組組長', '山防組組員'];
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
     public function index()
     {
@@ -50,7 +53,7 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function show($id)
     {

@@ -1,3 +1,7 @@
+@php
+    use App\Enums\Gender;
+    use App\Enums\Identity;
+@endphp
 <div class="form mt-5">
     <form wire:submit.prevent="submit" class="createRecordForm">
         @if(App\Enums\Mode::EDIT == $mode)
@@ -41,8 +45,10 @@
                     <select id="gender" wire:model="gender"
                             class="form-control @error('gender') is-invalid @enderror">
                         <option value="">請選擇性別</option>
-                        <option value="{{ App\Enums\Gender::MALE->value }}">男</option>
-                        <option value="{{ App\Enums\Gender::FEMALE->value }}">女</option>
+                        <option
+                            value="{{ Gender::MALE->value }}"> {{ Gender::from(Gender::MALE->value)->toChinese() }} </option>
+                        <option
+                            value="{{ Gender::FEMALE->value }}"> {{ Gender::from(Gender::FEMALE->value)->toChinese() }}</option>
                     </select>
                     @error('gender')
                     <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -56,8 +62,8 @@
                     <select id="isVegetarian" wire:model="isVegetarian"
                             class="form-control @error('isVegetarian') is-invalid @enderror">
                         <option value="">請選擇是否吃素</option>
-                        <option value="0">否</option>
                         <option value="1">是</option>
+                        <option value="0">否</option>
                     </select>
                     @error('isVegetarian')
                     <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -78,8 +84,10 @@
             <select id="identity" wire:model="identity"
                     class="form-control @error('identity') is-invalid @enderror">
                 <option value="">請選擇參加身份</option>
-                <option value="{{ App\Enums\Identity::STUDENT->value }}">學生</option>
-                <option value="{{ App\Enums\Identity::SOCIAL->value }}">社會人士</option>
+                <option
+                    value="{{ Identity::STUDENT->value }}">{{ Identity::from(Identity::STUDENT->value)->toChinese() }}</option>
+                <option
+                    value="{{ Identity::SOCIAL->value }}">{{ Identity::from(Identity::SOCIAL->value)->toChinese() }}</option>
             </select>
             @error('identity')
             <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -103,7 +111,8 @@
         @endif
 
         <div class="text-center">
-            <button type="submit" class="btn btn-primary">{{ App\Enums\Mode::CREATE == $mode ? '提交' : '修改'}} </button>
+            <button type="submit"
+                    class="btn btn-primary">{{ App\Enums\Mode::CREATE == $mode ? '提交' : '修改'}} </button>
         </div>
     </form>
 </div>

@@ -16,4 +16,17 @@ enum Identity: string {
      * 社會人士
      */
     case SOCIAL = 'social';
+
+    /**
+     * 將身份轉換成中文
+     *
+     * @return string
+     */
+    public function toChinese(): string
+    {
+        return match ($this) {
+            self::STUDENT => '學生',
+            self::SOCIAL => '社會人士',
+        };
+    }
 }

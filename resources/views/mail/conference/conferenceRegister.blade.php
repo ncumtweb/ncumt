@@ -6,7 +6,7 @@
     <h3 style="margin-top: 20px;">表單名稱：2024 第二十五屆全國大專校院登山運動研討會報名表</h3>
     <ul>
         <li>姓名 : {{ $conferenceUser->name }}</li>
-        <li>性別 : {{ $conferenceUser->getGenderString($conferenceUser->gender) }}</li>
+        <li>性別 : {{ App\Enums\Gender::MALE->value == $conferenceUser->gender ? '男' : '女' }}</li>
         <li>手機 : {{ $conferenceUser->phone }}</li>
         <li>是否吃素：{{ $conferenceUser->is_vegetarian ? '是' : '否' }}</li>
         <li>E-mail : {{ $conferenceUser->email }}</li>
