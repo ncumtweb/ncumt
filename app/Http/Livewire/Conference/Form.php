@@ -110,7 +110,7 @@ class Form extends Component
         $conferenceUser->save();
 
         Mail::to($conferenceUser->email)->queue(new ConferenceRegister($conferenceUser, $this->mode));
-        Log::info('send conference email to ' . $conferenceUser->email . ', mode: ' . $this->mode->value);
+        Log::info('send conference register email to ' . $conferenceUser->email . ', mode: ' . $this->mode->value);
 
         if (Mode::CREATE == $this->mode) {
             $registerOrEdit = '送出';

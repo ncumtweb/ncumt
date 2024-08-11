@@ -20,7 +20,6 @@ class ConferenceUser extends Model
      */
     public function getGenderString(string $gender): string
     {
-        Log::info($this->gender);
         return Gender::MALE->value == $this->gender  ? '男' : '女';
     }
 }

@@ -69,10 +69,10 @@
                                     class="bi bi-chevron-down dropdown-indicator"></i></a>
                             <ul>
                                 <li><a href="{{ route('record.create') }}">新增紀錄</a></li>
-                                <li><a href="{{ route('post.create') }}">新增公告</a></i>
-                                <li><a href="{{ route('calendar.create') }}">新增活動</a></i>
-                                <li><a href="{{ route('course.create') }}">新增社課</a></i>
-                                <li><a href="{{ route('faq.create') }}">新增FAQ</a></i>
+                                <li><a href="{{ route('post.create') }}">新增公告</a></li>
+                                <li><a href="{{ route('calendar.create') }}">新增活動</a></li>
+                                <li><a href="{{ route('course.create') }}">新增社課</a></li>
+                                <li><a href="{{ route('faq.create') }}">新增FAQ</a></li>
                             </ul>
                         </li>
                     @endif
@@ -86,9 +86,9 @@
                     <li class="dropdown"><a><span>{{Auth::user()->name_zh . ' 您好'}}</span> <i
                                 class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
-                            <li><a href="{{ route('user.show', Auth::user()->id )}}">{{ __('個人資料') }}</a></i>
-                            <li><a href="{{ route('course.showRecord') }}">{{ __('已報名社課') }}</a></i>
-                            <li><a href="{{ route('rental.index') }}">{{ __('已租借清單') }}</a></i>
+                            <li><a href="{{ route('user.show', Auth::user()->id )}}">{{ __('個人資料') }}</a></li>
+                            <li><a href="{{ route('course.showRecord') }}">{{ __('已報名社課') }}</a></li>
+                            <li><a href="{{ route('rental.index') }}">{{ __('已租借清單') }}</a></li>
                             <li><a href="/portal/logout">{{ __('登出') }}</a></li>
                         </ul>
                 @endif
