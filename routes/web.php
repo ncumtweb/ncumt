@@ -41,6 +41,10 @@ Route::get('/conference/search', function () {
     return view('conference.searchAndEdit');
 });
 
+Route::get('/conference/result', function () {
+    return view('conference.result');
+});
+
 // Route::get('/map', function () {
 //     return view('map');
 // });

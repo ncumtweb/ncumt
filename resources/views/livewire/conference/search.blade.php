@@ -1,5 +1,5 @@
 <div class="form mt-3">
-    <form wire:submit.prevent="submit" class="php-email-form">
+    <form wire:submit.prevent="submit" class="createRecordForm">
         @if (session('status'))
             <div class="col-lg-12 text-center mb-2">
                 <h6 class="alert alert-success">{{ session('status') }}</h6>

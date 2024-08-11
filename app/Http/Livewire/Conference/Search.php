@@ -11,11 +11,11 @@ class Search extends Component
 
     public $email;
 
-    protected $rules = [
+    protected array $rules = [
         'email' => 'required|email',
     ];
 
-    public $messages = [
+    public array $messages = [
         'email.required' => 'Email 為必填',
         'email.email' => 'Email 格式錯誤',
     ];
@@ -33,7 +33,7 @@ class Search extends Component
         $this->emit('userSelected', $this->conferenceUser->id);
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view('livewire.conference.search');
     }

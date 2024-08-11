@@ -25,7 +25,7 @@ class Form extends Component
     public $schoolName;
     public $department;
 
-    protected $rules = [
+    protected array $rules = [
         'name' => 'required|string|max:255',
         'isVegetarian' => 'required|boolean',
         'gender' => 'required|in:0,1',
@@ -34,7 +34,7 @@ class Form extends Component
         'identity' => 'required|in:student,social',
     ];
 
-    public $messages = [
+    public array $messages = [
         'name.required' => '姓名為必填',
         'isVegetarian.required' => '是否吃素為必填',
         'phone.required' => '手機為必填',
@@ -92,25 +92,8 @@ class Form extends Component
             }
         }
 
-        $conferenceUser = Mode::CREATE == $this->mode ? new ConferenceUser() : $this->conferenceUser;
-        $conferenceUser->name = $this->name;
-        $conferenceUser->is_vegetarian = $this->isVegetarian;
-        $conferenceUser->gender = $this->gender;
-        $conferenceUser->phone = $this->phone;
-        $conferenceUser->email = $this->email;
-        $conferenceUser->identity = $this->identity;
-        // 若更新成 SOCIAL 校名與系級要設為空
-        if (Identity::SOCIAL->value == $this->identity) {
-            $conferenceUser->school_name = null;
-            $conferenceUser->department = null;
-        } else {
-            $conferenceUser->school_name = $this->schoolName;
-            $conferenceUser->department = $this->department;
-        }
-        $conferenceUser->save();
-
-        Mail::to($conferenceUser->email)->queue(new ConferenceRegister($conferenceUser, $this->mode));
-        Log::info('send conference register email to ' . $conferenceUser->email . ', mode: ' . $this->mode->value);
+        $conferenceUser = $this->saveConferenceUser();
+        $this->sendSuccessEmail($conferenceUser);
 
         if (Mode::CREATE == $this->mode) {
             $registerOrEdit = '送出';
@@ -120,7 +103,7 @@ class Form extends Component
             $registerOrEdit = '修改';
         }
 
-        $successMessage = '成功'. $registerOrEdit . '報名資訊！已將您的報名資訊寄送至您的信箱，請確認您的信箱。';
+        $successMessage = '成功' . $registerOrEdit . '報名資訊！已將您的報名資訊寄送至您的信箱，請確認您的信箱。';
         session()->flash('status', $successMessage);
     }
 
@@ -129,8 +112,49 @@ class Form extends Component
         return view('livewire.conference.form');
     }
 
-    private function isOriginalEmail():bool
+    private function isOriginalEmail(): bool
     {
         return $this->conferenceUser->email == $this->email;
+    }
+
+    /**
+     * 儲存或是編輯 conferenceUser
+     *
+     * @return ConferenceUser
+     */
+    private function saveConferenceUser(): ConferenceUser
+    {
+        $conferenceUser = Mode::CREATE == $this->mode ? new ConferenceUser() : $this->conferenceUser;
+
+        $conferenceUser->name = $this->name;
+        $conferenceUser->is_vegetarian = $this->isVegetarian;
+        $conferenceUser->gender = $this->gender;
+        $conferenceUser->phone = $this->phone;
+        $conferenceUser->email = $this->email;
+        $conferenceUser->identity = $this->identity;
+
+        // 若更新成 SOCIAL 校名與系級要設為空
+        if (Identity::SOCIAL->value == $this->identity) {
+            $conferenceUser->school_name = null;
+            $conferenceUser->department = null;
+        } else {
+            $conferenceUser->school_name = $this->schoolName;
+            $conferenceUser->department = $this->department;
+        }
+
+        $conferenceUser->save();
+        return $conferenceUser;
+    }
+
+    /**
+     * 發送報名或是編輯成功的 email
+     *
+     * @param ConferenceUser $conferenceUser
+     * @return void
+     */
+    private function sendSuccessEmail(ConferenceUser $conferenceUser): void
+    {
+        Mail::to($conferenceUser->email)->queue(new ConferenceRegister($conferenceUser, $this->mode));
+        Log::info('send conference register email to ' . $conferenceUser->email . ', mode: ' . $this->mode->value);
     }
 }

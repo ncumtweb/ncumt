@@ -1228,7 +1228,7 @@ section {
     font-weight: 600;
 }
 
-.contact .php-email-form .result-message {
+.contact .createRecordForm .result-message {
 
     color: #f55b6a;
     text-align: center;
@@ -1237,11 +1237,11 @@ section {
     font-weight: 600;
 }
 
-.contact .php-email-form .error-message br + br {
+.contact .createRecordForm .error-message br + br {
     margin-top: 25px;
 }
 
-.contact .php-email-form .sent-message {
+.contact .createRecordForm .sent-message {
     display: none;
     color: var(--color-white);
     background: var(--color-green);
@@ -1250,14 +1250,14 @@ section {
     font-weight: 600;
 }
 
-.contact .php-email-form .loading {
+.contact .createRecordForm .loading {
     display: none;
     background: var(--color-white);
     text-align: center;
     padding: 15px;
 }
 
-.contact .php-email-form .loading:before {
+.contact .createRecordForm .loading:before {
     content: "";
     display: inline-block;
     border-radius: 50%;
@@ -1283,11 +1283,6 @@ section {
 
 .contact .createRecordForm #answer {
     height: 200px;
-}
-
-.contact .createRecordForm input:focus,
-.contact .createRecordForm textarea:focus {
-    background-color: var(--color-primary);
 }
 
 .contact .createRecordForm .row button[type=button] {
@@ -1388,11 +1383,6 @@ section {
     padding: 10px 14px;
     box-shadow: none;
     font-size: 15px;
-}
-
-.contact .php-email-form input:focus,
-.contact .php-email-form textarea:focus {
-    background-color: var(--color-primary);
 }
 
 .contact .php-email-form button[type=button] {

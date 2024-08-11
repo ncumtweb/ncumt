@@ -10,6 +10,12 @@
 
         <nav id="navbar" class="navbar">
             <ul>
+                <li class="dropdown"><a><span>登山研討會</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <ul>
+                        <li><a href="{{ url('conference/register') }}">研討會報名表</a></li>
+                        <li><a href="{{ url('conference/search') }}">研討會查詢</a></li>
+                        <li><a href="{{ url('conference/result') }}">研討會報名結果</a></li>
+                    </ul>
                 <li><a href="{{ url('/aboutus') }}">關於我們</a></li>
                 <li class="dropdown"><a><span>社課資訊</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                     <ul>
