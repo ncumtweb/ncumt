@@ -4,7 +4,10 @@ namespace App\Http\Livewire\Conference;
 
 use App\Enums\Identity;
 use App\Enums\Mode;
+use App\Mail\Conference\ConferenceRegister;
 use App\Models\ConferenceUser;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 
 class Form extends Component
@@ -96,6 +99,7 @@ class Form extends Component
         $conferenceUser->phone = $this->phone;
         $conferenceUser->email = $this->email;
         $conferenceUser->identity = $this->identity;
+        // 若更新成 SOCIAL 校名與系級要設為空
         if (Identity::SOCIAL->value == $this->identity) {
             $conferenceUser->school_name = null;
             $conferenceUser->department = null;
@@ -105,12 +109,18 @@ class Form extends Component
         }
         $conferenceUser->save();
 
+        Mail::to($conferenceUser->email)->queue(new ConferenceRegister($conferenceUser, $this->mode));
+        Log::info('send conference email to ' . $conferenceUser->email . ', mode: ' . $this->mode->value);
+
         if (Mode::CREATE == $this->mode) {
-            $successMessage = '成功送出報名資訊！';
+            $registerOrEdit = '送出';
             $this->reset();
+            $this->mode = Mode::CREATE;
         } else {
-            $successMessage = '成功修改報名資訊！';
+            $registerOrEdit = '修改';
         }
+
+        $successMessage = '成功'. $registerOrEdit . '報名資訊！已將您的報名資訊寄送至您的信箱，請確認您的信箱。';
         session()->flash('status', $successMessage);
     }
 
