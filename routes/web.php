@@ -28,13 +28,21 @@ Route::get('/basic-information', function () {
     return view('forms.basic_information');
 })->name('form.basic_information');
 
+Route::get('/club-roles', function () {
+    return view('forms.club_roles');
+})->name('form.club_roles');
+
+Route::get('/physical-condition', function () {
+    return view('forms.physical-condition');
+})->name('form.physical-condition');
+
 Route::get('/eating-habit', function () {
     return view('forms.eating_habit');
 })->name('form.eating_habit');
 
-Route::get('/emergency-contact', function () {
-    return view('forms.emergency_contact');
-})->name('form.emergency_contact');
+Route::get('/contact-information', function () {
+    return view('forms.contact_information');
+})->name('form.contact_information');
 
 Route::get('/mountaineering-deeds', function () {
     return view('forms.mountaineering_deeds');
@@ -80,7 +88,12 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
-    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::put('/user/{id}', [UserController::class, 'updateBasicInformation'])->name('user.updateBasicInformation');
+    Route::put('/user/{id}', [UserController::class, 'updateClubRoles'])->name('user.updateClubRoles');
+    Route::put('/user/{id}', [UserController::class, 'updatePhysicalCondition'])->name('user.updatePhysicalCondition');
+    Route::put('/user/{id}', [UserController::class, 'updateEatingHabit'])->name('user.updateEatingHabit');
+    Route::put('/user/{id}', [UserController::class, 'updateContactInformation'])->name('user.updateContactInformation');
+    Route::put('/user/{id}', [UserController::class, 'updateMountaineeringDeeds'])->name('user.updateMountaineeringDeeds');
 
     //course
     Route::get('/course/showRecord/', [CourseController::class, 'showRecord'])->name('course.showRecord');
