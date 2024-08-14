@@ -8,7 +8,7 @@
         <li>姓名 : {{ $conferenceUser->name }}</li>
         <li>性別 : {{ App\Enums\Gender::MALE->value == $conferenceUser->gender ? '男' : '女' }}</li>
         <li>手機 : {{ $conferenceUser->phone }}</li>
-        <li>是否吃素：{{ $conferenceUser->is_vegetarian ? '是' : '否' }}</li>
+        <li>葷素：{{ $conferenceUser->is_vegetarian ? '素' : '葷' }}</li>
         <li>E-mail : {{ $conferenceUser->email }}</li>
         @if(App\Enums\Identity::STUDENT->value == $conferenceUser->identity)
             <li>參加講習之身份 : 學生</li>

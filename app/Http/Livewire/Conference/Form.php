@@ -16,6 +16,8 @@ class Form extends Component
     public $mode;
     public $conferenceUser;
 
+    public bool $isDone = false;
+
     public $name;
     public $phone;
     public $gender;
@@ -28,7 +30,7 @@ class Form extends Component
     protected array $rules = [
         'name' => 'required|string|max:255',
         'isVegetarian' => 'required|boolean',
-        'gender' => 'required|in:0,1',
+        'gender' => 'required|in:1,2',
         'phone' => 'required|string|max:100',
         'email' => 'required|email|max:255',
         'identity' => 'required|in:student,social',
@@ -60,6 +62,7 @@ class Form extends Component
         $this->identity = $this->conferenceUser->identity;
         $this->schoolName = $this->conferenceUser->school_name;
         $this->department = $this->conferenceUser->department;
+        $this->isDone = false;
     }
 
     /**
@@ -104,6 +107,7 @@ class Form extends Component
         }
 
         $successMessage = '成功' . $registerOrEdit . '報名資訊！已將您的報名資訊寄送至您的信箱，請確認您的信箱。';
+        $this->isDone = true;
         session()->flash('status', $successMessage);
     }
 

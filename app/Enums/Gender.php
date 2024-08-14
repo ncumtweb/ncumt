@@ -7,12 +7,12 @@ enum Gender: int
     /**
      * 男
      */
-    case MALE = 0;
+    case MALE = 1;
 
     /**
      * 女
      */
-    case FEMALE = 1;
+    case FEMALE = 2;
 
     /**
      * 将性别转换为对应的中文描述
