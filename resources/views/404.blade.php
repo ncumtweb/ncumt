@@ -2,6 +2,9 @@
 @section('title', '404')
 
 @section('content')
+    @push('styles')
+        <link rel="stylesheet" href="{{ asset('assets/css/404.css') }}">
+    @endpush
     <div class="container-fluid">
         <img src="{{ asset('assets/img/404_' . $randomNumber . '.jpg') }}" class="crop" id="background-image" alt="">
         <div class="overlay">
