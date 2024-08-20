@@ -424,53 +424,36 @@
                 @endif
                 <div class="col-md-8">
                     <div class="form">
-                        <form action="{{ route('user.updateMountaineeringDeeds', $user->id) }}" method="POST" id="createRecordForm" class="php-email-form" enctype="multipart/form-data">
+                        <form action="{{ route('user.updateMountaineeringDeeds', $user->id) }}" method="POST" id="createRecordForm" class="php-email-form">
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="days_in_mountain" class="form-label">在山上的天數</label>
-                                        @if($user->days_in_mountain != 0)
-                                            <input type="text" name="days_in_mountain" class="form-control" id="days_in_mountain"
-                                                   value="{{ $user->days_in_mountain }}" >
-                                        @else
-                                            <input type="text" name="days_in_mountain" class="form-control" id="days_in_mountain"
-                                                   placeholder="請輸入在山上的天數">
-                                        @endif
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="times_climbed_mountain " class="form-label">爬山的次數</label>
-                                        @if($user->times_climbed_mountain  != 0)
-                                            <input type="text" name="times_climbed_mountain " class="form-control" id="times_climbed_mountain "
-                                                   value="{{ $user->times_climbed_mountain  }}" >
-                                        @else
-                                            <input type="text" name="times_climbed_mountain " class="form-control" id="times_climbed_mountain "
-                                                   placeholder="請輸入爬山的次數">
-                                        @endif
-                                    </div>
+                                <div class="form-group col-md-6">
+                                    <label for="days_in_mountain" class="form-label">在山上的天數</label>
+                                    <input type="number" name="days_in_mountain" class="form-control" id="days_in_mountain"
+                                           value="{{ old('days_in_mountain', $user->days_in_mountain) }}"
+                                           placeholder="請輸入在山上的天數">
                                 </div>
-                                <div class="row">
-                                    <div class="form-group col-md-6">
-                                        <label for="five_kilograms_running_time" class="form-label">五公里跑步時間(例：100分鐘20秒）</label>
-                                        @if($user->five_kilograms_running_time != null)
-                                            <input type="text" name="five_kilograms_running_time" class="form-control" id="five_kilograms_running_time"
-                                                   value="{{ $user->five_kilograms_running_time }}" >
-                                        @else
-                                            <input type="text" name="five_kilograms_running_time" class="form-control" id="five_kilograms_running_time"
-                                                   placeholder="請輸入五公里跑步時間">
-                                        @endif
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label for="join_the_club_time" class="form-label">加入登山社時間</label>
-                                        @if($user->join_the_club_time  != null)
-                                            <input type="text" name="join_the_club_time" class="form-control" id="join_the_club_time"
-                                                   value="{{ $user->join_the_club_time }}" >
-                                        @else
-                                            <input type="text" name="join_the_club_time" class="form-control" id="join_the_club_time"
-                                                   placeholder="請輸入加入登山社時間">
-                                        @endif
-                                    </div>
+                                <div class="form-group col-md-6">
+                                    <label for="times_climbed_mountain" class="form-label">爬山的次數</label>
+                                    <input type="number" name="times_climbed_mountain" class="form-control" id="times_climbed_mountain"
+                                           value="{{ old('times_climbed_mountain', $user->times_climbed_mountain) }}"
+                                           placeholder="請輸入爬山的次數">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label for="five_kilograms_running_time" class="form-label">五公里跑步時間(例：00:22:44）</label>
+                                    <input type="text" name="five_kilograms_running_time" class="form-control" id="five_kilograms_running_time"
+                                           value="{{ old('five_kilograms_running_time', $user->five_kilograms_running_time) }}"
+                                           placeholder="請輸入五公里跑步時間">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="join_the_club_time" class="form-label">加入登山社時間</label>
+                                    <input type="datetime-local" name="join_the_club_time" class="form-control" id="join_the_club_time"
+                                           value="{{ old('join_the_club_time', $user->join_the_club_time ) }}"
+                                           placeholder="請輸入加入登山社時間">
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="text-center">
@@ -483,4 +466,5 @@
             </div>
         </div>
     </section>
+
 @endsection
