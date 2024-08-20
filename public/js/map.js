@@ -44078,7 +44078,7 @@ const VERSION = '7.4.0';
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -44092,14 +44092,14 @@ const VERSION = '7.4.0';
 /******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
@@ -44112,12 +44112,12 @@ const VERSION = '7.4.0';
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -44128,7 +44128,7 @@ const VERSION = '7.4.0';
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
@@ -44168,7 +44168,7 @@ __webpack_require__.r(__webpack_exports__);
 var my_map = {
   // <-- add this line to declare the object
   display: function display() {
-    // <-- add this line to declare a method 
+    // <-- add this line to declare a method
 
     var map = new ol__WEBPACK_IMPORTED_MODULE_1__["default"]({
       target: 'map',
@@ -44198,7 +44198,7 @@ var my_map = {
         }),
         style: new ol_style_js__WEBPACK_IMPORTED_MODULE_9__["default"]({
           image: new ol_style_js__WEBPACK_IMPORTED_MODULE_10__["default"]({
-            src: "assets/img/ncumt.png"
+            src: "assets/img/favicon.png"
           }),
           text: new ol_style_js__WEBPACK_IMPORTED_MODULE_11__["default"]({
             font: '20px 微軟正黑體',
