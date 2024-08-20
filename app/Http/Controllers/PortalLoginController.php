@@ -46,8 +46,8 @@ class PortalLoginController extends Controller
             $user->phone = $user->phone ?? $user_portal->user['mobilePhone'];
             $user->personal_id = $user_portal->user['personalId'];
             $user->gender = $user_portal->user['gender'];
-            $user->create_user = Common::SYSTEM;
-            $user->modify_user = Common::SYSTEM;
+            $user->create_user = Common::SYSTEM_USER;
+            $user->modify_user = Common::SYSTEM_USER;
             $user->save();
 
             $checkExist = User::where('id', $user_portal->user['id'])->first(); // 指向不成功，所以再查一次

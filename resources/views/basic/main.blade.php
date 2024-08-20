@@ -12,7 +12,7 @@
 
     <!-- PWA  -->
     <meta name="theme-color" content="#6777ef"/>
-    <link rel="apple-touch-icon" href="{{ asset('assets/img/ncumt.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/img/favicon.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- Favicons -->
@@ -50,6 +50,7 @@
     <!-- Template Main CSS Files -->
     <link href="{{ asset('assets/css/variables.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/css/404.css') }}">
 
     @livewireStyles
 
