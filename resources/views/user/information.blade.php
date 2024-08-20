@@ -12,6 +12,7 @@
 
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
+            <section id="basic_information"></section>
             <div class="row">
                 <div class="col-lg-12 text-center mb-5">
                     <h1 class="page-title">基本資料</h1><!-- 置中標題 -->
@@ -26,7 +27,6 @@
                 @endif
                 <div class="col-md-8 ">
                     <div class="form ">
-                        <section id="basic_information"></section>
                         <form action="{{ route('user.updateBasicInformation', $user->id) }}" method="POST" id="createRecordForm"
                               class="php-email-form" enctype="multipart/form-data">
                             @csrf
@@ -99,10 +99,10 @@
                                     <label for="phone" class="form-label">手機號碼</label>
                                     @if($user->phone != null)
                                         <input type="tel" name="phone" class="form-control" id="phone"
-                                               value="{{ $user->phone }}" required>
+                                               value="{{ $user->phone }}" >
                                     @else
                                         <input type="tel" name="phone" class="form-control" id="phone"
-                                               placeholder="請輸入你的手機號碼">
+                                               placeholder="請輸入你的手機號碼" required>
                                     @endif
 
                                 </div>
@@ -110,10 +110,10 @@
                                     <label for="email" class="form-label">電子郵件</label>
                                     @if($user->phone != null)
                                         <input type="email" name="email" class="form-control" id="email"
-                                               value="{{ $user->email }}" required>
+                                               value="{{ $user->email }}">
                                     @else
                                         <input type="email" name="email" class="form-control" id="email"
-                                               placeholder="請輸入你的電子郵件">
+                                               placeholder="請輸入你的電子郵件" required>
                                     @endif
                                 </div>
                             </div>
@@ -132,6 +132,7 @@
     <!-- start form --><!-- 山社角色 -->
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
+            <section id="club_roles"></section>
             <div class="row">
                 <div class="col-lg-12 text-center mb-5">
                     <h1 class="page-title">山社角色</h1><!-- 置中標題 -->
@@ -146,7 +147,6 @@
                 @endif
                 <div class="col-md-8 ">
                     <div class="form ">
-                        <section id="club_roles"></section>
                         <form action="{{ route('user.updateClubRoles', $user->id) }}" method="POST" id="createRecordForm"
                               class="php-email-form" enctype="multipart/form-data">
                             @csrf
@@ -186,6 +186,7 @@
     <!-- start form --><!-- 身體情況 -->
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
+            <section id="physical_condition"></section>
             <div class="row">
                 <div class="col-lg-12 text-center mb-5">
                     <h1 class="page-title">身體情況</h1><!-- 置中標題 -->
@@ -200,30 +201,29 @@
                 @endif
                 <div class="col-md-8 ">
                     <div class="form ">
-                        <section id="physical_condition"></section>
                         <form action="{{ route('user.updatePhysicalCondition', $user->id) }}" method="POST" id="createRecordForm"
                               class="php-email-form" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="altitude_sickness" class="form-label">高山症（尚未爬過高山,沒有, 輕微, 嚴重)</label>
+                                    <label for="altitude_sickness" class="form-label">高山症（沒有, 輕微, 嚴重)</label>
                                     <select name="altitude_sickness" class="form-control" id="altitude_sickness" required>
                                         <option value="" disabled selected>請選擇</option>
-                                        <option value="尚未爬過高山" {{ $user->altitude_sickness == '尚未爬過高山' ? 'selected' : '' }}>尚未爬過高山</option>
-                                        <option value="沒有" {{ $user->altitude_sickness == '沒有' ? 'selected' : '' }}>沒有</option>
-                                        <option value="輕微" {{ $user->altitude_sickness == '輕微' ? 'selected' : '' }}>輕微</option>
-                                        <option value="嚴重" {{ $user->altitude_sickness == '嚴重' ? 'selected' : '' }}>嚴重</option>
+                                        <option value="0" {{ $user->altitude_sickness == '0' ? 'selected' : '' }}>沒有</option>
+                                        <option value="1" {{ $user->altitude_sickness == '1' ? 'selected' : '' }}>輕微</option>
+                                        <option value="2" {{ $user->altitude_sickness == '2' ? 'selected' : '' }}>嚴重</option>
                                     </select>
                                 </div>
+
                                 <div class="form-group col-md-6">
                                     <label for="special_disease" class="form-label">特殊疾病(請加說明，沒有則寫無)</label>
                                     @if($user->special_disease != null)
                                         <input type="text" name="special_disease" class="form-control" id="special_disease"
-                                               value="{{ $user->special_disease }}" required>
+                                               value="{{ $user->special_disease }}">
                                     @else
                                         <input type="text" name="special_disease" class="form-control" id="special_disease"
-                                               placeholder="請輸入你的特殊疾病">
+                                               placeholder="請輸入你的特殊疾病" required>
                                     @endif
                                 </div>
                             </div>
@@ -242,6 +242,7 @@
     <!-- start form --><!-- 飲食習慣 -->
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
+            <section id="eating_habit"></section>
             <div class="row">
                 <div class="col-lg-12 text-center mb-5">
                     <h1 class="page-title">飲食習慣</h1><!-- 置中標題 -->
@@ -257,7 +258,6 @@
                 @endif
                 <div class="col-md-8 ">
                     <div class="form ">
-                        <section id="eating_habit"></section>
                         <form action="{{ route('user.updateEatingHabit', $user->id) }}" method="POST" id="createRecordForm"
                               class="php-email-form" enctype="multipart/form-data">
                             @csrf
@@ -267,10 +267,11 @@
                                     <label for="dietary_habit" class="form-label">葷素食調查（葷, 素, 蛋奶素）</label>
                                     <select name="dietary_habit" class="form-control" id="dietary_habit" required>
                                         <option value="" disabled selected>請選擇</option>
-                                        <option value="葷" {{ $user->dietary_habit == '葷' ? 'selected' : '' }}>葷</option>
-                                        <option value="素" {{ $user->dietary_habit == '素' ? 'selected' : '' }}>素</option>
-                                        <option value="蛋奶素" {{ $user->dietary_habit == '蛋奶素' ? 'selected' : '' }}>蛋奶素</option>
+                                        <option value="0" {{ $user->dietary_habit == '0' ? 'selected' : '' }}>葷</option>
+                                        <option value="1" {{ $user->dietary_habit == '1' ? 'selected' : '' }}>素</option>
+                                        <option value="2" {{ $user->dietary_habit == '2' ? 'selected' : '' }}>蛋奶素</option>
                                     </select>
+
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="favorite_foods" class="form-label">喜歡的食物們</label>
@@ -288,10 +289,10 @@
                                     <label for="allergic_foods" class="form-label">過敏的食物們</label>
                                     @if($user->allergic_foods != null)
                                         <input type="text" name="allergic_foods" class="form-control" id="allergic_foods"
-                                               value="{{ $user->allergic_foods }}" required>
+                                               value="{{ $user->allergic_foods }}" >
                                     @else
                                         <input type="text" name="allergic_foods" class="form-control" id="allergic_foods"
-                                               placeholder="請輸入你的過敏的食物(沒有則寫無）">
+                                               placeholder="請輸入你的過敏的食物(沒有則寫無）"required>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
@@ -320,6 +321,7 @@
     <!-- start form --><!-- 聯絡資料 -->
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
+            <section id="contact_information"></section>
             <div class="row">
                 <div class="col-lg-12 text-center mb-5">
                     <h1 class="page-title">聯絡資料</h1><!-- 置中標題 -->
@@ -334,40 +336,39 @@
                 @endif
                 <div class="col-md-8 ">
                     <div class="form ">
-                        <section id="contact_information"></section>
                         <form action="{{ route('user.updateContactInformation', $user->id) }}" method="POST" id="createRecordForm"
                               class="php-email-form" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-3">
                                     <label for="emergency_contact_person" class="form-label">緊急聯絡人</label>
                                     @if($user->emergency_contact_person != null)
                                         <input type="text" name="emergency_contact_person" class="form-control" id="emergency_contact_person"
-                                               value="{{ $user->special_disease }}" required>
+                                               value="{{ $user->special_disease }}" >
                                     @else
                                         <input type="text" name="emergency_contact_person" class="form-control" id="emergency_contact_person"
-                                               placeholder="請輸入你的緊急聯絡人">
+                                               placeholder="請輸入你的緊急聯絡人"required>
                                     @endif
                                 </div>
-                                <div class="form-group col-md-2">
+                                <div class="form-group col-md-3">
                                     <label for="emergency_contact_relation" class="form-label">關係</label>
                                     @if($user->emergency_contact_relation != null)
                                         <input type="text" name="emergency_contact_relation" class="form-control" id="emergency_contact_relation"
-                                               value="{{ $user->emergency_contact_relation }}" required>
+                                               value="{{ $user->emergency_contact_relation }}" >
                                     @else
                                         <input type="text" name="emergency_contact_relation" class="form-control" id="emergency_contact_relation"
-                                               placeholder="請輸入你與緊急聯絡人關係">
+                                               placeholder="請輸入關係"required>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="emergency_contact_phone" class="form-label">緊急聯絡電話</label>
                                     @if($user->emergency_contact_phone != null)
                                         <input type="text" name="emergency_contact_phone" class="form-control" id="emergency_contact_phone"
-                                               value="{{ $user->emergency_contact_phone }}" required>
+                                               value="{{ $user->emergency_contact_phone }}" >
                                     @else
                                         <input type="text" name="emergency_contact_phone" class="form-control" id="emergency_contact_phone"
-                                               placeholder="請輸入緊急聯絡電話">
+                                               placeholder="請輸入緊急聯絡電話"required>
                                     @endif
                                 </div>
                             </div>
@@ -376,20 +377,20 @@
                                     <label for="home_phone_number" class="form-label">家裡電話</label>
                                     @if($user->home_phone_number != null)
                                         <input type="text" name="home_phone_number" class="form-control" id="home_phone_number"
-                                               value="{{ $user->home_phone_number }}" required>
+                                               value="{{ $user->home_phone_number }}" >
                                     @else
                                         <input type="text" name="home_phone_number" class="form-control" id="home_phone_number"
-                                               placeholder="請輸入家裡電話">
+                                               placeholder="請輸入家裡電話"required>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="home_address" class="form-label">家裡住址</label>
                                     @if($user->home_address != null)
                                         <input type="text" name="home_address" class="form-control" id="home_address"
-                                               value="{{ $user->home_address }}" required>
+                                               value="{{ $user->home_address }}" >
                                     @else
                                         <input type="text" name="home_address" class="form-control" id="home_address"
-                                               placeholder="請輸入家裡住址">
+                                               placeholder="請輸入家裡住址"required>
                                     @endif
                                 </div>
                             </div>
@@ -408,6 +409,7 @@
     <!-- start form --><!-- 登山事蹟 -->
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
+            <section id="mountaineering_deeds"></section>
             <div class="row">
                 <div class="col-lg-12 text-center mb-5">
                     <h1 class="page-title">登山事蹟</h1><!-- 置中標題 -->
@@ -422,8 +424,7 @@
                 @endif
                 <div class="col-md-8 ">
                     <div class="form ">
-                        <section id="mountaineering_deeds"></section>
-                        <label for="mountaineering_deeds" style="font-size: 30px; color: #1c6149">登山事蹟</label>
+
                         <form action="{{ route('user.updateMountaineeringDeeds', $user->id) }}" method="POST" id="createRecordForm"
                               class="php-email-form" enctype="multipart/form-data">
                             @csrf
@@ -452,7 +453,7 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="five_kilograms_running_time" class="form-label">五公里跑步時間</label>
+                                    <label for="five_kilograms_running_time" class="form-label">五公里跑步時間(例：100分鐘20秒）</label>
                                     @if($user->five_kilograms_running_time != null)
                                         <input type="text" name="five_kilograms_running_time" class="form-control" id="five_kilograms_running_time"
                                                value="{{ $user->five_kilograms_running_time }}" >

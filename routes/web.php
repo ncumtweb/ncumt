@@ -85,32 +85,35 @@ Route::prefix('portal')->name('portal.')->group(function () {
 });
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
+
+    // User routes
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
-    Route::put('/user/{id}', [UserController::class, 'updateBasicInformation'])->name('user.updateBasicInformation');
-    Route::put('/user/{id}', [UserController::class, 'updateClubRoles'])->name('user.updateClubRoles');
-    Route::put('/user/{id}', [UserController::class, 'updatePhysicalCondition'])->name('user.updatePhysicalCondition');
-    Route::put('/user/{id}', [UserController::class, 'updateEatingHabit'])->name('user.updateEatingHabit');
-    Route::put('/user/{id}', [UserController::class, 'updateContactInformation'])->name('user.updateContactInformation');
-    Route::put('/user/{id}', [UserController::class, 'updateMountaineeringDeeds'])->name('user.updateMountaineeringDeeds');
+    Route::put('/user/{id}/basic-information', [UserController::class, 'updateBasicInformation'])->name('user.updateBasicInformation');
+    Route::put('/user/{id}/club-roles', [UserController::class, 'updateClubRoles'])->name('user.updateClubRoles');
+    Route::put('/user/{id}/physical-condition', [UserController::class, 'updatePhysicalCondition'])->name('user.updatePhysicalCondition');
+    Route::put('/user/{id}/eating-habit', [UserController::class, 'updateEatingHabit'])->name('user.updateEatingHabit');
+    Route::put('/user/{id}/contact-information', [UserController::class, 'updateContactInformation'])->name('user.updateContactInformation');
+    Route::put('/user/{id}/mountaineering-deeds', [UserController::class, 'updateMountaineeringDeeds'])->name('user.updateMountaineeringDeeds');
 
-    //course
+    // Course routes
     Route::get('/course/showRecord/', [CourseController::class, 'showRecord'])->name('course.showRecord');
 
-    //equipment
+    // Equipment routes
     Route::get('/equipment/{name}', [EquipmentController::class, 'index'])->name('equipment.index');
-    Route::get("/selectEquipment", [EquipmentController::class, 'select'])->name('equipment.select');
+    Route::get('/selectEquipment', [EquipmentController::class, 'select'])->name('equipment.select');
 
-    //rental
+    // Rental routes
     Route::get('/rentalList', [RentalController::class, 'index'])->name('rental.index');
     Route::get('/rentalList/returnRental/{rental_id}', [RentalController::class, 'returnRental'])->name('rental.return');
     Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
     Route::get('/equipment/addEquipment/{equipment_id}', [RentalController::class, 'addEquipment'])->name('rental.addEquipment');
     Route::get('/equipment/showRental/{rental_id}', [RentalController::class, 'showRental'])->name('rental.showRental');
     Route::get('/equipment/removeRentalEquipment/{rentalEquipment_id}', [RentalController::class, 'removeEquipment'])->name('rentalEquipment.remove');
-    Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
 });
+
+
 
 Route::middleware(['previousPage'])->group(function () {
     Route::post('/course/register/{id}', [CourseController::class, 'register'])->name('course.register');
