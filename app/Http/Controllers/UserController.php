@@ -2,26 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    protected string $paginationTheme = 'bootstrap';
-
+    const POSITION = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員", 
+    '技術組組長', '技術組組員', '器材組組長', '器材組組長', '醫藥組組長',
+    '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
+    '財務長', '山防組組長', '山防組組員'];
     /**
      * Display a listing of the resource.
      *
-     * @return Application|Factory|View
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $users = User::orderBy('created_at','asc')->paginate(10);
-        return view('user.userList', compact('users'));
+        $position = self::POSITION;
+
+        $users = User::orderBy('created_at','asc')->get();
+        return view('user.user', compact('users', 'position'));
     }
 
     /**
@@ -49,17 +50,18 @@ class UserController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
         $user = User::find($id);
+        $position = self::POSITION;
 
         //avoid url attack
         if(!$this->checkUser($id)) {
             return redirect()->route('index');
         }
-        return view('user.information', compact('user'));
+        return view('user.information', compact('user', 'position'));
     }
 
     /**
@@ -71,8 +73,9 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+        $position = self::POSITION;
 
-        return(view('user.edit', compact('user')));
+        return(view('user.edit', compact('user', 'position')));
     }
 
     /**
@@ -116,14 +119,5 @@ class UserController extends Controller
         else {
             return true;
         }
-    }
-
-    public function updateRole(Request $request, int $userId): \Illuminate\Http\RedirectResponse
-    {
-        $user = User::findOrFail($userId);
-        $user->role = $request->role;
-        $user->save();
-
-        return redirect()->route('user.list')->with('status', $user->name_zh . '的角色更新成功');
     }
 }

@@ -2,32 +2,37 @@
 
 namespace App\Console;
 
-use App\Mail\Conference\ConferenceReminder;
-use App\Mail\Course\CourseReminder;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Models\CourseRecord;
+use App\Models\Course;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\CourseReminder;
 
 class Kernel extends ConsoleKernel
 {
     /**
      * Define the application's command schedule.
      *
-     * @param Schedule $schedule
+     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule): void
+    protected function schedule(Schedule $schedule)
     {
         $schedule->command('queue:work --tries=3 --stop-when-empty')->withoutOverlapping()->everyMinute();
         $schedule->call(function () {
-            CourseReminder::sendEmail();
-        })->dailyAt('19:00');
-
-        // 登山研討會前一天晚上七點發送 email 提醒報名者
-        $schedule->call(function () {
-            ConferenceReminder::sendEmail();
-        })->dailyAt('19:00')
+           $course = Course::where('date', now()->addDay()->toDateString())->first();
+           if($course) {
+                foreach($course->users as $user) {
+                    Mail::to($user->email)->send(new CourseReminder($course, $user));
+                }
+           }
+        })->daily()
         ->when(function () {
-            return now()->format('Y-m-d') === '2024-10-25';
+            $course = Course::where('date', '>', now()->toDateString())->first();
+            if($course) {
+                return $course->date === now()->addDay()->toDateString();
+            }
         });
     }
 
@@ -36,9 +41,9 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected function commands(): void
+    protected function commands()
     {
-        $this->load(__DIR__ . '/Commands');
+        $this->load(__DIR__.'/Commands');
 
         require base_path('routes/console.php');
     }
