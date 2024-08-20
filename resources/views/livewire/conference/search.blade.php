@@ -31,7 +31,7 @@
                         <input type="text" id="verification-code" wire:model="verificationCodeInput"
                                class="form-control @error('verificationCodeInput') is-invalid @enderror"
                                placeholder="請輸入收到的驗證碼">
-                        <button type="button" id="resend-button" class="btn btn-secondary bi-arrow-clockwise ms-2"
+                        <button type="button" id="resend-button" class="btn btn-primary bi-arrow-clockwise ms-2"
                                 wire:click="resendVerificationCodeToUser">
                         </button>
                         <button type="button" class="btn btn-primary bi-check-lg ms-2"
