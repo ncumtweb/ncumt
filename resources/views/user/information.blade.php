@@ -110,10 +110,10 @@
                                     <label for="email" class="form-label">電子郵件</label>
                                     @if($user->phone != null)
                                         <input type="email" name="email" class="form-control" id="email"
-                                               value="{{ $user->email }}">
+                                               value="{{ $user->email }}" >
                                     @else
                                         <input type="email" name="email" class="form-control" id="email"
-                                               placeholder="請輸入你的電子郵件" required>
+                                               placeholder="請輸入你的電子郵件"required>
                                     @endif
                                 </div>
                             </div>
@@ -267,9 +267,9 @@
                                     <label for="dietary_habit" class="form-label">葷素食調查（葷, 素, 蛋奶素）</label>
                                     <select name="dietary_habit" class="form-control" id="dietary_habit" required>
                                         <option value="" disabled selected>請選擇</option>
-                                        <option value="0" {{ $user->dietary_habit == '0' ? 'selected' : '' }}>葷</option>
-                                        <option value="1" {{ $user->dietary_habit == '1' ? 'selected' : '' }}>素</option>
-                                        <option value="2" {{ $user->dietary_habit == '2' ? 'selected' : '' }}>蛋奶素</option>
+                                        <option value="0" {{ $user->dietary_habit == '1' ? 'selected' : '' }}>葷</option>
+                                        <option value="1" {{ $user->dietary_habit == '2' ? 'selected' : '' }}>素</option>
+                                        <option value="2" {{ $user->dietary_habit == '3' ? 'selected' : '' }}>蛋奶素</option>
                                     </select>
 
                                 </div>
@@ -422,69 +422,65 @@
                         <h6 class="alert alert-success">{{ session('status') }}</h6>
                     </div>
                 @endif
-                <div class="col-md-8 ">
-                    <div class="form ">
-
-                        <form action="{{ route('user.updateMountaineeringDeeds', $user->id) }}" method="POST" id="createRecordForm"
-                              class="php-email-form" enctype="multipart/form-data">
+                <div class="col-md-8">
+                    <div class="form">
+                        <form action="{{ route('user.updateMountaineeringDeeds', $user->id) }}" method="POST" id="createRecordForm" class="php-email-form" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="days_in_mountain" class="form-label">在山上的天數</label>
-                                    @if($user->days_in_mountain != null)
-                                        <input type="text" name="days_in_mountain" class="form-control" id="days_in_mountain"
-                                               value="{{ $user->days_in_mountain }}" >
-                                    @else
-                                        <input type="text" name="days_in_mountain" class="form-control" id="days_in_mountain"
-                                               placeholder="請輸入在山上的天數">
-                                    @endif
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="days_in_mountain" class="form-label">在山上的天數</label>
+                                        @if($user->days_in_mountain != 0)
+                                            <input type="text" name="days_in_mountain" class="form-control" id="days_in_mountain"
+                                                   value="{{ $user->days_in_mountain }}" >
+                                        @else
+                                            <input type="text" name="days_in_mountain" class="form-control" id="days_in_mountain"
+                                                   placeholder="請輸入在山上的天數">
+                                        @endif
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="times_climbed_mountain " class="form-label">爬山的次數</label>
+                                        @if($user->times_climbed_mountain  != 0)
+                                            <input type="text" name="times_climbed_mountain " class="form-control" id="times_climbed_mountain "
+                                                   value="{{ $user->times_climbed_mountain  }}" >
+                                        @else
+                                            <input type="text" name="times_climbed_mountain " class="form-control" id="times_climbed_mountain "
+                                                   placeholder="請輸入爬山的次數">
+                                        @endif
+                                    </div>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label for="times_climbed_mountain " class="form-label">爬山的次數</label>
-                                    @if($user->times_climbed_mountain  != null)
-                                        <input type="text" name="times_climbed_mountain " class="form-control" id="times_climbed_mountain "
-                                               value="{{ $user->times_climbed_mountain  }}" >
-                                    @else
-                                        <input type="text" name="times_climbed_mountain " class="form-control" id="times_climbed_mountain "
-                                               placeholder="請輸入爬山的次數">
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-6">
-                                    <label for="five_kilograms_running_time" class="form-label">五公里跑步時間(例：100分鐘20秒）</label>
-                                    @if($user->five_kilograms_running_time != null)
-                                        <input type="text" name="five_kilograms_running_time" class="form-control" id="five_kilograms_running_time"
-                                               value="{{ $user->five_kilograms_running_time }}" >
-                                    @else
-                                        <input type="text" name="five_kilograms_running_time" class="form-control" id="five_kilograms_running_time"
-                                               placeholder="請輸入五公里跑步時間">
-                                    @endif
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="join_the_club_time" class="form-label">加入登山社時間</label>
-                                    @if($user->join_the_club_time  != null)
-                                        <input type="text" name="join_the_club_time" class="form-control" id="join_the_club_time"
-                                               value="{{ $user->join_the_club_time }}" >
-                                    @else
-                                        <input type="text" name="join_the_club_time" class="form-control" id="join_the_club_time"
-                                               placeholder="請輸入加入登山社時間">
-                                    @endif
-                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <label for="five_kilograms_running_time" class="form-label">五公里跑步時間(例：100分鐘20秒）</label>
+                                        @if($user->five_kilograms_running_time != null)
+                                            <input type="text" name="five_kilograms_running_time" class="form-control" id="five_kilograms_running_time"
+                                                   value="{{ $user->five_kilograms_running_time }}" >
+                                        @else
+                                            <input type="text" name="five_kilograms_running_time" class="form-control" id="five_kilograms_running_time"
+                                                   placeholder="請輸入五公里跑步時間">
+                                        @endif
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="join_the_club_time" class="form-label">加入登山社時間</label>
+                                        @if($user->join_the_club_time  != null)
+                                            <input type="text" name="join_the_club_time" class="form-control" id="join_the_club_time"
+                                                   value="{{ $user->join_the_club_time }}" >
+                                        @else
+                                            <input type="text" name="join_the_club_time" class="form-control" id="join_the_club_time"
+                                                   placeholder="請輸入加入登山社時間">
+                                        @endif
+                                    </div>
                             </div>
                             <div class="row">
                                 <div class="text-center">
                                     <button type="submit">儲存變更</button>
                                 </div>
                             </div>
-
                         </form>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 @endsection
