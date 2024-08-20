@@ -10,7 +10,7 @@ import Point from 'ol/geom/Point';
 import {Icon,Fill, Stroke, Circle, Text, Style} from 'ol/style.js';
 
 var my_map = {                       // <-- add this line to declare the object
-    display: function () {           // <-- add this line to declare a method 
+    display: function () {           // <-- add this line to declare a method
 
         const map = new Map({
             target: 'map',
@@ -39,7 +39,7 @@ var my_map = {                       // <-- add this line to declare the object
                 name: '結城山',
             }),
         ];
-        
+
 
         for (var i = 0; i < position_array.length; i++) {
             const marker = new VectorLayer({
@@ -48,7 +48,7 @@ var my_map = {                       // <-- add this line to declare the object
                 }),
                 style: new Style({
                     image: new Icon({
-                        src: "assets/img/ncumt.png",
+                        src: "assets/img/favicon.png",
                     }),
                     text: new Text({
                         font: '20px 微軟正黑體',
@@ -68,7 +68,7 @@ var my_map = {                       // <-- add this line to declare the object
             })
             map.addLayer(marker);
         }
-        
+
     }                                // <-- close the method
 };                                   // <-- close the object
 export default my_map;               // <-- and export the object
