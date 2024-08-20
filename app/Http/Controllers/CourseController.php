@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Course\CourseRegister;
 use App\Models\Course;
 use App\Models\CourseRecord;
+use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
-use App\Http\Controllers\RecordController;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
 class CourseController extends Controller
 {
+    use ImageTrait;
     /**
      * Display a listing of the resource.
      *
@@ -53,7 +54,7 @@ class CourseController extends Controller
         $course->date = $request->input('date');
         $course->speaker = $request->input('speaker');
         $course->location = $request->input('location');
-        $course->image = App::make(RecordController::class)->storeImage($file, $folder_name, $name);
+        $course->image = $this->storeImage($file, $folder_name, $name);
         if($request->input('videoURL')) {
             $course->videoURL = $request->input('videoURL');
         }
@@ -96,7 +97,7 @@ class CourseController extends Controller
         $msg = auth()->user()->name . '「' . $courseRecord->course->title. '」' . '社課報名完成';
 
         Mail::to($courseRecord->user->email)
-            ->later(now()->addSeconds(5), new \App\Mail\Course($courseRecord));
+            ->later(now()->addSeconds(5), new CourseRegister($courseRecord));
 
         return redirect()->back()->with('status', $msg);
     }
@@ -140,7 +141,7 @@ class CourseController extends Controller
             $file = $request->image;
             $folder_name = "uploads/images/courses";
             $name = $request->input('title');
-            $course->image = App::make(RecordController::class)->storeImage($file, $folder_name, $name);
+            $course->image = $this->storeImage($file, $folder_name, $name);
         }
 
         $course->title = $request->input('title');

@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Record;
+use App\Traits\ImageTrait;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use Spatie\LaravelImageOptimizer\Facades\ImageOptimizer;
+
 
 class RecordController extends Controller
 {
+    use ImageTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -83,10 +86,10 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
         $record = Record::findOrFail($id);
         $category_array = ["中級山", "高山", "溯溪"];
@@ -166,17 +169,6 @@ class RecordController extends Controller
         }
 
         return redirect()->route('portal.index')->with('status','您並無權限進行此操作，請先登入。');
-    }
-
-    public function storeImage($file, $folder_name, $name) {
-
-        $upload_path = public_path() . '/' . $folder_name;
-        $extension  =  $file->extension();
-        $filename = $name  . time() . '.' . $extension;
-        $file->move($upload_path, $filename);
-        ImageOptimizer::optimize($folder_name . '/' . $filename);
-
-        return $folder_name . '/' . $filename;
     }
 
     public function uploadImage(Request $request) {
