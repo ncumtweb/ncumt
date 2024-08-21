@@ -85,7 +85,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateBasicInformation(Request $request, $id)
+
+public function updateBasicInformation(Request $request, $id)
     {
         // 驗證表單數據
         $validatedData = $request->validate([
@@ -115,8 +116,7 @@ class UserController extends Controller
         $user->department_level = $request->input('department_level');
 
         // 設置更新者和更新時間
-        $user->modify_user = auth()->user()->id;
-        $user->updated_at = now();
+        $user->setModifiedUser();
 
         // 保存變更
         $user->save();
@@ -141,8 +141,7 @@ class UserController extends Controller
         $user->guard = $request->input('guard');
 
         // 設置更新者和更新時間
-        $user->modify_user = auth()->user()->id;
-        $user->updated_at = now();
+        $user->setModifiedUser();
 
         // 保存變更
         $user->save();
@@ -156,7 +155,7 @@ class UserController extends Controller
         // 驗證表單數據
         $validatedData = $request->validate([
             'special_disease' => 'nullable|string|max:255',
-            'altitude_sickness' => 'required|string|max:255',  // 確保這裡的規則符合你的需求
+            'altitude_sickness' => 'required|string|max:255',
         ]);
 
         // 獲取用戶
@@ -167,8 +166,7 @@ class UserController extends Controller
         $user->altitude_sickness = $request->input('altitude_sickness');
 
         // 設置更新者和更新時間
-        $user->modify_user = auth()->user()->id;
-        $user->updated_at = now();
+        $user->setModifiedUser();
 
         // 保存變更
         $user->save();
@@ -197,8 +195,7 @@ class UserController extends Controller
         $user->hate_foods = $request->input('hate_foods');
 
         // 設置更新者和更新時間
-        $user->modify_user = auth()->user()->id;
-        $user->updated_at = now();
+        $user->setModifiedUser();
 
         // 保存變更
         $user->save();
@@ -229,8 +226,7 @@ class UserController extends Controller
         $user->home_address = $request->input('home_address');
 
         // 設置更新者和更新時間
-        $user->modify_user = auth()->user()->id;
-        $user->updated_at = now();
+        $user->setModifiedUser();
 
         // 保存變更
         $user->save();
@@ -259,8 +255,7 @@ class UserController extends Controller
         $user->join_the_club_time = $request->input('join_the_club_time');
 
         // 設置更新者和更新時間
-        $user->modify_user = auth()->user()->id;
-        $user->updated_at = now();
+        $user->setModifiedUser();
 
         // 保存變更
         $user->save();

@@ -28,7 +28,7 @@
                 <div class="col-md-8 ">
                     <div class="form ">
                         <form action="{{ route('user.updateBasicInformation', $user->id) }}" method="POST" id="createRecordForm"
-                              class="php-email-form" enctype="multipart/form-data">
+                              class="php-email-form" >
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -148,7 +148,7 @@
                 <div class="col-md-8 ">
                     <div class="form ">
                         <form action="{{ route('user.updateClubRoles', $user->id) }}" method="POST" id="createRecordForm"
-                              class="php-email-form" enctype="multipart/form-data">
+                              class="php-email-form" >
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -165,9 +165,9 @@
                                     <label for="guard" class="form-label">嚮導（非嚮導, 初嚮, 領嚮）</label>
                                     <select name="guard" class="form-control" id="guard" disabled>
                                         <option value="" disabled selected>請選擇</option>
-                                        <option value="非嚮導" {{ $user->guard == '非嚮導' ? 'selected' : '' }}>非嚮導</option>
-                                        <option value="初嚮" {{ $user->guard == '素' ? 'selected' : '' }}>初嚮</option>
-                                        <option value="領嚮" {{ $user->guard == '領嚮' ? 'selected' : '' }}>領嚮</option>
+                                        <option value="0" {{ $user->role == '0' ? 'selected' : '' }}>非嚮導</option>
+                                        <option value="1" {{ $user->role == '1' ? 'selected' : '' }}>初嚮</option>
+                                        <option value="2" {{ $user->role == '2' ? 'selected' : '' }}>領嚮</option>
                                     </select>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                 <div class="col-md-8 ">
                     <div class="form ">
                         <form action="{{ route('user.updatePhysicalCondition', $user->id) }}" method="POST" id="createRecordForm"
-                              class="php-email-form" enctype="multipart/form-data">
+                              class="php-email-form">
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -246,7 +246,6 @@
             <div class="row">
                 <div class="col-lg-12 text-center mb-5">
                     <h1 class="page-title">飲食習慣</h1><!-- 置中標題 -->
-                    <!--<label for="basic_information" style="font-size: 30px; color: #1c6149">飲食習慣</label>-->
                 </div>
             </div>
             <!-- start form -->
@@ -259,7 +258,7 @@
                 <div class="col-md-8 ">
                     <div class="form ">
                         <form action="{{ route('user.updateEatingHabit', $user->id) }}" method="POST" id="createRecordForm"
-                              class="php-email-form" enctype="multipart/form-data">
+                              class="php-email-form" >
                             @csrf
                             @method('PUT')
                             <div class="row">
@@ -337,7 +336,7 @@
                 <div class="col-md-8 ">
                     <div class="form ">
                         <form action="{{ route('user.updateContactInformation', $user->id) }}" method="POST" id="createRecordForm"
-                              class="php-email-form" enctype="multipart/form-data">
+                              class="php-email-form">
                             @csrf
                             @method('PUT')
                             <div class="row">

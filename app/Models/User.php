@@ -19,7 +19,7 @@ class User extends Authenticatable
     //     $roles = [
     //         1 => '社員',
     //         2 => '幹部',
-        
+
     //     ];
     //     社員 => 0, 社長 => 1, 副社長 => 2, 嚮導組組長 => 3, 嚮導組組員 => 4,
     //     技術組組長 => 5, 技術組組員 => 6, 器材組組長 => 7, 器材組組員 => 8, 醫藥組組長 => 9,
@@ -61,4 +61,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /*更新 modify_user 和 updated_at 字段,抽成共用*/
+    public function setModifiedUser()
+    {
+        $this->modify_user = auth()->user()->id;
+        $this->updated_at = now();
+    }
 }
