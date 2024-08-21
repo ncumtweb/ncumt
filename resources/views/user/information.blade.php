@@ -292,7 +292,7 @@
                                                value="{{ $user->allergic_foods }}" >
                                     @else
                                         <input type="text" name="allergic_foods" class="form-control" id="allergic_foods"
-                                               placeholder="請輸入你的過敏的食物(沒有則寫無）"required>
+                                               placeholder="請輸入你的過敏的食物(沒有則寫無）" required>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
@@ -348,7 +348,7 @@
                                                value="{{ $user->special_disease }}" >
                                     @else
                                         <input type="text" name="emergency_contact_person" class="form-control" id="emergency_contact_person"
-                                               placeholder="請輸入你的緊急聯絡人"required>
+                                               placeholder="請輸入你的緊急聯絡人" required>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-3">
@@ -358,7 +358,7 @@
                                                value="{{ $user->emergency_contact_relation }}" >
                                     @else
                                         <input type="text" name="emergency_contact_relation" class="form-control" id="emergency_contact_relation"
-                                               placeholder="請輸入關係"required>
+                                               placeholder="請輸入關係" required>
                                     @endif
                                 </div>
                                 <div class="form-group col-md-6">
@@ -368,7 +368,7 @@
                                                value="{{ $user->emergency_contact_phone }}" >
                                     @else
                                         <input type="text" name="emergency_contact_phone" class="form-control" id="emergency_contact_phone"
-                                               placeholder="請輸入緊急聯絡電話"required>
+                                               placeholder="請輸入緊急聯絡電話" required>
                                     @endif
                                 </div>
                             </div>
