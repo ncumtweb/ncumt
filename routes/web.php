@@ -11,6 +11,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -133,13 +134,15 @@ Route::middleware(['checkRole'])->group(function () {
     Route::get('/faq/edit/{id}', [FaqController::class, 'edit'])->name('faq.edit');
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
-    
+
     // user
     Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
     Route::post('/users/updateRole/{id}', [UserController::class, 'updateRole'])->name('user.updateRole');
-
-    Route::get('/conference/result', function () {
-        return view('conference.result');
-    });
 });
 
+Route::get('/conference/result', function () {
+    if (Auth::check() && Auth::user()->isValidIdentifiers(['110602527', '111409003', '109403525'])) {
+        return view('conference.result');
+    }
+    abort(403, '您沒有權限進入此頁面');
+});
