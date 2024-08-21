@@ -1533,3 +1533,9 @@ button.black[type=submit] {
     text-indent: 2em;
     text-align: justify;
 }
+
+/* 提示必須填寫此表格的記號 (用此label會在名稱後加＊號 ）*/
+.required-label::after {
+    content: " *";
+    color: red;
+}
