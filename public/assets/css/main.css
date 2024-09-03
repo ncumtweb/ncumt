@@ -1573,32 +1573,50 @@ button.black[type=submit] {
     text-indent: 2em;
     text-align: justify;
 }
+/*紀錄*/
 
 /*圖片*/
-
-.custom-img {
+.record-img {
     width: 100%;
     height: auto;
     object-fit: cover;
     padding: 0 16px; /* 左右寬度 */
     margin: 9px 0; /* 上下間距 */
+    border-radius: 5%; /*導角*/
+}
+
+.record-description {
+    text-align: left;
+    line-height: 2.5;
 }
 
 /* 基本按鈕樣式 */
-.btn-custom {
+.record-btn {
     width: 150px;
     height: 50px;
     font-size: 1rem;
+    border-radius: 4px;
+    background-color: #343a40;
+    color: #ffffff;
+    border: 2px solid transparent;
+    transition: all 0.3s ease; /* 平滑過渡效果 */
+}
+
+.record-btn:hover {
+    background-color: #ffffff;
+    color: #343a40;
+    border-color: #343a40;
 }
 
 /* 螢幕寬度大於等於768px時的按鈕樣式 */
 @media (min-width: 768px) {
-    .btn-custom {
+    .record-btn {
         width: 200px;
         height: 60px;
         font-size: 1.2rem;
     }
 }
+
 /*紀錄標籤字型*/
 .record-meta {
     font-size: 16px;

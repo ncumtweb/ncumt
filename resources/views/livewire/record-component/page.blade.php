@@ -6,7 +6,7 @@
                     <!-- 圖片區 -->
                     <div class="col-md-6 d-flex justify-content-center mb-3 mb-md-0">
                         <a href="{{ route('record.show', $record->id) }}">
-                            <img src="{{ asset($record->image) }}" loading="lazy" alt="" class="img-fluid custom-img">
+                            <img src="{{ asset($record->image) }}" loading="lazy" alt="" class="img-fluid record-img">
                         </a>
                     </div>
 
@@ -17,10 +17,26 @@
                             <div class="record-meta">
                                 <span class="date">{{ $category_array[$record->category] }}</span>
                                 <span class="mx-1">&bullet;</span>
-                                <span>{{ $record->start_date }} - {{ $record->end_date }}</span>
+                                @php
+                                    $startYear = \Carbon\Carbon::parse($record->start_date)->format('Y');
+                                    $endYear = \Carbon\Carbon::parse($record->end_date)->format('Y');
+                                    $startMonth = \Carbon\Carbon::parse($record->start_date)->format('m');
+                                    $endMonth = \Carbon\Carbon::parse($record->end_date)->format('m');
+                                @endphp
+
+                                @if($startYear != $endYear)
+                                    <span>{{ \Carbon\Carbon::parse($record->start_date)->format('Y.m.d') }} - {{ \Carbon\Carbon::parse($record->end_date)->format('Y.m.d') }}</span>
+                                @else
+                                    @if($startMonth != $endMonth)
+                                        <span>{{ \Carbon\Carbon::parse($record->start_date)->format('Y.m.d') }} - {{ \Carbon\Carbon::parse($record->end_date)->format('m.d') }}</span>
+                                    @else
+                                        <span>{{ \Carbon\Carbon::parse($record->start_date)->format('Y.m.d') }} - {{ \Carbon\Carbon::parse($record->end_date)->format('d') }}</span>
+                                    @endif
+                                @endif
+
                             </div>
-                            <p class="text-start">{{ $record->description }}</p>
-                            <button type="button" class="btn btn-outline-dark btn-custom mt-2"
+                            <p class="record-description">{{ $record->description }}</p>
+                            <button type="button" class="btn btn-dark record-btn mt-2"
                                     onclick="location.href='{{ route('record.show', $record->id )}}'">詳細內容
                             </button>
                         </div>
