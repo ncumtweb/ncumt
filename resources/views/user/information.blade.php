@@ -344,7 +344,7 @@
                                     <label for="emergency_contact_person" class="form-label required-label">緊急聯絡人</label>
                                     @if($user->emergency_contact_person != null)
                                         <input type="text" name="emergency_contact_person" class="form-control" id="emergency_contact_person"
-                                               value="{{ $user->special_disease }}" >
+                                               value="{{ $user->emergency_contact_person }}" >
                                     @else
                                         <input type="text" name="emergency_contact_person" class="form-control" id="emergency_contact_person"
                                                placeholder="請輸入你的緊急聯絡人" required>
