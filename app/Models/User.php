@@ -44,4 +44,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function isValidIdentifiers(array $identifiers): bool
+    {
+        return in_array($this->identifier, $identifiers);
+    }
 }
