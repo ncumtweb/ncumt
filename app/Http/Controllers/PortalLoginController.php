@@ -32,7 +32,7 @@ class PortalLoginController extends Controller
             $user->name_zh = $user_portal->user['chineseName'];
             $user->name_en = $user_portal->user['englishName'];
             $user->email = $user_portal->user['email'];
-            $user->phone = $user->phone ?? $user_portal->user['mobilePhone'];
+            $user->phone = $user_portal->user['mobilePhone'] ?? null;
             $user->personal_id = $user_portal->user['personalId'];
             $user->gender = $user_portal->user['gender'];
             $user->login_method = LoginMethod::PORTAL;
