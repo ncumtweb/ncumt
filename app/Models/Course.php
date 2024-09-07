@@ -9,11 +9,16 @@ class Course extends Model
 {
     use HasFactory;
 
-    public function courseRecord() {
+    protected $dates = ['start_date', 'end_date'];
+
+    public function courseRecord(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
         return $this->hasMany(CourseRecord::class);
     }
 
-    public function users() {
+    public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
         return $this->belongsToMany(User::class, 'course_records', 'course_id', 'user_id');
     }
 }
+

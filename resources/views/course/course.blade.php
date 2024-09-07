@@ -1,3 +1,4 @@
+@php use App\Utils\DateFormatter; @endphp
 @extends('basic.main')
 
 @section('title',  '社課影片')
@@ -18,7 +19,7 @@
                                     <div class="aside-block">
                                         <div class="video-post">
                                             <h1>
-                                                {{ $course->title . ' ' . $course->date}}
+                                                {{ $course->title . ' ' . DateFormatter::formatRange($course->start_date, $course->end_date)}}
                                                 @if($course->pptURL)
                                                     &nbsp;
                                                     <a class="bi bi-filetype-ppt" href="{{ asset($course->pptURL) }}"

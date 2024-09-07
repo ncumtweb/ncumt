@@ -4,6 +4,7 @@ namespace App\Mail\Course;
 
 use App\Models\Course;
 use App\Models\User;
+use App\Utils\DateFormatter;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -36,13 +37,14 @@ class CourseReminder extends Mailable
      */
     public function build(): static
     {
+        $date = DateFormatter::formatRange($this->course->start_date, $this->course->end_date);
         return $this->from('ncumt40@gmail.com')
             ->subject('「' . $this->course->title . '」' . '報名提醒')
             ->view('mail.course.remindCourse')
             ->with([
                 'title' => $this->course->title,
                 'name' => $this->user->name_zh,
-                'date' => $this->course->date,
+                'date' => $date,
                 'speaker' => $this->course->speaker,
                 'location' => $this->course->location,
             ]);
@@ -54,7 +56,7 @@ class CourseReminder extends Mailable
      */
     public static function sendEmail(): void
     {
-        $courses = Course::where('date', now()->addDay()->toDateString())->get();
+        $courses = Course::where('start_date', now()->addDay()->toDateString())->get();
 
         if ($courses->isEmpty()) {
             return;
