@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\CourseRecord;
 use App\Traits\ImageTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Mail;
 
@@ -20,7 +21,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::whereNotNull('videoURL')->orderBy('date','desc')->get();
+        $courses = Course::whereNotNull('videoURL')->orderBy('start_date','desc')->get();
         return view('course.course', ['courses' => $courses]);
     }
 
@@ -51,7 +52,8 @@ class CourseController extends Controller
         $course = new Course();
         $course->title = $request->input('title');
         $course->description = $request->input('description');
-        $course->date = $request->input('date');
+        $course->start_date = $request->input('start_date');
+        $course->end_date = $request->input('end_date');
         $course->speaker = $request->input('speaker');
         $course->location = $request->input('location');
         $course->image = $this->storeImage($file, $folder_name, $name);
@@ -61,6 +63,8 @@ class CourseController extends Controller
         if($request->input('pptURL')) {
             $course->pptURL = $request->input('pptURL');
         }
+        $course->create_user = Auth::user()->id;
+        $course->modify_user = Auth::user()->id;
 
         $course->save();
 
@@ -78,8 +82,8 @@ class CourseController extends Controller
     {
 
         $courses = Course::where('videoURL', null)
-            ->whereDate('date', '>=' , now()->toDateString())
-            ->orderBy('date','asc')
+            ->whereDate('start_date', '>=' , now()->toDateString())
+            ->orderBy('start_date','asc')
             ->get();
 
 
@@ -146,7 +150,8 @@ class CourseController extends Controller
 
         $course->title = $request->input('title');
         $course->description = $request->input('description');
-        $course->date = $request->input('date');
+        $course->start_date = $request->input('start_date');
+        $course->end_date = $request->input('end_date');
         $course->speaker = $request->input('speaker');
         $course->location = $request->input('location');
 
@@ -156,6 +161,7 @@ class CourseController extends Controller
         if($request->input('pptURL')) {
             $course->pptURL = $request->input('pptURL');
         }
+        $course->modify_user = Auth::user()->id;
         $course->update();
 
         return redirect()->route('course.showRegister')->with('status','社課更新成功');

@@ -45,8 +45,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function isValidIdentifiers(array $identifiers): bool
+    public function isValidIdentifiers(array $studentIds): bool
     {
-        return in_array($this->identifier, $identifiers);
+        return in_array($this->student_id, $studentIds);
     }
 }
