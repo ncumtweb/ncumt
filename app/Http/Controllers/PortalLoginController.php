@@ -7,6 +7,7 @@ use App\Enums\LoginMethod;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Laravel\Socialite\Facades\Socialite;
 
 class PortalLoginController extends Controller
 {
@@ -18,12 +19,12 @@ class PortalLoginController extends Controller
 
     public function redirectToProvider()
     {
-        return \Socialite::with('portal')->redirect();
+        return Socialite::with('portal')->redirect();
     }
 
     public function handleProviderCallback(): \Illuminate\Http\RedirectResponse
     {
-        $user_portal = \Socialite::with('portal')->stateless()->user();
+        $user_portal = Socialite::with('portal')->stateless()->user();
         Log::debug('user login, user array: ', array($user_portal));
         $existUser = User::where('student_id', $user_portal->user['studentId'])->first();
         if (is_null($existUser)) {
@@ -32,18 +33,21 @@ class PortalLoginController extends Controller
             $user->name_zh = $user_portal->user['chineseName'];
             $user->name_en = $user_portal->user['englishName'];
             $user->email = $user_portal->user['email'];
-            $user->phone = $user->phone ?? $user_portal->user['mobilePhone'];
+            $user->phone = $user_portal->user['mobilePhone'] ?? null;
             $user->personal_id = $user_portal->user['personalId'];
             $user->gender = $user_portal->user['gender'];
+            $user->birthday = $user_portal->user['birthday'];
             $user->login_method = LoginMethod::PORTAL;
             $user->create_user = Common::SYSTEM_USER;
             $user->modify_user = Common::SYSTEM_USER;
             $user->save();
             Auth::login($user);
         } else {
-            // 之前登入的人若沒有寫入以下資料，要重新寫入
+            // 之前登入的人若沒有以下資料，要重新寫入
+            $existUser->phone = $existUser->phone ?? ($user_portal->user['mobilePhone'] ?? null);
             $existUser->personal_id = $existUser->personal_id ?? $user_portal->user['personalId'];
             $existUser->gender = $existUser->gender ?? $user_portal->user['gender'];
+            $existUser->birthday = $existUser->birthday ?? $user_portal->user['birthday'];
             $existUser->login_method = $existUser->login_method ?? LoginMethod::PORTAL;
             $existUser->save();
             Auth::login($existUser);
