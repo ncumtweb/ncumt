@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Course\CourseRegister;
 use App\Models\Course;
 use App\Models\CourseRecord;
 use App\Traits\ImageTrait;
@@ -96,7 +97,7 @@ class CourseController extends Controller
         $msg = auth()->user()->name . '「' . $courseRecord->course->title. '」' . '社課報名完成';
 
         Mail::to($courseRecord->user->email)
-            ->later(now()->addSeconds(5), new \App\Mail\Course($courseRecord));
+            ->later(now()->addSeconds(5), new CourseRegister($courseRecord));
 
         return redirect()->back()->with('status', $msg);
     }

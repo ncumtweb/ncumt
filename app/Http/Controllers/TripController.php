@@ -1,46 +1,36 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Trip;
-use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use Carbon\Carbon;
 use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\File;
+use App\Enums\JudgementID;
+use App\Enums\RouteCategory;
 
 class TripController extends Controller
 {
     use ImageTrait;
+//    public function __construct()
+//    {
+//        $this->middleware('TripAuthenticate');
+//    }
+
     public function create() // 會連到 web.php 的 function
     {
-        if (Auth::check() && Auth::user()->role > 0) {
-            if(Auth::user()->guard != 0) {
-                return view('trip.create');
-            }
-            // 等隊伍畫面完成後，想導回隊伍頁面，加入以下內容
-            /*
-             *    @if (session('status'))
-             *    <div class="col-lg-12 text-center">
-             *      <h6 class="alert alert-danger">{{ session('status') }}</h6>
-             *    </div>
-             */
-            return redirect()->route('index')->with('status', '您不具有嚮導資格，無法進行操作。');
-        }
-        return redirect()->route('portal.index')->with('status', '您並無權限進行此操作，請先登入。');
+        $judgement_ids = JudgementID::cases(); // Get all enum instances
+        $categories = RouteCategory::cases();
+        return view('trip.create', compact('judgement_ids', 'categories'));
+
     }
 
     public function edit($id)
     {
-        if (Auth::check() && Auth::user()->role > 0) {
-            if (Auth::user()->guard != 0) {
                 if (!is_numeric($id)) {
                     return redirect()->back()->with('error', '無效的隊伍 ID');
                 }
-                // 根據 ID 取得現有資料
                 $trip = Trip::find($id);
                 if (!$trip) {
                     return redirect()->back()->with('error', '找不到該隊伍');
@@ -51,34 +41,72 @@ class TripController extends Controller
                     $trip->pre_departure_time = Carbon::parse($trip->pre_departure_time);
                     $trip->start_date = Carbon::parse($trip->pre_departure_time);
                     $trip->end_date = Carbon::parse($trip->end_date);
+                    $judgement_ids = JudgementID::cases();
+                    $categories = RouteCategory::cases();
 
-                    return view('trip.edit', compact('trip'));
-                }
-            } else {
-                return redirect()->route('index')->with('status', '您不具有嚮導資格，無法進行操作。');
-            }
+                    return view('trip.edit',  compact('trip', 'judgement_ids', 'categories'));
         }
-        return redirect()->route('portal.index')->with('status', '您並無權限進行此操作，請先登入。');
     }
 
     // 創建新隊伍資料
     public function store(Request $request)
     {
-        // validate date
         $validator = Validator::make($request->all(), [
-            'registration_close' => 'after_or_equal:registration_open',
-            'quit_date' => 'after_or_equal:registration_close',
-            'pre_departure_time' => 'after_or_equal:quit_date',
-            'start_date' => 'after_or_equal:pre_departure_time',
-            'end_date' => 'after_or_equal:start_date',
-
+            'expected_fee' => 'required|integer|min:0',
+            'expected_member_count' => 'required|integer|min:0',
+            'expected_cadre_count' => 'required|integer|min:0',
+            'actual_fee' => 'required|integer|min:0',
+            'registration_open' => 'after:today',
+            'registration_close' => [
+                'required',
+                'date',
+                'after:today',
+                'after_or_equal:registration_open',
+            ],
+            'quit_date'  => [
+                'required',
+                'date',
+                'after:today',
+                'after_or_equal:registration_close',
+            ],
+            'pre_departure_time'  => [
+                'required',
+                'date',
+                'after:today',
+                'after_or_equal:quit_date',
+            ],
+            'start_date' => [
+                'required',
+                'date',
+                'after:today',
+                'after_or_equal:pre_departure_time',
+            ],
+            'end_date' => [
+                'required',
+                'date',
+                'after:today',
+                'after_or_equal:start_date',
+            ],
+            'prepare_day' => 'required|integer|min:0'
         ], [
+            'expected_fee.integer' => '預期費用輸入內容須為大於零的整數。',
+            'expected_member_count.integer' => '預期成員數輸入內容須為大於零的整數。',
+            'expected_cadre_count.integer' => '預期幹部數輸入內容須為大於零的整數。',
+            'actual_fee.integer' => '實際費用輸入內容須為大於零的整數。',
+            'registration_open.after' => '報名開始日期需晚於今日。',
             'registration_close.after_or_equal' => '報名截止日期需在報名開始日期之後。',
+            'registration_close.after' => '報名截止日期需晚於今日。',
             'quit_date.after_or_equal' => '鳥隊日期需在報名截止日期之後。',
+            'quit_date.after' => '鳥隊日期需晚於今日。',
             'pre_departure_time.after_or_equal' => '行前會日期需在鳥隊日期之後。',
+            'pre_departure_time.after' => '行前會日期需晚於今日。',
             'start_date.after_or_equal' => '隊伍開始日期需在行前會日期之後。',
+            'start_date.after' => '隊伍開始日期需晚於今日。',
             'end_date.after_or_equal' => '結束日期需在開始日期之後。',
+            'end_date.after' => '結束日期需晚於今日。',
             'image.required' => '請上傳封面照。',
+            'prepare_day.min' => '預備天日期必須為正整數或零。',
+            'prepare_day.integer' => '預備天日期必須為正整數或零。'
         ]);
         $file = $request->image;
         $folder_name = "uploads/images/trips";
@@ -131,26 +159,68 @@ class TripController extends Controller
     // 修改新隊伍資料
     public function update(Request $request, $id)
     {
-
         $trip = Trip::find($id);
         if (!$trip) {
             return redirect()->back()->with('error', '找不到該隊伍');
         } else {
             // validate date
             $validator = Validator::make($request->all(), [
-                'registration_close' => 'after_or_equal:registration_open',
-                'quit_date' => 'after_or_equal:registration_close',
-                'pre_departure_time' => 'after_or_equal:quit_date',
-                'start_date' => 'after_or_equal:pre_departure_time',
-                'end_date' => 'after_or_equal:start_date',
+                'expected_fee' => 'required|integer|min:0',
+                'expected_member_count' => 'required|integer|min:0',
+                'expected_cadre_count' => 'required|integer|min:0',
+                'actual_fee' => 'required|integer|min:0',
+                'registration_open' => 'after:today',
+                'registration_close' => [
+                    'required',
+                    'date',
+                    'after:today',
+                    'after_or_equal:registration_open',
+                ],
+                'quit_date'  => [
+                    'required',
+                    'date',
+                    'after:today',
+                    'after_or_equal:registration_close',
+                ],
+                'pre_departure_time'  => [
+                    'required',
+                    'date',
+                    'after:today',
+                    'after_or_equal:quit_date',
+                ],
+                'start_date' => [
+                    'required',
+                    'date',
+                    'after:today',
+                    'after_or_equal:pre_departure_time',
+                ],
+                'end_date' => [
+                    'required',
+                    'date',
+                    'after:today',
+                    'after_or_equal:start_date',
+                ],
+                'prepare_day' => 'required|integer|min:0'
 
             ], [
+                'expected_fee.integer' => '預期費用輸入內容須為大於零的整數。',
+                'expected_member_count.integer' => '預期成員數輸入內容須為大於零的整數。',
+                'expected_cadre_count.integer' => '預期幹部數輸入內容須為大於零的整數。',
+                'actual_fee.integer' => '實際費用輸入內容須為大於零的整數。',
+                'registration_open.after' => '報名開始日期需晚於今日。',
                 'registration_close.after_or_equal' => '報名截止日期需在報名開始日期之後。',
+                'registration_close.after' => '報名截止日期需晚於今日。',
                 'quit_date.after_or_equal' => '鳥隊日期需在報名截止日期之後。',
+                'quit_date.after' => '鳥隊日期需晚於今日。',
                 'pre_departure_time.after_or_equal' => '行前會日期需在鳥隊日期之後。',
+                'pre_departure_time.after' => '行前會日期需晚於今日。',
                 'start_date.after_or_equal' => '隊伍開始日期需在行前會日期之後。',
+                'start_date.after' => '隊伍開始日期需晚於今日。',
                 'end_date.after_or_equal' => '結束日期需在開始日期之後。',
+                'end_date.after' => '結束日期需晚於今日。',
                 'image.required' => '請上傳封面照。',
+                'prepare_day.min' => '預備天日期必須為正整數或零。',
+                'prepare_day.integer' => '預備天日期必須為正整數或零。'
             ]);
 
             if($request->image) {
@@ -200,4 +270,7 @@ class TripController extends Controller
             }
         }
     }
+
+
+
 }

@@ -1207,22 +1207,6 @@ section {
     }
 }
 
-.contact .createRecordForm .form-group {
-    margin-bottom: 20px;
-}
-
-.contact .createRecordForm input,
-.contact .createRecordForm textarea {
-    padding: 10px 14px;
-    border-radius: 0;
-    box-shadow: none;
-    font-size: 15px;
-}
-
-.contact .createRecordForm #answer {
-    height: 200px;
-}
-
 .contact .createRecordForm {
     box-shadow: 0 0 30px rgba(var(--color-black-rgb), 0.1);
     padding: 30px;
@@ -1235,9 +1219,70 @@ section {
     }
 }
 
-.contact .createRecordForm input::focus,
-.contact .createRecordForm textarea::focus {
-    background-color: var(--color-primary);
+.contact .createRecordForm .error-message {
+    display: none;
+    color: var(--color-white);
+    background: var(--color-red);
+    text-align: left;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.contact .createRecordForm .result-message {
+
+    color: #f55b6a;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.contact .createRecordForm .error-message br + br {
+    margin-top: 25px;
+}
+
+.contact .createRecordForm .sent-message {
+    display: none;
+    color: var(--color-white);
+    background: var(--color-green);
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.contact .createRecordForm .loading {
+    display: none;
+    background: var(--color-white);
+    text-align: center;
+    padding: 15px;
+}
+
+.contact .createRecordForm .loading:before {
+    content: "";
+    display: inline-block;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin: 0 10px -6px 0;
+    border: 3px solid var(--color-green);
+    border-top-color: var(--color-white);
+    animation: animate-loading 1s linear infinite;
+}
+
+.contact .createRecordForm .form-group {
+    margin-bottom: 20px;
+}
+
+.contact .createRecordForm input,
+.contact .createRecordForm textarea,
+.contact .createRecordForm select {
+    padding: 10px 14px;
+    box-shadow: none;
+    font-size: 15px;
+}
+
+.contact .createRecordForm #answer {
+    height: 200px;
 }
 
 .contact .createRecordForm .row button[type=button] {
@@ -1338,11 +1383,6 @@ section {
     padding: 10px 14px;
     box-shadow: none;
     font-size: 15px;
-}
-
-.contact .php-email-form input::focus,
-.contact .php-email-form textarea::focus {
-    background-color: var(--color-primary);
 }
 
 .contact .php-email-form button[type=button] {

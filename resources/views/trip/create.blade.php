@@ -25,6 +25,31 @@
                             @endif
                             <!-- 更新失敗提示 -->
                             <div class="form-group col-md-12">
+                                @error('expected_cadre_count')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-12">
+                                @error('actual_fee')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-12">
+                                @error('expected_member_count')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-12">
+                                @error('expected_fee')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-12">
+                                @error('prepare_day')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-12">
                                 @error('end_date')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -41,6 +66,11 @@
                             </div>
                             <div class="form-group col-md-12">
                                 @error('registration_close')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-12">
+                                @error('registration_open')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -67,10 +97,12 @@
                                 <div class="form-group">
                                     <label for="category" class="form-label">路線類別</label>
                                     <select id="category" name="category" class="form-select" required>
-                                        <option selected disabled value="">請選擇路線類別</option>
-                                        <option value="0">中級山</option>
-                                        <option value="1">高山</option>
-                                        <option value="2">溯溪</option>
+                                        <option selected disabled value="">請選擇評分類別</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->value }}" {{ old('category', $categories) == $category->value ? 'selected' : '' }}>
+                                                {{ $category->label() }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
 
@@ -78,10 +110,11 @@
                                     <label for="judgements_id" class="form-label">路線難度等級</label>
                                     <select id="judgements_id" name="judgements_id" class="form-select" required>
                                         <option selected disabled value="">請選擇路線類別</option>
-                                        <option value="0">A</option>
-                                        <option value="1">B</option>
-                                        <option value="2">C</option>
-                                        <option value="3">D</option>
+                                        @foreach ($judgement_ids as $judgement_id)
+                                            <option value="{{ $judgement_id->value }}" {{ old('judgement_id', $judgement_ids) == $judgement_id->value ? 'selected' : '' }}>
+                                                {{ $judgement_id->label() }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
 

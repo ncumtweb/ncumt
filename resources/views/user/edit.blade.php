@@ -47,7 +47,7 @@
                   </div>
                   <div class="form-group col-md-6">
                     <label for="position" class="form-label">職位</label>
-                    <input type="text" name="position" class="form-control" id="position" value="{{ $position[$user->role] }}">
+                    <input type="text" name="position" class="form-control" id="position" value="{{ App\Enums\Role::from($user->role)->toChinese() }}">
                   </div>
                 </div>
 
@@ -58,7 +58,7 @@
                   </div>
                   <div class="form-group col-md-4">
                     <label for="phone" class="form-label">手機號碼</label>
-                    <input type="phone" name="phone" class="form-control" id="phone" value="{{ $user->phone }}">
+                    <input type="text" name="phone" class="form-control" id="phone" value="{{ $user->phone }}">
                   </div>
                   <div class="form-group col-md-4">
                     <label for="email" class="form-label">電子郵件</label>

@@ -8,11 +8,12 @@ use App\Http\Controllers\FaqController;
 use App\Http\Controllers\JudgementController;
 use App\Http\Controllers\PortalLoginController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\TripController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\TripController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\UserMiddleware;
 
 
 /*
@@ -27,12 +28,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::fallback(function () {
-    return redirect()->route('index');
+    $randomNumber = rand(1, 4) . '';
+    return view('404', ['randomNumber' => $randomNumber]);
 });
 
 Route::get('/aboutus', function () {
     return view('information.aboutus');
 });
+
+Route::get('/conference/register', function () {
+    return view('conference.register');
+});
+
+Route::get('/conference/search', function () {
+    return view('conference.searchAndEdit');
+});
+
 
 // Route::get('/map', function () {
 //     return view('map');
@@ -61,10 +72,9 @@ Route::prefix('portal')->name('portal.')->group(function () {
 });
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
-    Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
-    Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
-    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user/show/{id}', [UserController::class, 'show'])->name('user.show');
+    Route::put('/user/show/{id}', [UserController::class, 'update'])->name('user.update');
 
     //course
     Route::get('/course/showRecord/', [CourseController::class, 'showRecord'])->name('course.showRecord');
@@ -118,7 +128,6 @@ Route::middleware(['checkRole'])->group(function () {
     Route::post('/record/imgur', [RecordController::class, 'callImgurApi'])->name('record.callImgurApi');
     Route::get('/record/delete/{id}', [RecordController::class, 'delete'])->name('record.delete');
 
-
     //faq
     Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create');
     Route::post('/faq/create', [FaqController::class, 'store'])->name('faq.store');
@@ -127,8 +136,21 @@ Route::middleware(['checkRole'])->group(function () {
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
     // trip
-    Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
-    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])->name('trip.edit');
+
     Route::put('/trip/create', [TripController::class, 'store'])->name('trip.store');
     Route::put('/trip/edit/{id}', [TripController::class, 'update'])->name('trip.update');
+
+    Route::get('/trip/create', [TripController::class, 'create'])
+        ->middleware('TripAuthenticate');
+    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])
+        ->middleware('TripAuthenticate');
+
+    // user
+    Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
+    Route::post('/users/updateRole/{id}', [UserController::class, 'updateRole'])->name('user.updateRole');
+
+    Route::get('/conference/result', function () {
+        return view('conference.result');
+    });
 });
+

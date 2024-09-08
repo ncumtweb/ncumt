@@ -25,22 +25,27 @@
                             @endif
                             <!-- 更新失敗提示 -->
                             <div class="form-group col-md-12">
-                                @error('end_date')
+                                @error('expected_cadre_count')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group col-md-12">
-                                @error('quit_date')
+                                @error('actual_fee')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group col-md-12">
-                                @error('start_date')
+                                @error('expected_member_count')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group col-md-12">
-                                @error('registration_close')
+                                @error('expected_fee')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-12">
+                                @error('prepare_day')
                                 <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
@@ -67,36 +72,27 @@
                                 <div class="form-group">
                                     <label for="category" class="form-label">路線類別</label>
                                     <select id="category" name="category" class="form-select" required>
-                                        <option selected disabled value="">請選擇路線類別</option>
-                                        <option
-                                            value="0" {{ old('category', $trip->category) == 0 ? 'selected' : '' }} >中級山
-                                        </option>
-                                        <option
-                                            value="1" {{ old('category', $trip->category) == 1 ? 'selected' : '' }} >高山
-                                        </option>
-                                        <option
-                                            value="2" {{ old('category', $trip->category) == 2 ? 'selected' : '' }} >溯溪
-                                        </option>
+                                        <option selected disabled value="">請選擇評分類別</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->value }}" {{ old('category', $trip->category) == $category->value ? 'selected' : '' }}>
+                                                {{ $category->label() }}
+                                            </option>
+                                        @endforeach
                                     </select>
+
                                 </div>
 
                                 <div class="form-group">
                                     <label for="judgements_id" class="form-label">路線難度等級</label>
                                     <select id="judgements_id" name="judgements_id" class="form-select" required>
                                         <option selected disabled value="">請選擇路線類別</option>
-                                        <option value="0" {{ old('category', $trip->category) == 0 ? 'selected' : '' }}>
-                                            A
-                                        </option>
-                                        <option value="1" {{ old('category', $trip->category) == 1 ? 'selected' : '' }}>
-                                            B
-                                        </option>
-                                        <option value="2" {{ old('category', $trip->category) == 2 ? 'selected' : '' }}>
-                                            C
-                                        </option>
-                                        <option value="3" {{ old('category', $trip->category) == 3 ? 'selected' : '' }}>
-                                            D
-                                        </option>
+                                        @foreach ($judgement_ids as $judgement_id)
+                                            <option value="{{ $judgement_id->value }}" {{ old('judgement_id', $trip->judgement_id) == $judgement_id->value ? 'selected' : '' }}>
+                                                {{ $judgement_id->label() }}
+                                            </option>
+                                        @endforeach
                                     </select>
+
                                 </div>
 
                                 <div class="row">
@@ -158,7 +154,7 @@
                                 <div class="form-group col-md-12">
                                     <label for="image">封面照</label>
                                     <input type="file" name="image" class="form-control" id="image"
-                                           accept="image/gif, image/jpeg, image/png" required>
+                                           accept="image/gif, image/jpeg, image/png" >
                                     <img class="img-fluid" id="preview_image" src="#" alt="預覽封面"/>
                                 </div>
 

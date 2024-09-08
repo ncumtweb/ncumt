@@ -14,7 +14,7 @@
                 </div>
 
                 <!-- 評分表單 -->
-                <livewire:judgement-component.form :judgement="null" :mode="'create'"/>
+                <livewire:judgement-component.form :judgement="null" :mode="App\Enums\Mode::CREATE->value"/>
 
                 <!-- 評分紀錄表 -->
                 <div class="row gy-4 justify-content-center text-center">
