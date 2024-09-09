@@ -1207,6 +1207,68 @@ section {
     }
 }
 
+.contact .createRecordForm {
+    box-shadow: 0 0 30px rgba(var(--color-black-rgb), 0.1);
+    padding: 30px;
+    background: var(--color-white);
+}
+
+@media (max-width: 640px) {
+    .contact .createRecordForm {
+        padding: 20px;
+    }
+}
+
+.contact .createRecordForm .error-message {
+    display: none;
+    color: var(--color-white);
+    background: var(--color-red);
+    text-align: left;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.contact .createRecordForm .result-message {
+
+    color: #f55b6a;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.contact .createRecordForm .error-message br + br {
+    margin-top: 25px;
+}
+
+.contact .createRecordForm .sent-message {
+    display: none;
+    color: var(--color-white);
+    background: var(--color-green);
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.contact .createRecordForm .loading {
+    display: none;
+    background: var(--color-white);
+    text-align: center;
+    padding: 15px;
+}
+
+.contact .createRecordForm .loading:before {
+    content: "";
+    display: inline-block;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    margin: 0 10px -6px 0;
+    border: 3px solid var(--color-green);
+    border-top-color: var(--color-white);
+    animation: animate-loading 1s linear infinite;
+}
+
 .contact .createRecordForm .form-group {
     margin-bottom: 20px;
 }
@@ -1533,9 +1595,57 @@ button.black[type=submit] {
     text-indent: 2em;
     text-align: justify;
 }
+/*紀錄*/
 
-/* 提示必須填寫此表格的記號 (用此label會在名稱後加＊號 ）*/
-.required-label::after {
-    content: " *";
-    color: red;
+/*圖片*/
+.record-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 0 16px; /* 左右寬度 */
+    margin: 9px 0; /* 上下間距 */
+    border-radius: 5%; /*導角*/
+}
+
+.record-description {
+    text-align: left;
+    line-height: 2.5;
+}
+
+/* 基本按鈕樣式 */
+.record-btn {
+    width: 150px;
+    height: 50px;
+    font-size: 1rem;
+    border-radius: 4px;
+    background-color: #343a40;
+    color: #ffffff;
+    border: 2px solid transparent;
+    transition: all 0.3s ease; /* 平滑過渡效果 */
+}
+
+.record-btn:hover {
+    background-color: #ffffff;
+    color: #343a40;
+    border-color: #343a40;
+}
+
+/* 螢幕寬度大於等於768px時的按鈕樣式 */
+@media (min-width: 768px) {
+    .record-btn {
+        width: 200px;
+        height: 60px;
+        font-size: 1.2rem;
+    }
+}
+
+/*紀錄標籤字型*/
+.record-meta {
+    font-size: 16px;
+    letter-spacing: 0.07rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: var(--font-secondary);
+    color: rgba(var(--color-black-rgb), 0.4);
+    margin-bottom: 10px;
 }

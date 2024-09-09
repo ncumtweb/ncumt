@@ -11,6 +11,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -74,23 +75,22 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
     Route::put('/user/{id}/contact-information', [UserController::class, 'updateContactInformation'])->name('user.updateContactInformation');
     Route::put('/user/{id}/mountaineering-deeds', [UserController::class, 'updateMountaineeringDeeds'])->name('user.updateMountaineeringDeeds');
 
-    // Course routes
+    //course
     Route::get('/course/showRecord/', [CourseController::class, 'showRecord'])->name('course.showRecord');
 
-    // Equipment routes
+    //equipment
     Route::get('/equipment/{name}', [EquipmentController::class, 'index'])->name('equipment.index');
-    Route::get('/selectEquipment', [EquipmentController::class, 'select'])->name('equipment.select');
+    Route::get("/selectEquipment", [EquipmentController::class, 'select'])->name('equipment.select');
 
-    // Rental routes
+    //rental
     Route::get('/rentalList', [RentalController::class, 'index'])->name('rental.index');
     Route::get('/rentalList/returnRental/{rental_id}', [RentalController::class, 'returnRental'])->name('rental.return');
     Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
     Route::get('/equipment/addEquipment/{equipment_id}', [RentalController::class, 'addEquipment'])->name('rental.addEquipment');
     Route::get('/equipment/showRental/{rental_id}', [RentalController::class, 'showRental'])->name('rental.showRental');
     Route::get('/equipment/removeRentalEquipment/{rentalEquipment_id}', [RentalController::class, 'removeEquipment'])->name('rentalEquipment.remove');
+    Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
 });
-
-
 
 Route::middleware(['previousPage'])->group(function () {
     Route::post('/course/register/{id}', [CourseController::class, 'register'])->name('course.register');

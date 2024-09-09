@@ -1,3 +1,4 @@
+@php use App\Utils\DateFormatter; @endphp
 @extends('basic.main')
 
 @section('title',  '社課報名')
@@ -56,7 +57,7 @@
                                 @endauth
                             </h2>
                             <h3>講者： {{ $course->speaker }}</h3>
-                            <h3>日期： {{ $course->date }}</h3>
+                            <h3>時間： {{ DateFormatter::formatRange($course->start_date, $course->end_date) }}</h3>
                             <h3>地點： {{ $course->location }}</h3>
                             @if( $course->description )
                                 <h3>簡介：</h3>

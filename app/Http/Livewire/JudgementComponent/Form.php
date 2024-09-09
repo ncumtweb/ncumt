@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\JudgementComponent;
 
+use App\Enums\Mode;
 use App\Models\Judgement;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -82,7 +83,7 @@ class Form extends Component
     public function mount($mode)
     {
         $this->mode = $mode;
-        if ($this->mode == 'edit') {
+        if ($this->mode == Mode::EDIT->value) {
 
             $this->judgementUpdated = Judgement::findOrFail($this->judgementId);
             $this->name = $this->judgementUpdated->name;
@@ -105,7 +106,7 @@ class Form extends Component
             return;
         }
 
-        $judgement = $this->mode == 'edit' ? $this->judgementUpdated : new Judgement();
+        $judgement = $this->mode == Mode::EDIT->value ? $this->judgementUpdated : new Judgement();
         $judgement->name = $this->name;
         $judgement->normal_day = $this->normal_day;
         $judgement->abnormal_day = $this->abnormal_day;
@@ -119,7 +120,7 @@ class Form extends Component
         $judgement->score = $this->totalScore;
         $judgement->result_level = $this->resultLevel;
         $judgement->modify_user = Auth::id();
-        if ($this->mode == 'edit') {
+        if ($this->mode == Mode::EDIT->value) {
             $judgement->update();
             return redirect()->route('judgement.index')->with('status','評分紀錄更新成功');
         }

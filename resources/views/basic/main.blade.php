@@ -12,7 +12,7 @@
 
     <!-- PWA  -->
     <meta name="theme-color" content="#6777ef"/>
-    <link rel="apple-touch-icon" href="{{ asset('assets/img/ncumt.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('assets/img/favicon.png') }}">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- Favicons -->
@@ -46,12 +46,14 @@
     <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
 
+
     <!-- Template Main CSS Files -->
     <link href="{{ asset('assets/css/variables.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
     @livewireStyles
-    @stack('styles')
+
+        @stack('styles')
     <!-- =======================================================
     * Template Name: ZenBlog
     * Updated: Mar 10 2023 with Bootstrap v5.2.3
