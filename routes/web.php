@@ -152,7 +152,8 @@ Route::get('/conference/result', function () {
 Route::middleware(['TripAuthenticate'])->group(function () {
     //trip
     Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
-    Route::put('/trip/create', [TripController::class, 'update'])->name('trip.update');
+    Route::put('/trip/create', [TripController::class, 'store'])->name('trip.store');
     Route::get('/trip/edit/{id}', [TripController::class, 'edit'])->name('trip.edit');
-    Route::put('/trip/edit/{id}', [TripController::class, 'store'])->name('trip.store');
+    Route::put('/trip/edit/{id}', [TripController::class, 'update'])->name('trip.update');
+
 });
