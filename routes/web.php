@@ -11,9 +11,10 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\TripController;
+use App\Http\Middleware\TripAuthenticate;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\UserMiddleware;
 
 
 /*
@@ -128,6 +129,7 @@ Route::middleware(['checkRole'])->group(function () {
     Route::post('/record/imgur', [RecordController::class, 'callImgurApi'])->name('record.callImgurApi');
     Route::get('/record/delete/{id}', [RecordController::class, 'delete'])->name('record.delete');
 
+
     //faq
     Route::get('/faq/create', [FaqController::class, 'create'])->name('faq.create');
     Route::post('/faq/create', [FaqController::class, 'store'])->name('faq.store');
@@ -135,24 +137,22 @@ Route::middleware(['checkRole'])->group(function () {
     Route::put('/faq/edit/{id}', [FaqController::class, 'update'])->name('faq.update');
     Route::delete('/faq/edit/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
-    // trip
-
-    Route::put('/trip/create', [TripController::class, 'store'])->name('trip.store');
-    Route::put('/trip/edit/{id}', [TripController::class, 'update'])->name('trip.update');
-    Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
-    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])->name('trip.edit');
-
-//    Route::get('/trip/create', [TripController::class, 'create'])
-//        ->middleware('TripAuthenticate');
-//    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])
-//        ->middleware('TripAuthenticate');
-
     // user
     Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
     Route::post('/users/updateRole/{id}', [UserController::class, 'updateRole'])->name('user.updateRole');
-
-    Route::get('/conference/result', function () {
-        return view('conference.result');
-    });
 });
 
+Route::get('/conference/result', function () {
+    if (Auth::check() && Auth::user()->isValidIdentifiers(['110602527', '111409003', '109403525'])) {
+        return view('conference.result');
+    }
+    abort(403, '您沒有權限進入此頁面');
+});
+
+Route::middleware(['TripAuthenticate'])->group(function () {
+    //trip
+    Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
+    Route::put('/trip/create', [TripController::class, 'update'])->name('trip.update');
+    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])->name('trip.edit');
+    Route::put('/trip/edit/{id}', [TripController::class, 'store'])->name('trip.store');
+});

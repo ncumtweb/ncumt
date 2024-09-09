@@ -2,11 +2,11 @@
 
 namespace Ncucc\Portal;
 
+use GuzzleHttp\ClientInterface;
+use Illuminate\Support\Arr;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
 use Laravel\Socialite\Two\User;
-use GuzzleHttp\ClientInterface;
-use Illuminate\Support\Arr;
 
 class PortalBaseProvider extends AbstractProvider implements ProviderInterface
 {
@@ -29,7 +29,7 @@ class PortalBaseProvider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    protected function getAuthUrl($state)
+    protected function getAuthUrl($state): string
     {
         return $this->buildAuthUrlFromBase(self::PORTAL_BASE_URL . '/oauth2/authorization', $state);
     }
@@ -45,7 +45,7 @@ class PortalBaseProvider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    protected function getUserByToken($token)
+    protected function getUserByToken($token): array
     {
         $userUrl = self::PORTAL_BASE_URL . '/apis/oauth/v1/info';
 
@@ -65,7 +65,7 @@ class PortalBaseProvider extends AbstractProvider implements ProviderInterface
      * @param  string  $code
      * @return array
      */
-    public function getAccessTokenResponse($code)
+    public function getAccessTokenResponse($code): array
     {
         $postKey = (version_compare(ClientInterface::MAJOR_VERSION, '6') === 1) ? 'form_params' : 'body';
 
@@ -81,7 +81,7 @@ class PortalBaseProvider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    protected function mapUserToObject(array $user)
+    protected function mapUserToObject(array $user): User
     {
         return (new User)->setRaw($user)->map([
             'id' => $user['identifier'],
@@ -94,7 +94,7 @@ class PortalBaseProvider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
-    protected function getTokenFields($code)
+    protected function getTokenFields($code): array
     {
         return parent::getTokenFields($code) + ['grant_type' => 'authorization_code'];
     }

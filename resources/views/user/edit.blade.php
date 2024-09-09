@@ -54,7 +54,7 @@
                 <div class="row">
                   <div class="form-group col-md-4">
                     <label for="studentID" class="form-label">學號</label>
-                    <input type="text" name="studentID" class="form-control" id="studentID" value="{{ $user->identifier }}" required>
+                    <input type="text" name="studentID" class="form-control" id="studentID" value="{{ $user->student_id }}" required>
                   </div>
                   <div class="form-group col-md-4">
                     <label for="phone" class="form-label">手機號碼</label>
