@@ -139,7 +139,7 @@ public function updateBasicInformation(Request $request, $id)
         // 更新用戶資料
         $user->role = $request->input('role');
         $user->guard = $request->input('guard');
-
+        $user->river_guard = $request->input('river_guard');
         // 設置更新者和更新時間
         $user->setModifiedUser();
 

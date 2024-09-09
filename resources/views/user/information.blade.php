@@ -129,13 +129,13 @@
             </div>
         </div>
     </section>
-    <!-- start form --><!-- 山社角色 -->
+    <!-- start form --><!-- 詳細資料 -->
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
-            <section id="club_roles"></section>
+            <section id="detail_information"></section>
             <div class="row">
                 <div class="col-lg-12 text-center mb-5">
-                    <h1 class="page-title">山社角色</h1><!-- 置中標題 -->
+                    <h1 class="page-title">詳細資料</h1><!-- 置中標題 -->
                 </div>
             </div>
             <!-- start form -->
@@ -152,6 +152,35 @@
                             @csrf
                             @method('PUT')
                             <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label for="role" class="form-label">角色</label>
+                                    <select name="role" class="form-control" id="gender" disabled>
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="0" {{ $user->role == '0' ? 'selected' : '' }}>社員</option>
+                                        <option value="1" {{ $user->role == '1' ? 'selected' : '' }}>社長</option>
+                                        <option value="2" {{ $user->role == '2' ? 'selected' : '' }}>副社長</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="guard" class="form-label">嚮導（非嚮導, 初嚮, 領嚮）</label>
+                                    <select name="guard" class="form-control" id="guard" disabled>
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="0" {{ $user->guard == '0' ? 'selected' : '' }}>非嚮導</option>
+                                        <option value="1" {{ $user->guard == '1' ? 'selected' : '' }}>初嚮</option>
+                                        <option value="2" {{ $user->guard == '2' ? 'selected' : '' }}>領嚮</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="river_guard" class="form-label">溪嚮（非溪嚮, 溪嚮）</label>
+                                    <select name="river_guard" class="form-control" id="river_guard" disabled>
+                                        <option value="" disabled selected>請選擇</option>
+                                        <option value="0" {{ $user->river_guard == '0' ? 'selected' : '' }}>非溪嚮</option>
+                                        <option value="1" {{ $user->river_guard == '1' ? 'selected' : '' }}>溪嚮</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-md-6">
                                     <label for="role" class="form-label">角色</label>
                                     <select name="role" class="form-control" id="gender" disabled>
@@ -165,9 +194,9 @@
                                     <label for="guard" class="form-label">嚮導（非嚮導, 初嚮, 領嚮）</label>
                                     <select name="guard" class="form-control" id="guard" disabled>
                                         <option value="" disabled selected>請選擇</option>
-                                        <option value="0" {{ $user->role == '0' ? 'selected' : '' }}>非嚮導</option>
-                                        <option value="1" {{ $user->role == '1' ? 'selected' : '' }}>初嚮</option>
-                                        <option value="2" {{ $user->role == '2' ? 'selected' : '' }}>領嚮</option>
+                                        <option value="0" {{ $user->guard == '0' ? 'selected' : '' }}>非嚮導</option>
+                                        <option value="1" {{ $user->guard == '1' ? 'selected' : '' }}>初嚮</option>
+                                        <option value="2" {{ $user->guard == '2' ? 'selected' : '' }}>領嚮</option>
                                     </select>
                                 </div>
                             </div>
