@@ -7,20 +7,20 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use App\Traits\ImageTrait;
 use Illuminate\Support\Facades\File;
-use App\Enums\JudgementID;
+use App\Enums\JudgementRank;
 use App\Enums\RouteCategory;
 
 class TripController extends Controller
 {
     use ImageTrait;
-//    public function __construct()
-//    {
-//        $this->middleware('TripAuthenticate');
-//    }
+    public function __construct()
+    {
+        $this->middleware('TripAuthenticate');
+    }
 
     public function create() // 會連到 web.php 的 function
     {
-        $judgement_ids = JudgementID::cases(); // Get all enum instances
+        $judgement_ids = JudgementRank::cases(); // Get all enum instances
         $categories = RouteCategory::cases();
         return view('trip.create', compact('judgement_ids', 'categories'));
 
@@ -41,7 +41,7 @@ class TripController extends Controller
                     $trip->pre_departure_time = Carbon::parse($trip->pre_departure_time);
                     $trip->start_date = Carbon::parse($trip->pre_departure_time);
                     $trip->end_date = Carbon::parse($trip->end_date);
-                    $judgement_ids = JudgementID::cases();
+                    $judgement_ids = JudgementRank::cases();
                     $categories = RouteCategory::cases();
 
                     return view('trip.edit',  compact('trip', 'judgement_ids', 'categories'));

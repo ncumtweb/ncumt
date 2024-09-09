@@ -12,9 +12,7 @@
                     <a> 努力製作中，先放隻狗狗在這邊等。</a>
                 </div>
             </div>
-
             <div class="row">
-
                 <div class="col-lg-12 text-center mb-5">
                     <img src="assets/img/post-landscape-1.jpg" alt="" class="img-fluid">
                 </div>

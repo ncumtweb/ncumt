@@ -70,7 +70,4 @@ class Kernel extends HttpKernel
         'user' => \App\Http\Middleware\UserMiddleware::class,
         'TripAuthenticate' => \App\Http\Middleware\TripAuthenticate::class
     ];
-
-
 }
-

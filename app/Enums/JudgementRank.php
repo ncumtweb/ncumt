@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum JudgementID: int
+enum JudgementRank: int
 {
     case SSS = 13;
     case S_PLUS = 12;
