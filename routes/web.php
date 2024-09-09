@@ -139,11 +139,13 @@ Route::middleware(['checkRole'])->group(function () {
 
     Route::put('/trip/create', [TripController::class, 'store'])->name('trip.store');
     Route::put('/trip/edit/{id}', [TripController::class, 'update'])->name('trip.update');
+    Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
+    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])->name('trip.edit');
 
-    Route::get('/trip/create', [TripController::class, 'create'])
-        ->middleware('TripAuthenticate');
-    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])
-        ->middleware('TripAuthenticate');
+//    Route::get('/trip/create', [TripController::class, 'create'])
+//        ->middleware('TripAuthenticate');
+//    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])
+//        ->middleware('TripAuthenticate');
 
     // user
     Route::get('/user/list', [UserController::class, 'index'])->name('user.list');

@@ -24,61 +24,15 @@
                                 </div>
                             @endif
                             <!-- 更新失敗提示 -->
-                            <div class="form-group col-md-12">
-                                @error('expected_cadre_count')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('actual_fee')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('expected_member_count')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('expected_fee')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('prepare_day')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('end_date')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('quit_date')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('start_date')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('registration_close')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('registration_open')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group col-md-12">
-                                @error('pre_departure_time')
-                                <div class="alert alert-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <form action="{{ route('trip.create') }}" method="POST" id="createRecordForm"
                                   class="createRecordForm" enctype="multipart/form-data">
                                 @csrf
