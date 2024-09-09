@@ -25,6 +25,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/trip/list', function () {
+    return view('trip.tripList');
+});
+
 Route::fallback(function () {
     return redirect()->route('index');
 });
@@ -44,6 +48,7 @@ Route::get('/course/register', [CourseController::class, 'showRegister'])->name(
 Route::get('/judgement', [JudgementController::class, 'index'])->name('judgement.index');
 Route::get('/judgement/record', [JudgementController::class, 'record'])->name('judgement.record');
 Route::get('/judgement/rule', [JudgementController::class, 'rule'])->name('judgement.rule');
+Route::get('/judgement/pointRule', [JudgementController::class, 'pointRule'])->name('judgement.pointRule');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq.index');
 Route::get('/record', [RecordController::class, 'index'])->name('record.index');
 Route::get('/record/show/{id}', [RecordController::class, 'show'])->name('record.show');
