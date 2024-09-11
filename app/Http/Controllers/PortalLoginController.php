@@ -35,9 +35,9 @@ class PortalLoginController extends Controller
             $user->name_en = $user_portal->user['englishName'] ?? null;
             $user->email = $user_portal->user['email'];
             $user->phone = $user_portal->user['mobilePhone'] ?? null;
-            $user->personal_id = $user_portal->user['personalId'];
+            $user->personal_id = $user_portal->user['personalId'] ?? null;
             $user->gender = $user_portal->user['gender'];
-            $user->birthday = $user_portal->user['birthday'];
+            $user->birthday = $user_portal->user['birthday'] ?? null;
             $user->department_level = $this->getDepartmentLevel($academyRecords);
             $user->login_method = LoginMethod::PORTAL;
             $user->create_user = Common::SYSTEM_USER;
@@ -47,9 +47,9 @@ class PortalLoginController extends Controller
         } else {
             // 之前登入的人若沒有以下資料，要重新寫入
             $existUser->phone = $existUser->phone ?? ($user_portal->user['mobilePhone'] ?? null);
-            $existUser->personal_id = $existUser->personal_id ?? $user_portal->user['personalId'];
+            $existUser->personal_id = $existUser->personal_id ?? ($user_portal->user['personalId'] ?? null);
             $existUser->gender = $existUser->gender ?? $user_portal->user['gender'];
-            $existUser->birthday = $existUser->birthday ?? $user_portal->user['birthday'];
+            $existUser->birthday = $existUser->birthday ?? ($user_portal->user['birthday'] ?? null);
             $existUser->department_level = $existUser->department_level ?? $this->getDepartmentLevel($academyRecords);
             $existUser->login_method = $existUser->login_method ?? LoginMethod::PORTAL;
             $existUser->save();
@@ -58,8 +58,10 @@ class PortalLoginController extends Controller
 
         if (session()->has('previous_page')) {
             $url = session('previous_page');
-            session()->forget('previous_page');
-            return redirect()->intended($url);
+            if ($url != config('app.url') . '/portal') {
+                session()->forget('previous_page');
+                return redirect()->intended($url);
+            }
         }
 
         return redirect()->route('index');
