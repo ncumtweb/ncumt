@@ -26,17 +26,22 @@ class PortalLoginController extends Controller
     {
         $user_portal = Socialite::with('portal')->stateless()->user();
         Log::debug('user login, user array: ', array($user_portal));
-        $existUser = User::where('student_id', $user_portal->user['studentId'])->first();
+        $studentId = $user_portal->user['studentId'] ?? null;
+        if (is_null($studentId)) {
+            $existUser = User::where('email', $user_portal->user['email'])->first();
+        } else {
+            $existUser = User::where('student_id', $studentId)->first();
+        }
         $academyRecords = $user_portal->user['academyRecords'] ?? null;
         if (is_null($existUser)) {
             $user = new User();
-            $user->student_id = $user_portal->user['studentId'];
-            $user->name_zh = $user_portal->user['chineseName'];
+            $user->student_id = $studentId;
+            $user->name_zh = $user_portal->user['chineseName'] ?? $user_portal->user['email'];
             $user->name_en = $user_portal->user['englishName'] ?? null;
             $user->email = $user_portal->user['email'];
             $user->phone = $user_portal->user['mobilePhone'] ?? null;
             $user->personal_id = $user_portal->user['personalId'] ?? null;
-            $user->gender = $user_portal->user['gender'];
+            $user->gender = $user_portal->user['gender'] ?? null;
             $user->birthday = $user_portal->user['birthday'] ?? null;
             $user->department_level = $this->getDepartmentLevel($academyRecords);
             $user->login_method = LoginMethod::PORTAL;
@@ -48,7 +53,7 @@ class PortalLoginController extends Controller
             // 之前登入的人若沒有以下資料，要重新寫入
             $existUser->phone = $existUser->phone ?? ($user_portal->user['mobilePhone'] ?? null);
             $existUser->personal_id = $existUser->personal_id ?? ($user_portal->user['personalId'] ?? null);
-            $existUser->gender = $existUser->gender ?? $user_portal->user['gender'];
+            $existUser->gender = $existUser->gender ?? ($user_portal->user['gender'] ?? null);
             $existUser->birthday = $existUser->birthday ?? ($user_portal->user['birthday'] ?? null);
             $existUser->department_level = $existUser->department_level ?? $this->getDepartmentLevel($academyRecords);
             $existUser->login_method = $existUser->login_method ?? LoginMethod::PORTAL;

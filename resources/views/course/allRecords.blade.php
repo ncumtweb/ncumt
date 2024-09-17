@@ -49,7 +49,7 @@
                                 <tbody>
                                     @foreach($courseRecords as $courseRecord)
                                     <tr>
-                                        <td>{{ $courseRecord->user->student_id }}</td>
+                                        <td>{{ $courseRecord->user->student_id ?? '社會人士' }}</td>
                                         <td>{{ $courseRecord->user->name_zh }}</td>
                                         <td>{{ $courseRecord->user->email }}</td>
                                         <td>{{ $courseRecord->created_at }}</td>
