@@ -1,3 +1,4 @@
+@php use App\Utils\DateFormatter; @endphp
 @extends('basic.main')
 
 @section('title',  '社課影片')

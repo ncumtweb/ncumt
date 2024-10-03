@@ -15,7 +15,7 @@
                         <li><a href="{{ url('conference/register') }}">研討會報名表</a></li>
                         <li><a href="{{ url('conference/search') }}">研討會查詢</a></li>
                         @auth
-                            @if(Auth::user()->role > App\Enums\Role::MEMBER->value)
+                            @if (Auth::user()->isValidIdentifiers(['110602527', '111409003', '109403525']))
                                 <li><a href="{{ url('conference/result') }}">研討會報名結果</a></li>
                             @endif
                         @endauth

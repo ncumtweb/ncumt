@@ -43,7 +43,7 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
-                                    <td>{{ $user->identifier }}</td>
+                                    <td>{{ $user->student_id }}</td>
                                     <td>{{ $user->name_zh}}</td>
                                     <td>{{ $user->email }}</td>
                                     <td>{{ $user->nickname }}</td>

@@ -33,7 +33,7 @@
                 <div class="row justify-content-center">
                     <!-- Table -->
 
-                        <div class="col-md-10 text-center mb-5">                    
+                        <div class="col-md-10 text-center mb-5">
                             <table class="table table-light table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -49,20 +49,20 @@
                                 <tbody>
                                     @foreach($courseRecords as $courseRecord)
                                     <tr>
-                                        <td>{{ $courseRecord->user->identifier }}</td>
+                                        <td>{{ $courseRecord->user->student_id ?? '社會人士' }}</td>
                                         <td>{{ $courseRecord->user->name_zh }}</td>
-                                        <td>{{ $courseRecord->user->email }}</td> 
-                                        <td>{{ $courseRecord->created_at }}</td>                  
+                                        <td>{{ $courseRecord->user->email }}</td>
+                                        <td>{{ $courseRecord->created_at }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-                        </div>    
+                        </div>
 
                     <!-- End Table -->
                 </div>
             @endif
-            
-        </div>    
-    </section>    
+
+        </div>
+    </section>
 @endsection

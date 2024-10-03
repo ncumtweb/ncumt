@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Enums\Common;
+use App\Enums\LoginMethod;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use Laravel\Socialite\Facades\Socialite;
 
 class PortalLoginController extends Controller
 {
@@ -16,58 +19,91 @@ class PortalLoginController extends Controller
 
     public function redirectToProvider()
     {
-        return \Socialite::with('portal')->redirect();
+        return Socialite::with('portal')->redirect();
     }
 
-    public function handleProviderCallback()
+    public function handleProviderCallback(): \Illuminate\Http\RedirectResponse
     {
-        $user_portal = \Socialite::with('portal')->stateless()->user();
-        // 幹部名單
-
-        // 社員 => 0, 社長 => 1, 副社長 => 2, 嚮導組組長 => 3, 嚮導組組員 => 4,
-        // 技術組組長 => 5, 技術組組員 => 6, 器材組組長 => 7, 器材組組員 => 8, 醫藥組組長 => 9,
-        // 醫藥組組員 => 10, 文書組組長 => 11, 文書組組員 => 12, 美宣 => 13, 網管 => 14,
-        // 財務長 => 15, 山防組組長 => 16
-
-        // $position = ["社員", "社長", "副社長", "嚮導組組長", "嚮導組組員",
-        // '技術組組長', '技術組組員', '器材組組長', '器材組組員', '醫藥組組長',
-        // '醫藥組組員', '文書組組長', '文書組組員', '美宣', '網管',
-        // '財務長', '山防組組長' ];
-
-        $checkExist = User::where('id', $user_portal->user['id'])->first();
-
-        if (is_null($checkExist)) {
+        $user_portal = Socialite::with('portal')->stateless()->user();
+        Log::debug('user login, user array: ', array($user_portal));
+        $studentId = $user_portal->user['studentId'] ?? null;
+        if (is_null($studentId)) {
+            $existUser = User::where('email', $user_portal->user['email'])->first();
+        } else {
+            $existUser = User::where('student_id', $studentId)->first();
+        }
+        $academyRecords = $user_portal->user['academyRecords'] ?? null;
+        if (is_null($existUser)) {
             $user = new User();
-            $user->id = $user_portal->user['id'];
-            $user->identifier = $user_portal->user['studentId'];
-            $user->name_zh = $user_portal->user['chineseName'];
-            $user->name_en = $user_portal->user['englishName'];
+            $user->student_id = $studentId;
+            $user->name_zh = $user_portal->user['chineseName'] ?? $user_portal->user['email'];
+            $user->name_en = $user_portal->user['englishName'] ?? null;
             $user->email = $user_portal->user['email'];
-            $user->phone = $user->phone ?? $user_portal->user['mobilePhone'];
-            $user->personal_id = $user_portal->user['personalId'];
-            $user->gender = $user_portal->user['gender'];
+            $user->phone = $user_portal->user['mobilePhone'] ?? null;
+            $user->personal_id = $user_portal->user['personalId'] ?? null;
+            $user->gender = $user_portal->user['gender'] ?? null;
+            $user->birthday = $user_portal->user['birthday'] ?? null;
+            $user->department_level = $this->getDepartmentLevel($academyRecords);
+            $user->login_method = LoginMethod::PORTAL;
             $user->create_user = Common::SYSTEM_USER;
             $user->modify_user = Common::SYSTEM_USER;
             $user->save();
-
-            $checkExist = User::where('id', $user_portal->user['id'])->first(); // 指向不成功，所以再查一次
+            Auth::login($user);
+        } else {
+            // 之前登入的人若沒有以下資料，要重新寫入
+            $existUser->phone = $existUser->phone ?? ($user_portal->user['mobilePhone'] ?? null);
+            $existUser->personal_id = $existUser->personal_id ?? ($user_portal->user['personalId'] ?? null);
+            $existUser->gender = $existUser->gender ?? ($user_portal->user['gender'] ?? null);
+            $existUser->birthday = $existUser->birthday ?? ($user_portal->user['birthday'] ?? null);
+            $existUser->department_level = $existUser->department_level ?? $this->getDepartmentLevel($academyRecords);
+            $existUser->login_method = $existUser->login_method ?? LoginMethod::PORTAL;
+            $existUser->save();
+            Auth::login($existUser);
         }
-        Auth::login($checkExist);
 
         if (session()->has('previous_page')) {
             $url = session('previous_page');
-            session()->forget('previous_page');
-            return redirect()->intended($url);
+            if ($url != config('app.url') . '/portal') {
+                session()->forget('previous_page');
+                return redirect()->intended($url);
+            }
         }
 
         return redirect()->route('index');
     }
 
-    public function logout()
+    public function logout(): \Illuminate\Http\RedirectResponse
     {
         // 將目前使用者登出
         Auth::logout();
 
         return redirect()->intended(url()->previous());
+    }
+
+    private function getDepartmentLevel($academyRecords)
+    {
+        // 檢查 $academyRecords 是否為 null
+        if (is_null($academyRecords)) {
+            return null;
+        }
+
+        // 建立年級的對應關係
+        $grades = [
+            '1' => '一年級',
+            '2' => '二年級',
+            '3' => '三年級',
+            '4' => '四年級'
+        ];
+
+        // 取得年級的第一個數字
+        $gradeNumber = substr($academyRecords['grad'], 0, 1);
+        $grade = $grades[$gradeNumber] ?? '';
+
+        // 組合最終的結果
+        if ($academyRecords['name'] && $grade) {
+            return "{$academyRecords['name']}$grade";
+        }
+
+        return $academyRecords['name']; // 如果資料不完整，返回系名
     }
 }
