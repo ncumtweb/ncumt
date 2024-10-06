@@ -38,6 +38,7 @@ class CourseReminder extends Mailable
     public function build(): static
     {
         $date = DateFormatter::formatRange($this->course->start_date, $this->course->end_date);
+
         return $this->from('ncumt40@gmail.com')
             ->subject('「' . $this->course->title . '」' . '報名提醒')
             ->view('mail.course.remindCourse')
@@ -56,7 +57,9 @@ class CourseReminder extends Mailable
      */
     public static function sendEmail(): void
     {
-        $courses = Course::where('start_date', now()->addDay()->toDateString())->get();
+        $startOfTomorrow = now()->addDay()->startOfDay();  // 明天的 00:00
+        $endOfTomorrow = now()->addDay()->endOfDay();      // 明天的 23:59
+        $courses = Course::whereBetween('start_date', [$startOfTomorrow, $endOfTomorrow])->get();
 
         if ($courses->isEmpty()) {
             return;
