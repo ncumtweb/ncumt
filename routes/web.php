@@ -33,6 +33,9 @@ Route::fallback(function () {
 Route::get('/aboutus', function () {
     return view('information.aboutus');
 });
+Route::get('/trip/detail', function () {
+    return view('trip.tripDetail');
+});
 
 Route::get('/conference/register', function () {
     return view('conference.register');

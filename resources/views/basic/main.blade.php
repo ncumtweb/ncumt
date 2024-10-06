@@ -45,6 +45,10 @@
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/tripDetail.css') }}" rel="stylesheet">
+
+    <!-- Vendor JS Files  -->
+    <script src="{{ asset('assets/js/tripDetail.js') }}"></script>
 
 
     <!-- Template Main CSS Files -->
