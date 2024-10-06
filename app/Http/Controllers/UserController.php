@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index(Request $request): View
     {
         $page = $request->input('page', 1);
-        $users = User::orderBy('created_at', 'asc')->paginate(1)->appends(['page' => $page]);
+        $users = User::orderBy('created_at', 'desc')->paginate(10)->appends(['page' => $page]);
         $request->session()->forget('page');
         return view('user.userList', compact('users'));
     }
