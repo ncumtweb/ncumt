@@ -182,23 +182,22 @@
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
-                                    <label for="role" class="form-label">角色</label>
-                                    <select name="role" class="form-control" id="gender" disabled>
+                                    <label for="has_long_experience" class="form-label">是否有溯溪經驗</label>
+                                    <select name="has_long_experience" class="form-control" id="has_long_experience">
                                         <option value="" disabled selected>請選擇</option>
-                                        <option value="0" {{ $user->role == '0' ? 'selected' : '' }}>社員</option>
-                                        <option value="1" {{ $user->role == '1' ? 'selected' : '' }}>社長</option>
-                                        <option value="2" {{ $user->role == '2' ? 'selected' : '' }}>副社長</option>
+                                        <option value="0" {{ $user->has_long_experience == '0' ? 'selected' : '' }}>沒有</option>
+                                        <option value="1" {{ $user->has_long_experience == '1' ? 'selected' : '' }}>有</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="guard" class="form-label">嚮導（非嚮導, 初嚮, 領嚮）</label>
-                                    <select name="guard" class="form-control" id="guard" disabled>
+                                    <label for="has_river_experience" class="form-label">是否有溯溪經驗</label>
+                                    <select name="has_river_experience" class="form-control" id="has_river_experience">
                                         <option value="" disabled selected>請選擇</option>
-                                        <option value="0" {{ $user->guard == '0' ? 'selected' : '' }}>非嚮導</option>
-                                        <option value="1" {{ $user->guard == '1' ? 'selected' : '' }}>初嚮</option>
-                                        <option value="2" {{ $user->guard == '2' ? 'selected' : '' }}>領嚮</option>
+                                        <option value="0" {{ $user->has_river_experience == '0' ? 'selected' : '' }}>沒有</option>
+                                        <option value="1" {{ $user->has_river_experience == '1' ? 'selected' : '' }}>有</option>
                                     </select>
                                 </div>
+
                             </div>
                             <div class="row">
                                 <div class="text-center">

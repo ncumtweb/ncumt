@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    const POSITION = 'general_user';
     protected string $paginationTheme = 'bootstrap';
 
     /**
@@ -62,6 +63,7 @@ class UserController extends Controller
         }
         return view('user.information', compact('user'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -117,14 +119,5 @@ class UserController extends Controller
         else {
             return true;
         }
-    }
-
-    public function updateRole(Request $request, int $userId): \Illuminate\Http\RedirectResponse
-    {
-        $user = User::findOrFail($userId);
-        $user->role = $request->role;
-        $user->save();
-
-        return redirect()->route('user.list')->with('status', $user->name_zh . '的角色更新成功');
     }
 }
