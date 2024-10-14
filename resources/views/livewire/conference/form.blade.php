@@ -112,11 +112,20 @@
                 @endif
 
                 <div class="text-center">
+                    @if(App\Enums\Mode::CREATE == $mode)
+                        <button type="submit"
+                                class="btn btn-primary">提交
+                        </button>
+                    @else
                     <button type="submit"
-                            class="btn btn-primary">{{ App\Enums\Mode::CREATE == $mode ? '提交' : '修改'}} </button>
+                            class="btn btn-primary">修改
+                    </button>
+                        <button type="button" wire:click="cancelRegistration"
+                                class="btn btn-danger">取消報名
+                        </button>
+                    @endif
                 </div>
             @endif
-
     </form>
 </div>
 

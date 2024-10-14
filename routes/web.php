@@ -37,11 +37,11 @@ Route::get('/aboutus', function () {
 
 Route::get('/conference/register', function () {
     return view('conference.register');
-});
+})->name('conference.register');
 
 Route::get('/conference/search', function () {
     return view('conference.searchAndEdit');
-});
+})->name('conference.search');
 
 
 // Route::get('/map', function () {
