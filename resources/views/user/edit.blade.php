@@ -1,6 +1,6 @@
 @extends('basic.main')
 
-@section('title',  '個人資料')        
+@section('title',  '個人資料')
 
 @section('content')
 
@@ -27,18 +27,18 @@
                 @method('PUT')
                 <div class="row">
                   <div class="form-group col-md-6">
-                    <label for="name_zh" class="form-label">中文姓名</label>                    
+                    <label for="name_zh" class="form-label">中文姓名</label>
                     <input type="text" name="name_zh" class="form-control" id="name_zh" value="{{ $user->name_zh }}" required>
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="name_en" class="form-label">英文姓名</label>                    
+                    <label for="name_en" class="form-label">英文姓名</label>
                     <input type="text" name="name_en" class="form-control" id="name_en" value="{{ $user->name_en }}" required>
                   </div>
-                </div> 
-                
+                </div>
+
                 <div class="row">
                   <div class="form-group col-md-6">
-                    <label for="nickname" class="form-label">暱稱</label>                    
+                    <label for="nickname" class="form-label">暱稱</label>
                     @if($user->nickname != null)
                       <input type="text" name="nickname" class="form-control" id="nickname" value="{{ $user->nickname }}" >
                     @else
@@ -46,22 +46,22 @@
                     @endif
                   </div>
                   <div class="form-group col-md-6">
-                    <label for="position" class="form-label">職位</label>                    
-                    <input type="text" name="position" class="form-control" id="position" value="{{ $position[$user->role] }}">
+                    <label for="position" class="form-label">職位</label>
+                    <input type="text" name="position" class="form-control" id="position" value="{{ App\Enums\Role::from($user->role)->toChinese() }}">
                   </div>
                 </div>
 
                 <div class="row">
                   <div class="form-group col-md-4">
-                    <label for="studentID" class="form-label">學號</label>                    
-                    <input type="text" name="studentID" class="form-control" id="studentID" value="{{ $user->identifier }}" required>
+                    <label for="studentID" class="form-label">學號</label>
+                    <input type="text" name="studentID" class="form-control" id="studentID" value="{{ $user->student_id }}" required>
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="phone" class="form-label">手機號碼</label>                    
-                    <input type="phone" name="phone" class="form-control" id="phone" value="{{ $user->phone }}">
+                    <label for="phone" class="form-label">手機號碼</label>
+                    <input type="text" name="phone" class="form-control" id="phone" value="{{ $user->phone }}">
                   </div>
                   <div class="form-group col-md-4">
-                    <label for="email" class="form-label">電子郵件</label>                    
+                    <label for="email" class="form-label">電子郵件</label>
                     <input type="email" name="email" class="form-control" id="email" value="{{ $user->email }}" required>
                   </div>
                 </div>
@@ -72,7 +72,7 @@
                 </div>
               </form>
             </div>
-          </div> 
+          </div>
         </div>
 
       </div>

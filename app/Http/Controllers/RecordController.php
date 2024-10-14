@@ -86,10 +86,10 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show($id)
     {
         $record = Record::findOrFail($id);
         $category_array = ["中級山", "高山", "溯溪"];

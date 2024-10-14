@@ -11,6 +11,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -62,10 +63,17 @@ Route::prefix('portal')->name('portal.')->group(function () {
 });
 
 Route::middleware(['auth', 'auth.session'])->group(function () {
+
+    // User routes
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
     Route::get('/user/{id}', [UserController::class, 'show'])->name('user.show');
-    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::put('/user/{id}/basic-information', [UserController::class, 'updateBasicInformation'])->name('user.updateBasicInformation');
+    Route::put('/user/{id}/club-roles', [UserController::class, 'updateClubRoles'])->name('user.updateClubRoles');
+    Route::put('/user/{id}/physical-condition', [UserController::class, 'updatePhysicalCondition'])->name('user.updatePhysicalCondition');
+    Route::put('/user/{id}/eating-habit', [UserController::class, 'updateEatingHabit'])->name('user.updateEatingHabit');
+    Route::put('/user/{id}/contact-information', [UserController::class, 'updateContactInformation'])->name('user.updateContactInformation');
+    Route::put('/user/{id}/mountaineering-deeds', [UserController::class, 'updateMountaineeringDeeds'])->name('user.updateMountaineeringDeeds');
 
     //course
     Route::get('/course/showRecord/', [CourseController::class, 'showRecord'])->name('course.showRecord');
