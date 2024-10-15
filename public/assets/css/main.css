@@ -1627,3 +1627,16 @@ button.black[type=submit] {
     color: rgba(var(--color-black-rgb), 0.4);
     margin-bottom: 10px;
 }
+
+.cancel .btn.btn-danger {
+    background: var(--color-red);
+    border: 1;
+    padding: 10px 10px;
+    color: #fff;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.cancel .btn.btn-danger:hover {
+    background: rgba(var(--color-red-rgb), 0.8);
+}
