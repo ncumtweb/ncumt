@@ -1628,7 +1628,7 @@ button.black[type=submit] {
     margin-bottom: 10px;
 }
 
-.btn.btn-danger {
+.cancel .btn.btn-danger {
     background: var(--color-red);
     border: 1;
     padding: 10px 10px;
@@ -1637,6 +1637,6 @@ button.black[type=submit] {
     cursor: pointer;
 }
 
-.btn.btn-danger:hover {
+.cancel .btn.btn-danger:hover {
     background: rgba(var(--color-red-rgb), 0.8);
 }

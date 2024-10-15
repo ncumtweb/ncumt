@@ -111,7 +111,7 @@
                     </div>
                 @endif
 
-                <div class="text-center">
+                <div class="text-center cancel">
                     @if(App\Enums\Mode::CREATE == $mode)
                         <button type="submit"
                                 class="btn btn-primary">提交
@@ -120,6 +120,7 @@
                     <button type="submit"
                             class="btn btn-primary">修改
                     </button>
+                        &nbsp;
                         <button type="button" wire:click="cancelRegistration"
                                 class="btn btn-danger">取消報名
                         </button>
