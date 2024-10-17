@@ -11,7 +11,7 @@ enum PersonalEquipmentCategory: string
     case HEADLAMP = '頭燈';
     case TREKKING_POLE = '登山杖 (支)';
     case CARABINER = '大D';
-    case FIGURE_EIGHT = '八字';
+    case FIGURE_EIGHT = '八字環';
     case SLING = 'sling';
     case HELMET = '頭盔';
     case CANYONING_HARNESS = '吊帶';
