@@ -26,7 +26,7 @@
                             </a>
                         </li>
                     </ul>
-
+                    <a href="{{ asset('pdfs/第二十五屆全國大專校院登山運動研討會議程表.pdf') }}" class="btn btn-primary" download>下載會議資訊 PDF</a>
                     <h3 class="mt-4">聯絡資訊</h3>
                     <ul class="list-styled">
                         <li>中華民國健行登山會信箱：info@alpineclub.org.tw</li>
