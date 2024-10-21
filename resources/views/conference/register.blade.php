@@ -11,10 +11,11 @@
             </div>
             <div class="row mt-3 justify-content-center">
                 <div class="col-md-10 text-center">
-                    <h3>「報名已截止，如有任何問題，請私訊聯絡<a style="color: blue;"
-                                                              href="https://www.facebook.com/ncumountaineeringclub"
-                                                              target="_blank"
-                                                              class="text-decoration-underline">粉絲專頁</a>」</h3>
+                    <h3>「線上報名已截止，若想參加請直接到會場參加即可，但將不會提供午餐與禮品。 」</h3>
+                    <h3>如有任何問題，請私訊聯絡<a style="color: blue;"
+                                                   href="https://www.facebook.com/ncumountaineeringclub"
+                                                   target="_blank"
+                                                   class="text-decoration-underline">粉絲專頁</a></h3>
                 </div>
             </div>
             <div class="row justify-content-center">
