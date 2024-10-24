@@ -12,39 +12,8 @@
                     <div>
                     </div>
                     <section id="posts" class="posts">
-                        <div class="row">
-                            <!-- Start Video -->
-                            @foreach($courses as $course)
-                                <div class="col-lg-12 mb-3">
-                                    <div class="aside-block">
-                                        <div class="video-post">
-                                            <h1>
-                                                {{ $course->title . ' ' . $course->date}}
-                                                @if($course->pptURL)
-                                                    &nbsp;
-                                                    <a class="bi bi-filetype-ppt" href="{{ asset($course->pptURL) }}"
-                                                       target="_blank"></a>
-                                                @endif
-
-                                                @auth
-                                                    @if(Auth::user()->role > 0)
-                                                        <a class="bi bi-pencil-square"
-                                                           href="{{ route('course.edit', $course->id) }}"></a>
-                                                        <a class="bi bi-trash" onclick="return confirmDeleteCourse();"
-                                                           href="{{ route('course.destroy', $course->id) }}"></a>
-                                                    @endif
-                                                @endauth
-                                            </h1>
-                                            <a href="{{ asset($course->videoURL) }}" class="glightbox link-video">
-                                                <span class="bi-play-fill"></span>
-                                                <img src="{{ asset($course->image) }}" loading="lazy" alt=""
-                                                     class="img-fluid">
-                                            </a>
-
-                                        </div>
-                                    </div>
-                                </div><!-- End Video -->
-                            @endforeach
+                        <div class="row gy-4 justify-content-center text-center">
+                            <livewire:course-video.page/>
                         </div>
                     </section>
                 </div>
