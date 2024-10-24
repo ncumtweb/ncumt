@@ -22,12 +22,11 @@ class Kernel extends ConsoleKernel
             CourseReminder::sendEmail();
         })->dailyAt('19:00');
 
-        // 登山研討會前一天晚上七點發送 email 提醒報名者
         $schedule->call(function () {
             ConferenceReminder::sendEmail();
-        })->dailyAt('19:00')
+        })->dailyAt('12:00')
         ->when(function () {
-            return now()->format('Y-m-d') === '2024-10-25';
+            return now()->format('Y-m-d') === '2024-10-19';
         });
     }
 

@@ -9,9 +9,13 @@
                 <h1>113 年度第二十五屆全國大專校院 登山運動研討會</h1>
                 <h1 class="page-title">報名表</h1>
             </div>
-            <div class="row mb-5 justify-content-center">
-                <div class="col-md-10">
-                    <livewire:conference.form :mode="App\Enums\Mode::CREATE"/>
+            <div class="row mt-3 justify-content-center">
+                <div class="col-md-10 text-center">
+                    <h3>「線上報名已截止，若想參加請直接到會場參加即可，但將不會提供午餐與禮品。 」</h3>
+                    <h3>如有任何問題，請私訊聯絡<a style="color: blue;"
+                                                   href="https://www.facebook.com/ncumountaineeringclub"
+                                                   target="_blank"
+                                                   class="text-decoration-underline">粉絲專頁</a></h3>
                 </div>
             </div>
             <div class="row justify-content-center">
@@ -26,7 +30,8 @@
                             </a>
                         </li>
                     </ul>
-
+                    <a href="{{ asset('pdfs/第二十五屆全國大專校院登山運動研討會議程表.pdf') }}" class="btn btn-primary"
+                       download>下載會議資訊 PDF</a>
                     <h3 class="mt-4">聯絡資訊</h3>
                     <ul class="list-styled">
                         <li>中華民國健行登山會信箱：info@alpineclub.org.tw</li>

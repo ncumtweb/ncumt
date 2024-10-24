@@ -18,9 +18,11 @@ class UserController extends Controller
      *
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(Request $request): View
     {
-        $users = User::orderBy('created_at','asc')->paginate(10);
+        $page = $request->input('page', 1);
+        $users = User::orderBy('created_at', 'desc')->paginate(10)->appends(['page' => $page]);
+        $request->session()->forget('page');
         return view('user.userList', compact('users'));
     }
 
@@ -124,6 +126,7 @@ class UserController extends Controller
         $user->role = $request->role;
         $user->save();
 
-        return redirect()->route('user.list')->with('status', $user->name_zh . '的角色更新成功');
+        $page = $request->input('page', 1);
+        return redirect()->route('user.list', ['page' => $page])->with('status', $user->name_zh . '的角色更新成功');
     }
 }

@@ -51,6 +51,7 @@
                                         @if(Auth::user()->role == Role::WEB_ADMIN->value)
                                             <form action="{{ route('user.updateRole', $user->id) }}" method="POST">
                                                 @csrf
+                                                <input type="hidden" name="page" value="{{ request()->get('page', 1) }}">
                                                 <label for="role">
                                                     <select name="role" onchange="this.form.submit()">
                                                         @foreach(Role::cases() as $role)

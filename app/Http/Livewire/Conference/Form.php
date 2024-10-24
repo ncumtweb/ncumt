@@ -163,4 +163,15 @@ class Form extends Component
         Mail::to($conferenceUser->email)->queue(new ConferenceRegister($conferenceUser, $this->mode));
         Log::info('send conference register email to ' . $conferenceUser->email . ', mode: ' . $this->mode->value);
     }
+
+    public function cancelRegistration()
+    {
+        if (!$this->conferenceUser) {
+            return redirect()->route('conference.search')->with('status', '無法取消報名，請確認您的報名資訊是否正確');
+        }
+
+        $userName = $this->conferenceUser->name;
+        $this->conferenceUser->delete();
+        return redirect()->route('conference.register')->with('status', $userName . '，您的報名已取消');
+    }
 }
