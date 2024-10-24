@@ -44,13 +44,6 @@
         {{ $courses->links() }}
     </div>
     <!-- 滾動到頂端的 JavaScript -->
-    <script>
-        document.addEventListener('scroll-to-top', function () {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-    </script>
+    <script src="{{ asset('js/pageScroll.js') }}"></script>
 </div>
 
