@@ -10,6 +10,8 @@ use App\Http\Controllers\PortalLoginController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
+use App\Http\Controllers\TripController;
+use App\Http\Middleware\TripAuthenticate;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -145,4 +147,13 @@ Route::get('/conference/result', function () {
         return view('conference.result');
     }
     abort(403, '您沒有權限進入此頁面');
+});
+
+Route::middleware(['TripAuthenticate'])->group(function () {
+    //trip
+    Route::get('/trip/create', [TripController::class, 'create'])->name('trip.create');
+    Route::put('/trip/create', [TripController::class, 'store'])->name('trip.store');
+    Route::get('/trip/edit/{id}', [TripController::class, 'edit'])->name('trip.edit');
+    Route::put('/trip/edit/{id}', [TripController::class, 'update'])->name('trip.update');
+
 });
