@@ -11,7 +11,6 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RentalController;
 use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -34,15 +33,6 @@ Route::fallback(function () {
 Route::get('/aboutus', function () {
     return view('information.aboutus');
 });
-
-Route::get('/conference/register', function () {
-    return view('conference.register');
-})->name('conference.register');
-
-Route::get('/conference/search', function () {
-    return view('conference.searchAndEdit');
-})->name('conference.search');
-
 
 // Route::get('/map', function () {
 //     return view('map');
@@ -138,11 +128,4 @@ Route::middleware(['checkRole'])->group(function () {
     // user
     Route::get('/user/list', [UserController::class, 'index'])->name('user.list');
     Route::post('/users/updateRole/{id}', [UserController::class, 'updateRole'])->name('user.updateRole');
-});
-
-Route::get('/conference/result', function () {
-    if (Auth::check() && Auth::user()->isValidIdentifiers(['110602527', '111409003', '109403525'])) {
-        return view('conference.result');
-    }
-    abort(403, '您沒有權限進入此頁面');
 });

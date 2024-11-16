@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Mail\Conference\ConferenceReminder;
 use App\Mail\Course\CourseReminder;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
@@ -21,13 +20,6 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             CourseReminder::sendEmail();
         })->dailyAt('19:00');
-
-        $schedule->call(function () {
-            ConferenceReminder::sendEmail();
-        })->dailyAt('12:00')
-        ->when(function () {
-            return now()->format('Y-m-d') === '2024-10-19';
-        });
     }
 
     /**
