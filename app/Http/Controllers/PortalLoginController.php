@@ -25,7 +25,6 @@ class PortalLoginController extends Controller
     public function handleProviderCallback(): \Illuminate\Http\RedirectResponse
     {
         $user_portal = Socialite::with('portal')->stateless()->user();
-        Log::debug('user login, user array: ', array($user_portal));
         $studentId = $user_portal->user['studentId'] ?? null;
         if (is_null($studentId)) {
             $existUser = User::where('email', $user_portal->user['email'])->first();
@@ -60,6 +59,7 @@ class PortalLoginController extends Controller
             $existUser->save();
             Auth::login($existUser);
         }
+        $this->logUserLoginInfo();
 
         if (session()->has('previous_page')) {
             $url = session('previous_page');
@@ -105,5 +105,15 @@ class PortalLoginController extends Controller
         }
 
         return $academyRecords['name']; // 如果資料不完整，返回系名
+    }
+
+    private function logUserLoginInfo(): void
+    {
+        $user = Auth::user();
+
+        Log::info('User login', [
+            'name_zh' => $user->name_zh,
+            'student_id' => $user->student_id
+        ]);
     }
 }
