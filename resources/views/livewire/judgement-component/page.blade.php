@@ -2,13 +2,21 @@
     <!-- 搜尋和篩選器 -->
     <div class="filter-container mb-3 flex-row d-flex flex-wrap align-items-center">
         <!-- 路線名稱搜尋 -->
-        <div class="flex-grow-1 ms-2 d-flex justify-content-start">
-            <input type="text" wire:model.debounce.300ms="searchTerm" placeholder="搜尋路線名稱..."
-                   class="form-control-sm search-input mt-2">
+        <div class="position-relative">
+            <input type="text" class="form-control" wire:model.lazy="searchTerm" placeholder="搜尋路線名稱..."
+                   style="padding-right: 2.5rem;">
+            @if($searchTerm)
+                <i class="bi bi-x position-absolute" style="top: 50%; right: 2.5rem; transform: translateY(-50%); cursor: pointer; font-size: 2rem; opacity: 0.5 {{ $searchTerm ? '' : 'display: none;' }}" wire:click="clearSearch"></i>
+            @endif
+            <button class="btn btn-outline-secondary position-absolute top-0 end-0" type="button"
+                    style="height: 100%;" wire:click="performSearch">
+                <i class="bi bi-search"></i>
+            </button>
         </div>
+
         <!-- 隊伍難度篩選 -->
-        <div class="flex-grow-1 me-2 d-flex justify-content-end">
-            <select wire:model="selectedLevel" class="form-control-sm mt-2">
+        <div class="flex-grow-1 d-flex justify-content-end">
+            <select wire:model="selectedLevel" class="form-control-sm" style="height: 35px;">
                 <option value="">選擇難度等級</option>
                 @foreach($result_levelArray as $level)
                     <option value="{{ $level }}">{{ $level }} </option>
@@ -40,7 +48,7 @@
                     <th scope="col" class="hide-mobile">背水天數</th>
                     <th scope="col">難度總分</th>
                     <th scope="col">隊伍難度</th>
-                    <th scope="col" class="show-mobile">info</th>
+                    <th scope="col" class="show-mobile">詳細資訊</th>
                     <!-- 幹部才能編輯 -->
                     @auth
                         @if(Auth::user()->role > 0)
@@ -72,9 +80,9 @@
                         <td>{{ $judgement->score }} 分</td>
                         <td>{{ $judgement->result_level }}</td>
                         <td class="show-mobile">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            <button type="button" class="p-0" style="width: 25px; height: 25px; font-size: 1.0rem; line-height: 25px; text-align: center;" data-bs-toggle="modal"
                                     data-bs-target="#modal-{{ $judgement->id }}">
-                                info
+                                <i class="bi bi-info-circle"></i>
                             </button>
                         </td>
                         @auth

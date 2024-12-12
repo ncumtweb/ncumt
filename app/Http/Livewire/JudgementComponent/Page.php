@@ -18,6 +18,15 @@ class Page extends Component
     public $amountOfPage = 10;
     public $searchTerm = ''; // 新增搜尋字詞
     public $selectedLevel = ''; // 新增篩選等級
+    public function performSearch() // 執行搜尋
+    {
+        $this->resetPage();
+    }
+    public function clearSearch() // 清除搜尋
+    {
+        $this->searchTerm = '';
+        $this->resetPage();
+    }
 
     public function render()
     {
@@ -39,6 +48,8 @@ class Page extends Component
             }
 
         }
+
+
 
         $judgements = $query->paginate($this->amountOfPage);
 
