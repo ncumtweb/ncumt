@@ -45,6 +45,16 @@ class FaqController extends Controller
         return redirect()->route('faq.index')->with('status','Faq 建立成功');
     }
 
+    public function storeAsk(Request $request)
+    {
+        $faq = new Faq();
+        $faq->question = $request->input('question');
+
+        $faq->save();
+
+        return redirect()->route('faq.index')->with('status','Faq 建立成功');
+    }
+
     /**
      * Display the specified resource.
      *
@@ -83,7 +93,7 @@ class FaqController extends Controller
         $faq->answer = $request->input('answer');
 
         $faq->update();
-        
+
         return redirect()->route('faq.index')->with('status','Faq 更新成功');
     }
 
@@ -97,7 +107,7 @@ class FaqController extends Controller
     {
         $faq = Faq::findOrFail($id);
         $faq->delete();
-        
+
         return redirect()->route('faq.index')->with('status','Faq 刪除成功');
     }
 }
