@@ -113,6 +113,12 @@ return [
         'emergency' => [
             'path' => storage_path('logs/laravel.log'),
         ],
+        'discord' => [
+            'driver' => 'custom',
+            'via' => App\Logging\DiscordLogger::class,
+            'level' => 'error', // 只記錄 error 級別的日誌
+            'webhook_url' => env('DISCORD_WEBHOOK_URL'),
+        ],
     ],
 
 ];
