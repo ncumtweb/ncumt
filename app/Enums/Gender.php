@@ -14,11 +14,6 @@ enum Gender: int
      */
     case FEMALE = 2;
 
-    /**
-     * 将性别转换为对应的中文描述
-     *
-     * @return string
-     */
     public function toChinese(): string
     {
         return match ($this) {
