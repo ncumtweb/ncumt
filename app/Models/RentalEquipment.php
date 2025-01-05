@@ -3,11 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use App\Models\Equipment;
-use App\Models\Rental;
 
-class RentalEquipment extends Model
+class RentalEquipment extends BaseModel
 {
     use HasFactory;
 

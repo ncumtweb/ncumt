@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Equipment;
 use App\Enums\EquipmentStatus;
 use App\Models\Equipment;
 use App\Models\Rental;
+use App\Models\RentalEquipment;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -20,6 +21,18 @@ class PersonalRental extends Component
     public int $rentalAmount = 0;
 
     protected string $paginationTheme = 'bootstrap';
+
+    public $returnDate;
+
+    protected array $rules = [
+        'returnDate' => 'required|date|after:today',
+    ];
+
+    protected array $messages = [
+        'returnDate.required' => '請輸入預計歸還日期。',
+        'returnDate.date' => '預計歸還日期格式錯誤。',
+        'returnDate.after' => '預計歸還日期必須是今天之後的日期。',
+    ];
 
     public function selectCategory($category): void
     {
@@ -38,7 +51,10 @@ class PersonalRental extends Component
 
         // 添加到租借清單
         if (!isset($this->rentalEquipmentMap[$equipmentId])) {
-            $this->rentalEquipmentMap[$equipmentId] = $equipment;
+            $this->rentalEquipmentMap[$equipmentId] = [
+                'equipment' => $equipment,
+                'price' => $equipment->getPrice()
+            ];
             $this->rentalAmount += $equipment->getPrice();
             session()->flash('status', "$equipment->category $equipment->equipment_oid 已加入租借清單！");
         }
@@ -46,36 +62,64 @@ class PersonalRental extends Component
 
     public function removeFromRentalList(int $equipmentId): void
     {
+        $equipment = Equipment::find($equipmentId);
+
         // 從租借清單中移除該裝備
         if (isset($this->rentalEquipmentMap[$equipmentId])) {
             unset($this->rentalEquipmentMap[$equipmentId]);
+            $this->rentalAmount -= $equipment->getPrice();
             session()->flash('status', "裝備已移出租借清單！");
         }
     }
 
-    public function confirmRental(): void
+    /** @noinspection PhpMissingReturnTypeInspection */
+    public function confirmRental()
     {
-        // 確認租借並更新數據庫
-        Equipment::whereIn('id', array_keys($this->rentalEquipmentMap))
+        $this->validate();
+        $rentalEquipmentIdList = array_keys($this->rentalEquipmentMap);
+        Equipment::whereIn('id', $rentalEquipmentIdList)
             ->update(['status' => EquipmentStatus::BORROWED->value]);
+        $rentalId = $this->newRental();
+        $this->newRentalEquipmentList($rentalId, $rentalEquipmentIdList);
+        $this->reset();
 
-        $this->rentalEquipmentMap = [];
-        $this->rentalAmount = 0;
-
-        session()->flash('status', '租借已成功確認！');
+        return redirect()->route('rental.personalRentalRecord')->with('status','租借成功，請確認租借資訊');
     }
 
-    public function render()
+    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         $equipments = Equipment::where('category', $this->selectedCategory)->where('status', EquipmentStatus::NOT_BORROWED->value)->paginate(4);
 
         return view('livewire.equipment.personal-rental', ['equipments' => $equipments]);
     }
 
-    private function newRental(): void
+    private function newRental(): int
     {
         $rental = new Rental();
         $rental->user_id = Auth::user()->id;
+        $rental->rental_amount = $this->rentalAmount;
+        $rental->rental_date = date('Y-m-d');
+        $rental->return_date = $this->returnDate;
         $rental->save();
+        return $rental->id;
+    }
+
+    private function newRentalEquipmentList(int $rentalId, array $equipmentIdList): void
+    {
+        foreach ($equipmentIdList as $equipmentId) {
+            $rentalEquipment = new RentalEquipment();
+            $rentalEquipment->equipment_id = $equipmentId;
+            $rentalEquipment->rental_id = $rentalId;
+            $rentalEquipment->save();
+        }
+    }
+
+    /**
+     * 重置金額
+     */
+    private function resetData(): void
+    {
+        $this->rentalEquipmentMap = [];
+        $this->rentalAmount = 0;
     }
 }

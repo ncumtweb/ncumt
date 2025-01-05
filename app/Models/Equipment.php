@@ -12,6 +12,9 @@ class Equipment extends Model
     use HasFactory;
     protected $table = 'equipments';
 
+    /**
+     * 判斷是否為社員，返回對應的裝備價錢
+     */
     public function getPrice() {
         return Auth::user()->role >= Role::MEMBER->value ? $this->member_price : $this->normal_price;
     }

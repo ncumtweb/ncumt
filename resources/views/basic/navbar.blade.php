@@ -41,7 +41,7 @@
                     <li class="dropdown"><a><span>系統</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
                         <ul>
                             @if(Auth::user()->role > App\Enums\Role::MEMBER->value)
-                                <li><a href="{{ route('equipment.select') }}">個人裝備租借系統</a></li>
+                                <li><a href="{{ route('equipment.selectPersonalEquipment') }}">個人裝備租借系統</a></li>
                             @endif
                         </ul>
                     </li>
@@ -98,7 +98,7 @@
                         <ul>
                             <li><a href="{{ route('user.show', Auth::user()->id )}}">{{ __('個人資料') }}</a></li>
                             <li><a href="{{ route('course.showRecord') }}">{{ __('已報名社課') }}</a></li>
-                            <li><a href="{{ route('rental.index') }}">{{ __('已租借清單') }}</a></li>
+                            <li><a href="{{ route('rental.personalRentalRecord') }}">{{ __('已租借清單') }}</a></li>
                             <li><a href="/portal/logout">{{ __('登出') }}</a></li>
                         </ul>
                 @endif

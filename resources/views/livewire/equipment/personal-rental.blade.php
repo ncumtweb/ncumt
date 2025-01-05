@@ -1,4 +1,3 @@
-@php use App\Models\Equipment; @endphp
 <div id="top" class="row">
     <h1 class="page-title text-center">個人裝備租借</h1>
     <div class="list-group col-md-2 text-center">
@@ -13,27 +12,27 @@
     <div class="col-md-8 text-center mb-5">
         <div class="row mt-3">
             @if($equipments->isEmpty())
-                <div class="col-md-12 text-center">
+                <div class="col-md-12">
                     <h2>{{ $selectedCategory }}已經被租借完畢</h2>
                 </div>
             @else
                 @if (session('status'))
-                    <div class="col-md-12 text-center">
+                    <div class="col-md-12">
                         <h6 class="alert alert-success">{{ session('status') }}</h6>
                     </div>
                 @endif
                 @foreach($equipments as $equipment)
-                    <div class="col-md-3 mb-3" wire:key="equipment-{{ $equipment->id }}">
+                    <div class="col-md-3 mb-3 thumbnail" wire:key="equipment-{{ $equipment->id }}">
                         <img src="{{ asset($equipment->image) }}" class="card-img-top mb-2 img-fluid"
                              alt="{{ $equipment->category }}">
                         <div class="card-body">
                             <h5 class="card-title mb-2">{{ $equipment->category }} {{ $equipment->equipment_oid }}</h5>
-                            <div class="text-left mb-2">
+                            <div class="text-start mb-2">
                                 裝備簡介：{{ $equipment->description }}<br>
                                 裝備重量：{{ $equipment->weight }} 克<br>
-                                社員價格：{{ $equipment->member_price }}<br>
-                                非社員價格：{{ $equipment->normal_price }}<br>
-                                購買日期：{{ $equipment->bought_date }}
+                                社員價格：{{ $equipment->member_price }} 元<br>
+                                非社員價格：{{ $equipment->normal_price }} 元<br>
+                                裝備購買日期：{{ $equipment->bought_date }}
                             </div>
                             @if (isset($rentalEquipmentMap[$equipment->id]))
                                 <button class="btn btn-secondary btn-block" disabled>已加入租借清單</button>
@@ -56,7 +55,7 @@
                 @foreach($rentalEquipmentMap as $equipmentId => $rentalEquipment)
                     <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                         <span>
-                            {{ $rentalEquipment['category'] }} {{ $rentalEquipment['equipment_oid'] }}
+                            {{ $rentalEquipment['equipment']['category'] }} {{ $rentalEquipment['equipment']['equipment_oid'] }}（{{ $rentalEquipment['price'] }}）
                         </span>
                         <button wire:click="removeFromRentalList({{ $equipmentId }})"
                                 class="btn btn-danger btn-sm"
@@ -69,7 +68,15 @@
                         <span>目前總金額：{{ $rentalAmount }}</span>
                     </li>
             </ul>
-            <button wire:click="confirmRental" class="btn btn-success mt-1">
+            <!-- 預計歸還日期輸入框 -->
+            <div class="form-group mt-2">
+                <label for="return_date">預計歸還日期</label>
+                <input type="date" id="return_date" wire:model="returnDate" class="form-control" required>
+                @error('returnDate') <span class="text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <!-- 確認租借按鈕 -->
+            <button wire:click="confirmRental" class="btn btn-success mt-1" {{ !$returnDate ? 'disabled' : '' }}>
                 確認租借
             </button>
         @else
