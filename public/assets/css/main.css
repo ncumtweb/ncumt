@@ -1508,15 +1508,15 @@ section {
 }
 
 /* FAQ */
-.accordion-button {
+.faq .accordion-button {
     font-size: 30px;
 }
 
-.accordion-body strong {
+.faq .accordion-body strong {
     font-size: 20px;
 }
 
-.accordion-body form {
+.faq .accordion-body form {
     display: flex;
     justify-content: flex-end;
 }

@@ -21,7 +21,7 @@
         @endif
 
         <div class="row justify-content-center">
-          <div class="col-lg-10">
+          <div class="col-lg-10 faq">
               <div class="accordion accordion-flush" id="faqlist" data-aos="fade-up" data-aos-delay="100">
                 @foreach($faqs as $faq)
                   <div class="accordion-item"><!-- Start Faq item-->
@@ -36,7 +36,7 @@
                       <strong>
                         {{$faq->answer}}
                         @auth
-                          @if(Auth::user()->role > 0) 
+                          @if(Auth::user()->role > 0)
                             <form action="{{ route('faq.destroy', $faq->id) }}" method="POST">
                               <button type = "button" class="bi bi-pencil-square" onclick="window.location='{{ route('faq.edit', $faq->id) }}'"></button>
                               @csrf
