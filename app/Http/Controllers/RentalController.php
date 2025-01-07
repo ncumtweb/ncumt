@@ -26,10 +26,11 @@ class RentalController extends Controller
     public function personalRentalRecord(): Factory|View|Application
     {
         $rentals = Rental::where('user_id', Auth::user()->id)->whereNotNull('rental_date')->orderby('created_at', 'desc')->get();
-        $rentalEquipments = [];
-        foreach($rentals as $rental)
-            $rentalEquipments = $rental->rentalEquipment;
-        return view('equipment.rentalList', compact('rentals', 'rentalEquipments'));
+        $rentalEquipmentMap = [];
+        foreach($rentals as $rental) {
+            $rentalEquipmentMap[$rental->id] = $rental->rentalEquipment;
+        }
+        return view('equipment.rentalList', compact('rentals', 'rentalEquipmentMap'));
     }
 
     public function returnRental($rental_id): RedirectResponse

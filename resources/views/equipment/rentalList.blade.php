@@ -44,13 +44,9 @@
                                                 <td class="fw-bold">租借日期</td>
                                                 <td>{{ $rental->rental_date }}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="fw-bold">預計歸還日期</td>
-                                                <td>{{ $rental->return_date }}</td>
-                                            </tr>
                                             @if($rental->actual_return_date)
                                                 <tr>
-                                                    <td class="fw-bold">實際歸還日期</td>
+                                                    <td class="fw-bold">歸還日期</td>
                                                     <td>{{ $rental->actual_return_date }}</td>
                                                 </tr>
                                             @else
@@ -88,7 +84,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            @foreach($rentalEquipments as $rentalEquipment)
+                                            @foreach($rentalEquipmentMap[$rental->id] as $rentalEquipment)
                                                 <tr>
                                                     <td>{{ $rentalEquipment->equipment_id }}</td>
                                                     <td>{{ $rentalEquipment->equipment->category }}</td>

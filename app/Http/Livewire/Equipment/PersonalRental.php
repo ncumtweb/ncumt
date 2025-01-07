@@ -6,6 +6,9 @@ use App\Enums\EquipmentStatus;
 use App\Models\Equipment;
 use App\Models\Rental;
 use App\Models\RentalEquipment;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -73,7 +76,7 @@ class PersonalRental extends Component
         return redirect()->route('rental.personalRentalRecord')->with('status','租借成功，請確認租借資訊');
     }
 
-    public function render(): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    public function render(): Factory|View|Application
     {
         $equipments = Equipment::where('category', $this->selectedCategory)->where('status', EquipmentStatus::NOT_BORROWED->value)->paginate(4);
 
