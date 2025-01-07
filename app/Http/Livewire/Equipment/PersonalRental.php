@@ -22,18 +22,6 @@ class PersonalRental extends Component
 
     protected string $paginationTheme = 'bootstrap';
 
-    public $returnDate;
-
-    protected array $rules = [
-        'returnDate' => 'required|date|after:today',
-    ];
-
-    protected array $messages = [
-        'returnDate.required' => '請輸入預計歸還日期。',
-        'returnDate.date' => '預計歸還日期格式錯誤。',
-        'returnDate.after' => '預計歸還日期必須是今天之後的日期。',
-    ];
-
     public function selectCategory($category): void
     {
         $this->selectedCategory = $category;
@@ -75,7 +63,6 @@ class PersonalRental extends Component
     /** @noinspection PhpMissingReturnTypeInspection */
     public function confirmRental()
     {
-        $this->validate();
         $rentalEquipmentIdList = array_keys($this->rentalEquipmentMap);
         Equipment::whereIn('id', $rentalEquipmentIdList)
             ->update(['status' => EquipmentStatus::BORROWED->value]);

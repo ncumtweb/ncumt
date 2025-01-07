@@ -69,15 +69,9 @@
                         <span>{{ $rentalAmount }}</span>
                     </li>
                 </ul>
-                <!-- 預計歸還日期輸入框 -->
-                <div class="form-group mt-3">
-                    <label for="return_date" class="form-label">預計歸還日期</label>
-                    <input type="date" id="return_date" wire:model="returnDate" class="form-control" required>
-                    @error('returnDate') <span class="text-danger">{{ $message }}</span> @enderror
-                </div>
                 <!-- 確認租借按鈕 -->
                 <button wire:click="confirmRental"
-                        class="btn btn-success w-100 mt-3" {{ !$returnDate ? 'disabled' : '' }}>
+                        class="btn btn-success w-100 mt-3">
                     確認租借
                 </button>
             @else
@@ -153,12 +147,7 @@
                     <span>目前總金額：{{ $rentalAmount }}</span>
                 </li>
             </ul>
-            <div class="form-group mt-2">
-                <label for="return_date">預計歸還日期</label>
-                <input type="date" id="return_date" wire:model="returnDate" class="form-control" required>
-                @error('returnDate') <span class="text-danger">{{ $message }}</span> @enderror
-            </div>
-            <button wire:click="confirmRental" class="btn btn-success mt-1" {{ !$returnDate ? 'disabled' : '' }}>
+            <button wire:click="confirmRental" class="btn btn-success mt-1">
                 確認租借
             </button>
         @else

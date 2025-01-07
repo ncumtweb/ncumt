@@ -15,6 +15,7 @@ class RenameSizeToNumberInEquipmentsTable extends Migration
     {
         Schema::table('equipments', function (Blueprint $table) {
             $table->renameColumn('size', 'number');
+            $table->renameColumn('name', 'category');
         });
     }
 
@@ -27,6 +28,7 @@ class RenameSizeToNumberInEquipmentsTable extends Migration
     {
         Schema::table('equipments', function (Blueprint $table) {
             $table->renameColumn('number', 'size');
+            $table->renameColumn('category', 'name');
         });
     }
 }
