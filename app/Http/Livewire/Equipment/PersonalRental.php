@@ -86,7 +86,6 @@ class PersonalRental extends Component
         $rental->user_id = Auth::user()->id;
         $rental->rental_amount = $this->rentalAmount;
         $rental->rental_date = date('Y-m-d');
-        $rental->return_date = $this->returnDate;
         $rental->save();
         return $rental->id;
     }
