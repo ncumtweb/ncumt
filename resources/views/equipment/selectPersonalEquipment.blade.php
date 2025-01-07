@@ -4,7 +4,7 @@
 
 @section('content')
     <section id="contact" class="contact mb-5">
-        <div class="container" data-aos="fade-up">
+        <div class="container">
             <livewire:equipment.personal-rental/>
         </div>
     </section>

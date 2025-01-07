@@ -1627,3 +1627,10 @@ button.black[type=submit] {
     color: rgba(var(--color-black-rgb), 0.4);
     margin-bottom: 10px;
 }
+
+/*側邊選單*/
+@media (min-width: 768px) {
+    .offcanvas {
+        display: none !important; /* 在桌面模式下隱藏 offcanvas */
+    }
+}

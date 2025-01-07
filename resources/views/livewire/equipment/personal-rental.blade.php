@@ -2,27 +2,89 @@
     <h1 class="page-title text-center">個人裝備租借</h1>
 
     <!-- 左側：選擇裝備種類 -->
-    <div class="col-md-2 text-center">
-        <div class="accordion" id="categoriesAccordion">
-            <div class="accordion-item">
-                <h5 class="accordion-header" id="categoriesHeader">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#categoriesCollapse" aria-controls="categoriesCollapse">
-                        選擇裝備種類
-                    </button>
-                </h5>
-                <div id="categoriesCollapse" class="accordion-collapse collapse" aria-labelledby="categoriesHeader" data-bs-parent="#categoriesAccordion">
-                    <div class="accordion-body">
-                        <div class="list-group">
-                            @foreach(App\Enums\PersonalEquipmentCategory::cases() as $category)
-                                <a href="#" class="list-group-item list-group-item-action"
-                                   wire:click.prevent="selectCategory('{{ $category->value }}')"
-                                   onclick="scrollToTop()">{{ $category->value }}
-                                </a>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
+    <div class="d-md-block d-none col-md-2 text-center">
+        <h5 class="list-group-item">選擇裝備種類</h5>
+        <div class="list-group">
+            @foreach(App\Enums\PersonalEquipmentCategory::cases() as $category)
+                <a href="#" class="list-group-item list-group-item-action"
+                   wire:click.prevent="selectCategory('{{ $category->value }}')"
+                   onclick="scrollToTop()">{{ $category->value }}
+                </a>
+            @endforeach
+        </div>
+    </div>
+    <!-- 裝備選單按鈕 -->
+    <a class="btn btn-outline-primary d-md-none mb-2 me-2" type="button" data-bs-toggle="offcanvas"
+       data-bs-target="#categoriesOffcanvas" aria-controls="categoriesOffcanvas">
+        <i class="bi bi-list"></i> 裝備選單
+    </a>
+    <!-- 裝備選單 Offcanvas -->
+    <div class="offcanvas offcanvas-start d-md-none" tabindex="-1" id="categoriesOffcanvas"
+         aria-labelledby="categoriesOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="categoriesOffcanvasLabel">裝備選單</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="list-group">
+                @foreach(App\Enums\PersonalEquipmentCategory::cases() as $category)
+                    <a href="#" class="list-group-item list-group-item-action" data-bs-dismiss="offcanvas" aria-label="Close"
+                       wire:click.prevent="selectCategory('{{ $category->value }}')"
+                       onclick="scrollToTop()">{{ $category->value }}
+                    </a>
+                @endforeach
             </div>
+        </div>
+    </div>
+
+    <!-- 租借清單按鈕 -->
+    <a class="btn btn-outline-success d-md-none mb-2" type="button" data-bs-toggle="offcanvas"
+       data-bs-target="#rentalListOffcanvas" aria-controls="rentalListOffcanvas">
+        <i class="bi bi-cart"></i> 租借清單
+    </a>
+    <!-- 租借清單 Offcanvas -->
+    <div class="offcanvas offcanvas-end d-md-none" tabindex="-1" id="rentalListOffcanvas"
+         aria-labelledby="rentalListOffcanvasLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="rentalListOffcanvasLabel">租借清單</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            @if(count($rentalEquipmentMap) > 0)
+                <ul class="list-unstyled">
+                    @foreach($rentalEquipmentMap as $equipmentId => $rentalEquipment)
+                        <li class="d-flex justify-content-between align-items-center mb-2">
+                            <span>
+                                <strong>{{ $rentalEquipment['equipment']['category'] }}</strong>
+                                {{ $rentalEquipment['equipment']['equipment_oid'] }}（{{ $rentalEquipment['price'] }}）
+                            </span>
+                            <button wire:click="removeFromRentalList({{ $equipmentId }})"
+                                    class="btn btn-danger btn-sm ms-2" data-bs-dismiss="offcanvas" aria-label="Close">
+                                移除
+                            </button>
+                        </li>
+                    @endforeach
+                    <li class="d-flex justify-content-between align-items-center">
+                        <strong>目前總金額：</strong>
+                        <span>{{ $rentalAmount }}</span>
+                    </li>
+                </ul>
+                <!-- 預計歸還日期輸入框 -->
+                <div class="form-group mt-3">
+                    <label for="return_date" class="form-label">預計歸還日期</label>
+                    <input type="date" id="return_date" wire:model="returnDate" class="form-control" required>
+                    @error('returnDate') <span class="text-danger">{{ $message }}</span> @enderror
+                </div>
+                <!-- 確認租借按鈕 -->
+                <button wire:click="confirmRental"
+                        class="btn btn-success w-100 mt-3" {{ !$returnDate ? 'disabled' : '' }}>
+                    確認租借
+                </button>
+            @else
+                <div class="text-center mt-3">
+                    <p>目前沒有要租借的裝備</p>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -56,7 +118,9 @@
                             @if (isset($rentalEquipmentMap[$equipment->id]))
                                 <button class="btn btn-secondary btn-block" disabled>已加入租借清單</button>
                             @else
-                                <button wire:click="addToRentalList({{ $equipment->id }})" class="btn btn-primary btn-block">加入租借清單</button>
+                                <button wire:click="addToRentalList({{ $equipment->id }})"
+                                        class="btn btn-primary btn-block">加入租借清單
+                                </button>
                             @endif
                         </div>
                     </div>
@@ -69,51 +133,39 @@
     </div>
 
     <!-- 右側：租借清單 -->
-    <div class="col-md-2 text-center">
-        <div class="accordion" id="rentalAccordion">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="rentalHeader">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rentalListCollapse" aria-controls="rentalListCollapse">
-                        租借清單
-                    </button>
-                </h2>
-                <div id="rentalListCollapse" class="accordion-collapse collapse" aria-labelledby="rentalHeader" data-bs-parent="#rentalAccordion">
-                    <div class="accordion-body">
-                        @if(count($rentalEquipmentMap) > 0)
-                            <ul>
-                                @foreach($rentalEquipmentMap as $equipmentId => $rentalEquipment)
-                                    <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-                                        <span>
-                                            {{ $rentalEquipment['equipment']['category'] }} {{ $rentalEquipment['equipment']['equipment_oid'] }}（{{ $rentalEquipment['price'] }}）
-                                        </span>
-                                        <button wire:click="removeFromRentalList({{ $equipmentId }})"
-                                                class="btn btn-danger btn-sm"
-                                                style="margin-left: 10px;">
-                                            移除
-                                        </button>
-                                    </li>
-                                @endforeach
-                                <li style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span>目前總金額：{{ $rentalAmount }}</span>
-                                </li>
-                            </ul>
-                            <div class="form-group mt-2">
-                                <label for="return_date">預計歸還日期</label>
-                                <input type="date" id="return_date" wire:model="returnDate" class="form-control" required>
-                                @error('returnDate') <span class="text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <button wire:click="confirmRental" class="btn btn-success mt-1" {{ !$returnDate ? 'disabled' : '' }}>
-                                確認租借
-                            </button>
-                        @else
-                            <div class="col-md-12 text-center">
-                                <p>目前沒有要租借的裝備</p>
-                            </div>
-                        @endif
-                    </div>
-                </div>
+    <div class="d-md-block d-none col-md-2 text-center">
+        <h3>租借清單</h3>
+        @if(count($rentalEquipmentMap) > 0)
+            <ul>
+                @foreach($rentalEquipmentMap as $equipmentId => $rentalEquipment)
+                    <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <span>
+                            {{ $rentalEquipment['equipment']['category'] }} {{ $rentalEquipment['equipment']['equipment_oid'] }}（{{ $rentalEquipment['price'] }}）
+                        </span>
+                        <button wire:click="removeFromRentalList({{ $equipmentId }})"
+                                class="btn btn-danger btn-sm"
+                                style="margin-left: 10px;">
+                            移除
+                        </button>
+                    </li>
+                @endforeach
+                <li style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>目前總金額：{{ $rentalAmount }}</span>
+                </li>
+            </ul>
+            <div class="form-group mt-2">
+                <label for="return_date">預計歸還日期</label>
+                <input type="date" id="return_date" wire:model="returnDate" class="form-control" required>
+                @error('returnDate') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
-        </div>
+            <button wire:click="confirmRental" class="btn btn-success mt-1" {{ !$returnDate ? 'disabled' : '' }}>
+                確認租借
+            </button>
+        @else
+            <div class="col-md-12 text-center">
+                <p>目前沒有要租借的裝備</p>
+            </div>
+        @endif
     </div>
 </div>
 

@@ -58,8 +58,8 @@
                                                     <td class="fw-bold">操作</td>
                                                     <td>
                                                         <button type="button"
-                                                                onclick="window.location='{{ route('rental.return', $rental->id) }}'"
-                                                                class="btn btn-success btn-sm">
+                                                                onclick="window.location='{{ route('rental.returnPersonalRental', $rental->id) }}'"
+                                                                class="btn btn-primary btn-sm">
                                                             歸還
                                                         </button>
                                                     </td>
