@@ -108,4 +108,13 @@ class PersonalRental extends Component
         $this->rentalEquipmentMap = [];
         $this->rentalAmount = 0;
     }
+
+    /**
+     * 觸發滾動到頂端
+     * @return void
+     */
+    public function updatedPage(): void
+    {
+        $this->dispatchBrowserEvent('scroll-to-top');
+    }
 }

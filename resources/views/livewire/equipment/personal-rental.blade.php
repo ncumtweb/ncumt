@@ -156,10 +156,5 @@
             </div>
         @endif
     </div>
+    <script src="{{ asset('js/pageScroll.js') }}"></script>
 </div>
-
-<script>
-    function scrollToTop() {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-</script>
