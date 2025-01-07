@@ -1628,6 +1628,19 @@ button.black[type=submit] {
     margin-bottom: 10px;
 }
 
+.cancel .btn.btn-danger {
+    background: var(--color-red);
+    border: 1;
+    padding: 10px 10px;
+    color: #fff;
+    transition: 0.4s;
+    cursor: pointer;
+}
+
+.cancel .btn.btn-danger:hover {
+    background: rgba(var(--color-red-rgb), 0.8);
+}
+
 /*側邊選單*/
 @media (min-width: 768px) {
     .offcanvas {

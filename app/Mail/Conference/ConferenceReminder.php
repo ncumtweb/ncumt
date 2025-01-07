@@ -16,11 +16,10 @@ class ConferenceReminder extends Mailable
     /**
      * Create a new message instance.
      *
-     * @return void
+     * @param ConferenceUser $conferenceUser
      */
-    public function __construct()
+    public function __construct(private readonly ConferenceUser $conferenceUser)
     {
-
     }
 
     /**
@@ -33,8 +32,12 @@ class ConferenceReminder extends Mailable
         $subject = '「第二十五屆全國大專校院登山運動研討會」報名提醒';
 
         return $this->from(config('mail.from.address'), config('mail.from.name'))
-            ->view('mail.conference.conferenceReminder')
-            ->subject($subject);
+            ->view('mail.conference.conferenceReminder', ['conferenceUser' => $this->conferenceUser])
+            ->subject($subject)
+            ->attach('app/Mail/Conference/Attachment/reminder.pdf', [
+                'as' => '第二十五屆全國大專校院登山運動研討會-行前通知.pdf',
+                'mime' => 'application/pdf',
+            ]);
     }
 
     /**
@@ -49,7 +52,7 @@ class ConferenceReminder extends Mailable
             return;
         }
         foreach ($conferenceUsers as $conferenceUser) {
-            Mail::to($conferenceUser->email)->queue(new ConferenceReminder());
+            Mail::to($conferenceUser->email)->queue(new ConferenceReminder($conferenceUser));
             Log::info('send conference reminder email to ' . $conferenceUser->email);
         }
     }
