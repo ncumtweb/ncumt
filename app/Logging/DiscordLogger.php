@@ -2,8 +2,8 @@
 
 namespace App\Logging;
 
-use Monolog\Logger;
 use Monolog\Handler\AbstractProcessingHandler;
+use Monolog\Logger;
 
 class DiscordLogger
 {
@@ -47,8 +47,8 @@ class DiscordHandler extends AbstractProcessingHandler
             "\n**File:** %s\n**Line:** %d\n**Code:** %d\n**Previous:** %d\n\n",
             $file,
             $line,
-            $code,
-            $prev
+            $this->convertObjectToString($code),
+            $this->convertObjectToString($prev)
         );
 
         // 準備發送的 Discord 消息
@@ -61,5 +61,13 @@ class DiscordHandler extends AbstractProcessingHandler
         $client->post($this->webhookUrl, [
             'json' => $payload,
         ]);
+    }
+
+    private function convertObjectToString($object): string
+    {
+        if (is_object($object)) {
+            return method_exists($object, '__toString') ? (string) $object : get_class($object);
+        }
+        return $object;
     }
 }
