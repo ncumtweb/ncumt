@@ -1508,15 +1508,15 @@ section {
 }
 
 /* FAQ */
-.accordion-button {
+.faq .accordion-button {
     font-size: 30px;
 }
 
-.accordion-body strong {
+.faq .accordion-body strong {
     font-size: 20px;
 }
 
-.accordion-body form {
+.faq .accordion-body form {
     display: flex;
     justify-content: flex-end;
 }
@@ -1569,10 +1569,11 @@ button.black[type=submit] {
 
 /*course*/
 
-.course-desc p{
+.course-desc p {
     text-indent: 2em;
     text-align: justify;
 }
+
 /*紀錄*/
 
 /*圖片*/
@@ -1639,4 +1640,28 @@ button.black[type=submit] {
 
 .cancel .btn.btn-danger:hover {
     background: rgba(var(--color-red-rgb), 0.8);
+}
+
+/*側邊選單*/
+@media (min-width: 768px) {
+    .offcanvas {
+        display: none !important; /* 在桌面模式下隱藏 offcanvas */
+    }
+}
+
+/* hide column from table */
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none;
+    }
+}
+@media (min-width: 768px) {
+    .show-mobile {
+        display: none;
+    }
+}
+select.form-control-sm {
+    padding-left: 1px;
+    padding-right: 1px;
+    text-align: center;
 }
