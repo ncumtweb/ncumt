@@ -1,99 +1,106 @@
 @extends('basic.main')
 
-@section('title',  '已租借清單')
+@section('title', '已租借清單')
 
 @section('content')
-
     <section id="contact" class="contact">
         <div class="container" data-aos="fade-up">
 
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center mb-2">
-                    <h1 class="page-title">已租借清單</h1>
+            <!-- Page Title -->
+            <div class="row justify-content-center mb-4">
+                <div class="col-lg-10 text-center">
+                    <h1 class="page-title text-primary">已租借清單</h1>
                 </div>
                 @if (session('status'))
-                    <div class="col-lg-10 text-center mb-2">
+                    <div class="col-lg-10 text-center">
                         <h6 class="alert alert-success">{{ session('status') }}</h6>
                     </div>
                 @endif
             </div>
+
+            <!-- No Rentals -->
             @if($rentals->count() == 0)
                 <div class="row justify-content-center">
-                    <div class="col-md-10 text-center mb-5">
-                        <table class="table table-light table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <td colspan = 4> 目前尚無租借</td>
-                                </tr>
-                            </thead>
-                        </table>
+                    <div class="col-md-8 text-center">
+                        <div class="alert alert-info">目前尚無租借</div>
                     </div>
                 </div>
             @else
+                <!-- Rentals List -->
                 <div class="row justify-content-center">
-                    <!-- Table -->
                     @foreach($rentals as $rental)
-                        <div class="col-md-10 text-center mb-5">                    
-                            <table class="table table-light table-bordered table-striped">
-                                <thead>
-                                    <tr>
-                                        <th colspan = 3>租借裝備列表</th>
-                                    </tr>
-                                    <tr>
-                                        <th scope="col">編號</th>
-                                        <th scope="col">名稱</th>
-                                        <th scope="col">價格</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($rentalEquipments as $rentalEquipment)
-                                        <tr>
-                                            <td>{{ $rentalEquipment->equipment_id }}</td>
-                                            <td>{{ $rentalEquipment->equipment->description }}</td>
-                                            @if(Auth::user()->user >= 0)
-                                                <td>{{ $rentalEquipment->equipment->member_price }}</td>
+                        <div class="col-lg-10 mb-5">
+                            <!-- Rental Info Card -->
+                            <div class="card shadow-sm text-center">
+                                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0 text-center">租借資訊</h5>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Rental Info Table -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                            <tr>
+                                                <td class="fw-bold">租借日期</td>
+                                                <td>{{ $rental->rental_date }}</td>
+                                            </tr>
+                                            @if($rental->actual_return_date)
+                                                <tr>
+                                                    <td class="fw-bold">歸還日期</td>
+                                                    <td>{{ $rental->actual_return_date }}</td>
+                                                </tr>
                                             @else
-                                                <td>{{ $rentalEquipment->equipment->normal_price }}</td>
-                                            @endif                            
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                            <table class="table table-light table-bordered table-striped" style="table-layout: fixed;">
-                                <tbody>
-                                    <tr>
-                                        <th colspan = 4 >租借資訊</th>
-                                    </tr>
-                                    <tr>
-                                        <td colspan = 2>租借日期</td>
-                                        <td colspan = 2>{{ $rental->rental_date }}</td>
-                                    </tr>                                    
-                                    <tr>
-                                        <td colspan = 2>預計歸還日期</td>
-                                        <td colspan = 2>{{ $rental->return_date }}</td> 
-                                    </tr>                         
-                                    <tr>
-                                        <td >總金額</td>
-                                        <td >{{ $rental->rental_amount }}</td>
-                                        @if($rental->actual_return_date)
-                                            <td>實際歸還日期</td>
-                                            <td>{{ $rental->actual_return_date }}</td>
-                                        @else                        
-                                            <td colspan = 2>
-                                                <div class="equipment">
-                                                    <button type="button" onclick="window.location='{{ route('rental.return', $rental->id) }}'" style="padding: 1px 50px;">歸還</button>
-                                                </div>                                    
-                                            </td>
-                                        @endif
-                                    </tr>   
-                                </tbody>
-                            </table>
-                        </div>    
+                                                <tr>
+                                                    <td class="fw-bold">操作</td>
+                                                    <td>
+                                                        <button type="button"
+                                                                onclick="window.location='{{ route('rental.returnPersonalRental', $rental->id) }}'"
+                                                                class="btn btn-primary btn-sm">
+                                                            歸還
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                            <tr>
+                                                <td class="fw-bold">總金額</td>
+                                                <td>{{ $rental->rental_amount }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <!-- Rental Equipment Table -->
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped mb-0">
+                                            <thead class="table-light">
+                                            <tr>
+                                                <th colspan="4">租借裝備列表</th>
+                                            </tr>
+                                            <tr>
+                                                <th scope="col" class="text-center">編號</th>
+                                                <th scope="col" class="text-center">類型</th>
+                                                <th scope="col" class="text-center">簡介</th>
+                                                <th scope="col" class="text-center">價格</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($rentalEquipmentMap[$rental->id] as $rentalEquipment)
+                                                <tr>
+                                                    <td>{{ $rentalEquipment->equipment_id }}</td>
+                                                    <td>{{ $rentalEquipment->equipment->category }}</td>
+                                                    <td class="text-wrap">{{ $rentalEquipment->equipment->description }}</td>
+                                                    <td>{{ $rentalEquipment->equipment->getPrice() }}</td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
-                    <!-- End Table -->
                 </div>
             @endif
-            
-        </div>    
-    </section>    
+        </div>
+    </section>
 @endsection

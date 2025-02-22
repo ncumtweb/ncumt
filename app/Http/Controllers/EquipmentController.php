@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Equipment;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 class EquipmentController extends Controller
 {
-    public function select() 
+    public function selectPersonalEquipment(): Factory|View|Application
     {
-        return view('equipment.chose');
+        return view('equipment.selectPersonalEquipment');
     }
 
     /**
@@ -19,7 +22,7 @@ class EquipmentController extends Controller
      */
     public function index($name)
     {
-        $equipments = Equipment::orderBy('created_at','desc')->where('name', $name)->where('status', 0)->get();        
+        $equipments = Equipment::orderBy('created_at','desc')->where('name', $name)->where('status', 0)->get();
         return view('equipment.equipment',compact('equipments', 'name'));
     }
 
