@@ -80,16 +80,11 @@ Route::middleware(['auth', 'auth.session'])->group(function () {
 
     //equipment
     Route::get('/equipment/{name}', [EquipmentController::class, 'index'])->name('equipment.index');
-    Route::get("/selectEquipment", [EquipmentController::class, 'select'])->name('equipment.select');
+    Route::get("/selectPersonalEquipment", [EquipmentController::class, 'selectPersonalEquipment'])->name('equipment.selectPersonalEquipment');
 
     //rental
-    Route::get('/rentalList', [RentalController::class, 'index'])->name('rental.index');
-    Route::get('/rentalList/returnRental/{rental_id}', [RentalController::class, 'returnRental'])->name('rental.return');
-    Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
-    Route::get('/equipment/addEquipment/{equipment_id}', [RentalController::class, 'addEquipment'])->name('rental.addEquipment');
-    Route::get('/equipment/showRental/{rental_id}', [RentalController::class, 'showRental'])->name('rental.showRental');
-    Route::get('/equipment/removeRentalEquipment/{rentalEquipment_id}', [RentalController::class, 'removeEquipment'])->name('rentalEquipment.remove');
-    Route::put('/equipment/showRental/{rental_id}', [RentalController::class, 'update'])->name('rental.update');
+    Route::get('/personalRentalRecord', [RentalController::class, 'personalRentalRecord'])->name('rental.personalRentalRecord');
+    Route::get('/personalRentalRecord/returnPersonalRental/{rental_id}', [RentalController::class, 'returnRental'])->name('rental.returnPersonalRental');
 });
 
 Route::middleware(['previousPage'])->group(function () {
