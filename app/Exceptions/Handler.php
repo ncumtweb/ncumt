@@ -3,8 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
+use Illuminate\Support\Facades\Log;
 
 class Handler extends ExceptionHandler
 {
@@ -38,7 +38,24 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
-        
+
+    }
+
+    public function report(Throwable $e)
+    {
+        parent::report($e);
+
+        // 將錯誤記錄到 Discord
+        if ($this->shouldReport($e)) {
+            Log::channel('discord')->error($e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'code' => $e->getCode(),
+                'prev' => $e->getPrevious(),
+            ]);
+        }
     }
 
 }
+
+
