@@ -44,11 +44,11 @@
               </div>
               <div class="form-group ">
                   <label for="expired_at">過期時間</label>
-                  <input type="datetime-local" class="form-control" id="expired_at" name="expired_at">
+                  <input type="datetime-local" class="form-control" id="expired_at" name="expired_at" required>
                 </div>
               <div class="form-group">  
                     <label for="CKeditor" class="form-label">內容</label>
-                    <textarea rows="10" style="height:100%" class="form-control" id="CKeditor" name="content"></textarea>  
+                    <textarea rows="10" style="height:100%" class="form-control" id="CKeditor" name="content" required></textarea>  
                 </div>
              
               <div class="row">
