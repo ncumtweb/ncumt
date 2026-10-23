@@ -16,8 +16,7 @@
         "livewire/livewire": "^2.12",
         "ncucc/portal-oauth2-provider": "*",
         "spatie/laravel-image-optimizer": "^1.7",
-        "spatie/laravel-sitemap": "^6.3",
-        "timetree/timetree-sdk-php": "^1.0"
+        "spatie/laravel-sitemap": "^6.3"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

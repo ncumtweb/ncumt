@@ -18,6 +18,13 @@
             <h6 class="alert alert-success">{{ session('status') }}</h6>
           </div>
         @endif
+        @if ($errors->any())
+          <div class="col-lg-12 text-center mb-5">
+            @foreach ($errors->all() as $error)
+              <h6 class="alert alert-danger">{{ $error }}</h6>
+            @endforeach
+          </div>
+        @endif
         <!-- start form -->
         <div class="row justify-content-center">
           <div class = "col-md-8 ">

@@ -20,6 +20,13 @@
                             <h6 class="alert alert-success">{{ session('status') }}</h6>
                         </div>
                     @endif
+                    @if ($errors->any())
+                        <div class="col-md-8 text-center mb-5">
+                            @foreach ($errors->all() as $error)
+                                <h6 class="alert alert-danger">{{ $error }}</h6>
+                            @endforeach
+                        </div>
+                    @endif
                     <div class="col-md-8 ">
                         <div class="form ">
                             <form action="{{ route('user.update', $user->id) }}" method="POST" id="createRecordForm"
