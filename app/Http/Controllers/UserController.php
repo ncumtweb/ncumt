@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -73,6 +74,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::findOrFail($id);
+        $this->authorize('update', $user);
 
         return(view('user.edit', compact('user')));
     }
@@ -80,21 +82,22 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateUserRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, $id)
     {
-        $user = User::find($id);
-        $user->name_zh = $request->input('name_zh');
-        $user->name_en = $request->input('name_en');
-        $user->nickname = $request->input('nickname');
+        $validated = $request->validated();
+        $user = User::findOrFail($id);
+        $user->name_zh = $validated['name_zh'];
+        $user->name_en = $validated['name_en'];
+        $user->nickname = $validated['nickname'] ?? null;
         // if ($user->role) {
         //     $user->role = $request->input('position');
         // }
-        $user->phone = $request->input('phone');
-        $user->email = $request->input('email');
+        $user->phone = $validated['phone'] ?? null;
+        $user->email = $validated['email'];
         $user->update();
 
         return redirect()->back()->with('status','個人資料更新成功');
