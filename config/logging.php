@@ -65,6 +65,8 @@ return [
             'path' => storage_path('logs/laravel.log'),
             'level' => env('LOG_LEVEL', 'debug'),
             'days' => 14,
+            // 部署時用 root 跑 artisan 也可能建立當天的 log，讓 php-fpm 之後仍寫得進去
+            'permission' => 0666,
         ],
 
         'slack' => [

@@ -70,20 +70,54 @@ class UserProfileUpdateTest extends TestCase
             ->assertForbidden();
     }
 
-    public function test_officer_can_edit_another_users_profile(): void
+    public function test_web_admin_can_edit_another_users_profile(): void
     {
-        $leader = $this->makeUser(Role::CLUB_LEADER, 'leader@example.com');
+        $admin = $this->makeUser(Role::WEB_ADMIN, 'admin@example.com');
         $member = $this->makeUser(Role::MEMBER, 'member@example.com');
 
-        $this->actingAs($leader)
+        $this->actingAs($admin)
             ->get(route('user.edit', $member->id))
             ->assertOk();
 
-        $this->actingAs($leader)
+        $this->actingAs($admin)
             ->put(route('user.update', $member->id), $this->payload())
             ->assertSessionHasNoErrors();
 
         $this->assertSame('new@example.com', $member->fresh()->email);
+    }
+
+    public function test_officers_other_than_web_admin_cannot_edit_another_users_profile(): void
+    {
+        $member = $this->makeUser(Role::MEMBER, 'member@example.com');
+
+        foreach ([Role::CLUB_LEADER, Role::VICE_CLUB_LEADER, Role::EQUIPMENT_MEMBER, Role::TREASURER] as $role) {
+            $officer = $this->makeUser($role, "officer-{$role->value}@example.com");
+
+            $this->actingAs($officer)
+                ->get(route('user.edit', $member->id))
+                ->assertForbidden();
+
+            $this->actingAs($officer)
+                ->put(route('user.update', $member->id), $this->payload())
+                ->assertForbidden();
+        }
+
+        $this->assertSame('member@example.com', $member->fresh()->email);
+    }
+
+    public function test_officer_can_still_edit_own_profile(): void
+    {
+        $leader = $this->makeUser(Role::CLUB_LEADER, 'leader@example.com');
+
+        $this->actingAs($leader)
+            ->get(route('user.edit', $leader->id))
+            ->assertOk();
+
+        $this->actingAs($leader)
+            ->put(route('user.update', $leader->id), $this->payload())
+            ->assertSessionHasNoErrors();
+
+        $this->assertSame('new@example.com', $leader->fresh()->email);
     }
 
     public function test_guest_is_redirected_to_login(): void

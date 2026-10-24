@@ -11,10 +11,10 @@ class UserPolicy
     use HandlesAuthorization;
 
     /**
-     * 本人或幹部（與 checkRole middleware 相同門檻）才能編輯個人資料
+     * 本人或網管才能編輯個人資料（與使用者列表只對網管顯示編輯按鈕一致）
      */
     public function update(User $actor, User $user): bool
     {
-        return $actor->id === $user->id || $actor->role > Role::MEMBER->value;
+        return $actor->id === $user->id || (int) $actor->role === Role::WEB_ADMIN->value;
     }
 }
